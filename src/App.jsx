@@ -1,11 +1,12 @@
-
+import { lazy } from "react"
+const AppRoutes= lazy(() => import("./routes/AppRoutes"));
 
 
 function App() {
 
   return (
     <>
-      <h2 className='text-red-600'>Hello</h2>
+      <AppRoutes />
     </>
   )
 }
