@@ -28,6 +28,9 @@ const Login = () => {
             onSuccess: (res) => {
                 const role = res?.user?.role;
                 console.log("Logged in as:", role);
+                console.log('`/${role}/dashboard`', `/${role}/dashboard`)
+
+                console.log("Logged in as:", role);
                 if (role === "school_admin") navigate("/school-admin/dashboard");
                 else if (role === "super_admin") navigate("/super-admin/dashboard");
                 else if (role === "student") navigate("/student/dashboard");
@@ -45,7 +48,6 @@ const Login = () => {
             >
                 <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
 
-                {/* ❌ Error Message */}
                 {isError && (
                     <div className="mb-3 text-red-500 text-sm">
                         {error?.message || "Login failed"}

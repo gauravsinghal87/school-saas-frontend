@@ -1,67 +1,66 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { useState } from "react";
+import { useUser } from "../context/UserContext";
+import BaseNavbar from "../components/common/BaseNavbar";
+import Sidebar from "../components/common/BaseSidebar";
+import { MENU_CONFIG } from "../utils/menuConfig";
 
-const BaseLayout = ({ title, menu }) => {
+const BaseLayout = ({ title, menu, role, user }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const queryClient = useQueryClient();
+    const { logout } = useUser();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [activeItem, setActiveItem] = useState(null);
 
     const handleLogout = async () => {
-        // 🔐 remove auth data
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-
-        // 🧠 clear all queries
-        await queryClient.clear();
-
-        // 🚀 redirect
-        navigate("/", { replace: true });
+        await logout();
+        queryClient.clear();
+        navigate("/");
     };
 
+    // Get current path to determine active item
+    const getActiveItemFromPath = () => {
+        const currentPath = location.pathname;
+        const activeMenuItem = menu.find(item => item.path === currentPath);
+        return activeMenuItem?.name || null;
+    };
+
+
+
+    // Handle mobile menu toggle
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    // Handle sidebar item click
+    const handleSidebarItemClick = (itemId) => {
+        setActiveItem(itemId);
+    };
+
+
+    console.log('menu>>>', MENU_CONFIG[role])
     return (
-        <div className="flex h-screen bg-gray-100">
+        <div className="flex h-screen bg-">
+            {/* Modern Sidebar */}
+            <Sidebar
+                role={role}
+                activeItem={activeItem || getActiveItemFromPath()}
+                onItemClick={handleSidebarItemClick}
+                isOpen={isSidebarOpen}
+                onClose={() => setIsSidebarOpen(false)}
+                user={user}
+                menuConfig={MENU_CONFIG}
+            />
 
-            {/* 🧭 Sidebar */}
-            <aside className="w-64 bg-gray-900 text-white flex flex-col">
-                <div className="p-4 text-xl font-bold border-b border-gray-700">
-                    {title}
-                </div>
+            {/* Main Content Area */}
+            <div className="flex flex-col flex-1 ">
+                {/* Topbar with mobile menu toggle */}
+                <BaseNavbar onMenuToggleonMenuClick={toggleSidebar} />
 
-                <nav className="flex-1 p-2">
-                    {menu.map((item) => (
-                        <div
-                            key={item.path}
-                            onClick={() => navigate(item.path)}
-                            className={`p-2 rounded cursor-pointer ${location.pathname === item.path
-                                ? "bg-gray-700"
-                                : "hover:bg-gray-700"
-                                }`}
-                        >
-                            {item.name}
-                        </div>
-                    ))}
-                </nav>
-            </aside>
-
-            {/* 🧩 Main */}
-            <div className="flex flex-col flex-1">
-
-                {/* 🔝 Topbar */}
-                <header className="h-14 bg-white shadow flex items-center justify-between px-4">
-                    <div className="font-semibold text-gray-700">
-                        {title}
-                    </div>
-
-                    <button
-                        onClick={handleLogout}
-                        className="px-3 py-1 bg-red-500 text-white rounded"
-                    >
-                        Logout
-                    </button>
-                </header>
-
-                {/* 📄 Content */}
-                <main className="flex-1 p-4 overflow-y-auto">
+                {/* Main Content */}
+                <main className="flex-1 overflow-y-auto p-4">
                     <Outlet />
                 </main>
             </div>

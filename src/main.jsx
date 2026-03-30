@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import { Toaster } from "react-hot-toast";
 import { UserProvider } from './context/UserContext.jsx';
+import { ThemeProvider } from './context/ThemContext.jsx';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,23 +22,25 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <UserProvider>
-        <App />
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: "#1f2937",
-              color: "#fff",
-              borderRadius: "10px",
-              padding: "12px 16px",
-            },
-          }}
-        />
-      </UserProvider>
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <UserProvider>
+          <App />
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: "#1f2937",
+                color: "#fff",
+                borderRadius: "10px",
+                padding: "12px 16px",
+              },
+            }}
+          />
+        </UserProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   </StrictMode>,
 )

@@ -1,3 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Montserrat:wght@700;800&display=swap');
 @import "tailwindcss";
+
+@theme {
+    /* BRAND */
+    --color-primary: #2563EB;
+    --color-secondary: #F59E0B;
+
+    /* SURFACES */
+    --color-surface-page: #F9FAFB;
+    --color-surface-card: #FFFFFF;
+    --color-surface-header: #FFFFFF;
+    --color-surface-sidebar: #0F1815;
+
+    /* TEXT */
+    --color-text-primary: #111827;
+    --color-text-secondary: #6B7280;
+    --color-text-heading: #030712;
+
+    /* SIDEBAR */
+    --color-sidebar-text: #D7D3D4;
+    --color-sidebar-hover: #1A2420;
+    --color-sidebar-active: #0F1815;
+    --color-sidebar-text-hover: #FFFFFF;
+    --color-sidebar-text-active: var(--color-primary);
+
+    /* BUTTONS */
+    --color-button-primary: #2563EB;
+    --color-button-primary-text: #FFFFFF;
+    --color-button-primary-hover: #1D4ED8;
+
+    /* BORDERS */
+    --color-border: #E5E7EB;
+
+    /* STATUS */
+    --color-success: #16A34A;
+    --color-warning: #F59E0B;
+    --color-error: #DC2626;
+    --color-info: #0284C7;
+}
 
 

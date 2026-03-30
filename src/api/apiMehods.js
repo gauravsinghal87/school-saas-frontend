@@ -2,7 +2,7 @@ import api from "./apiConfig";
 import { apiPaths } from "./apiPath";
 
 
-let role = "staff"; // default role for testing
+let role = "super_admin"; // default role for testing
 
 
 export const login = async (data) => {
@@ -19,7 +19,7 @@ export const login = async (data) => {
     else if (data.email.includes("school_admin")) role = "school_admin";
     else if (data.email.includes("student")) role = "student";
     else if (data.email.includes("parent")) role = "parent";
-    else if (data.email.includes("staff")) role = "staff"; // /tacher aside staff can be teacher, accountant, etc.
+    else if (data.email.includes("staff")) role = "staff";
 
     // ✅ success response
     return {

@@ -12,9 +12,15 @@ export const UserProvider = ({ children }) => {
     isFetching,
   } = useCurrentUser();
 
-  // 🔐 logout function
   const logout = () => {
-    localStorage.removeItem("token");
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+      queryClient.removeQueries();
+      queryClient.resetQueries();
+      // Force React refresh of auth state
+      window.location.reload(); // ✅ safest fix (simple + reliable)
+    };
   };
 
   // 🧠 memoized value (performance)
