@@ -2,7 +2,7 @@ import api from "./apiConfig";
 import { apiPaths } from "./apiPath";
 
 
-let role = "super_admin"; // default role for testing
+let role = "school_admin"; // default role for testing
 
 
 export const login = async (data) => {
@@ -56,6 +56,14 @@ export const getCurrentUser = async () => {
 export const createStudent = (data) => {
     return api.post(apiPaths.students.create, data);
 };
+
+export const createTeacher = (data) => {
+    return api.post(apiPaths.teachers.createTeacher, data);
+};
+
+export const getTeachers = () => {
+    return api.get(apiPaths.teachers.teachersList);
+}
 
 export const getStudents = () => {
     return api.get(apiPaths.students.list);

@@ -60,7 +60,7 @@ const BaseLayout = ({ title, menu, role, user }) => {
                 <BaseNavbar onMenuToggleonMenuClick={toggleSidebar} />
 
                 {/* Main Content */}
-                <main className="flex-1 overflow-y-auto p-4">
+                <main className="flex-1 overflow-y-auto bg-surface-page p-4">
                     <Outlet />
                 </main>
             </div>

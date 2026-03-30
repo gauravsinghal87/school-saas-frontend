@@ -10,8 +10,10 @@ export const apiPaths = {
         create: "/students",
     },
     teachers: {
-        list: "/teachers",
+        // list: "/teachers",
         create: "/teachers",
+        teachersList: "/teachers",
+        createTeacher: "/create/teacher",
     },
     classes: {
         list: "/classes",

@@ -2,6 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCurrentUser, login } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
+import { createTeacher,getTeachers } from "../api/apiMehods";
 
 export const useLoginMutation = () => {
     const queryClient = useQueryClient();
@@ -16,6 +17,29 @@ export const useLoginMutation = () => {
     });
 };
 
+export const createTeacherMutation = ()=>
+{
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createTeacher,
+        successMessage: "Teacher created successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["teachersList"]);
+        },
+    });
+}
+
+export const getTeachersMutation = ()=>
+{
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: getTeachers,
+        successMessage: "Teachers fetched successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["teachersList"]);
+        },
+    });
+}
 
 export const useCurrentUser = () => {
     return useQuery({
