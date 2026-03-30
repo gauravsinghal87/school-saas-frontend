@@ -2,7 +2,7 @@ import api from "./apiConfig";
 import { apiPaths } from "./apiPath";
 
 
-let role = "super_admin"; // default role for testing
+let role = "student"; // default role for testing
 
 
 export const login = async (data) => {

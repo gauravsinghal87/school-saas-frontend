@@ -3,23 +3,10 @@ import React, { useState } from "react";
 import { LogOut, ChevronRight, LayoutDashboard, School, CreditCard, Users, UserCircle, Calendar, DollarSign, FileText, Home } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ROLES } from "../../utils/roles";
+import { useUser } from "../../context/UserContext";
 
 // ─── ICON MAPPING ──────────────────────────────────────────────────────────────
 
-const getIcon = (iconName) => {
-    const icons = {
-        Dashboard: LayoutDashboard,
-        Schools: School,
-        Subscriptions: CreditCard,
-        Students: Users,
-        Staff: UserCircle,
-        Attendance: Calendar,
-        Fees: DollarSign,
-        Results: FileText,
-        Home: Home,
-    };
-    return icons[iconName] || LayoutDashboard;
-};
 
 // ─── ROLE CONFIG ──────────────────────────────────────────────────────────────
 
@@ -117,30 +104,32 @@ const Sidebar = ({
 }) => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const { logout } = useUser();
     const role = roleProp || localStorage.getItem("role") || ROLES.STAFF;
     const meta = ROLE_META[role] ?? ROLE_META[ROLES.STAFF];
 
     // Get menu items for the role
     const menuItems = menuConfig[role] || [];
 
-    console.log('memuitem', menuItems)
-    // Group menu items into sections (you can customize this based on your needs)
     const sections = {
         main: menuItems.slice(0, 3), // First 3 items as main
         secondary: menuItems.slice(3), // Remaining as secondary
     };
 
-    console.log('sections>>>', sections)
+    const handleLogout = async () => {
+        await logout();
+        navigate("/");
 
+    }
 
 
     const [expanded, setExpanded] = useState({ main: true, secondary: true });
     const toggle = (s) => setExpanded((p) => ({ ...p, [s]: !p[s] }));
 
     const goTo = (path, id) => {
+        const fullPath = `/${role}/${path}`;
+        navigate(fullPath);
         onItemClick?.(id);
-        navigate(path);
         if (isOpen) onClose?.();
     };
 
@@ -150,15 +139,14 @@ const Sidebar = ({
 
     // Check if a menu item is active
     const isActivePath = (path) => {
-        return location.pathname === path;
+        return location.pathname.split("/").includes(path);
     };
 
-    // ── Nav Item ────────────────────────────────────────────────────────────────
-
     const NavItem = ({ item, index }) => {
-        const Icon = getIcon(item.name);
+        const Icon = item?.icon
         const isActive = isActivePath(item.path);
 
+        console.log('isAcgtive>>>', isActive)
         return (
             <button
                 onClick={() => goTo(item.path, item.name)}
@@ -212,7 +200,6 @@ const Sidebar = ({
 
     const Section = ({ title, items, sectionId }) => {
         if (!items || items.length === 0) return null;
-
         return (
             <div className="mb-3">
                 <button
@@ -400,7 +387,7 @@ const Sidebar = ({
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.backgroundColor = "transparent";
                             }}
-                            onClick={() => navigate("/login")}
+                            onClick={handleLogout}
                         >
                             <LogOut size={16} strokeWidth={2} />
                         </button>
