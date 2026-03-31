@@ -9,15 +9,15 @@ const NotFound = () => {
       <div className="max-w-lg w-full text-center">
         {/* Animated 404 Number */}
         <div className="mb-8">
-          <h1 className="text-9xl font-bold text-primary animate-bounce">404</h1>
+          <h1 className="text-9xl font-bold text-text-heading animate-bounce">404</h1>
         </div>
 
         {/* Error Message */}
         <div className="mb-8">
-          <h2 className="text-3xl font-semibold text-primary mb-4">
+          <h2 className="text-3xl font-semibold text-text-heading mb-4">
             Oops! Page Not Found
           </h2>
-          <p className="text-primary text-lg">
+          <p className="text-text-heading text-lg">
             The page you're looking for doesn't exist or has been moved.
           </p>
         </div>
@@ -25,7 +25,7 @@ const NotFound = () => {
         {/* Go Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 bg-button-primary-text hover:bg-primarytext-primary text-button-primary-hover font-semibold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105 shadow-lg"
+          className="inline-flex items-center gap-2 bg-button-primary-text hover:cursor-pointer hover:bg-surface-page text-primary  font-semibold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105 shadow-lg"
         >
           <svg
             className="w-5 h-5"

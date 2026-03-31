@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../hooks/useQueryMutations";
+// import { useLoginMutation } from "../hooks/useQueryMutations";
 import { GraduationCap, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { ROLES } from "../utils/roles";
-import { useQueryClient } from "@tanstack/react-query";
+import { useUser } from "../context/UserContext";
 
 
 
@@ -17,28 +17,49 @@ const ROLE_ROUTES = {
 
 const Login = () => {
     const navigate = useNavigate();
-    const { mutate, isPending, isError, error } = useLoginMutation();
-    const queryClient = useQueryClient();
+    const { login } = useUser();
+    // const { mutate, isPending, isError, error } = useLoginMutation();
+    const [isPending, setIsPending] = useState(false);
+    const [error, setError] = useState(null);
+    const { refetch, user } = useUser()
     const [form, setForm] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
 
+
+
+    console.log("Current user in Login component:", user); // Debugging line
     const handleChange = (e) =>
         setForm({ ...form, [e.target.name]: e.target.value });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        mutate(form, {
-            onSuccess: (res) => {
-                const role = res?.user?.role;
-                const route = ROLE_ROUTES[role];
-                console.log("Login successful! Redirecting to:", route);
-                if (route) {
-                    navigate(route, { replace: true });
-                }
-            },
-        });
-    };
 
+        try {
+            setIsPending(true);
+            setError(null);
+
+            const data = await login({
+                email: form.email,
+                password: form.password,
+            });
+            console.log("data", data);
+            const role = data?.user?.role;
+            console.log("role", role);
+
+            const route = ROLE_ROUTES[role];
+
+            if (route) {
+                navigate(route);
+            } else {
+                navigate("/"); // fallback
+            }
+
+        } catch (err) {
+            setError(err);
+        } finally {
+            setIsPending(false);
+        }
+    };
     return (
         <div className="min-h-screen flex" style={{ backgroundColor: "var(--color-surface-sidebar)" }}>
 
@@ -166,7 +187,7 @@ const Login = () => {
                     </div>
 
                     {/* Error Banner */}
-                    {isError && (
+                    {/* {isError && (
                         <div
                             className="flex items-start gap-3 p-4 rounded-xl mb-6 border"
                             style={{
@@ -186,7 +207,7 @@ const Login = () => {
                                 {error?.message || "Invalid credentials. Please try again."}
                             </p>
                         </div>
-                    )}
+                    )} */}
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-5">

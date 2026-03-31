@@ -23,6 +23,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   const userRole = user?.role;
+  console.log("userRole",userRole);
 
   // 🚀 ROLE MISMATCH → redirect to correct dashboard
   if (allowedRoles && !allowedRoles.includes(userRole)) {

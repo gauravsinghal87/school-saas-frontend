@@ -2,20 +2,47 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getCurrentUser, login } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
+import { createTeacher,getTeachers } from "../api/apiMehods";
 
-export const useLoginMutation = () => {
+// export const useLoginMutation = () => {
+//     const queryClient = useQueryClient();
+
+//     return useAppMutation({
+//         apiCall: login,
+//         successMessage: "Login successful 🎉",
+//         onSuccessCallback: (res) => {
+//             console.log("responsesss",res);
+//             localStorage.setItem("token", res.accessToken);
+//              localStorage.setItem("user", JSON.stringify(res.user));  
+//             localStorage.setItem("role", res?.user?.role);
+//             queryClient.setQueryData(["me"], res.user);
+//         },
+//     });
+// };
+
+export const createTeacherMutation = ()=>
+{
     const queryClient = useQueryClient();
     return useAppMutation({
-        apiCall: login,
-        successMessage: "Login successful 🎉",
+        apiCall: createTeacher,
+        successMessage: "Teacher created successfully 🎉",
         onSuccessCallback: (res) => {
-            localStorage.setItem("token", res.token);
-            localStorage.setItem("role", res?.user?.role);
-            queryClient.setQueryData(["me"], res.user);
+            queryClient.invalidateQueries(["teachersList"]);
         },
     });
-};
+}
 
+export const getTeachersMutation = ()=>
+{
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: getTeachers,
+        successMessage: "Teachers fetched successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["teachersList"]);
+        },
+    });
+}
 
 export const useCurrentUser = () => {
     return useQuery({

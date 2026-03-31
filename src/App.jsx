@@ -1,12 +1,16 @@
 import { lazy } from "react"
 const AppRoutes = lazy(() => import("./routes/AppRoutes"));
+import ErrorBoundary from "./components/common/ErrorBoundary";
 
 
 function App() {
 
   return (
     <>
-      <AppRoutes />
+      <ErrorBoundary>
+        <AppRoutes />
+      </ErrorBoundary>
+
     </>
   )
 }

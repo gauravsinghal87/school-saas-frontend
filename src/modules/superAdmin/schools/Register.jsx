@@ -3,42 +3,11 @@ import { useForm } from "react-hook-form";
 import { schoolValidation } from "../../../utils/validation";
 import MobileField from "../../../components/common/MobileField";
 import InputField from "../../../components/common/InputField";
+import SubmitButton from "../../../components/common/Button";
+import TextAreaField from "../../../components/common/Textarea";
+import { showError } from "../../../utils/toast";
 
-// ─────────────────────────────────────────────
-// COMMON COMPONENTS  (Single Responsibility)
-// ─────────────────────────────────────────────
 
-/** Textarea field */
-function TextAreaField({ label, id, placeholder, register, error, required, rows = 3 }) {
-    return (
-        <div className="flex flex-col gap-1.5">
-            <label htmlFor={id} className="text-sm font-semibold text-text-primary">
-                {label}
-                {required && <span className="text-error ml-0.5">*</span>}
-            </label>
-            <textarea
-                id={id}
-                rows={rows}
-                placeholder={placeholder}
-                {...register}
-                className={`
-          w-full rounded-xl border bg-surface-card px-4 py-2.5 text-sm text-text-primary
-          placeholder:text-text-secondary resize-none
-          outline-none transition-all duration-200
-          focus:ring-2 focus:ring-primary/30 focus:border-primary
-          ${error ? "border-error focus:ring-error/30 focus:border-error" : "border-border"}
-        `}
-            />
-            {error && (
-                <p className="flex items-center gap-1 text-xs text-error font-medium">
-                    <span>⚠</span> {error.message}
-                </p>
-            )}
-        </div>
-    );
-}
-
-/** Section header with divider */
 function SectionHeader({ icon, title, subtitle }) {
     return (
         <div className="flex items-start gap-3 mb-5">
@@ -53,74 +22,10 @@ function SectionHeader({ icon, title, subtitle }) {
     );
 }
 
-/** Submit / primary button with loading spinner */
-function SubmitButton({ loading, label = "Submit", loadingLabel = "Submitting…" }) {
-    return (
-        <button
-            type="submit"
-            disabled={loading}
-            className="
-        w-full flex items-center justify-center gap-2
-        rounded-xl bg-button-primary hover:bg-button-primary-hover
-        text-button-primary-text font-semibold text-sm
-        px-6 py-3 transition-all duration-200
-        disabled:opacity-60 disabled:cursor-not-allowed
-        shadow-sm hover:shadow-md active:scale-[0.98]
-      "
-        >
-            {loading ? (
-                <>
-                    <Spinner />
-                    {loadingLabel}
-                </>
-            ) : (
-                label
-            )}
-        </button>
-    );
-}
 
-/** Inline SVG spinner */
-function Spinner() {
-    return (
-        <svg
-            className="animate-spin h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-        >
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-            />
-        </svg>
-    );
-}
 
-/** Toast notification */
-function Toast({ type, message, onClose }) {
-    if (!message) return null;
-    const styles = {
-        success: "bg-success text-white",
-        error: "bg-error text-white",
-    };
-    return (
-        <div
-            className={`
-        fixed top-5 right-5 z-50 flex items-center gap-3
-        px-5 py-3.5 rounded-2xl shadow-xl text-sm font-semibold
-        max-w-sm animate-fade-in-down
-        ${styles[type] || styles.error}
-      `}
-        >
-            <span>{type === "success" ? "✓" : "✕"}</span>
-            <span className="flex-1">{message}</span>
-            <button onClick={onClose} className="opacity-70 hover:opacity-100 ml-2 text-base leading-none">×</button>
-        </div>
-    );
-}
+
+
 
 /** Success screen shown after registration */
 function SuccessScreen({ data, onReset }) {
@@ -196,7 +101,6 @@ async function registerSchool(payload) {
 // ─────────────────────────────────────────────
 export default function SchoolRegisterPage() {
     const [loading, setLoading] = useState(false);
-    const [toast, setToast] = useState(null);
     const [registeredData, setRegisteredData] = useState(null);
 
     const {
@@ -208,12 +112,14 @@ export default function SchoolRegisterPage() {
 
     const onSubmit = async (data) => {
         setLoading(true);
-        setToast(null);
         try {
             await registerSchool(data);
             setRegisteredData(data);
+            setTimeout(() => {
+                setRegisteredData(null)
+            }, 3000);
         } catch (err) {
-            setToast({ type: "error", message: err.message || "Registration failed. Please try again." });
+            showError('Registration failed. Please try again.')
         } finally {
             setLoading(false);
         }
@@ -227,14 +133,8 @@ export default function SchoolRegisterPage() {
     return (
         <div className="min-h-screen bg-surface-page font-[Merriweather,serif] px-4 py-10 sm:py-14">
             {/* Toast */}
-            <Toast
-                type={toast?.type}
-                message={toast?.message}
-                onClose={() => setToast(null)}
-            />
-
             {/* Card */}
-            <div className="mx-auto w-full max-w-2xl bg-surface-card rounded-3xl border border-border shadow-sm overflow-hidden">
+            <div className="mx-auto w-full max-w-5xl bg-surface-card rounded-3xl border border-border shadow-sm overflow-hidden">
 
                 {/* ── Header ── */}
                 <div className="bg-primary px-6 py-8 sm:px-10 text-white relative overflow-hidden">
@@ -250,20 +150,9 @@ export default function SchoolRegisterPage() {
                             <h1 className="text-xl sm:text-2xl font-extrabold font-[Montserrat,sans-serif] tracking-tight leading-tight">
                                 School Registration
                             </h1>
-                            <p className="text-white/70 text-xs mt-0.5">
-                                Register your institution on EduCore — takes under 2 minutes.
-                            </p>
+
                         </div>
                     </div>
-
-                    {/* Progress indicator */}
-                    {!registeredData && (
-                        <div className="relative z-10 mt-6 flex gap-2">
-                            <Step n="1" label="School Info" active />
-                            <div className="flex-1 self-center h-px bg-white/20 mx-1" />
-                            <Step n="2" label="Admin Info" />
-                        </div>
-                    )}
                 </div>
 
                 {/* ── Body ── */}
@@ -369,12 +258,7 @@ export default function SchoolRegisterPage() {
                                     label="Register School"
                                     loadingLabel="Registering…"
                                 />
-                                <p className="text-center text-xs text-text-secondary">
-                                    By registering, you agree to EduCore's{" "}
-                                    <a href="#" className="text-primary underline underline-offset-2">Terms of Service</a>{" "}
-                                    and{" "}
-                                    <a href="#" className="text-primary underline underline-offset-2">Privacy Policy</a>.
-                                </p>
+
                             </div>
                         </form>
                     )}
@@ -386,21 +270,3 @@ export default function SchoolRegisterPage() {
 
 // ─────────────────────────────────────────────
 // TINY HELPERS
-// ─────────────────────────────────────────────
-function Step({ n, label, active }) {
-    return (
-        <div className="flex items-center gap-1.5">
-            <span
-                className={`
-          w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center
-          ${active ? "bg-white text-primary" : "bg-white/20 text-white"}
-        `}
-            >
-                {n}
-            </span>
-            <span className={`text-xs font-medium ${active ? "text-white" : "text-white/50"}`}>
-                {label}
-            </span>
-        </div>
-    );
-}

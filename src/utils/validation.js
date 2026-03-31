@@ -19,3 +19,5 @@ export const schoolValidation = {
         minLength: { value: 10, message: "Please provide a complete address" },
     },
 };
+
+

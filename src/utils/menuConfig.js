@@ -79,6 +79,8 @@ export const MENU_CONFIG = {
         { id: "admin-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
         { id: "admin-students", name: "Students", path: "students", icon: GraduationCap, section: "main" },
         { id: "admin-staff", name: "Staff", path: "staff", icon: Briefcase, section: "main" },
+        { id: "teachers", name: "Teachers", path: "teachers", icon: Briefcase, section: "main" },
+
         { id: "admin-parents", name: "Parents", path: "parents", icon: Users, section: "main" },
         { id: "admin-classes", name: "Classes & Sections", path: "classes", icon: Layers, section: "main" },
 

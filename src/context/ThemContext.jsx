@@ -27,7 +27,7 @@ const COLOR_THEMES = [
 
 function applyTheme(themeId, isDark) {
     const theme = COLOR_THEMES.find((t) => t.id === themeId) ?? COLOR_THEMES[0];
-    const root = document.documentElement;
+    // const root = document.documentElement;
 
     // root.setAttribute("data-theme", themeId);
 

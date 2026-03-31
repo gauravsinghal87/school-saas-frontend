@@ -189,9 +189,9 @@ const Sidebar = ({
                         />
                     </div>
 
-                    <span className="truncate text-[13px] font-medium">{item.name}</span>
+                    <span className={`truncate  ${isActive ? 'text-primary' : 'text-sidebar-text'} text-[13px] font-medium`}>{item.name}</span>
                 </div>
-            </button>
+            </button >
         );
     };
 

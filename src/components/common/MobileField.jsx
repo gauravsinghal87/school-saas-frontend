@@ -1,4 +1,4 @@
-export default MobileField({ label, id, register, error, required }) {
+export default function MobileField({ label, id, register, error, required }) {
     return (
         <div className="flex flex-col gap-1.5">
             <label htmlFor={id} className="text-sm font-semibold text-text-primary">

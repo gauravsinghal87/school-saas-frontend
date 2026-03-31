@@ -2,37 +2,13 @@ import api from "./apiConfig";
 import { apiPaths } from "./apiPath";
 
 
-let role = "super_admin";
+let role = localStorage.getItem("role") || ""; // default role for testing
+
 
 
 export const login = async (data) => {
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    if (data.password !== "123456") {
-        throw {
-            message: "Invalid email or password",
-        };
-    }
-
-    if (data.email.includes("super")) role = "super_admin";
-    else if (data.email.includes("school_admin")) role = "school_admin";
-    else if (data.email.includes("student")) role = "student";
-    else if (data.email.includes("parent")) role = "parent";
-    else if (data.email.includes("staff")) role = "staff";
-
-    // ✅ success response
-    return {
-        success: true,
-        token: "dummy-token",
-        user: {
-            id: 1,
-            name: role.toUpperCase(),
-            email: data.email,
-            role,
-            permissions: ["ALL_ACCESS"],
-        },
-    };
+    const res = await api.post(apiPaths.auth.login, data);
+    return res.data;
 };
 
 
@@ -56,6 +32,14 @@ export const getCurrentUser = async () => {
 export const createStudent = (data) => {
     return api.post(apiPaths.students.create, data);
 };
+
+export const createTeacher = (data) => {
+    return api.post(apiPaths.teachers.createTeacher, data);
+};
+
+export const getTeachers = () => {
+    return api.get(apiPaths.teachers.teachersList);
+}
 
 export const getStudents = () => {
     return api.get(apiPaths.students.list);
