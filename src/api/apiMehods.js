@@ -29,6 +29,15 @@ export const getCurrentUser = async () => {
 };
 
 
+
+export const getSchoolList = async (params) => {
+    return await api.get(apiPaths.superAdmin.SCHOOL_LIST, { params });
+}
+export const registerSchool = async (data) => {
+    return await api.post(apiPaths.superAdmin.REG_SCHOOL, data);
+};
+
+
 export const createStudent = (data) => {
     return api.post(apiPaths.students.create, data);
 };

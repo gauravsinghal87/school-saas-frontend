@@ -1,4 +1,3 @@
-/** Inline SVG spinner */
 function Spinner() {
   return (
     <svg
@@ -17,19 +16,34 @@ function Spinner() {
   );
 }
 
-export default function SubmitButton({ loading, label = "Submit", loadingLabel = "Submitting…" }) {
+export default function Button({
+  loading = false,
+  label,
+  loadingLabel = "Processing...",
+  children,
+  onClick,
+  type = "button",
+  variant = "primary",
+}) {
+  const baseStyle = `
+    flex items-center justify-center gap-2
+    rounded-xl font-semibold text-sm
+    px-6 py-3 transition-all duration-200
+    disabled:opacity-60 disabled:cursor-not-allowed
+    shadow-sm hover:shadow-md active:scale-[0.98]
+  `;
+
+  const variants = {
+    primary: "bg-button-primary hover:bg-button-primary-hover text-button-primary-text",
+    outline: "border border-border text-text-primary hover:bg-surface-hover",
+  };
+
   return (
     <button
-      type="submit"
+      type={type}
       disabled={loading}
-      className="
-        w-full flex items-center justify-center gap-2
-        rounded-xl bg-button-primary hover:bg-button-primary-hover
-        text-button-primary-text font-semibold text-sm
-        px-6 py-3 transition-all duration-200
-        disabled:opacity-60 disabled:cursor-not-allowed
-        shadow-sm hover:shadow-md active:scale-[0.98]
-      "
+      onClick={onClick}
+      className={`${baseStyle} ${variants[variant]}`}
     >
       {loading ? (
         <>
@@ -37,10 +51,8 @@ export default function SubmitButton({ loading, label = "Submit", loadingLabel =
           {loadingLabel}
         </>
       ) : (
-        label
+        children || label
       )}
     </button>
   );
 }
-
-

@@ -1,142 +1,142 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import Select from "react-select";
 
-const Select = ({
+const AppSelect = ({
   label,
   error,
   options = [],
-  required,
-  isMulti = false,
   value,
   onChange,
+  isMulti = false,
+  placeholder = "Select...",
   name,
-  placeholder = "Select..."
 }) => {
-  const [open, setOpen] = useState(false);
-  const ref = useRef();
+  const [inputValue, setInputValue] = useState("");
 
-  // ✅ CLOSE ON OUTSIDE CLICK
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
+  // 🎨 styles
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: "var(--color-surface-card)",
+      borderColor: state.isFocused
+        ? "var(--color-primary)"
+        : error
+        ? "var(--color-error)"
+        : "var(--color-border)",
+      boxShadow: "none",
+      borderRadius: "12px",
+      padding: "2px",
+      minHeight: "44px",
+      "&:hover": {
+        borderColor: "var(--color-primary)",
+      },
+    }),
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    menu: (provided) => ({
+      ...provided,
+      borderRadius: "12px",
+      overflow: "hidden",
+      zIndex: 50,
+    }),
 
-  // ✅ SELECT HANDLER
-  const handleSelect = (option) => {
-    if (!isMulti) {
-      onChange({ target: { name, value: option.value } });
-      setOpen(false);
-    } else {
-      let newValues = value || [];
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected
+        ? "var(--color-primary)"
+        : state.isFocused
+        ? "var(--color-surface-page)"
+        : "white",
+      color: state.isSelected ? "#fff" : "var(--color-text-primary)",
+    }),
 
-      if (newValues.includes(option.value)) {
-        newValues = newValues.filter((v) => v !== option.value);
-      } else {
-        newValues = [...newValues, option.value];
-      }
+    multiValue: (provided) => ({
+      ...provided,
+      backgroundColor: "var(--color-primary)",
+    }),
 
-      onChange({ target: { name, value: newValues } });
-    }
+    multiValueLabel: (provided) => ({
+      ...provided,
+      color: "#fff",
+    }),
+
+    multiValueRemove: (provided) => ({
+      ...provided,
+      color: "#fff",
+      ":hover": {
+        backgroundColor: "var(--color-button-primary-hover)",
+        color: "#fff",
+      },
+    }),
+
+    placeholder: (provided) => ({
+      ...provided,
+      color: "var(--color-text-secondary)",
+    }),
+
+    singleValue: (provided) => ({
+      ...provided,
+      color: "var(--color-text-primary)",
+    }),
   };
 
-  // ✅ REMOVE CHIP
-  const removeItem = (val, e) => {
-    e.stopPropagation();
-    const newValues = value.filter((v) => v !== val);
-    onChange({ target: { name, value: newValues } });
+  // 🔄 handle select
+  const handleChange = (selected) => {
+    if (isMulti) {
+      const values = selected ? selected.map((s) => s.value) : [];
+      onChange({ target: { name, value: values } });
+    } else {
+      onChange({ target: { name, value: selected?.value || "" } });
+    }
+
+    setInputValue(""); // ✅ clear search after select
+  };
+
+  // 🔁 format value
+  const formattedValue = isMulti
+    ? options.filter((opt) => value?.includes(opt.value))
+    : options.find((opt) => opt.value === value) || null;
+
+  // 🔍 custom filter (better than default)
+  const filterOption = (option, input) => {
+    return option.label.toLowerCase().includes(input.toLowerCase());
   };
 
   return (
-    <div className="w-full relative" ref={ref}>
+    <div className="w-full">
       {/* LABEL */}
       {label && (
-        <label className="block text-xs font-semibold mb-1 text-[var(--color-text-secondary)] uppercase">
-          {label} {required && "*"}
+        <label className="block text-xs font-semibold mb-1 uppercase text-[var(--color-text-secondary)]">
+          {label}
         </label>
       )}
 
-      {/* INPUT BOX */}
-      <div
-        onClick={() => setOpen((prev) => !prev)}
-        className={`w-full min-h-[44px] px-3 py-2 rounded-xl border text-sm flex flex-wrap gap-2 items-center cursor-pointer
-        bg-[var(--color-surface-card)]
-        border-[var(--color-border)]
-        focus-within:border-[var(--color-primary)]
-        ${error ? "border-[var(--color-error)]" : ""}
-        `}
-      >
-        {/* MULTI */}
-        {isMulti ? (
-          value?.length ? (
-            value.map((val) => {
-              const option = options.find((o) => o.value === val);
-              return (
-                <span
-                  key={val}
-                  className="flex items-center gap-1 px-2 py-1 text-xs rounded-md bg-[var(--color-primary)] text-white"
-                >
-                  {option?.label}
-                  <span
-                    onClick={(e) => removeItem(val, e)}
-                    className="cursor-pointer text-white text-xs"
-                  >
-                    ✕
-                  </span>
-                </span>
-              );
-            })
-          ) : (
-            <span className="text-gray-400">{placeholder}</span>
-          )
-        ) : (
-          <span>
-            {options.find((o) => o.value === value)?.label || placeholder}
-          </span>
-        )}
+      <Select
+        options={options}
+        value={formattedValue}
+        onChange={handleChange}
+        isMulti={isMulti}
+        placeholder={placeholder}
+        styles={customStyles}
+        className="text-sm"
+        classNamePrefix="react-select"
 
-        {/* ARROW */}
-        <span className="ml-auto text-gray-400">⌄</span>
-      </div>
+        // 🔍 SEARCH CONTROL
+        isSearchable
+        inputValue={inputValue}
+        onInputChange={(val) => setInputValue(val)}
+        filterOption={filterOption}
 
-      {/* DROPDOWN */}
-      {open && (
-        <div className="absolute w-full mt-2 bg-white border border-[var(--color-border)] rounded-xl shadow-lg z-50 max-h-60 overflow-y-auto animate-fadeIn">
-          {options.map((option) => {
-            const selected = isMulti
-              ? value?.includes(option.value)
-              : value === option.value;
-
-            return (
-              <div
-                key={option.value}
-                onClick={() => handleSelect(option)}
-                className={`px-4 py-2 text-sm cursor-pointer flex justify-between items-center
-                hover:bg-gray-100
-                ${
-                  selected
-                    ? "bg-[var(--color-primary)] text-white"
-                    : "text-[var(--color-text-primary)]"
-                }`}
-              >
-                {option.label}
-                {selected && <span>✓</span>}
-              </div>
-            );
-          })}
-        </div>
-      )}
+        noOptionsMessage={() => "No results found"}
+      />
 
       {/* ERROR */}
       {error && (
-        <p className="text-xs mt-1 text-[var(--color-error)]">{error}</p>
+        <p className="text-xs mt-1 text-[var(--color-error)]">
+          {error}
+        </p>
       )}
     </div>
   );
 };
 
-export default Select;
+export default AppSelect;

@@ -8,11 +8,12 @@ import ParentLayout from "../layouts/ParentLayout";
 import StaffLayout from "../layouts/StaffLayout";
 import Teachers from "../modules/admin/teachers/Teachers";
 import AddTeacher from "../modules/admin/teachers/AddTeacher";
+import SchoolsPage from "../components/common/SchoolPage";
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
 const NotFound = lazy(() => import("../components/common/NotFound"));
-const SchoolRegisterPage = lazy(() => import("../modules/superAdmin//schools/Register"));
+const SchoolRegisterPage = lazy(() => import("../modules/superAdmin/schools/SchoolRegister"));
 const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
 const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
 const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
@@ -48,7 +49,7 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<SuperAdminDashboard />} />
-            <Route path="schools" element={<SchoolRegisterPage />} />
+            <Route path="schools" element={<SchoolsPage />} />
 
             <Route path="*" element={<NotFound />} />
 

@@ -7,16 +7,19 @@ import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
 import FormGroup from "../../components/common/Formgroup";
 import DateRangePicker from "./DateRangePicker";
+import PhoneInput from "../../components/common/PhoneInput";
+import AppPhoneInput from "../../components/common/PhoneInput";
 
 export default function ComponentsDemo() {
-const [form, setForm] = useState({
-  name: "",
-  email: "",
-  password: "",
-  role: "",
-  subjects: [], // ✅ multi select
-  message: ""
-});
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    subjects: [], // ✅ multi select
+    message: "",
+    phone: ""
+  });
   const [range, setRange] = useState({
     startDate: "",
     endDate: ""
@@ -27,29 +30,29 @@ const [form, setForm] = useState({
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-const handleSubmit = () => {
-  let newErrors = {};
+  const handleSubmit = () => {
+    let newErrors = {};
 
-  if (!form.name) newErrors.name = "Name is required";
-  if (!form.email) newErrors.email = "Email is required";
+    if (!form.name) newErrors.name = "Name is required";
+    if (!form.email) newErrors.email = "Email is required";
 
-  setErrors(newErrors);
+    setErrors(newErrors);
 
-  if (Object.keys(newErrors).length === 0) {
+    if (Object.keys(newErrors).length === 0) {
 
-    const payload = {
-      ...form,
-      dateRange: {
-        startDate: range.startDate,
-        endDate: range.endDate
-      }
-    };
+      const payload = {
+        ...form,
+        dateRange: {
+          startDate: range.startDate,
+          endDate: range.endDate
+        }
+      };
 
 
-    // 🔥 API CALL
-    // api.post("/create-user", payload)
-  }
-};
+      // 🔥 API CALL
+      // api.post("/create-user", payload)
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[var(--color-surface-page)] p-6">
@@ -86,7 +89,7 @@ const handleSubmit = () => {
               required
               error={errors.email}
             />
-               <Input
+            <Input
               label="Password"
               name="password"
               type="password"
@@ -96,30 +99,37 @@ const handleSubmit = () => {
               required
               error={errors.password}
             />
+            <AppPhoneInput
+              label="Phone Number"
+              name="phone"
+              value={form.phone}
+              onChange={handleChange}
+              error={errors.phone}
+            />
 
             {/* SELECT */}
-           <Select
-  label="Role"
-  name="role"
-  value={form.role}
-  onChange={handleChange}
-  options={[
-    { label: "Admin", value: "admin" },
-    { label: "Teacher", value: "teacher" }
-  ]}
-/>
-<Select
-  label="Subjects"
-  name="subjects"
-  isMulti
-  value={form.subjects}
-  onChange={handleChange}
-  options={[
-    { label: "Math", value: "math" },
-    { label: "Science", value: "science" },
-    { label: "English", value: "english" }
-  ]}
-/>
+            <Select
+              label="Role"
+              name="role"
+              value={form.role}
+              onChange={handleChange}
+              options={[
+                { label: "Admin", value: "admin" },
+                { label: "Teacher", value: "teacher" }
+              ]}
+            />
+            <Select
+              label="Subjects"
+              name="subjects"
+              isMulti
+              value={form.subjects}
+              onChange={handleChange}
+              options={[
+                { label: "Math", value: "math" },
+                { label: "Science", value: "science" },
+                { label: "English", value: "english" }
+              ]}
+            />
 
             {/* TEXTAREA */}
             <Textarea
@@ -129,15 +139,16 @@ const handleSubmit = () => {
               onChange={handleChange}
               placeholder="Write something..."
             />
- <div className="p-10">
-      <DateRangePicker value={range} onChange={setRange} />
-    </div>
+            <div className="p-10">
+              <DateRangePicker value={range} onChange={setRange} />
+            </div>
             {/* FORM GROUP (CUSTOM USAGE) */}
             <FormGroup label="Custom Field" required>
               <input
                 className="w-full h-[44px] px-4 rounded-xl border border-[var(--color-border)]"
                 placeholder="Custom input inside FormGroup"
               />
+
             </FormGroup>
 
             {/* BUTTONS */}

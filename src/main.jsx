@@ -26,20 +26,20 @@ createRoot(document.getElementById('root')).render(
       <QueryClientProvider client={queryClient}>
         <UserProvider>
           <App />
-          <Toaster
-            position="top-right"
-            reverseOrder={false}
-            toastOptions={{
-              duration: 3000,
-              style: {
-                background: "#1f2937",
-                color: "#fff",
-                borderRadius: "10px",
-                padding: "12px 16px",
-              },
-            }}
-          />
         </UserProvider>
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#1f2937",
+              color: "#fff",
+              borderRadius: "10px",
+              padding: "12px 16px",
+            },
+          }}
+        />
       </QueryClientProvider>
     </ThemeProvider>
   </StrictMode>,
