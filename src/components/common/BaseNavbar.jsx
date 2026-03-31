@@ -190,7 +190,7 @@ export function BaseNavbar({ onMenuClick, }) {
                     </div>
 
                     {/* ── RIGHT: Icons only ── */}
-                    <div className="flex items-center gap-[2px] flex-shrink-0 ">
+                    <div className="flex items-center lg:gap-6 flex-shrink-0">
 
                         {/* Mobile search toggle */}
                         {!searchOpen && (

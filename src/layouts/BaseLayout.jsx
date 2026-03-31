@@ -12,7 +12,6 @@ const BaseLayout = ({ title, menu, role, user }) => {
     const queryClient = useQueryClient();
     const { logout } = useUser();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [activeItem, setActiveItem] = useState(null);
 
     const handleLogout = async () => {
         await logout();
@@ -22,11 +21,10 @@ const BaseLayout = ({ title, menu, role, user }) => {
 
     // Get current path to determine active item
     const getActiveItemFromPath = () => {
-        const currentPath = location.pathname;
+        const currentPath = location.pathname.split("/").pop(); // 👈 key fix
         const activeMenuItem = menu.find(item => item.path === currentPath);
-        return activeMenuItem?.name || null;
+        return activeMenuItem?.id || null;
     };
-
 
 
     // Handle mobile menu toggle
@@ -40,18 +38,17 @@ const BaseLayout = ({ title, menu, role, user }) => {
     };
 
 
-    console.log('menu>>>', MENU_CONFIG[role])
     return (
-        <div className="flex h-screen bg-">
+        <div className="flex h-screen bg-surface-page">
             {/* Modern Sidebar */}
             <Sidebar
                 role={role}
-                activeItem={activeItem || getActiveItemFromPath()}
+                activeItem={getActiveItemFromPath()}
                 onItemClick={handleSidebarItemClick}
                 isOpen={isSidebarOpen}
                 onClose={() => setIsSidebarOpen(false)}
                 user={user}
-                menuConfig={MENU_CONFIG}
+                menuConfig={MENU_CONFIG || {}}
             />
 
             {/* Main Content Area */}

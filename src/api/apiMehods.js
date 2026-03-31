@@ -2,37 +2,37 @@ import api from "./apiConfig";
 import { apiPaths } from "./apiPath";
 
 
-let role = "school_admin"; // default role for testing
+let role = localStorage.getItem("role") || ""; // default role for testing
+
 
 
 export const login = async (data) => {
+  const res = await api.post(apiPaths.auth.login, data);
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  // optional: normalize response
+  return res.data;
 
-    if (data.password !== "123456") {
-        throw {
-            message: "Invalid email or password",
-        };
-    }
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    if (data.email.includes("super")) role = "super_admin";
-    else if (data.email.includes("school_admin")) role = "school_admin";
-    else if (data.email.includes("student")) role = "student";
-    else if (data.email.includes("parent")) role = "parent";
-    else if (data.email.includes("staff")) role = "staff";
+    // if (data.password !== "123456") {
+    //     throw {
+    //         message: "Invalid email or password",
+    //     };
+    // }
 
-    // ✅ success response
-    return {
-        success: true,
-        token: "dummy-token",
-        user: {
-            id: 1,
-            name: role.toUpperCase(),
-            email: data.email,
-            role,
-            permissions: ["ALL_ACCESS"],
-        },
-    };
+
+    // // ✅ success response
+    // return {
+    //     success: true,
+    //     token: "dummy-token",
+    //     user: {
+    //         id: 1,
+    //         name: role.toUpperCase(),
+    //         email: data.email,
+    //         role,
+    //         permissions: ["ALL_ACCESS"],
+    //     },
+    // };
 };
 
 

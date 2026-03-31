@@ -3,7 +3,7 @@ export const API_BASE_URL = "http://localhost:8080/api";
 
 export const apiPaths = {
     auth: {
-        login: "/auth/login",
+        login: "/api/super-admin",
     },
     students: {
         list: "/students",
@@ -19,4 +19,4 @@ export const apiPaths = {
         list: "/classes",
         create: "/classes",
     },
-}
+} 

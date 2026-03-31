@@ -2,7 +2,7 @@ import React from 'react'
 
 const SuperAdminDashboard = () => {
     return (
-        <div>SuperAdminDashboard</div>
+        <div className='text-text-primary'>SuperAdminDashboard</div>
     )
 }
 
