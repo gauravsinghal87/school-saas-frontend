@@ -11,7 +11,7 @@ export const useLoginMutation = () => {
         onSuccessCallback: (res) => {
             localStorage.setItem("token", res.token);
             localStorage.setItem("role", res?.user?.role);
-            queryClient.invalidateQueries(["me"]);
+            queryClient.setQueryData(["me"], res.user);
         },
     });
 };

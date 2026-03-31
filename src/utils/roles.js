@@ -13,3 +13,12 @@ export const ROLE_ROUTES = {
     [ROLES.PARENT]: "/parent/dashboard",
     [ROLES.STAFF]: "/staff/dashboard",
 };
+
+
+export const ROLE_ROUTES_SIDEBAR = {
+    [ROLES.SUPER_ADMIN]: "/super-admin",
+    [ROLES.SCHOOL_ADMIN]: "/school-admin",
+    [ROLES.STUDENT]: "/student",
+    [ROLES.PARENT]: "/parent",
+    [ROLES.STAFF]: "/staff",
+};

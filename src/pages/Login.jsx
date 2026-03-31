@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../hooks/useQueryMutations";
 import { GraduationCap, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { ROLES } from "../utils/roles";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 
@@ -17,7 +18,7 @@ const ROLE_ROUTES = {
 const Login = () => {
     const navigate = useNavigate();
     const { mutate, isPending, isError, error } = useLoginMutation();
-
+    const queryClient = useQueryClient();
     const [form, setForm] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
 
@@ -30,7 +31,10 @@ const Login = () => {
             onSuccess: (res) => {
                 const role = res?.user?.role;
                 const route = ROLE_ROUTES[role];
-                if (route) navigate(route);
+                console.log("Login successful! Redirecting to:", route);
+                if (route) {
+                    navigate(route, { replace: true });
+                }
             },
         });
     };
@@ -208,6 +212,7 @@ const Login = () => {
                                 <input
                                     type="email"
                                     name="email"
+                                    autoComplete='email'
                                     placeholder="you@school.edu"
                                     value={form.email}
                                     onChange={handleChange}
@@ -251,6 +256,7 @@ const Login = () => {
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     name="password"
+                                    autoComplete="current-password"
                                     placeholder="••••••••"
                                     value={form.password}
                                     onChange={handleChange}

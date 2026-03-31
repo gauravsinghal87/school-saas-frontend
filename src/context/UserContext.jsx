@@ -1,8 +1,11 @@
 import { createContext, useContext, useMemo } from "react";
 import { useCurrentUser } from "../hooks/useQueryMutations";
+import { useQueryClient } from "@tanstack/react-query";
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
+  const queryClient = useQueryClient();
+
   const {
     data: user,
     isLoading,
@@ -12,15 +15,13 @@ export const UserProvider = ({ children }) => {
     isFetching,
   } = useCurrentUser();
 
-  const logout = () => {
-    const handleLogout = () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
-      queryClient.removeQueries();
-      queryClient.resetQueries();
-      // Force React refresh of auth state
-      window.location.reload(); // ✅ safest fix (simple + reliable)
-    };
+  const logout = async () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    queryClient.removeQueries();
+    queryClient.resetQueries();
+    // Force React refresh of auth state
+    window.location.reload(); // ✅ safest fix (simple + reliable)
   };
 
   // 🧠 memoized value (performance)

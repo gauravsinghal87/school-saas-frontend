@@ -9,8 +9,7 @@ import ParentLayout from "./ParentLayout";
 
 export const ROLE_LAYOUT = {
     [ROLES.SUPER_ADMIN]: SuperAdminLayout,
-    [ROLES.ADMIN]: AdminLayout,
-    [ROLES.TEACHER]: TeacherLayout,
+    [ROLES.SCHOOL_ADMIN]: AdminLayout,
     [ROLES.STAFF]: StaffLayout,
     [ROLES.STUDENT]: StudentLayout,
     [ROLES.PARENT]: ParentLayout,

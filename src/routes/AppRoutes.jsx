@@ -6,6 +6,8 @@ import { ROLES } from "../utils/roles";
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import StaffLayout from "../layouts/StaffLayout";
+import BaseLayout from "../layouts/BaseLayout";
+import SchoolRegisterPage from "../modules/superAdmin/schools/Register";
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
@@ -46,6 +48,10 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<SuperAdminDashboard />} />
+            <Route path="schools" element={<SchoolRegisterPage />} />
+
+            <Route path="*" element={<NotFound />} />
+
           </Route>
 
           {/* 🧑‍💼 Admin */}
@@ -58,6 +64,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFound />} />
+
           </Route>
 
           {/* 🎓 Student */}
@@ -70,6 +78,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<StudentDashboard />} />
+            <Route path="*" element={<NotFound />} />
+
           </Route>
 
           <Route
@@ -81,6 +91,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<ParentDashboard />} />
+            <Route path="*" element={<NotFound />} />
+
           </Route>
 
 
@@ -94,6 +106,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<StaffDashboard />} />
+            <Route path="*" element={<NotFound />} />
+
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

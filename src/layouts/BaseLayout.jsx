@@ -34,7 +34,7 @@ const BaseLayout = ({ title, menu, role, user }) => {
 
     // Handle sidebar item click
     const handleSidebarItemClick = (itemId) => {
-        setActiveItem(itemId);
+        // setActiveItem(itemId);
     };
 
 
