@@ -17,6 +17,7 @@ const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
 const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
 const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
 const StaffDashboard = lazy(() => import("../modules/staff/dashboard/StaffDashboard"));
+const Addteacher = lazy(() => import("../modules/teachers/addteacher/Addteacher"));
 
 const ParentDashboard = lazy(() =>
   import("../modules/parent/dashboard/ParentDashboard")
@@ -48,6 +49,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<SuperAdminDashboard />} />
+            <Route path="teachers" element={<Teachers />} />
+            <Route path="teachers/add" element={<Addteacher />} />
           </Route>
 
           {/* 🧑‍💼 Admin */}
