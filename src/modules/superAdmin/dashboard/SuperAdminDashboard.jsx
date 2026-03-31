@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import ComponentsDemo from '../../../components/common/components';
 
 const SuperAdminDashboard = () => {
     return (
-        <div className='text-text-primary'>SuperAdminDashboard</div>
+    <ComponentsDemo/>
     )
 }
 

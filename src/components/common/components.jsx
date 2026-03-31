@@ -7,6 +7,8 @@ import Button from "../../components/common/Button";
 import Card from "../../components/common/Card";
 import FormGroup from "../../components/common/Formgroup";
 import DateRangePicker from "./DateRangePicker";
+import PhoneInput from "../../components/common/PhoneInput";
+import AppPhoneInput from "../../components/common/PhoneInput"; 
 
 export default function ComponentsDemo() {
 const [form, setForm] = useState({
@@ -15,7 +17,8 @@ const [form, setForm] = useState({
   password: "",
   role: "",
   subjects: [], // ✅ multi select
-  message: ""
+  message: "",
+  phone:""
 });
 console.log("form",form);
   const [range, setRange] = useState({
@@ -99,6 +102,13 @@ const handleSubmit = () => {
               required
               error={errors.password}
             />
+            <AppPhoneInput
+  label="Phone Number"
+  name="phone"
+  value={form.phone}
+  onChange={handleChange}
+  error={errors.phone}
+/>
 
             {/* SELECT */}
            <Select
@@ -141,6 +151,7 @@ const handleSubmit = () => {
                 className="w-full h-[44px] px-4 rounded-xl border border-[var(--color-border)]"
                 placeholder="Custom input inside FormGroup"
               />
+
             </FormGroup>
 
             {/* BUTTONS */}

@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
       console.log("res",res);
       // const data = res?.data;
       // console.log("data",data);
-      setUser(res.user);
+      // setUser(res.user);
       // ✅ store tokens
       localStorage.setItem("token", res.accessToken);
       localStorage.setItem("refreshToken", res.refreshToken);
