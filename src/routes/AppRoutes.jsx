@@ -7,7 +7,7 @@ import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import StaffLayout from "../layouts/StaffLayout";
 import Teachers from "../modules/admin/teachers/Teachers";
-import AddTeacher from "../modules/admin/teachers/AddTeacher";
+
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
@@ -62,7 +62,7 @@ const AppRoutes = () => {
             <Route path="dashboard" element={<AdminDashboard />} />
 
             <Route path="teachers" element={<Teachers />} />
-            <Route path="teachers/add" element={<AddTeacher />} />
+       
 
           </Route>
 
