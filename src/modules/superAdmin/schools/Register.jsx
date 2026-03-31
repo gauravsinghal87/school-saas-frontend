@@ -8,26 +8,8 @@ import TextAreaField from "../../../components/common/Textarea";
 import { showError } from "../../../utils/toast";
 
 
-function SectionHeader({ icon, title, subtitle }) {
-    return (
-        <div className="flex items-start gap-3 mb-5">
-            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-xl">
-                {icon}
-            </div>
-            <div>
-                <h2 className="text-base font-bold text-text-heading leading-tight">{title}</h2>
-                <p className="text-xs text-text-secondary mt-0.5">{subtitle}</p>
-            </div>
-        </div>
-    );
-}
 
 
-
-
-
-
-/** Success screen shown after registration */
 function SuccessScreen({ data, onReset }) {
     return (
         <div className="flex flex-col items-center justify-center py-12 px-6 text-center gap-6">
@@ -64,9 +46,7 @@ function Detail({ label, value }) {
     );
 }
 
-// ─────────────────────────────────────────────
-// VALIDATION RULES  (Open/Closed — extend without touching fields)
-// ─────────────────────────────────────────────
+
 const PHONE_REGEX = /^[6-9]\d{9}$/;
 
 
@@ -164,11 +144,7 @@ export default function SchoolRegisterPage() {
 
                             {/* ─── Section 1: School Info ─── */}
                             <section>
-                                <SectionHeader
-                                    icon="🏛️"
-                                    title="School Information"
-                                    subtitle="Basic details about the institution"
-                                />
+
                                 <div className="space-y-4">
                                     <InputField
                                         label="School Name"
@@ -213,13 +189,8 @@ export default function SchoolRegisterPage() {
                             {/* Divider */}
                             <div className="border-t border-border border-dashed" />
 
-                            {/* ─── Section 2: Admin Info ─── */}
                             <section>
-                                <SectionHeader
-                                    icon="👤"
-                                    title="Primary Admin Details"
-                                    subtitle="This person will manage the school account"
-                                />
+
                                 <div className="space-y-4">
                                     <InputField
                                         label="Admin Full Name"

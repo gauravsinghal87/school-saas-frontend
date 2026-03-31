@@ -111,7 +111,6 @@ const Sidebar = ({
     // Get menu items for the role
     const menuItems = menuConfig[role] || [];
 
-    console.log('itemmm>>', menuItems)
     const sections = {
         main: menuItems.slice(0, 3),
         secondary: menuItems.slice(3),

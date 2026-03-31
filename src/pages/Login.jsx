@@ -26,8 +26,6 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
 
-
-    console.log("Current user in Login component:", user); // Debugging line
     const handleChange = (e) =>
         setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -38,16 +36,12 @@ const Login = () => {
             setIsPending(true);
             setError(null);
 
-            const data = await login({
+            const res = await login({
                 email: form.email,
                 password: form.password,
             });
-            console.log("data", data);
-            const role = data?.user?.role;
-            console.log("role", role);
-
+            const role = res.data?.user?.role;
             const route = ROLE_ROUTES[role];
-
             if (route) {
                 navigate(route);
             } else {

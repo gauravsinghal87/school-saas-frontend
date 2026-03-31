@@ -2,12 +2,12 @@ import { createContext, useContext, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCurrentUser } from "../hooks/useQueryMutations";
 import { login } from "../api/apiMehods";
+import { showSuccess } from "../utils/toast";
 
 const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const queryClient = useQueryClient();
-  //  const[user,  setUser] = useState(null);
   const {
     data: user,
     isLoading,
@@ -21,21 +21,15 @@ export const UserProvider = ({ children }) => {
   const handleLogin = async (payload) => {
     try {
       const res = await login(payload);
-      console.log("res", res);
-      // const data = res?.data;
-      // console.log("data",data);
-      // setUser(res.user);
-      // ✅ store tokens
-      localStorage.setItem("token", res.accessToken);
-      localStorage.setItem("refreshToken", res.refreshToken);
-
-      // ✅ store user
-      localStorage.setItem("user", JSON.stringify(res.user));
-      localStorage.setItem("role", res.user.role);
-
-      // ✅ update react-query cache (THIS = setUser)
-      queryClient.setQueryData(["me"], res.user);
-
+      if (res.success) {
+        showSuccess('Login successful!');
+        const { accessToken, refreshToken, user } = res.data;
+        localStorage.setItem("token", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("role", user?.role);
+        queryClient.setQueryData(["me"], user);
+      }
       return res;
     } catch (err) {
       console.error("Login failed", err);

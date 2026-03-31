@@ -8,7 +8,7 @@ let role = localStorage.getItem("role") || ""; // default role for testing
 
 export const login = async (data) => {
     const res = await api.post(apiPaths.auth.login, data);
-    return res.data;
+    return res;
 };
 
 

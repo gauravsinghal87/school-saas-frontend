@@ -17,12 +17,10 @@ const [form, setForm] = useState({
   subjects: [], // ✅ multi select
   message: ""
 });
-console.log("form",form);
   const [range, setRange] = useState({
     startDate: "",
     endDate: ""
   });
-  console.log("range",range);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -47,7 +45,6 @@ const handleSubmit = () => {
       }
     };
 
-    console.log("FINAL API PAYLOAD:", payload);
 
     // 🔥 API CALL
     // api.post("/create-user", payload)
