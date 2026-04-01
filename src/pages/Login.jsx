@@ -29,18 +29,18 @@ const Login = () => {
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
 
-    useEffect(() => {
-        if (!token) {
-            navigate("/", { replace: true });
-            return;
-        }
-        const redirectPath = ROLE_ROUTES[role];
-        if (redirectPath) {
-            navigate(redirectPath, { replace: true });
-        } else {
-            navigate("/", { replace: true });
-        }
-    }, [token, role, navigate]);
+    // useEffect(() => {
+    //     if (!token) {
+    //         navigate("/", { replace: true });
+    //         return;
+    //     }
+    //     const redirectPath = ROLE_ROUTES[role];
+    //     if (redirectPath) {
+    //         navigate(redirectPath, { replace: true });
+    //     } else {
+    //         navigate("/", { replace: true });
+    //     }
+    // }, [token, role, navigate]);
 
 
 

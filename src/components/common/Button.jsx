@@ -43,7 +43,7 @@ export default function Button({
       type={type}
       disabled={loading}
       onClick={onClick}
-      className={`${baseStyle} ${variants[variant]}`}
+      className={`${baseStyle} ${variants[variant]} cursor-pointer`}
     >
       {loading ? (
         <>

@@ -98,7 +98,6 @@ function StatusPanel({ row, onConfirm, loading }) {
     );
 }
 
-// ── SchoolForm ───────────────────────────────────────────────────────────────
 
 function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
     const [values, setValues] = useState({
@@ -114,6 +113,8 @@ function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
 
+
+    console.log('loading sgtatus', loading);
     const handleChange = (name, value) => {
         setValues((prev) => ({ ...prev, [name]: value }));
         // validate on change only if field was already touched
@@ -221,39 +222,7 @@ function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
                         </button>
                     </div>
 
-                    {/* Admin fields shown in view mode */}
-                    <div className="space-y-5">
-                        <Input
-                            label="Admin Full Name"
-                            name="adminName"
-                            placeholder="e.g. Dilip Kumar"
-                            required
-                            value={values.adminName}
-                            onChange={(e) => handleChange("adminName", e.target.value)}
-                            onBlur={() => handleBlur("adminName")}
-                            error={errors.adminName}
-                        />
-                        <Input
-                            label="Admin Email"
-                            name="adminEmail"
-                            type="email"
-                            placeholder="admin@example.com"
-                            required
-                            value={values.adminEmail}
-                            onChange={(e) => handleChange("adminEmail", e.target.value)}
-                            onBlur={() => handleBlur("adminEmail")}
-                            error={errors.adminEmail}
-                        />
-                        <AppPhoneInput
-                            label="Admin Phone"
-                            name="adminPhone"
-                            value={values.adminPhone}
-                            onChange={(e) => handleChange("adminPhone", e.target.value)}
-                            onBlur={() => handleBlur("adminPhone")}
-                            required
-                            error={errors.adminPhone}
-                        />
-                    </div>
+
 
                     <p className="text-sm text-text-secondary">
                         This will <strong>{values.status ? "deactivate" : "activate"}</strong> the school.
@@ -367,7 +336,10 @@ export default function SchoolsPage() {
 
     const handleStatusToggle = (row) => {
         const newStatus = !row.isActive;
-        updateStatus({ id: row._id, isActive: newStatus });
+        updateStatus({
+            id: row._id,
+            isActive: newStatus,
+        });
     };
 
     const handleDelete = async (row) => {
@@ -435,7 +407,7 @@ export default function SchoolsPage() {
 
     const meta = panel.mode ? panelMeta[panel.mode] : {};
 
-    function ActionCell({ row, onEdit, onDelete }) {
+    function ActionCell({ row, onEdit }) {
         return (
             <div className="flex items-center gap-1">
                 {onEdit && (
@@ -473,7 +445,7 @@ export default function SchoolsPage() {
 
                 <DataTable
                     actionCell={(row) => (
-                        <ActionCell row={row} onEdit={openView} onDelete={handleDelete} />
+                        <ActionCell row={row} onEdit={openView} />
                     )}
                     title="All Schools"
                     columns={COLUMNS}
@@ -505,7 +477,7 @@ export default function SchoolsPage() {
                 subtitle={meta.subtitle}
             >
                 {panel.mode === PANEL_MODE.ADD && (
-                    <SchoolForm onSubmit={handleAddSubmit} mode="add" loading={submitting} />
+                    <SchoolForm onSubmit={handleAddSubmit} mode="add" loading={isCreating} />
                 )}
                 {panel.mode === PANEL_MODE.VIEW && (
                     <SchoolForm defaultValues={panel.row} onSubmit={openView} mode="view" loading={submitting} />
@@ -642,13 +614,13 @@ export default function SchoolsPage() {
 
 
 
-//     const handleStatusToggle = (row) => {
-//         const newStatus = !row.isActive;
-//         updateStatus({
-//             id: row._id,
-//             isActive: newStatus,
-//         });
-//     };
+// const handleStatusToggle = (row) => {
+//     const newStatus = !row.isActive;
+//     updateStatus({
+//         id: row._id,
+//         isActive: newStatus,
+//     });
+// };
 
 
 //     const COLUMNS = [

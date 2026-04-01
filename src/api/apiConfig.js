@@ -50,6 +50,9 @@ api.interceptors.response.use(
                     console.error("Forbidden");
                     break;
 
+                // case 404:
+                //     console.error("404 not found");
+                //     return Promise.reject(new Error("Resource not found"));
                 case 500:
                     console.error("Server error");
                     break;

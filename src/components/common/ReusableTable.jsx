@@ -203,12 +203,7 @@ function DefaultActionCell({ row, onEdit, onDelete }) {
     );
 }
 
-// 
-// DATATABLE
-//
-// CLIENT mode (default) — internal filter / sort / paginate
-// SERVER mode           — pass: serverMode page total onSearch onPageChange onPageSizeChange
-// 
+ 
 export default function DataTable({
     title,
     actionCell,
