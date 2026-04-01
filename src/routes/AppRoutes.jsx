@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
-import { ROLES } from "../utils/roles";
+import { ROLE_ROUTES, ROLES } from "../utils/roles";
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import StaffLayout from "../layouts/StaffLayout";
@@ -32,91 +32,100 @@ const SuperAdminDashboard = lazy(() =>
   import("../modules/superAdmin/dashboard/SuperAdminDashboard")
 );
 
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+
+
+
 const AppRoutes = () => {
-  return (
-    <BrowserRouter>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<Login />} />
-
-          {/* 👑 Super Admin */}
-          <Route
-            path="/super-admin"
-            element={
-              <ProtectedRoute allowedRoles={[ROLES.SUPER_ADMIN]}>
-                <SuperAdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<SuperAdminDashboard />} />
-            <Route path="schools" element={<SchoolsPage />} />
-
-            <Route path="*" element={<NotFound />} />
-
-          </Route>
-
-          {/* 🧑‍💼 Admin */}
-          <Route
-            path="/school-admin"
-            element={
-              <ProtectedRoute allowedRoles={[ROLES.SCHOOL_ADMIN]}>
-                <AdminLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<AdminDashboard />} />
-
-            <Route path="teachers" element={<Teachers />} />
-            <Route path="teachers/add" element={<AddTeacher />} />
-
-          </Route>
-
-          {/* 🎓 Student */}
-          <Route
-            path="/student"
-            element={
-              <ProtectedRoute allowedRoles={[ROLES.STUDENT]}>
-                <StudentLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<StudentDashboard />} />
-            <Route path="*" element={<NotFound />} />
-
-          </Route>
-
-          <Route
-            path="/parent"
-            element={
-              <ProtectedRoute allowedRoles={[ROLES.PARENT]}>
-                <ParentLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<ParentDashboard />} />
-            <Route path="*" element={<NotFound />} />
-
-          </Route>
 
 
+return (
+  <BrowserRouter>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route path="/" element={<Login />} />
 
-          <Route
-            path="/staff"
-            element={
-              <ProtectedRoute allowedRoles={[ROLES.STAFF]}>
-                <StaffLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<StaffDashboard />} />
-            <Route path="*" element={<NotFound />} />
+        {/* 👑 Super Admin */}
+        <Route
+          path="/super-admin"
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.SUPER_ADMIN]}>
+              <SuperAdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<SuperAdminDashboard />} />
+          <Route path="schools" element={<SchoolsPage />} />
 
-          </Route>
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-  );
+
+        </Route>
+
+        {/* 🧑‍💼 Admin */}
+        <Route
+          path="/school-admin"
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.SCHOOL_ADMIN]}>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="students" element={<AdminDashboard />} />
+
+
+          <Route path="teachers" element={<Teachers />} />
+          <Route path="teachers/add" element={<AddTeacher />} />
+
+        </Route>
+
+        {/* 🎓 Student */}
+        <Route
+          path="/student"
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.STUDENT]}>
+              <StudentLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<StudentDashboard />} />
+          <Route path="*" element={<NotFound />} />
+
+        </Route>
+
+        <Route
+          path="/parent"
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.PARENT]}>
+              <ParentLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<ParentDashboard />} />
+          <Route path="*" element={<NotFound />} />
+
+        </Route>
+
+
+
+        <Route
+          path="/staff"
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.STAFF]}>
+              <StaffLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<StaffDashboard />} />
+          <Route path="*" element={<NotFound />} />
+
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  </BrowserRouter>
+);
 };
 
 export default AppRoutes;

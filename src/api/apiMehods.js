@@ -9,6 +9,23 @@ export const login = async (data) => {
     return res;
 };
 
+
+export const registerSchool = async (data) => {
+    return await api.post(apiPaths.superAdmin.REG_SCHOOL, data);
+};
+
+export const getSchoolList = async (params) => {
+    return await api.get(apiPaths.superAdmin.SCHOOL_LIST, { params });
+}
+
+
+export const updateSchoolStatus = async (data) => {
+    const { id, ...rest } = data;
+    const url = apiPaths.superAdmin.UPDATE_SCHOOL.replace("{id}", id);
+    return await api.patch(url, rest);
+}
+
+
 export const getCurrentUser = async () => {
     await new Promise((res) => setTimeout(res, 500));
 
@@ -23,16 +40,6 @@ export const getCurrentUser = async () => {
         permissions: ["ALL_ACCESS"],
     };
 };
-
-export const getSchoolList = async (params) => {
-    return await api.get(apiPaths.superAdmin.SCHOOL_LIST, { params });
-}
-
-export const registerSchool = async (data) => {
-    return await api.post(apiPaths.superAdmin.REG_SCHOOL, data);
-};
-
-
 export const createStudent = (data) => {
     return api.post(apiPaths.students.create, data);
 };

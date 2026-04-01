@@ -12,6 +12,7 @@ const AppPhoneInput = ({
   required = false,
   placeholder = "Enter phone number",
   defaultCountry = "in",
+  ...rest
 }) => {
   const handleChange = (phone, country) => {
     onChange({
@@ -81,6 +82,7 @@ const AppPhoneInput = ({
         }}
 
         placeholder={placeholder}
+        {...rest}
       />
 
       {/* ERROR */}

@@ -22,9 +22,8 @@ const Input = ({ label, error, required, type, ...props }) => {
         <input
           {...props}
           type={isPassword ? (showPassword ? "text" : "password") : type}
-          className={`w-full h-[44px] px-4 ${
-            isPassword ? "pr-10" : ""
-          } rounded-xl border text-sm outline-none transition
+          className={`w-full h-[44px] px-4 ${isPassword ? "pr-10" : ""
+            } rounded-xl border text-sm outline-none transition
           bg-[var(--color-surface-card)]
           text-[var(--color-text-primary)]
           border-[var(--color-border)]

@@ -8,6 +8,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, isLoading, isAuthenticated } = useUser();
   const location = useLocation();
 
+  
   // ⏳ Loading
   if (isLoading) {
     return (
