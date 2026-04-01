@@ -17,6 +17,11 @@ export const apiPaths = {
     },
     superAdmin: {
         REG_SCHOOL: '/api/super-admin/school-reg',
-        SCHOOL_LIST: '/api/super-admin/schools'
+        SCHOOL_LIST: '/api/super-admin/schools',
+        CREATE_SUBSCRIPTION: '/api/subscription-plan',
+        SUBSCRIPTION_LIST: '/api/subscription-plan',
+        UPDATE_SUBSCRIPTION: '/api/subscription-plan',
+        DELETE_SUBSCRIPTION: '/api/subscription-plan',
+        UPDATE_SUBSCRIPTION_STATUS: '/api/subscription-plan',
     }
 } 
