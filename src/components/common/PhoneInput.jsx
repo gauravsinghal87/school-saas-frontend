@@ -1,8 +1,8 @@
 import PhoneInputImport from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-const PhoneInput = PhoneInputImport.default || PhoneInputImport;
 
+const PhoneInput = PhoneInputImport.default || PhoneInputImport;
 const AppPhoneInput = ({
   label,
   name,
@@ -50,11 +50,10 @@ const AppPhoneInput = ({
           width: "100%",
           height: "44px",
           borderRadius: "12px",
-          border: `1px solid ${
-            error
-              ? "var(--color-error)"
-              : "var(--color-border)"
-          }`,
+          border: `1px solid ${error
+            ? "var(--color-error)"
+            : "var(--color-border)"
+            }`,
           backgroundColor: "var(--color-surface-card)",
           color: "var(--color-text-primary)",
           fontSize: "14px",

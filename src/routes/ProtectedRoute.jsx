@@ -23,12 +23,11 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   const userRole = user?.role;
-  console.log("userRole",userRole);
-
   // 🚀 ROLE MISMATCH → redirect to correct dashboard
   if (allowedRoles && !allowedRoles.includes(userRole)) {
-    const redirectPath = ROLE_ROUTES[userRole];
+    const redirectPath = ROLE_ROUTES[(userRole)] || "/"; // default to home if role is unknown
 
+    console.log('redirectPath', userRole)
     // 🧠 Prevent infinite loop
     if (redirectPath && location.pathname !== redirectPath) {
       return <Navigate to={redirectPath} replace />;

@@ -1,9 +1,9 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, login } from "../api/apiMehods";
+import { getCurrentUser, getSchoolList, login, registerSchool } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
-import { createTeacher,getTeachers } from "../api/apiMehods";
-
+import { createTeacher, getTeachers } from "../api/apiMehods";
+import useAppQuery from "./useAppQuery";
 // export const useLoginMutation = () => {
 //     const queryClient = useQueryClient();
 
@@ -20,8 +20,7 @@ import { createTeacher,getTeachers } from "../api/apiMehods";
 //     });
 // };
 
-export const createTeacherMutation = ()=>
-{
+export const createTeacherMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
         apiCall: createTeacher,
@@ -32,8 +31,26 @@ export const createTeacherMutation = ()=>
     });
 }
 
-export const getTeachersMutation = ()=>
-{
+export const createSchoolMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: registerSchool,
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["schoolsList"]);
+        },
+    });
+
+}
+
+export const useSchoolList = (params) => {
+    return useAppQuery({
+        queryKey: ["schoolsList", params],  
+        apiCall: () => getSchoolList(params), 
+    });
+};
+
+
+export const getTeachersMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
         apiCall: getTeachers,

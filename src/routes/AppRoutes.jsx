@@ -6,18 +6,22 @@ import { ROLES } from "../utils/roles";
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import StaffLayout from "../layouts/StaffLayout";
-import Teachers from "../modules/admin/teachers/Teachers";
+// import Teachers from "../modules/admin/teachers/Teachers";
+
+// import AddTeacher from "../modules/admin/teachers/AddTeacher";
+import SchoolsPage from "../components/common/SchoolPage";
 
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
 const NotFound = lazy(() => import("../components/common/NotFound"));
-
+const SchoolRegisterPage = lazy(() => import("../modules/superAdmin/schools/SchoolRegister"));
 const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
 const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
 const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
 const StaffDashboard = lazy(() => import("../modules/staff/dashboard/StaffDashboard"));
-const Addteacher = lazy(() => import("../modules/teachers/addteacher/Addteacher"));
+const Addteacher = lazy(() => import("../modules/admin/teachers/addteacher/Addteacher"));
+const Subscription = lazy(() => import("../modules/superAdmin/subscription/Subscription"));
 
 const ParentDashboard = lazy(() =>
   import("../modules/parent/dashboard/ParentDashboard")
@@ -49,8 +53,12 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<SuperAdminDashboard />} />
-            <Route path="teachers" element={<Teachers />} />
             <Route path="teachers/add" element={<Addteacher />} />
+            <Route path="schools" element={<SchoolsPage />} />
+            <Route path="subscriptions" element={<Subscription />} />
+
+            <Route path="*" element={<NotFound />} />
+
           </Route>
 
           {/* 🧑‍💼 Admin */}
@@ -64,7 +72,7 @@ const AppRoutes = () => {
           >
             <Route path="dashboard" element={<AdminDashboard />} />
 
-            <Route path="teachers" element={<Teachers />} />
+            {/* <Route path="teachers" element={<Teachers />} /> */}
        
 
           </Route>
@@ -79,6 +87,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<StudentDashboard />} />
+            <Route path="*" element={<NotFound />} />
+
           </Route>
 
           <Route
@@ -90,6 +100,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<ParentDashboard />} />
+            <Route path="*" element={<NotFound />} />
+
           </Route>
 
 
@@ -103,6 +115,8 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<StaffDashboard />} />
+            <Route path="*" element={<NotFound />} />
+
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

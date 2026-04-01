@@ -7,32 +7,8 @@ let role = localStorage.getItem("role") || ""; // default role for testing
 
 
 export const login = async (data) => {
-  const res = await api.post(apiPaths.auth.login, data);
-
-  // optional: normalize response
-  return res.data;
-
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // if (data.password !== "123456") {
-    //     throw {
-    //         message: "Invalid email or password",
-    //     };
-    // }
-
-
-    // // ✅ success response
-    // return {
-    //     success: true,
-    //     token: "dummy-token",
-    //     user: {
-    //         id: 1,
-    //         name: role.toUpperCase(),
-    //         email: data.email,
-    //         role,
-    //         permissions: ["ALL_ACCESS"],
-    //     },
-    // };
+    const res = await api.post(apiPaths.auth.login, data);
+    return res;
 };
 
 
@@ -50,6 +26,15 @@ export const getCurrentUser = async () => {
         role: role,
         permissions: ["ALL_ACCESS"],
     };
+};
+
+
+
+export const getSchoolList = async (params) => {
+    return await api.get(apiPaths.superAdmin.SCHOOL_LIST, { params });
+}
+export const registerSchool = async (data) => {
+    return await api.post(apiPaths.superAdmin.REG_SCHOOL, data);
 };
 
 

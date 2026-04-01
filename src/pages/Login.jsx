@@ -20,46 +20,40 @@ const Login = () => {
     const { login } = useUser();
     // const { mutate, isPending, isError, error } = useLoginMutation();
     const [isPending, setIsPending] = useState(false);
-const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
     const { refetch, user } = useUser()
     const [form, setForm] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
 
 
-
-    console.log("Current user in Login component:", user); // Debugging line
     const handleChange = (e) =>
         setForm({ ...form, [e.target.name]: e.target.value });
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-  try {
-    setIsPending(true);
-    setError(null);
+        try {
+            setIsPending(true);
+            setError(null);
 
-    const data = await login({
-      email: form.email,
-      password: form.password,
-    });
-console.log("data",data);
-    const role = data?.user?.role;
-    console.log("role",role);
+            const res = await login({
+                email: form.email,
+                password: form.password,
+            });
+            const role = res.data?.user?.role;
+            const route = ROLE_ROUTES[role];
+            if (route) {
+                navigate(route);
+            } else {
+                navigate("/"); // fallback
+            }
 
-    const route = ROLE_ROUTES[role];
-
-    if (route) {
-      navigate(route);
-    } else {
-      navigate("/"); // fallback
-    }
-
-  } catch (err) {
-    setError(err);
-  } finally {
-    setIsPending(false);
-  }
-};
+        } catch (err) {
+            setError(err);
+        } finally {
+            setIsPending(false);
+        }
+    };
     return (
         <div className="min-h-screen flex" style={{ backgroundColor: "var(--color-surface-sidebar)" }}>
 
@@ -233,6 +227,7 @@ console.log("data",data);
                                 <input
                                     type="email"
                                     name="email"
+                                    autoComplete='email'
                                     placeholder="you@school.edu"
                                     value={form.email}
                                     onChange={handleChange}
@@ -276,6 +271,7 @@ console.log("data",data);
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     name="password"
+                                    autoComplete="current-password"
                                     placeholder="••••••••"
                                     value={form.password}
                                     onChange={handleChange}

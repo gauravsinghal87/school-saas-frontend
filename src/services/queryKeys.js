@@ -4,5 +4,6 @@ export const QUERY_KEYS = {
     STUDENT: "student",
     STAFF: "staff",
     FEES: "fees",
+    schoolsList: "schoolsList",
 
 };

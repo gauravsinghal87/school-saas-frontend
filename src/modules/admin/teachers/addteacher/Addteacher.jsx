@@ -4,6 +4,7 @@ import { useState } from 'react';
 import StepIndicator from './components/StepIndicator';
 import StepBasicInfo from './components/steps/StepBasicInfo';
 import SectionTitle from './components/SectionTitle';
+
 const STEPS = [
   { id: "personal", label: "Personal", short: "01", icon: "👤" },
   { id: "professional", label: "Professional", short: "02", icon: "💼" },
@@ -13,8 +14,42 @@ const STEPS = [
   { id: "review", label: "Review", short: "06", icon: "✓" },
 ];
 export default function Addteacher() {
+
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    qualification: "",
+    experience: "",
+    subjects: [],
+    address: {
+      line1: "",
+      line2: "",
+      city: "",
+      state: "",
+      zip: "",
+    },
+    salary: {
+      amount: "",
+      currency: "USD",
+      payCycle: "monthly",
+    },
+    documents: [],
+  });
+console.log("formdata",formData);
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50/40">
               <div className="md:max-w-4xl w-[100vw] mx-auto md:px-4 px-2 sm:px-6 py-10 pb-20">
@@ -48,7 +83,7 @@ export default function Addteacher() {
         <form >
           <div className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/80 p-7 sm:p-10 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-indigo-50 to-transparent rounded-bl-[80px] pointer-events-none" />
-{step === 0 && <StepBasicInfo />}
+{step === 0 && <StepBasicInfo formData={formData} setFormData={setFormData} handleChange={handleChange} />}
 </div>
         </form>
         </div>

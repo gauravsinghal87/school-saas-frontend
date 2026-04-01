@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function Textarea({label, error, ...props}) {
+export default function Textarea({ label, error, ...props }) {
   return (
-   <div>
+    <div>
       {label && <label className="text-xs text-[var(--color-text-secondary)]">{label}</label>}
 
       <textarea

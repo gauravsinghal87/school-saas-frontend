@@ -40,6 +40,9 @@ api.interceptors.response.use(
                 case 401:
                     console.error("Unauthorized - Redirect to login");
                     localStorage.removeItem("token");
+                    localStorage.removeItem("refreshToken");
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("role");
                     window.location.href = "/";
                     break;
 

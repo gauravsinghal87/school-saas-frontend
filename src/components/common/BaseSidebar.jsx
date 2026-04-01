@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { LogOut, ChevronRight, LayoutDashboard, School, CreditCard, Users, UserCircle, Calendar, DollarSign, FileText, Home } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ROLES } from "../../utils/roles";
+import { ROLE_ROUTES, ROLE_ROUTES_SIDEBAR, ROLES } from "../../utils/roles";
 import { useUser } from "../../context/UserContext";
 
 // ─── ICON MAPPING ──────────────────────────────────────────────────────────────
@@ -112,22 +112,21 @@ const Sidebar = ({
     const menuItems = menuConfig[role] || [];
 
     const sections = {
-        main: menuItems.slice(0, 3), // First 3 items as main
-        secondary: menuItems.slice(3), // Remaining as secondary
+        main: menuItems.slice(0, 3),
+        secondary: menuItems.slice(3),
     };
 
     const handleLogout = async () => {
         await logout();
-        navigate("/");
-
-    }
+        navigate("/", { replace: true });
+    };
 
 
     const [expanded, setExpanded] = useState({ main: true, secondary: true });
     const toggle = (s) => setExpanded((p) => ({ ...p, [s]: !p[s] }));
 
     const goTo = (path, id) => {
-        const fullPath = `/${role}/${path}`;
+        const fullPath = `${ROLE_ROUTES_SIDEBAR[role]}/${path}`;
         navigate(fullPath);
         onItemClick?.(id);
         if (isOpen) onClose?.();
@@ -143,10 +142,9 @@ const Sidebar = ({
     };
 
     const NavItem = ({ item, index }) => {
+
         const Icon = item?.icon
         const isActive = isActivePath(item.path);
-
-        console.log('isAcgtive>>>', isActive)
         return (
             <button
                 onClick={() => goTo(item.path, item.name)}
@@ -190,15 +188,16 @@ const Sidebar = ({
                         />
                     </div>
 
-                    <span className="truncate text-[13px] font-medium">{item.name}</span>
+                    <span className={`truncate  ${isActive ? 'text-primary' : 'text-sidebar-text'} text-[13px] font-medium`}>{item.name}</span>
                 </div>
-            </button>
+            </button >
         );
     };
 
     // ── Section ─────────────────────────────────────────────────────────────────
 
     const Section = ({ title, items, sectionId }) => {
+
         if (!items || items.length === 0) return null;
         return (
             <div className="mb-3">
