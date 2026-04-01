@@ -4,21 +4,7 @@ import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import { createTeacher, getTeachers } from "../api/apiMehods";
 import useAppQuery from "./useAppQuery";
-// export const useLoginMutation = () => {
-//     const queryClient = useQueryClient();
 
-//     return useAppMutation({
-//         apiCall: login,
-//         successMessage: "Login successful 🎉",
-//         onSuccessCallback: (res) => {
-//             console.log("responsesss",res);
-//             localStorage.setItem("token", res.accessToken);
-//              localStorage.setItem("user", JSON.stringify(res.user));  
-//             localStorage.setItem("role", res?.user?.role);
-//             queryClient.setQueryData(["me"], res.user);
-//         },
-//     });
-// };
 
 export const createTeacherMutation = () => {
     const queryClient = useQueryClient();
@@ -44,8 +30,8 @@ export const createSchoolMutation = () => {
 
 export const useSchoolList = (params) => {
     return useAppQuery({
-        queryKey: ["schoolsList", params],  
-        apiCall: () => getSchoolList(params), 
+        queryKey: ["schoolsList", params],
+        apiCall: () => getSchoolList(params),
     });
 };
 

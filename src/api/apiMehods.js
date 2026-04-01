@@ -2,16 +2,12 @@ import api from "./apiConfig";
 import { apiPaths } from "./apiPath";
 
 
-let role = localStorage.getItem("role") || ""; // default role for testing
-
-
+let role = localStorage.getItem("role") || "";
 
 export const login = async (data) => {
     const res = await api.post(apiPaths.auth.login, data);
     return res;
 };
-
-
 
 export const getCurrentUser = async () => {
     await new Promise((res) => setTimeout(res, 500));
@@ -28,11 +24,10 @@ export const getCurrentUser = async () => {
     };
 };
 
-
-
 export const getSchoolList = async (params) => {
     return await api.get(apiPaths.superAdmin.SCHOOL_LIST, { params });
 }
+
 export const registerSchool = async (data) => {
     return await api.post(apiPaths.superAdmin.REG_SCHOOL, data);
 };
