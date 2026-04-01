@@ -148,7 +148,7 @@ const Sidebar = ({
         return (
             <button
                 onClick={() => goTo(item.path, item.name)}
-                className={`w-full flex items-center justify-between px-3 py-[9px] rounded-xl mb-[2px] transition-all duration-200 cursor-pointer overflow-visible ${isActive ? "nav-active-item" : ""}`}
+                className={`w-full  flex items-center justify-between px-3 py-[9px] rounded-xl mb-[2px] transition-all duration-200 cursor-pointer overflow-visible ${isActive ? "nav-active-item" : ""}`}
                 style={{
                     backgroundColor: isActive
                         ? "var(--color-sidebar-active)"

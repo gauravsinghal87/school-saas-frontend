@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCurrentUser } from "../hooks/useQueryMutations";
 import { login } from "../api/apiMehods";
-import { showSuccess } from "../utils/toast";
+import { showError, showSuccess } from "../utils/toast";
 
 const UserContext = createContext(null);
 
@@ -30,10 +30,23 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem("role", user?.role);
         queryClient.setQueryData(["me"], user);
       }
+      console.log("Login response >>", res);
+
+      if (!res.success) {
+        showError(error?.message || "Login failed. Please try again.");
+        return
+      }
       return res;
     } catch (err) {
-      console.error("Login failed", err);
-      throw err;
+      const message =
+        err?.response?.data?.message ||
+        err?.message ||
+        "Login failed. Please try again ❌";
+
+
+      showError(message); // 🔥 show toast
+
+      throw new Error(message); // 🔥 IMPORTANT
     }
   };
 

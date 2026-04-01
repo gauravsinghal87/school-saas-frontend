@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { GraduationCap, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
 import { ROLES } from "../utils/roles";
 import { useUser } from "../context/UserContext";
+import { showError } from "../utils/toast";
 
 
 
@@ -46,6 +47,10 @@ const Login = () => {
                 navigate(route);
             } else {
                 navigate("/"); // fallback
+            }
+            console.log("Login successful", res);
+            if (!res.success) {
+                showError(error?.message || "Login failed. Please try again.");
             }
 
         } catch (err) {
