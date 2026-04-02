@@ -2,27 +2,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
-import { ROLES } from "../utils/roles";
+import { ROLE_ROUTES, ROLES } from "../utils/roles";
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
-import StaffLayout from "../layouts/StaffLayout";
-// import Teachers from "../modules/admin/teachers/Teachers";
-
-// import AddTeacher from "../modules/admin/teachers/AddTeacher";
-import SchoolsPage from "../components/common/SchoolPage";
+import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
 
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
 const NotFound = lazy(() => import("../components/common/NotFound"));
-const SchoolRegisterPage = lazy(() => import("../modules/superAdmin/schools/SchoolRegister"));
 const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
 const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
 const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
 const StaffDashboard = lazy(() => import("../modules/staff/dashboard/StaffDashboard"));
 const Addteacher = lazy(() => import("../modules/admin/teachers/addteacher/Addteacher"));
 const Subscription = lazy(() => import("../modules/superAdmin/subscription/Subscription"));
-
+const AdminPage = lazy(() => import("../modules/superAdmin/admins/AdminPage"));
 const ParentDashboard = lazy(() =>
   import("../modules/parent/dashboard/ParentDashboard")
 );
@@ -35,6 +30,11 @@ const StudentDashboard = lazy(() =>
 const SuperAdminDashboard = lazy(() =>
   import("../modules/superAdmin/dashboard/SuperAdminDashboard")
 );
+
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+
+
 
 const AppRoutes = () => {
   return (
@@ -55,6 +55,8 @@ const AppRoutes = () => {
             <Route path="dashboard" element={<SuperAdminDashboard />} />
             <Route path="teachers/add" element={<Addteacher />} />
             <Route path="schools" element={<SchoolsPage />} />
+            <Route path="admins" element={<AdminPage />} />
+
             <Route path="subscriptions" element={<Subscription />} />
 
             <Route path="*" element={<NotFound />} />
@@ -73,7 +75,7 @@ const AppRoutes = () => {
             <Route path="dashboard" element={<AdminDashboard />} />
 
             {/* <Route path="teachers" element={<Teachers />} /> */}
-       
+
 
           </Route>
 
@@ -103,22 +105,6 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
 
           </Route>
-
-
-
-          <Route
-            path="/staff"
-            element={
-              <ProtectedRoute allowedRoles={[ROLES.STAFF]}>
-                <StaffLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<StaffDashboard />} />
-            <Route path="*" element={<NotFound />} />
-
-          </Route>
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

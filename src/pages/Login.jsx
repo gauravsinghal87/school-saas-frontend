@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useLoginMutation } from "../hooks/useQueryMutations";
 import { GraduationCap, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-react";
@@ -26,6 +26,23 @@ const Login = () => {
     const [form, setForm] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
 
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    // useEffect(() => {
+    //     if (!token) {
+    //         navigate("/", { replace: true });
+    //         return;
+    //     }
+    //     const redirectPath = ROLE_ROUTES[role];
+    //     if (redirectPath) {
+    //         navigate(redirectPath, { replace: true });
+    //     } else {
+    //         navigate("/", { replace: true });
+    //     }
+    // }, [token, role, navigate]);
+
+
 
     const handleChange = (e) =>
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,9 +63,8 @@ const Login = () => {
             if (route) {
                 navigate(route);
             } else {
-                navigate("/"); // fallback
+                navigate("/");
             }
-            console.log("Login successful", res);
             if (!res.success) {
                 showError(error?.message || "Login failed. Please try again.");
             }

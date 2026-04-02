@@ -3,7 +3,7 @@ import { set, useForm } from "react-hook-form";
 import SidePanel from "../../../components/common/SlidePanel";
 import SubscriptionForm from "./components/SubscriptionForm";
 import Button from "../../../components/common/Button";
-import { createSubscriptionMutation, updateSubscriptionMutation, deleteSubscriptionMutation,updateSubscriptionStatusMutation } from "../../../hooks/useQueryMutations";
+import { createSubscriptionMutation, updateSubscriptionMutation, deleteSubscriptionMutation, updateSubscriptionStatusMutation } from "../../../hooks/useQueryMutations";
 import { subscriptionList } from "../../../hooks/useQueryMutations";
 import DataTable from "../../../components/common/ReusableTable";
 import ConfirmBox from "../../../components/common/ConfirmBox";
@@ -22,29 +22,27 @@ export default function Subscription() {
     const [selected, setSelected] = useState(null);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
-    console.log("selected", selected);
-    const [data, setData] = useState([]);
     const STATUS_MAP = {
         active: { label: "Active", bg: "bg-success/10", text: "text-success" },
         inactive: { label: "Inactive", bg: "bg-error/10", text: "text-error" },
     };
-  const {mutateAsync:updateSubscriptionStatus,isPending:isUpdatingStatus}=  updateSubscriptionStatusMutation();
+    const { mutateAsync: updateSubscriptionStatus, isPending: isUpdatingStatus } = updateSubscriptionStatusMutation();
 
     const handleToggleStatus = async (row) => {
-  try {
-    const newStatus = row.status === "active" ? "inactive" : "active";
+        try {
+            const newStatus = row.status === "active" ? "inactive" : "active";
 
 
-    await updateSubscriptionStatus({
-      id: row._id,
-      data: { status: newStatus },
-    });
+            await updateSubscriptionStatus({
+                id: row._id,
+                data: { status: newStatus },
+            });
 
-    refetch();
-  } catch (err) {
-    console.error(err);
-  }
-};
+            refetch();
+        } catch (err) {
+            console.error(err);
+        }
+    };
     const COLUMNS = [
         { key: "name", label: "Subscription Name", sortable: true },
 
@@ -63,19 +61,19 @@ export default function Subscription() {
         },
 
         { key: "features", label: "Features" },
-{
-  key: "status",
-  label: "Status",
-  sortable: true,
-  width: "110px",
-  render: (val, row) => (
-    <ToggleButton
-      isActive={val === "active"}
-    //   loading={isupdating && selected?._id === row._id}
-      onToggle={() => handleToggleStatus(row)}
-    />
-  ),
-},
+        {
+            key: "status",
+            label: "Status",
+            sortable: true,
+            width: "110px",
+            render: (val, row) => (
+                <ToggleButton
+                    isActive={val === "active"}
+                    //   loading={isupdating && selected?._id === row._id}
+                    onToggle={() => handleToggleStatus(row)}
+                />
+            ),
+        },
 
         {
             key: "createdAt",
@@ -89,7 +87,6 @@ export default function Subscription() {
     ];
 
     const { mutateAsync: createSubscriptionPlan, isPending } = createSubscriptionMutation();
-    console.log("ispending", isPending);
 
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
@@ -101,15 +98,11 @@ export default function Subscription() {
         },
     });
     const { data: apiResponse, isLoading, refetch } = subscriptionList({ page, limit, search });
-    const { mutateAsync: updateSubscription,isPending:isupdating } = updateSubscriptionMutation();
-    console.log("isupdating",isupdating);
+    const { mutateAsync: updateSubscription, isPending: isupdating } = updateSubscriptionMutation();
     const { mutateAsync: deleteSubscription } = deleteSubscriptionMutation();
     const tableData = apiResponse?.data || [];
     const total = apiResponse?.data?.pagination?.total ?? 0;
 
-    console.log("tabledata", tableData);
-
-    console.log("apiresponse", apiResponse);
     // Load data
     //   const fetchData = async () => {
     //     const res = await getSubscriptions();
@@ -140,7 +133,6 @@ export default function Subscription() {
             if (mode === "create") {
                 await createSubscriptionPlan(formData);
             } else if (mode === "edit") {
-                console.log("updatedformdata", formData);
                 await updateSubscription({ id: selected._id, formData });
 
             }
@@ -162,10 +154,22 @@ export default function Subscription() {
     return (
         <div className="p-6">
 
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h1 className="text-2xl font-bold text-text-heading">Subscribtions</h1>
+                    <p className="text-sm text-text-secondary mt-0.5">
+                        Manage all Subscribtions on EduCore.
+                    </p>
+                </div>
+                <div className="flex justify-end">
+                    <Button onClick={() => openModal("create")} >
+                        Add Subscription
+                    </Button>
+                </div>
+            </div>
             {/* Add Button */}
-            {/* <Button onClick={() => openModal("create")} >
-                Add Subscription
-            </Button> */}
+
 
             {/* List */}
             <div className="grid gap-3 mt-6 ">
@@ -224,7 +228,7 @@ export default function Subscription() {
 
                     <div className="flex justify-end mt-auto">
                         {mode !== "view" && (
-                            <Button type="submit" loading={mode=="edit"?isupdating:isPending} loadingLabel={mode === "edit" ? "Updating..." : "Creating..."} variant="primary">
+                            <Button type="submit" loading={mode == "edit" ? isupdating : isPending} loadingLabel={mode === "edit" ? "Updating..." : "Creating..."} variant="primary">
                                 {mode === "edit" ? "Update" : "Create"}
                             </Button>
                         )}

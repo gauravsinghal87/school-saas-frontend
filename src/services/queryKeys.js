@@ -1,9 +1,11 @@
+
 export const QUERY_KEYS = {
     ME: "me",
     STUDENTS: "students",
     STUDENT: "student",
     STAFF: "staff",
     FEES: "fees",
+    SCHOOL_LIST: "schoolsList",
     schoolsList: "schoolsList",
     subscriptionPlans: "subscriptionPlans",
 

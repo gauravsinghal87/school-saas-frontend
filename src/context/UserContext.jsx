@@ -30,7 +30,6 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem("role", user?.role);
         queryClient.setQueryData(["me"], user);
       }
-      console.log("Login response >>", res);
 
       if (!res.success) {
         showError(error?.message || "Login failed. Please try again.");

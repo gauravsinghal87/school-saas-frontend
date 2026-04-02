@@ -9,41 +9,59 @@ export const login = async (data) => {
     return res;
 };
 
-export const getCurrentUser = async () => {
-    await new Promise((res) => setTimeout(res, 500));
-
-    if (!localStorage.getItem("token")) {
-        throw { message: "No token found" };
-    }
-
-    return {
-        id: 1,
-        name: "Admin User",
-        role: role,
-        permissions: ["ALL_ACCESS"],
-    };
-};
-
-export const getSchoolList = async (params) => {
-    return await api.get(apiPaths.superAdmin.SCHOOL_LIST, { params });
-}
-export const getSubscriptionList = async (params) => {
-    return await api.get(apiPaths.superAdmin.SUBSCRIPTION_LIST, { params });
-}
 
 export const registerSchool = async (data) => {
     return await api.post(apiPaths.superAdmin.REG_SCHOOL, data);
 };
 
+export const getSchoolList = async (params) => {
+    return await api.get(apiPaths.superAdmin.SCHOOL_LIST, { params });
+}
+
+
+export const getAdminList = async (params) => {
+    return await api.get(apiPaths.superAdmin.ADMINS, { params });
+}
+
+export const updateSchoolStatus = async (data) => {
+    const { id, ...rest } = data;
+    const url = apiPaths.superAdmin.UPDATE_SCHOOL.replace("{id}", id);
+    return await api.patch(url, rest);
+}
+
+export const getCurrentUser = async () => {
+
+    const storedUser = localStorage.getItem("user");
+    let user = storedUser ? JSON.parse(storedUser) : null;
+    return user;
+    // const res = await api.get(apiPaths.auth.me);
+
+    // if (res.success) {
+    //     const user = res.data;
+
+    //     localStorage.setItem("user", JSON.stringify(user));
+    //     localStorage.setItem("role", user?.role);
+
+    //     return user;
+    // }
+
+    // return null;
+
+};
+
+export const getSubscriptionList = async (params) => {
+    return await api.get(apiPaths.superAdmin.SUBSCRIPTION_LIST, { params });
+}
+
 
 export const createSubscription = async (formData) => {
     return await api.post(apiPaths.superAdmin.CREATE_SUBSCRIPTION, formData);
 };
-export const updateSubscription = async ({id, formData}) => {
+export const updateSubscription = async ({ id, formData }) => {
     return await api.put(`${apiPaths.superAdmin.UPDATE_SUBSCRIPTION}/${id}`, formData);
 };
 
-export const updateSubscriptionStatus = async ({id, data}) => {
+export const updateSubscriptionStatus = async ({ id, data }) => {
     return await api.patch(`${apiPaths.superAdmin.UPDATE_SUBSCRIPTION_STATUS}/${id}`, data);
 };
 export const deleteSubscription = async (id) => {

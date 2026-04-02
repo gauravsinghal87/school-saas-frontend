@@ -76,9 +76,12 @@ export const MENU_CONFIG = {
 
     [ROLES.SCHOOL_ADMIN]: [
         // main
+
         { id: "admin-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
         { id: "admin-students", name: "Students", path: "students", icon: GraduationCap, section: "main" },
         { id: "admin-staff", name: "Staff", path: "staff", icon: Briefcase, section: "main" },
+        { id: "academic-sessions", name: "Academic Sessions", path: "sessions", icon: Clock, section: "main" },
+
         { id: "teachers", name: "Teachers", path: "teachers", icon: Briefcase, section: "main" },
 
         { id: "admin-parents", name: "Parents", path: "parents", icon: Users, section: "main" },

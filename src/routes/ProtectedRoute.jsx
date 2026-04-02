@@ -8,6 +8,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, isLoading, isAuthenticated } = useUser();
   const location = useLocation();
 
+
   // ⏳ Loading
   if (isLoading) {
     return (
@@ -18,16 +19,15 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   // 🔐 Not logged in
-  if (!isAuthenticated) {
-    return <Navigate to="/" state={{ from: location }} replace />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/" state={{ from: location }} replace />;
+  // }
 
   const userRole = user?.role;
   // 🚀 ROLE MISMATCH → redirect to correct dashboard
   if (allowedRoles && !allowedRoles.includes(userRole)) {
-    const redirectPath = ROLE_ROUTES[(userRole)] || "/"; // default to home if role is unknown
+    const redirectPath = ROLE_ROUTES[(userRole)] // default to home if role is unknown
 
-    console.log('redirectPath', userRole)
     // 🧠 Prevent infinite loop
     if (redirectPath && location.pathname !== redirectPath) {
       return <Navigate to={redirectPath} replace />;

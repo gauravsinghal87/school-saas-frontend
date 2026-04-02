@@ -4,6 +4,7 @@ export const API_BASE_URL = "http://localhost:8080/api";
 export const apiPaths = {
     auth: {
         login: "/api/user/login",
+        me: "/api/user/me",
     },
     students: {
         list: "/students",
@@ -18,10 +19,12 @@ export const apiPaths = {
     superAdmin: {
         REG_SCHOOL: '/api/super-admin/school-reg',
         SCHOOL_LIST: '/api/super-admin/schools',
+        UPDATE_SCHOOL: '/api/super-admin/{id}/status',
         CREATE_SUBSCRIPTION: '/api/subscription-plan',
         SUBSCRIPTION_LIST: '/api/subscription-plan',
         UPDATE_SUBSCRIPTION: '/api/subscription-plan',
         DELETE_SUBSCRIPTION: '/api/subscription-plan',
         UPDATE_SUBSCRIPTION_STATUS: '/api/subscription-plan',
+        ADMINS: '/api/super-admin/admins',
     }
 } 

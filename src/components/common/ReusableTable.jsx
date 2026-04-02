@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, useRef } from "react";
 
- 
+
 const Icon = {
     Search: () => (
         <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth={1.8}>
@@ -60,7 +60,7 @@ const Icon = {
     ),
 };
 
- 
+
 function SortIcon({ column, sortConfig }) {
     const isActive = sortConfig.key === column.key;
     return (
@@ -178,7 +178,7 @@ function SkeletonRows({ rows, cols }) {
     ));
 }
 
-function ActionCell({ row, onEdit, onDelete }) {
+function DefaultActionCell({ row, onEdit, onDelete }) {
     return (
         <div className="flex items-center gap-1">
             {onEdit && (
@@ -203,14 +203,10 @@ function ActionCell({ row, onEdit, onDelete }) {
     );
 }
 
-// 
-// DATATABLE
-//
-// CLIENT mode (default) — internal filter / sort / paginate
-// SERVER mode           — pass: serverMode page total onSearch onPageChange onPageSizeChange
-// 
+
 export default function DataTable({
     title,
+    actionCell,
     columns = [],
     data = [],
     loading = false,
@@ -219,8 +215,6 @@ export default function DataTable({
     searchPlaceholder = "Search…",
     pageSizeOptions = [10, 20, 50],
     defaultPageSize = 10,
-    onAdd,
-    addLabel = "Add New",
     onEdit,
     onDelete,
     actions,
@@ -240,6 +234,8 @@ export default function DataTable({
     const [internalPageSize, setInternalPageSize] = useState(defaultPageSize);
     const [sortConfig, setSortConfig] = useState({ key: null, dir: "asc" });
     const debounceRef = useRef(null);
+
+
 
     const handleSearch = useCallback((val) => {
         setInternalSearch(val);
@@ -315,91 +311,92 @@ export default function DataTable({
         : columns;
 
     return (
-        <div className="flex flex-col rounded-2xl border border-border bg-surface-card overflow-hidden shadow-sm">
+        <>
 
-            {/* Toolbar */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-5 py-4 border-b border-border">
-                <div className="flex items-center gap-3 min-w-0">
-                    {title && (
-                        <h2 className="text-base font-bold text-text-heading truncate">{title}</h2>
-                    )}
-                    {!loading && countBadge != null && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
-                            {countBadge}
-                        </span>
-                    )}
-                </div>
-                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-                    {searchable && (
-                        <SearchBar value={internalSearch} onChange={handleSearch} placeholder={searchPlaceholder} />
-                    )}
-                    {actions}
-                    {onAdd && (
-                        <button
-                            onClick={onAdd}
-                            className="inline-flex items-center gap-1.5 h-9 px-4 rounded-xl text-sm font-semibold bg-button-primary text-button-primary-text hover:bg-button-primary-hover transition-all duration-150 shadow-sm hover:shadow active:scale-[0.97] whitespace-nowrap"
-                        >
-                            <Icon.Plus />
-                            {addLabel}
-                        </button>
-                    )}
-                </div>
-            </div>
 
-            {/* Table */}
-            <div className="overflow-x-auto">
-                <table className="w-full border-collapse text-sm">
-                    <thead>
-                        <tr className="bg-surface-page">
-                            {allCols.map((col) => (
-                                <th
-                                    key={col.key}
-                                    onClick={() => handleSort(col)}
-                                    style={col.width ? { width: col.width } : {}}
-                                    className={`group px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text-secondary select-none whitespace-nowrap border-b border-border ${col.sortable ? "cursor-pointer hover:text-text-primary transition-colors" : ""}`}
-                                >
-                                    <span className="inline-flex items-center">
-                                        {col.label}
-                                        {col.sortable && <SortIcon column={col} sortConfig={sortConfig} />}
-                                    </span>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {loading ? (
-                            <SkeletonRows rows={Math.min(defaultPageSize, 8)} cols={allCols.length} />
-                        ) : displayRows.length === 0 ? (
-                            <EmptyState message={emptyMessage} />
-                        ) : (
-                            displayRows.map((row, idx) => (
-                                <tr
-                                    key={row[rowKey] ?? idx}
-                                    className="border-b border-border last:border-0 hover:bg-surface-page transition-colors duration-100"
-                                >
-                                    {allCols.map((col) => (
-                                        <td key={col.key} className="px-4 py-3.5 text-text-primary whitespace-nowrap">
-                                            {col.key === "__actions__" ? (
-                                                <ActionCell row={row} onEdit={onEdit} onDelete={onDelete} />
-                                            ) : col.render ? (
-                                                col.render(row[col.key], row)
-                                            ) : (
-                                                <span className="block truncate max-w-[200px]">{row[col.key] ?? "—"}</span>
-                                            )}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))
+            <div className="flex flex-col rounded-2xl border border-border bg-surface-card overflow-hidden shadow-sm">
+                {/* Toolbar */}
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-5 py-4 border-b border-border">
+                    <div className="flex items-center gap-3 min-w-0">
+                        {title && (
+                            <h2 className="text-base font-bold text-text-heading truncate">{title}</h2>
                         )}
-                    </tbody>
-                </table>
-            </div>
+                        {!loading && countBadge != null && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                                {countBadge}
+                            </span>
+                        )}
 
-            {/* Footer */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-border">
-                <PageSizeSelect value={activePageSize} options={pageSizeOptions} onChange={handlePageSizeChange} />
-                <Pagination page={activePage} totalPages={activeTotalPages} total={activeTotal} pageSize={activePageSize} onPage={handlePageChange} />
+
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                        {searchable && (
+                            <SearchBar value={internalSearch} onChange={handleSearch} placeholder={searchPlaceholder} />
+                        )}
+                        {actions}
+
+                    </div>
+                </div>
+
+                {/* Table */}
+                <div className="overflow-x-auto">
+                    <table className="w-full border-collapse text-sm">
+                        <thead>
+                            <tr className="bg-surface-page">
+                                {allCols.map((col) => (
+                                    <th
+                                        key={col.key}
+                                        onClick={() => handleSort(col)}
+                                        style={col.width ? { width: col.width } : {}}
+                                        className={`group px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-text-secondary select-none whitespace-nowrap border-b border-border ${col.sortable ? "cursor-pointer hover:text-text-primary transition-colors" : ""}`}
+                                    >
+                                        <span className="inline-flex items-center">
+                                            {col.label}
+                                            {col.sortable && <SortIcon column={col} sortConfig={sortConfig} />}
+                                        </span>
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {loading ? (
+                                <SkeletonRows rows={Math.min(defaultPageSize, 8)} cols={allCols.length} />
+                            ) : displayRows.length === 0 ? (
+                                <EmptyState message={emptyMessage} />
+                            ) : (
+                                displayRows.map((row, idx) => (
+                                    <tr
+                                        key={row[rowKey] ?? idx}
+                                        className="border-b border-border last:border-0 hover:bg-surface-page transition-colors duration-100"
+                                    >
+                                        {allCols.map((col) => (
+                                            <td key={col.key} className="px-4 py-3.5 text-text-primary whitespace-nowrap">
+
+                                                {col.key === "__actions__" ? (
+                                                    actionCell ? (
+                                                        actionCell(row)
+                                                    ) : (
+                                                        <DefaultActionCell row={row} onEdit={onEdit} onDelete={onDelete} />
+                                                    )
+                                                ) : col.render ? col.render(row[col.key], row, idx) : (
+                                                    <span className="block truncate max-w-[200px]">{row[col.key] ?? "—"}</span>
+                                                )}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Footer */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-5 py-4 border-t border-border">
+                    <PageSizeSelect value={activePageSize} options={pageSizeOptions} onChange={handlePageSizeChange} />
+                    <Pagination page={activePage} totalPages={activeTotalPages} total={activeTotal} pageSize={activePageSize} onPage={handlePageChange} />
+                </div>
             </div>
-        </div>
+        </>
+
     );
 }

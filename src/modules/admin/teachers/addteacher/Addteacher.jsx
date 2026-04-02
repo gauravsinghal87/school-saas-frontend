@@ -15,7 +15,7 @@ const STEPS = [
   { id: "documents", label: "Documents", short: "05", icon: "📄" },
   { id: "review", label: "Review", short: "06", icon: "✓" },
 ];
-  const stepFields = {
+const stepFields = {
   0: [
     "name",
     "email",
@@ -26,19 +26,19 @@ const STEPS = [
     "gender",
     "maritalStatus",
   ],
-    1: ["designation", "dateOfJoining", "specialization", "qualifications"],
-    2: ["address.street", "address.city", "address.state", "address.zip", "address.country"],
-    3: ["salaryInfo.basic"],
-    4: [],
-  };
+  1: ["designation", "dateOfJoining", "specialization", "qualifications"],
+  2: ["address.street", "address.city", "address.state", "address.zip", "address.country"],
+  3: ["salaryInfo.basic"],
+  4: [],
+};
 export default function Addteacher() {
 
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  console.log("step",step);
+  console.log("step", step);
 
-  const { register, handleSubmit,watch, control,trigger, reset, formState: { errors } } = useForm({
-      mode: "onChange", 
+  const { register, handleSubmit, watch, control, trigger, reset, formState: { errors } } = useForm({
+    mode: "onChange",
     defaultValues: {
       name: "",
       email: "",
@@ -80,13 +80,13 @@ export default function Addteacher() {
     }));
   };
 
-      const onSubmit = async (formData) => {
-        try {
-          console.log("formData",formData);
-        } catch (error) {
-          
-        }
-      }
+  const onSubmit = async (formData) => {
+    try {
+      console.log("formData", formData);
+    } catch (error) {
+
+    }
+  }
   return (
     <div className="min-h-screen bg-[--color-surface-page to-indigo-50/40">
       <div className="md:max-w-4xl w-[100vw] ] mx-auto md:px-4 px-2 sm:px-6 py-10 pb-20">
@@ -123,44 +123,44 @@ export default function Addteacher() {
             {step === 0 && <StepBasicInfo register={register} errors={errors} control={control} watch={watch} />}
             {step === 1 && <div>Professional</div>}
           </div>
-  <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-100">
-              {step > 0 ? (
-                <button
-                  type="button"
-                  onClick={goPrev}
-                  className="flex items-center gap-2 px-5 py-2.5 text-sm font-600 text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 active:scale-95"
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  Previous
-                </button>
-              ) : <span />}
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-100">
+            {step > 0 ? (
+              <button
+                type="button"
+                onClick={goPrev}
+                className="flex items-center gap-2 px-5 py-2.5 text-sm font-600 text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 active:scale-95"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                Previous
+              </button>
+            ) : <span />}
 
-              {step < STEPS.length - 1 ? (
-                <button
-                  type="button"
-                  onClick={goNext}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-600 rounded-xl shadow-md shadow-indigo-200 hover:shadow-lg hover:shadow-indigo-300 transition-all duration-200 active:scale-95"
-                >
-                  Continue
-                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  disabled={mutation.isPending}
-                  className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white text-sm font-600 rounded-xl shadow-md shadow-emerald-200 hover:shadow-lg hover:shadow-emerald-300 transition-all duration-200 active:scale-95 disabled:cursor-not-allowed"
-                >
-                  {mutation.isPending ? (
-                    <>
-                      <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity=".25" /><path d="M12 2a10 10 0 0110 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" /></svg>
-                      Submitting…
-                    </>
-                  ) : (
-                    <> ✓ Submit Registration </>
-                  )}
-                </button>
-              )}
-            </div>
+            {step < STEPS.length - 1 ? (
+              <button
+                type="button"
+                onClick={goNext}
+                className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-600 rounded-xl shadow-md shadow-indigo-200 hover:shadow-lg hover:shadow-indigo-300 transition-all duration-200 active:scale-95"
+              >
+                Continue
+                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </button>
+            ) : (
+              <button
+                type="submit"
+                disabled={mutation.isPending}
+                className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white text-sm font-600 rounded-xl shadow-md shadow-emerald-200 hover:shadow-lg hover:shadow-emerald-300 transition-all duration-200 active:scale-95 disabled:cursor-not-allowed"
+              >
+                {mutation.isPending ? (
+                  <>
+                    <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity=".25" /><path d="M12 2a10 10 0 0110 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" /></svg>
+                    Submitting…
+                  </>
+                ) : (
+                  <> ✓ Submit Registration </>
+                )}
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>
