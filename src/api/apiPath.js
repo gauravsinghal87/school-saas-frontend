@@ -26,5 +26,8 @@ export const apiPaths = {
         DELETE_SUBSCRIPTION: '/api/subscription-plan',
         UPDATE_SUBSCRIPTION_STATUS: '/api/subscription-plan',
         ADMINS: '/api/super-admin/admins',
+        CREATE_ROLE: '/api/super-admin/role',
+        GET_ROLES: '/api/super-admin/role',
+        UPDATE_ROLE: '/api/super-admin/role/{id}',
     }
 } 

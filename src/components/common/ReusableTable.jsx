@@ -305,7 +305,7 @@ export default function DataTable({
         : sorted.slice((activePage - 1) * internalPageSize, activePage * internalPageSize);
 
     const countBadge = isServer ? externalTotal : filtered.length;
-    const showActions = onEdit || onDelete;
+    const showActions = true;
     const allCols = showActions
         ? [...columns, { key: "__actions__", label: "Actions", sortable: false }]
         : columns;

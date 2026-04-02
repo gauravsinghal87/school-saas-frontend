@@ -3,7 +3,7 @@ import ComponentsDemo from '../../../components/common/components';
 
 const SuperAdminDashboard = () => {
     return (
-    <ComponentsDemo/>
+        <ComponentsDemo />
     )
 }
 

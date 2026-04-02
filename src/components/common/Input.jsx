@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Input = ({ label, error,disabled, required,register, type, ...props }) => {
+const Input = ({ label, error, disabled, required, register, type, ...props }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const isPassword = type === "password";
@@ -19,9 +19,9 @@ const Input = ({ label, error,disabled, required,register, type, ...props }) => 
 
       {/* INPUT WRAPPER */}
       <div className="relative">
-        <input    disabled={disabled}
+        <input disabled={disabled}
           {...props}
-           {...register}  
+          {...register}
           type={isPassword ? (showPassword ? "text" : "password") : type}
           className={`w-full h-[44px] px-4 ${isPassword ? "pr-10" : ""
             } rounded-xl border text-sm outline-none transition
