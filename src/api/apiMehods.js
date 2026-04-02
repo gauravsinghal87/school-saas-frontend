@@ -13,7 +13,43 @@ export const login = async (data) => {
     return res;
 };
 
+//admin
 
+export const updateSection = async ({ id, data }) => {
+    return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
+};
+export const createSection
+    = async (formData) => {
+        return await api.post(apiPaths.admin.CREATE_SECTION, formData);
+    };
+export const createClass = async (formData) => {
+    return await api.post(apiPaths.admin.CREATE_CLASS, formData);
+};
+
+export const updateClass = async ({ id, data }) => {
+    return await api.put(`${apiPaths.admin.UPDATE_CLASS}/${id}`, data);
+};
+
+export const deleteClass = async (id) => {
+    return await api.delete(`${apiPaths.admin.DELETE_CLASS}/${id}`);
+};
+export const createAcademicYear = async (data) => {
+    return await api.post(apiPaths.admin.CREATE_ACADEMIC_YEAR, data);
+};
+
+export const updateAcademicYear = async ({ id, data }) => {
+    return await api.put(`${apiPaths.admin.UPDATE_ACADEMIC_YEAR}/${id}`, data);
+};
+export const getAcademicYearList = async (params) => {
+    return await api.get(apiPaths.admin.ACADEMIC_YEAR_LIST, { params });
+}
+
+export const getSectionList = async (params) => {
+    return await api.get(apiPaths.admin.SECTIONS_LIST, { params });
+}
+export const classesList = async (params) => {
+    return await api.get(apiPaths.admin.CLASSES_LIST, { params });
+}
 export const registerSchool = async (data) => {
     return await api.post(apiPaths.superAdmin.REG_SCHOOL, data);
 };

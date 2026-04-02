@@ -20,6 +20,9 @@ const StaffDashboard = lazy(() => import("../modules/staff/dashboard/StaffDashbo
 const Addteacher = lazy(() => import("../modules/admin/teachers/addteacher/Addteacher"));
 const Subscription = lazy(() => import("../modules/superAdmin/subscription/Subscription"));
 const AdminPage = lazy(() => import("../modules/superAdmin/admins/AdminPage"));
+const AcademicSessions = lazy(() => import("../modules/admin/academic-sessions/AcademicSessions"));
+const Sections = lazy(() => import("../modules/admin/sections/Sections"));
+const Classes = lazy(()=>import("../modules/admin/classes/Classes"));
 const ParentDashboard = lazy(() =>
   import("../modules/parent/dashboard/ParentDashboard")
 );
@@ -55,7 +58,7 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<SuperAdminDashboard />} />
-            <Route path="teachers/add" element={<Addteacher />} />
+            {/* <Route path="teachers/add" element={<Addteacher />} /> */}
             <Route path="schools" element={<SchoolsPage />} />
             <Route path="subscriptions" element={<Subscription />} />
             <Route path="roles" element={<RolesPage />} />
@@ -73,6 +76,11 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="teachers/add" element={<Addteacher />} />
+            <Route path="academic-sessions" element={<AcademicSessions />} />
+            <Route path="classes" element={<Classes />} />
+            <Route path="sections" element={<Sections />} />
+
 
             <Route path="subjects" element={<SubjectPage />} />
 

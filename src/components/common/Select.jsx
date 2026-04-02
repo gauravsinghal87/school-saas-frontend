@@ -21,8 +21,8 @@ const AppSelect = ({
       borderColor: state.isFocused
         ? "var(--color-primary)"
         : error
-        ? "var(--color-error)"
-        : "var(--color-border)",
+          ? "var(--color-error)"
+          : "var(--color-border)",
       boxShadow: "none",
       borderRadius: "12px",
       padding: "2px",
@@ -30,13 +30,22 @@ const AppSelect = ({
       "&:hover": {
         borderColor: "var(--color-primary)",
       },
+      menuPortal: (base) => ({
+        ...base,
+        zIndex: 9999,
+      }),
+
+      menu: (provided) => ({
+        ...provided,
+        zIndex: 9999,
+      }),
     }),
 
     menu: (provided) => ({
       ...provided,
       borderRadius: "12px",
       overflow: "hidden",
-      zIndex: 50,
+      zIndex: 500,
     }),
 
     option: (provided, state) => ({
@@ -44,8 +53,8 @@ const AppSelect = ({
       backgroundColor: state.isSelected
         ? "var(--color-primary)"
         : state.isFocused
-        ? "var(--color-surface-page)"
-        : "white",
+          ? "var(--color-surface-page)"
+          : "white",
       color: state.isSelected ? "#fff" : "var(--color-text-primary)",
     }),
 

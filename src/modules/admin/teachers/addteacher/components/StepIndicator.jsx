@@ -25,8 +25,8 @@ export default function StepIndicator({step, setStep}) {
               className={`flex flex-col items-center gap-1.5 flex-shrink-0 group ${done ? "cursor-pointer" : "cursor-default"}`}
             >
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-700 transition-all duration-300 border-[1.5px]
-                ${active ? "bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-200 scale-110" : ""}
-                ${done ? "bg-white border-indigo-300 text-indigo-600 hover:scale-105" : ""}
+                ${active ? "bg-primary border-primary text-white shadow-lg shadow-indigo-200 scale-110" : ""}
+                ${done ? "bg-white border-primary text-primary hover:scale-105" : ""}
                 ${future ? "bg-white border-slate-200 text-slate-400" : ""}
               `}>
                 {done ? (
@@ -36,7 +36,7 @@ export default function StepIndicator({step, setStep}) {
                 ) : active ? s.icon : s.short}
               </div>
               <span className={`text-[10px] font-600 uppercase tracking-wider hidden sm:block transition-colors
-                ${active ? "text-indigo-600" : done ? "text-indigo-400" : "text-slate-400"}`}>
+                ${active ? "text-primary" : done ? "text-primary" : "text-slate-400"}`}>
                 {s.label}
               </span>
             </button>

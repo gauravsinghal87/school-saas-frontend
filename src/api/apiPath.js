@@ -31,9 +31,22 @@ export const apiPaths = {
         UPDATE_ROLE: '/api/super-admin/role/{id}',
     },
     admin: {
+
         ADD_SUBJECT: '/api/admin/subject/reg',
         SUBJECT_LIST: '/api/admin/get/subjects',
         SUBJECT_UPDATE: '/api/admin/subject/{id}',
         SUBJECT_DELETE: '/api/admin/delete/subject/{id}',
+
+        ACADEMIC_YEAR_LIST: 'api/academic-session',
+        CREATE_ACADEMIC_YEAR: '/api/academic-session',
+        UPDATE_ACADEMIC_YEAR: '/api/academic-session/session',
+        CLASSES_LIST: '/api/admin/class/get/all',
+        CREATE_CLASS: '/api/admin/class',
+        UPDATE_CLASS: '/api/admin/class',
+        DELETE_CLASS: '/api/admin/class',
+        CREATE_SECTION: '/api/admin/section',
+        UPDATE_SECTION: '/api/admin/section',
+        SECTIONS_LIST: '/api/admin/get-sections',
     }
+
 } 
