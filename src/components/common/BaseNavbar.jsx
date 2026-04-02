@@ -8,7 +8,7 @@ import {
     Laptop,
 } from "lucide-react";
 import { useTheme } from "../../context/ThemContext";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────

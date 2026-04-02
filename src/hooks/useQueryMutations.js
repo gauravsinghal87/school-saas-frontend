@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole } from "../api/apiMehods";
+import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSubject, getSubjects, addSubject, deleteSubject } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import useAppQuery from "./useAppQuery";
@@ -249,3 +249,57 @@ export const useStudents = () => {
         queryFn: () => { return 1 },
     });
 };
+
+
+
+
+//admin queries & mutations 
+
+
+
+// ADD_SUBJECT: '/api/admin/subject/reg',
+//     SUBJECT_LIST: '/api/admin/subjects',
+//         SUBJECT_UPDATE: '/api/admin/subject/{id}',
+//             SUBJECT_DELETE: '/api/admin/delete/subject/{id}',
+
+
+export const addSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: addSubject,
+        successMessage: "Subject added successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["subjects"]);
+        },
+    });
+}
+
+export const getSubjectsQuery = () => {
+    return useAppQuery({
+        queryKey: ["subjects"],
+        apiCall: getSubjects,
+    });
+}
+
+export const updateSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateSubject,
+        successMessage: "Subject updated successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["subjects"]);
+        },
+    });
+}
+
+export const deleteSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteSubject,
+        successMessage: "Subject deleted successfully 🎉",
+        onSuccessCallback
+            : (res) => {
+                queryClient.invalidateQueries(["subjects"]);
+            },
+    });
+}

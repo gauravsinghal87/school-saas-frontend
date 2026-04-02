@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useUser } from "../context/UserContext";
 import { ROLE_ROUTES, ROLES } from "../utils/roles";
+import { useUser } from "../hooks/useUser";
 
 
 

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { LogOut, ChevronRight, LayoutDashboard, School, CreditCard, Users, UserCircle, Calendar, DollarSign, FileText, Home } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ROLE_ROUTES, ROLE_ROUTES_SIDEBAR, ROLES } from "../../utils/roles";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../hooks/useUser";
 
 // ─── ICON MAPPING ──────────────────────────────────────────────────────────────
 

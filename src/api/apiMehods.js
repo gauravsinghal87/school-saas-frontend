@@ -4,6 +4,10 @@ import { apiPaths } from "./apiPath";
 
 let role = localStorage.getItem("role") || "";
 
+
+//super-admin
+
+
 export const login = async (data) => {
     const res = await api.post(apiPaths.auth.login, data);
     return res;
@@ -96,4 +100,29 @@ export const updateRole = (data) => {
     const { _id: id, ...rest } = data;
     console.log("Updating role with ID:", id, "and data:", rest);
     return api.put(apiPaths.superAdmin.UPDATE_ROLE.replace("{id}", id), rest);
+}
+
+
+
+
+
+//admin api methods would go here
+
+
+
+export const addSubject = (data) => {
+    return api.post(apiPaths.admin.ADD_SUBJECT, data);
+}
+
+export const getSubjects = (params) => {
+    return api.get(apiPaths.admin.SUBJECT_LIST);
+}
+
+export const updateSubject = (data) => {
+    const { _id: id, ...rest } = data;
+    return api.put(apiPaths.admin.SUBJECT_UPDATE.replace("{id}", id), rest);
+}
+
+export const deleteSubject = (id) => {
+    return api.delete(apiPaths.admin.SUBJECT_DELETE.replace("{id}", id));
 }

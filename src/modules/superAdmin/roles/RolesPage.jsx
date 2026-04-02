@@ -96,7 +96,7 @@ function RoleForm({ defaultValues, onSubmit, loading, mode, onClose }) {
 }
 
 // ── Main Roles Component ─────────────────────────────────────────────────────
-export default function Roles() {
+export default function RolesPage() {
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
     const [search, setSearch] = useState("");
@@ -268,26 +268,6 @@ export default function Roles() {
                         <IconPlus />
                         Create Role
                     </button>
-                </div>
-
-                {/* Stats Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="bg-surface-card rounded-xl border border-border p-4">
-                        <p className="text-text-secondary text-sm">Total Roles</p>
-                        <p className="text-2xl font-bold text-text-heading">{total}</p>
-                    </div>
-                    <div className="bg-surface-card rounded-xl border border-border p-4">
-                        <p className="text-text-secondary text-sm">System Roles</p>
-                        <p className="text-2xl font-bold text-text-heading">
-                            {roles.filter(r => r.name === "SUPER_ADMIN" || r.name === "ADMIN").length}
-                        </p>
-                    </div>
-                    <div className="bg-surface-card rounded-xl border border-border p-4">
-                        <p className="text-text-secondary text-sm">Custom Roles</p>
-                        <p className="text-2xl font-bold text-text-heading">
-                            {roles.filter(r => r.name !== "SUPER_ADMIN" && r.name !== "ADMIN").length}
-                        </p>
-                    </div>
                 </div>
 
                 {/* Roles Table */}

@@ -1,10 +1,10 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useState } from "react";
-import { useUser } from "../context/UserContext";
 import BaseNavbar from "../components/common/BaseNavbar";
 import Sidebar from "../components/common/BaseSidebar";
 import { MENU_CONFIG } from "../utils/menuConfig";
+import { useUser } from "../hooks/useUser";
 
 const BaseLayout = ({ title, menu, role, user }) => {
     const navigate = useNavigate();

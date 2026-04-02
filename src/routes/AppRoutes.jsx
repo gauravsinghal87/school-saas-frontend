@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
-import { ROLE_ROUTES, ROLES } from "../utils/roles";
+import { ROLES } from "../utils/roles";
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
-import Roles from "../modules/superAdmin/roles/Roles";
+import SubjectPage from "../modules/admin/subjects/SubjectPage";
+import RolesPage from "../modules/superAdmin/roles/RolesPage";
 
 
 // 🔥 Lazy imports
@@ -57,7 +58,7 @@ const AppRoutes = () => {
             <Route path="teachers/add" element={<Addteacher />} />
             <Route path="schools" element={<SchoolsPage />} />
             <Route path="subscriptions" element={<Subscription />} />
-            <Route path="roles" element={<Roles />} />
+            <Route path="roles" element={<RolesPage />} />
             <Route path="*" element={<NotFound />} />
 
           </Route>
@@ -73,8 +74,9 @@ const AppRoutes = () => {
           >
             <Route path="dashboard" element={<AdminDashboard />} />
 
-            {/* <Route path="teachers" element={<Teachers />} /> */}
+            <Route path="subjects" element={<SubjectPage />} />
 
+            <Route path="*" element={<NotFound />} />
 
           </Route>
 
