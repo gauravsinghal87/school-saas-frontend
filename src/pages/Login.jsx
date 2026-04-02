@@ -63,9 +63,8 @@ const Login = () => {
             if (route) {
                 navigate(route);
             } else {
-                navigate("/"); // fallback
+                navigate("/");
             }
-            console.log("Login successful", res);
             if (!res.success) {
                 showError(error?.message || "Login failed. Please try again.");
             }

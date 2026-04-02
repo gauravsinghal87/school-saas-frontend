@@ -203,7 +203,7 @@ function DefaultActionCell({ row, onEdit, onDelete }) {
     );
 }
 
- 
+
 export default function DataTable({
     title,
     actionCell,
@@ -234,6 +234,8 @@ export default function DataTable({
     const [internalPageSize, setInternalPageSize] = useState(defaultPageSize);
     const [sortConfig, setSortConfig] = useState({ key: null, dir: "asc" });
     const debounceRef = useRef(null);
+
+
 
     const handleSearch = useCallback((val) => {
         setInternalSearch(val);

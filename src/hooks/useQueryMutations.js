@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus } from "../api/apiMehods";
+import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import useAppQuery from "./useAppQuery";
@@ -22,7 +22,7 @@ export const createSchoolMutation = () => {
         apiCall: registerSchool,
         queryKey: "schoolsList", // ✅ auto refetch after success
         successMessage: "School created successfully 🎉",
-        errorMessage: "Failed to create school ❌",
+        // errorMessage: "Failed to create school ❌",
     });
 };
 
@@ -174,6 +174,13 @@ export const useSchoolList = (params) => {
     return useAppQuery({
         queryKey: ["schoolsList", params],
         apiCall: () => getSchoolList(params),
+    });
+};
+
+export const getAdminListQuery = (params) => {
+    return useAppQuery({
+        queryKey: ["admins", params],
+        apiCall: () => getAdminList(params),
     });
 };
 export const subscriptionList = (params) => {

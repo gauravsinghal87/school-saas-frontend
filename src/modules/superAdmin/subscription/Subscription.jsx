@@ -22,7 +22,6 @@ export default function Subscription() {
     const [selected, setSelected] = useState(null);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
-    console.log("selected", selected);
     const STATUS_MAP = {
         active: { label: "Active", bg: "bg-success/10", text: "text-success" },
         inactive: { label: "Inactive", bg: "bg-error/10", text: "text-error" },
@@ -88,7 +87,6 @@ export default function Subscription() {
     ];
 
     const { mutateAsync: createSubscriptionPlan, isPending } = createSubscriptionMutation();
-    console.log("ispending", isPending);
 
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
@@ -101,14 +99,10 @@ export default function Subscription() {
     });
     const { data: apiResponse, isLoading, refetch } = subscriptionList({ page, limit, search });
     const { mutateAsync: updateSubscription, isPending: isupdating } = updateSubscriptionMutation();
-    console.log("isupdating", isupdating);
     const { mutateAsync: deleteSubscription } = deleteSubscriptionMutation();
     const tableData = apiResponse?.data || [];
     const total = apiResponse?.data?.pagination?.total ?? 0;
 
-    console.log("tabledata", tableData);
-
-    console.log("apiresponse", apiResponse);
     // Load data
     //   const fetchData = async () => {
     //     const res = await getSubscriptions();
@@ -139,7 +133,6 @@ export default function Subscription() {
             if (mode === "create") {
                 await createSubscriptionPlan(formData);
             } else if (mode === "edit") {
-                console.log("updatedformdata", formData);
                 await updateSubscription({ id: selected._id, formData });
 
             }
@@ -164,7 +157,7 @@ export default function Subscription() {
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-text-heading">Schools</h1>
+                    <h1 className="text-2xl font-bold text-text-heading">Subscribtions</h1>
                     <p className="text-sm text-text-secondary mt-0.5">
                         Manage all Subscribtions on EduCore.
                     </p>

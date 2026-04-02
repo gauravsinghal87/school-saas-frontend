@@ -27,7 +27,6 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   // 🚀 ROLE MISMATCH → redirect to correct dashboard
   if (allowedRoles && !allowedRoles.includes(userRole)) {
     const redirectPath = ROLE_ROUTES[(userRole)] // default to home if role is unknown
-    console.log('protected route', userRole, redirectPath, allowedRoles)
 
     // 🧠 Prevent infinite loop
     if (redirectPath && location.pathname !== redirectPath) {

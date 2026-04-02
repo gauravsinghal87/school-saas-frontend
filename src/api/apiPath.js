@@ -25,5 +25,6 @@ export const apiPaths = {
         UPDATE_SUBSCRIPTION: '/api/subscription-plan',
         DELETE_SUBSCRIPTION: '/api/subscription-plan',
         UPDATE_SUBSCRIPTION_STATUS: '/api/subscription-plan',
+        ADMINS: '/api/super-admin/admins',
     }
 } 

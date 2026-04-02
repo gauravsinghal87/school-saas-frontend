@@ -19,6 +19,10 @@ export const getSchoolList = async (params) => {
 }
 
 
+export const getAdminList = async (params) => {
+    return await api.get(apiPaths.superAdmin.ADMINS, { params });
+}
+
 export const updateSchoolStatus = async (data) => {
     const { id, ...rest } = data;
     const url = apiPaths.superAdmin.UPDATE_SCHOOL.replace("{id}", id);

@@ -40,7 +40,6 @@ export default function Addteacher() {
     },
     documents: [],
   });
-console.log("formdata",formData);
 
 const handleChange = (e) => {
   const { name, value } = e.target;
