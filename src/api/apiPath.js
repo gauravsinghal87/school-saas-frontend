@@ -16,7 +16,12 @@ export const apiPaths = {
         teachersList: "/teachers",
         createTeacher: "/create/teacher",
     },
+    admin: {
+        roles:"",
+        staff:"/api/staff",
+    },
     superAdmin: {
+        ROLES:"/api/super-admin/role",
         REG_SCHOOL: '/api/super-admin/school-reg',
         SCHOOL_LIST: '/api/super-admin/schools',
         UPDATE_SCHOOL: '/api/super-admin/{id}/status',

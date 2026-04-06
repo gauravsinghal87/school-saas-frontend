@@ -6,7 +6,14 @@ function Spinner() {
       fill="none"
       viewBox="0 0 24 24"
     >
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
       <path
         className="opacity-75"
         fill="currentColor"
@@ -24,6 +31,7 @@ export default function Button({
   onClick,
   type = "button",
   variant = "primary",
+  ...props
 }) {
   const baseStyle = `
     flex items-center justify-center gap-2
@@ -34,7 +42,8 @@ export default function Button({
   `;
 
   const variants = {
-    primary: "bg-button-primary hover:bg-button-primary-hover text-button-primary-text",
+    primary:
+      "bg-button-primary hover:bg-button-primary-hover text-button-primary-text",
     outline: "border border-border text-text-primary hover:bg-surface-hover",
   };
 
@@ -43,6 +52,7 @@ export default function Button({
       type={type}
       disabled={loading}
       onClick={onClick}
+      {...props}
       className={`${baseStyle} ${variants[variant]} cursor-pointer`}
     >
       {loading ? (
