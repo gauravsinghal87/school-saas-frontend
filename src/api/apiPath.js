@@ -30,7 +30,7 @@ export const apiPaths = {
         GET_ROLES: '/api/super-admin/role',
         UPDATE_ROLE: '/api/super-admin/role/{id}',
     },
-    admin: {
+admin: {
 
         ADD_SUBJECT: '/api/admin/subject/reg',
         SUBJECT_LIST: '/api/admin/get/subjects',
@@ -50,7 +50,9 @@ export const apiPaths = {
         DELETE_SECTION: '/api/admin/delete-section',
         CLASS_SUBJECTS: '/api/admin/subjects',
         UPDATE_CLASS_SUBJECTS:'api/admin/update-subjects',
-        REMOVE_CLASS_SUBJECTS:'api/admin/remove-subjects'
+        REMOVE_CLASS_SUBJECTS:'api/admin/remove-subjects',
+        CREATE_EXAM:'/api/admin/exam',
+        UPDATE_EXAM:'/api/admin/exam',
 
     }
 

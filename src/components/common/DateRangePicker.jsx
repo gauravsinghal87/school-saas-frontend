@@ -153,7 +153,7 @@ export default function DateRangePicker({ value, onChange }) {
 
       {/* DROPDOWN */}
       {open && (
-        <div className="absolute mt-3 bg-white border border-[var(--color-border)] rounded-2xl shadow-2xl z-50 flex backdrop-blur-lg">
+        <div className="absolute mt-3 right-[0px] bg-white border border-[var(--color-border)] rounded-2xl shadow-2xl z-50 flex backdrop-blur-lg">
           {renderCalendar(0)}
           {renderCalendar(1)}
         </div>

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSubject, getSubjects, addSubject, deleteSubject, createClass, updateClass, updateAcademicYear, deleteClass, classesList, getAcademicYearList, createAcademicYear, updateSection, createSection, getSectionList, deleteSection, updateClassSubjects, removeClassSubjects } from "../api/apiMehods";
+import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSubject, getSubjects, addSubject, deleteSubject, createClass, updateClass, updateAcademicYear, deleteClass, classesList, getAcademicYearList, createAcademicYear, updateSection, createSection, getSectionList, deleteSection, updateClassSubjects, removeClassSubjects, createExam, updateExam } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import useAppQuery from "./useAppQuery";
@@ -272,6 +272,29 @@ export const useStudents = () => {
 //admin queries & mutations 
 
 //admin
+
+export const createExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createExam,
+        successMessage: "Exam created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examsList"]);
+        },
+    });
+}
+export const updateExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateExam,
+        successMessage: "Exam updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examsList"]);
+        },
+    });
+
+
+}
 export const createSectionMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -305,7 +328,7 @@ export const createAcademicYearMutation = () => {
     });
 }
 export const updateAcademicYearMutation = () => {
-    const queryClient = useQueryClient();updateSection
+    const queryClient = useQueryClient();
     return useAppMutation({
         apiCall: updateAcademicYear,
         successMessage: "Academic year updated successfully 🎉",
