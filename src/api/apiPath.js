@@ -16,7 +16,9 @@ export const apiPaths = {
         teachersList: "/teachers",
         createTeacher: "/create/teacher",
     },
+
     superAdmin: {
+        ROLES: "/api/super-admin/role",
         REG_SCHOOL: '/api/super-admin/school-reg',
         SCHOOL_LIST: '/api/super-admin/schools',
         UPDATE_SCHOOL: '/api/super-admin/{id}/status',
@@ -57,7 +59,9 @@ export const apiPaths = {
         DELETE_SECTION: '/api/admin/delete-section',
         CLASS_SUBJECTS: '/api/admin/subjects',
         UPDATE_CLASS_SUBJECTS: 'api/admin/update-subjects',
-        REMOVE_CLASS_SUBJECTS: 'api/admin/remove-subjects'
+        REMOVE_CLASS_SUBJECTS: 'api/admin/remove-subjects',
+        roles: "",
+        staff: "/api/staff",
 
     }
 

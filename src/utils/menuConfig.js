@@ -110,17 +110,17 @@ export const MENU_CONFIG = {
         { id: "staff-schedule", name: "Schedule", path: "schedule", icon: CalendarDays, section: "main" },
         { id: "staff-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "main", badge: 1 },
 
-        // academic
-        { id: "staff-attendance", name: "Attendance", path: "attendance", icon: CalendarCheck, section: "academic" },
-        { id: "staff-marks", name: "Marks & Exams", path: "marks", icon: BarChart3, section: "academic" },
-        { id: "staff-materials", name: "Study Materials", path: "study-materials", icon: FolderOpen, section: "academic" },
-        { id: "staff-timetable", name: "Timetable", path: "timetable", icon: ClipboardList, section: "academic" },
+        // // academic
+        // { id: "staff-attendance", name: "Attendance", path: "attendance", icon: CalendarCheck, section: "academic" },
+        // { id: "staff-marks", name: "Marks & Exams", path: "marks", icon: BarChart3, section: "academic" },
+        // { id: "staff-materials", name: "Study Materials", path: "study-materials", icon: FolderOpen, section: "academic" },
+        // { id: "staff-timetable", name: "Timetable", path: "timetable", icon: ClipboardList, section: "academic" },
 
-        // personal
-        { id: "staff-leaves", name: "Leave Requests", path: "leaves", icon: Send, section: "personal" },
-        { id: "staff-payroll", name: "Payroll", path: "payroll", icon: Wallet, section: "personal" },
-        { id: "staff-clockin", name: "Attendance Log", path: "clock-in", icon: Clock, section: "personal" },
-        { id: "staff-profile", name: "My Profile", path: "profile", icon: UserCircle, section: "personal" },
+        // // personal
+        // { id: "staff-leaves", name: "Leave Requests", path: "leaves", icon: Send, section: "personal" },
+        // { id: "staff-payroll", name: "Payroll", path: "payroll", icon: Wallet, section: "personal" },
+        // { id: "staff-clockin", name: "Attendance Log", path: "clock-in", icon: Clock, section: "personal" },
+        // { id: "staff-profile", name: "My Profile", path: "profile", icon: UserCircle, section: "personal" },
     ],
 
     // ── STUDENT ─────────────────────────────────────────────────────────────────

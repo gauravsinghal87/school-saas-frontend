@@ -9,6 +9,7 @@ import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
 import SubjectPage from "../modules/admin/subjects/SubjectPage";
 import RolesPage from "../modules/superAdmin/roles/RolesPage";
 
+import AdminStaff from "../modules/admin/staff/AdminStaff";
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
@@ -16,9 +17,28 @@ const NotFound = lazy(() => import("../components/common/NotFound"));
 const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
 const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
 const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
-const StaffDashboard = lazy(() => import("../modules/staff/dashboard/StaffDashboard"));
-const Addteacher = lazy(() => import("../modules/admin/teachers/addteacher/Addteacher"));
-const Subscription = lazy(() => import("../modules/superAdmin/subscription/Subscription"));
+
+//staff imports
+const StaffDashboard = lazy(
+  () => import("../modules/staff/dashboard/StaffDashboard"),
+);
+const StaffLayout = lazy(() => import("../layouts/StaffLayout"));
+const StaffTeachers = lazy(
+  () => import("../modules/staff/teachers/StaffTeachers"),
+);
+const StaffStudents = lazy(
+  () => import("../modules/staff/students/StaffStudents"),
+);
+const StaffParents = lazy(
+  () => import("../modules/staff/parents/StaffParents"),
+);
+
+const Addteacher = lazy(
+  () => import("../modules/admin/teachers/addteacher/Addteacher"),
+);
+const Subscription = lazy(
+  () => import("../modules/superAdmin/subscription/Subscription"),
+);
 const AdminPage = lazy(() => import("../modules/superAdmin/admins/AdminPage"));
 const AcademicSessions = lazy(() => import("../modules/admin/academic-sessions/AcademicSessions"));
 const Sections = lazy(() => import("../modules/admin/sections/Sections"));
@@ -28,23 +48,22 @@ const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
 const ClassSubjects = lazy(() => import("../modules/admin/classes/ClassSubjects"));
 const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
-const ParentDashboard = lazy(() =>
-  import("../modules/parent/dashboard/ParentDashboard")
+
+const ParentDashboard = lazy(
+  () => import("../modules/parent/dashboard/ParentDashboard"),
 );
-const AdminDashboard = lazy(() =>
-  import("../modules/admin/dashboard/Dashboard")
+const AdminDashboard = lazy(
+  () => import("../modules/admin/dashboard/Dashboard"),
 );
-const StudentDashboard = lazy(() =>
-  import("../modules/student/dashboard/Dashboard")
+const StudentDashboard = lazy(
+  () => import("../modules/student/dashboard/Dashboard"),
 );
-const SuperAdminDashboard = lazy(() =>
-  import("../modules/superAdmin/dashboard/SuperAdminDashboard")
+const SuperAdminDashboard = lazy(
+  () => import("../modules/superAdmin/dashboard/SuperAdminDashboard"),
 );
 
 const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
-
-
 
 const AppRoutes = () => {
   return (
@@ -68,7 +87,6 @@ const AppRoutes = () => {
             <Route path="subscriptions" element={<Subscription />} />
             <Route path="roles" element={<RolesPage />} />
             <Route path="*" element={<NotFound />} />
-
           </Route>
 
           {/* 🧑‍💼 Admin */}
@@ -96,6 +114,8 @@ const AppRoutes = () => {
 
             <Route path="*" element={<NotFound />} />
 
+            <Route path="staff" element={<AdminStaff />} />
+            {/* <Route path="teachers" element={<Teachers />} /> */}
           </Route>
 
           {/* 🎓 Student */}
@@ -109,7 +129,6 @@ const AppRoutes = () => {
           >
             <Route path="dashboard" element={<StudentDashboard />} />
             <Route path="*" element={<NotFound />} />
-
           </Route>
 
           <Route
@@ -122,7 +141,20 @@ const AppRoutes = () => {
           >
             <Route path="dashboard" element={<ParentDashboard />} />
             <Route path="*" element={<NotFound />} />
-
+          </Route>
+          <Route
+            path="/staff"
+            element={
+              // <ProtectedRoute allowedRoles={[ROLES.STAFF]}>
+              <StaffLayout />
+              // </ProtectedRoute>
+            }
+          >
+            <Route path="dashboard" element={<StaffDashboard />} />
+            <Route path="teachers" element={<StaffTeachers />} />
+            <Route path="students" element={<StaffStudents />} />
+            <Route path="parents" element={<StaffParents />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>

@@ -1,10 +1,62 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-    getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSubject, getSubjects, addSubject, deleteSubject, createClass, updateClass, updateAcademicYear, deleteClass, classesList, getAcademicYearList, createAcademicYear, updateSection, createSection, createFeeStructure,
+    // Auth & User
+    getCurrentUser,
+    login,
+
+    // Super Admin
+    getSchoolList,
+    registerSchool,
+    updateSchoolStatus,
+    getAdminList,
+    createSubscription,
+    getSubscriptionList,
+    updateSubscription,
+    deleteSubscription,
+    updateSubscriptionStatus,
+    createRole,
+    getRoles,
+    updateRole,
+
+    // Admin - Academic
+    createAcademicYear,
+    updateAcademicYear,
+    getAcademicYearList,
+    createClass,
+    updateClass,
+    deleteClass,
+    classesList,
+    createSection,
+    updateSection,
+    deleteSection,
+    getSectionList,
+
+    // Admin - Subjects
+    addSubject,
+    getSubjects,
+    updateSubject,
+    deleteSubject,
+
+    // Admin - Teachers & Staff
+    createTeacher,
+    getTeachers,
+    fetchStaffList,
+    deleteStaff,
+    getStaffById,
+    uploadStaffDocuments,
+
+    // Admin - Students
+    createStudent,
+    getStudents,
+
+    // Admin - Fees
+    createFeeStructure,
     getFeeStructures,
     updateFeeStructure,
     deleteFeeStructure,
     getFeeStructureById,
+
+    // Admin - Timetable
     createPeriod,
     getPeriods,
     updatePeriod,
@@ -12,10 +64,13 @@ import {
     createTimetable,
     getTimetable,
     deleteTimetable,
+
+    // Admin - Class Subjects
     updateClassSubjects,
     removeClassSubjects,
-    deleteSection,
-    getSectionList,
+
+    // Other
+    fetchRolesList,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -36,8 +91,7 @@ export const createTeacherMutation = () => {
             queryClient.invalidateQueries(["teachersList"]);
         },
     });
-}
-
+};
 
 
 
@@ -54,8 +108,6 @@ export const createSchoolMutation = () => {
         // errorMessage: "Failed to create school ❌",
     });
 };
-
-
 
 
 export const updateSchoolStatusMutation = () => {
@@ -93,7 +145,7 @@ export const updateSchoolStatusMutation = () => {
                         schools: old.data.schools.map((s) =>
                             s._id === variables.id
                                 ? { ...s, isActive: variables.isActive }
-                                : s
+                                : s,
                         ),
                     },
                 };
@@ -111,7 +163,7 @@ export const updateSchoolStatusMutation = () => {
             showError(
                 error?.response?.data?.message ||
                 error?.message ||
-                "Failed to update status ❌"
+                "Failed to update status ❌",
             );
         },
 
@@ -139,7 +191,7 @@ export const createSubscriptionMutation = () => {
             queryClient.invalidateQueries(["schoolsList"]);
         },
     });
-}
+};
 export const updateSubscriptionMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -149,9 +201,7 @@ export const updateSubscriptionMutation = () => {
             queryClient.invalidateQueries(["subscriptionPlans"]);
         },
     });
-
-
-}
+};
 
 export const updateSubscriptionStatusMutation = () => {
     const queryClient = useQueryClient();
@@ -162,9 +212,7 @@ export const updateSubscriptionStatusMutation = () => {
             queryClient.invalidateQueries(["subscriptionPlans"]);
         },
     });
-
-
-}
+};
 export const deleteSubscriptionMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -174,9 +222,7 @@ export const deleteSubscriptionMutation = () => {
             queryClient.invalidateQueries(["subscriptionPlans"]);
         },
     });
-
-}
-
+};
 
 //admin
 export const academicYearList = (params) => {
@@ -207,7 +253,12 @@ export const subscriptionList = (params) => {
     });
 };
 
-
+export const useRolesList = () => {
+    return useAppQuery({
+        queryKey: ["roles"],
+        apiCall: fetchRolesList, // ✅ correct
+    });
+};
 
 export const getTeachersMutation = () => {
     const queryClient = useQueryClient();
@@ -218,7 +269,7 @@ export const getTeachersMutation = () => {
             queryClient.invalidateQueries(["teachersList"]);
         },
     });
-}
+};
 
 export const useCurrentUser = () => {
     return useQuery({
@@ -279,7 +330,49 @@ export const deleteRoleMutation = () => {
 export const useStudents = () => {
     return useQuery({
         queryKey: [QUERY_KEYS.STUDENTS],
-        queryFn: () => { return 1 },
+        queryFn: () => {
+            return 1;
+        },
+    });
+};
+
+// <<<--------admin---------->>>
+export const getStaffList = (params) => {
+    return useAppQuery({
+        queryKey: ["staffList", params],
+        apiCall: () => fetchStaffList({ ...params }),
+    });
+};
+
+export const deleteStaffMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: deleteStaff,
+        successMessage: "Staff deleted successfully 🎉",
+
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["staffList"]);
+        },
+    });
+};
+
+export const useStaffDetail = (staffId) => {
+    return useAppQuery({
+        queryKey: ["staff", staffId],
+        apiCall: () => getStaffById(staffId),
+        enabled: !!staffId,
+    });
+};
+export const useUploadStaffDocumentsMutation = (staffId, userId) => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: ({ formData }) => uploadStaffDocuments({ userId, formData }),
+        successMessage: "Documents uploaded successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["staff", staffId]);
+        },
     });
 };
 
