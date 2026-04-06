@@ -1,5 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSubject, getSubjects, addSubject, deleteSubject, createClass, updateClass, updateAcademicYear, deleteClass, classesList, getAcademicYearList, createAcademicYear, updateSection, createSection } from "../api/apiMehods";
+import {
+    getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSubject, getSubjects, addSubject, deleteSubject, createClass, updateClass, updateAcademicYear, deleteClass, classesList, getAcademicYearList, createAcademicYear, updateSection, createSection, createFeeStructure,
+    getFeeStructures,
+    updateFeeStructure,
+    deleteFeeStructure,
+    getFeeStructureById,
+    createPeriod,
+    getPeriods,
+    updatePeriod,
+    deletePeriod,
+    createTimetable,
+    getTimetable,
+    deleteTimetable,
+} from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import useAppQuery from "./useAppQuery";
@@ -305,7 +318,7 @@ export const createAcademicYearMutation = () => {
     });
 }
 export const updateAcademicYearMutation = () => {
-    const queryClient = useQueryClient();updateSection
+    const queryClient = useQueryClient(); updateSection
     return useAppMutation({
         apiCall: updateAcademicYear,
         successMessage: "Academic year updated successfully 🎉",
@@ -402,3 +415,134 @@ export const deleteSubjectMutation = () => {
             },
     });
 }
+
+
+// fees module
+
+// Get Fee Structures List
+export const feeStructuresList = (params) => {
+    return useAppQuery({
+        queryKey: ["feeStructures", params],
+        apiCall: () => getFeeStructures(params),
+    });
+};
+
+// Get Single Fee Structure
+export const feeStructureById = (id, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["feeStructure", id],
+        apiCall: () => getFeeStructureById(id),
+        enabled: enabled && !!id,
+    });
+};
+
+// Create Fee Structure
+export const createFeeStructureMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createFeeStructure,
+        successMessage: "Fee structure created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["feeStructures"]);
+        },
+    });
+};
+
+// Update Fee Structure
+export const updateFeeStructureMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateFeeStructure,
+        successMessage: "Fee structure updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["feeStructures"]);
+        },
+    });
+};
+
+// Delete Fee Structure
+export const deleteFeeStructureMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteFeeStructure,
+        successMessage: "Fee structure deleted successfully 🗑️",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["feeStructures"]);
+        },
+    });
+};
+
+
+// ==================== TIMETABLE MANAGEMENT ====================
+
+// Periods
+export const periodsList = (params) => {
+    return useAppQuery({
+        queryKey: ["periods", params],
+        apiCall: () => getPeriods(params),
+    });
+};
+
+export const createPeriodMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createPeriod,
+        successMessage: "Period created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["periods"]);
+        },
+    });
+};
+
+export const updatePeriodMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updatePeriod,
+        successMessage: "Period updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["periods"]);
+        },
+    });
+};
+
+export const deletePeriodMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deletePeriod,
+        successMessage: "Period deleted successfully 🗑️",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["periods"]);
+        },
+    });
+};
+
+// Timetable
+export const getTimetableQuery = (params, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["timetable", params],
+        apiCall: () => getTimetable(params),
+        enabled: enabled && !!params?.classId && !!params?.sectionId,
+    });
+};
+
+export const createTimetableMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createTimetable,
+        successMessage: "Timetable created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["timetable"]);
+        },
+    });
+};
+
+export const deleteTimetableMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteTimetable,
+        successMessage: "Timetable deleted successfully 🗑️",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["timetable"]);
+        },
+    });
+};

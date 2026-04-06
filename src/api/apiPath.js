@@ -47,6 +47,13 @@ export const apiPaths = {
         CREATE_SECTION: '/api/admin/section',
         UPDATE_SECTION: '/api/admin/section',
         SECTIONS_LIST: '/api/admin/get-sections',
+
+        // Fee Management
+        FEE_STRUCTURE: '/api/admin/fees/fees-structure',
+
+        // Timetable Management
+        PERIODS: '/api/timetable/periods',
+        TIMETABLE: '/api/timetable/timetable',
     }
 
 } 

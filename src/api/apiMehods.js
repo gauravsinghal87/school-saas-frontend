@@ -162,3 +162,63 @@ export const updateSubject = (data) => {
 export const deleteSubject = (id) => {
     return api.delete(apiPaths.admin.SUBJECT_DELETE.replace("{id}", id));
 }
+
+
+// ==================== FEE MANAGEMENT API METHODS ====================
+
+// Create Fee Structure
+export const createFeeStructure = async (data) => {
+    return await api.post(apiPaths.admin.FEE_STRUCTURE, data);
+};
+
+// Get Fee Structures List
+export const getFeeStructures = async (params) => {
+    return await api.get(apiPaths.admin.FEE_STRUCTURE, { params });
+};
+
+// Update Fee Structure
+export const updateFeeStructure = async ({ id, data }) => {
+    return await api.put(`${apiPaths.admin.FEE_STRUCTURE}/${id}`, data);
+};
+
+// Delete Fee Structure
+export const deleteFeeStructure = async (id) => {
+    return await api.delete(`${apiPaths.admin.FEE_STRUCTURE}/${id}`);
+};
+
+// Get Single Fee Structure
+export const getFeeStructureById = async (id) => {
+    return await api.get(`${apiPaths.admin.FEE_STRUCTURE}/${id}`);
+};
+
+// Periods
+export const createPeriod = async (data) => {
+    return await api.post(apiPaths.admin.PERIODS, data);
+};
+
+export const getPeriods = async (params) => {
+    return await api.get(apiPaths.admin.PERIODS, { params });
+};
+
+export const updatePeriod = async ({ id, data }) => {
+    return await api.put(`${apiPaths.admin.PERIODS}/${id}`, data);
+};
+
+export const deletePeriod = async (id) => {
+    return await api.delete(`${apiPaths.admin.PERIODS}/${id}`);
+};
+
+// Timetable
+export const createTimetable = async (data) => {
+    return await api.post(apiPaths.admin.TIMETABLE, data);
+};
+
+export const getTimetable = async (params) => {
+    return await api.get(apiPaths.admin.TIMETABLE, { params });
+};
+
+export const deleteTimetable = async (params) => {
+    return await api.delete(apiPaths.admin.TIMETABLE, { params });
+};
+
+

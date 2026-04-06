@@ -22,7 +22,10 @@ const Subscription = lazy(() => import("../modules/superAdmin/subscription/Subsc
 const AdminPage = lazy(() => import("../modules/superAdmin/admins/AdminPage"));
 const AcademicSessions = lazy(() => import("../modules/admin/academic-sessions/AcademicSessions"));
 const Sections = lazy(() => import("../modules/admin/sections/Sections"));
-const Classes = lazy(()=>import("../modules/admin/classes/Classes"));
+const Classes = lazy(() => import("../modules/admin/classes/Classes"));
+const Fees = lazy(() => import("../modules/admin/fees/Fees"));
+const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
+
 const ParentDashboard = lazy(() =>
   import("../modules/parent/dashboard/ParentDashboard")
 );
@@ -80,6 +83,8 @@ const AppRoutes = () => {
             <Route path="academic-sessions" element={<AcademicSessions />} />
             <Route path="classes" element={<Classes />} />
             <Route path="sections" element={<Sections />} />
+            <Route path="fees" element={<Fees />} />
+            <Route path="timetable" element={<Timetable />} />
 
 
             <Route path="subjects" element={<SubjectPage />} />
