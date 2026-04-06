@@ -118,3 +118,18 @@ export const getTeachers = () => {
 export const getStudents = () => {
     return api.get(apiPaths.students.list);
 };
+
+
+export const createRole = (data) => {
+    return api.post(apiPaths.superAdmin.CREATE_ROLE, data);
+};
+
+export const getRoles = (params) => {
+    return api.get(apiPaths.superAdmin.GET_ROLES, { params });
+}
+
+export const updateRole = (data) => {
+    const { _id: id, ...rest } = data;
+    console.log("Updating role with ID:", id, "and data:", rest);
+    return api.put(apiPaths.superAdmin.UPDATE_ROLE.replace("{id}", id), rest);
+}

@@ -152,28 +152,28 @@ export default function Subscription() {
     };
 
     return (
-        <div className="p-6">
+        <div className="min-h-screen bg-surface-page px-4 py-8">
+            <div className="max-w-7xl mx-auto space-y-6">
 
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl font-bold text-text-heading">Subscribtions</h1>
-                    <p className="text-sm text-text-secondary mt-0.5">
-                        Manage all Subscribtions on EduCore.
-                    </p>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h1 className="text-2xl font-bold text-text-heading">Subscribtions</h1>
+                        <p className="text-sm text-text-secondary mt-0.5">
+                            Manage all Subscribtions on EduCore.
+                        </p>
+                    </div>
+                    <div className="flex justify-end">
+                        <Button onClick={() => openModal("create")} >
+                            Add Subscription
+                        </Button>
+                    </div>
                 </div>
-                <div className="flex justify-end">
-                    <Button onClick={() => openModal("create")} >
-                        Add Subscription
-                    </Button>
-                </div>
-            </div>
-            {/* Add Button */}
+                {/* Add Button */}
 
 
-            {/* List */}
-            <div className="grid gap-3 mt-6 ">
-                {/* {data.map((item) => (
+                {/* List */}
+                <div className="grid gap-3 mt-6 ">
+                    {/* {data.map((item) => (
                     <div key={item._id} className="border p-4 rounded-md flex justify-between">
                         <div>
                             <h3 className="font-bold">{item.name}</h3>
@@ -188,70 +188,71 @@ export default function Subscription() {
                     </div>
                 ))} */}
 
-                <DataTable
-                    title="All Subscriptions"
-                    data={tableData}
-                    columns={COLUMNS}
-                    loading={isLoading}
-                    rowKey="_id"
-                    serverMode
-                    onAdd={() => openModal("create")}
-                    addLabel="Add Subscription"
-                    onSearch={(val) => { setSearch(val); setPage(1); }}
+                    <DataTable
+                        title="All Subscriptions"
+                        data={tableData}
+                        columns={COLUMNS}
+                        loading={isLoading}
+                        rowKey="_id"
+                        serverMode
+                        onAdd={() => openModal("create")}
+                        addLabel="Add Subscription"
+                        onSearch={(val) => { setSearch(val); setPage(1); }}
 
-                    onEdit={(row) => openModal("edit", row)}
-                    onDelete={(row) => {
-                        setSelected(row);
-                        setConfirmOpen(true);
+                        onEdit={(row) => openModal("edit", row)}
+                        onDelete={(row) => {
+                            setSelected(row);
+                            setConfirmOpen(true);
+                        }}
+
+
+                        searchPlaceholder="Search subscriptions..."
+                    />
+                </div>
+
+                {/* Modal */}
+                <SidePanel
+                    open={isOpen}
+                    onClose={() => setIsOpen(false)}
+                    title={`${mode.toUpperCase()} Subscription`}
+                >
+
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+
+                        <SubscriptionForm
+                            register={register}
+                            errors={errors}
+                            mode={mode}
+                            control={control}
+                        />
+
+                        <div className="flex justify-end mt-auto">
+                            {mode !== "view" && (
+                                <Button type="submit" loading={mode == "edit" ? isupdating : isPending} loadingLabel={mode === "edit" ? "Updating..." : "Creating..."} variant="primary">
+                                    {mode === "edit" ? "Update" : "Create"}
+                                </Button>
+                            )}
+                        </div>
+                    </form>
+
+                </SidePanel>
+                <ConfirmBox
+                    isOpen={confirmOpen}
+                    title="Delete Subscription"
+                    message={`Are you sure you want to delete "${selected?.name}"?`}
+                    loading={isPending}
+                    onCancel={() => setConfirmOpen(false)}
+                    onConfirm={async () => {
+                        try {
+                            await deleteSubscription(selected._id);
+                            refetch();
+                            setConfirmOpen(false);
+                        } catch (err) {
+                            console.error(err);
+                        }
                     }}
-
-
-                    searchPlaceholder="Search subscriptions..."
                 />
             </div>
-
-            {/* Modal */}
-            <SidePanel
-                open={isOpen}
-                onClose={() => setIsOpen(false)}
-                title={`${mode.toUpperCase()} Subscription`}
-            >
-
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-
-                    <SubscriptionForm
-                        register={register}
-                        errors={errors}
-                        mode={mode}
-                        control={control}
-                    />
-
-                    <div className="flex justify-end mt-auto">
-                        {mode !== "view" && (
-                            <Button type="submit" loading={mode == "edit" ? isupdating : isPending} loadingLabel={mode === "edit" ? "Updating..." : "Creating..."} variant="primary">
-                                {mode === "edit" ? "Update" : "Create"}
-                            </Button>
-                        )}
-                    </div>
-                </form>
-
-            </SidePanel>
-            <ConfirmBox
-                isOpen={confirmOpen}
-                title="Delete Subscription"
-                message={`Are you sure you want to delete "${selected?.name}"?`}
-                loading={isPending}
-                onCancel={() => setConfirmOpen(false)}
-                onConfirm={async () => {
-                    try {
-                        await deleteSubscription(selected._id);
-                        refetch();
-                        setConfirmOpen(false);
-                    } catch (err) {
-                        console.error(err);
-                    }
-                }}
-            />
         </div>
     );
 }

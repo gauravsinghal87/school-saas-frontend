@@ -24,7 +24,7 @@ export default function SlidePanel({ open, onClose, title, subtitle, children, w
     return (
         <AnimatePresence>
             {open && (
-                <div className="fixed inset-0 z-50 flex justify-end">
+                <div className="fixed  inset-0 z-50 flex justify-end">
                     {/* Backdrop - no blur, just opacity */}
                     <motion.div
                         className="absolute inset-0 bg-black/40"
@@ -37,20 +37,20 @@ export default function SlidePanel({ open, onClose, title, subtitle, children, w
 
                     {/* Panel - simple slide */}
                     <motion.div
-                        className={`relative z-10 flex flex-col h-full w-full ${width} bg-white shadow-xl`}
+                        className={`relative z-10 flex flex-col border-l border-border h-full w-full ${width} bg-surface-page shadow-xl`}
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
                     >
                         {/* Header - minimal */}
-                        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 flex-shrink-0">
+                        <div className="flex items-center justify-between border-l px-5 py-4 border-b border-border flex-shrink-0">
                             <div>
                                 {title && (
-                                    <h2 className="text-base font-semibold text-gray-900">{title}</h2>
+                                    <h2 className="text-base font-semibold text-text-heading">{title}</h2>
                                 )}
                                 {subtitle && (
-                                    <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>
+                                    <p className="text-xs text-text-heading mt-0.5">{subtitle}</p>
                                 )}
                             </div>
                             <button

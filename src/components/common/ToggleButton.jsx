@@ -2,27 +2,15 @@
 import React from "react";
 
 export default function ToggleButton({ isActive, onToggle, disabled }) {
-  const active = isActive === true || isActive === "active";
-
   return (
     <button
-      type="button"
       onClick={onToggle}
       disabled={disabled}
-      className={`relative inline-flex items-center h-6 w-12 rounded-full focus:outline-none 
-        transition-colors duration-300 ease-in-out
-        ${active 
-          ? "bg-[var(--color-primary)]" 
-          : "bg-[var(--color-border)]"}
-      `}
+      className={`relative w-12 h-6 flex items-center rounded-full p-1 transition-all duration-300 
+                        ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+                        ${isActive ? "bg-success shadow-md shadow-success/30" : "bg-border"}`}
     >
-      <span
-        className={`absolute left-1 top-1 w-4 h-4 rounded-full shadow-md 
-          transform transition-transform duration-300 ease-in-out
-          bg-[var(--color-surface-card)]
-          ${active ? "translate-x-6" : "translate-x-0"}
-        `}
-      />
+      <div className={`bg-white w-4 h-4 rounded-full shadow transform transition-all duration-300 ${isActive ? "translate-x-6" : "translate-x-0"}`} />
     </button>
   );
 }

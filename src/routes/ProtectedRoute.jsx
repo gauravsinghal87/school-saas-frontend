@@ -30,7 +30,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 
     // 🧠 Prevent infinite loop
     if (redirectPath && location.pathname !== redirectPath) {
-      return <Navigate to={redirectPath} replace />;
+      // return <Navigate to={redirectPath} replace />;
     }
 
     // ⚠️ fallback (rare case)

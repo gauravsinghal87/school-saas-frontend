@@ -39,14 +39,6 @@ import {
 
 import { ROLES } from "./roles";
 
-// ─── MENU CONFIG ──────────────────────────────────────────────────────────────
-// Structure per item:
-//   id       — unique key, used as activeItem in Sidebar
-//   name     — display label
-//   path     — route path
-//   icon     — Lucide component
-//   section  — groups items under a section header ("main" | "academic" | "personal" | ...)
-//   badge    — optional: number or string shown as a pill (e.g. notifications count)
 
 export const MENU_CONFIG = {
 
@@ -60,12 +52,9 @@ export const MENU_CONFIG = {
         { id: "sa-analytics", name: "Analytics", path: "analytics", icon: PieChart, section: "main" },
 
         // management
-        { id: "sa-admins", name: "Admins", path: "admins", icon: UserCog, section: "management" },
         { id: "sa-roles", name: "Roles & Perms", path: "roles", icon: ShieldCheck, section: "management" },
-        { id: "sa-audit", name: "Audit Logs", path: "audit-logs", icon: Activity, section: "management" },
 
         // system
-        { id: "sa-database", name: "Database", path: "database", icon: Database, section: "system" },
         { id: "sa-reports", name: "Reports", path: "reports", icon: FileBarChart, section: "system" },
         { id: "sa-announcements", name: "Announcements", path: "announcements", icon: Megaphone, section: "system" },
         { id: "sa-settings", name: "Settings", path: "settings", icon: Settings, section: "system" },

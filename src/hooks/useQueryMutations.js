@@ -1,10 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList } from "../api/apiMehods";
-import {getAcademicYearList,createAcademicYear,updateAcademicYear,classesList,createClass,updateClass,deleteClass,createSection,updateSection,getSectionList} from "../api/apiMehods";
+import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSection, createAcademicYear, updateAcademicYear, createClass, updateClass, deleteClass, createSection, getAcademicYearList } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import useAppQuery from "./useAppQuery";
 import { showError, showSuccess } from "../utils/toast";
+
+
+
+//SUPERADMIN QUERIES & MUTATIONS    
+
 
 export const createTeacherMutation = () => {
     const queryClient = useQueryClient();
@@ -119,25 +123,6 @@ export const createSchoolMutation = () => {
 
 
 
-// export const createSchoolMutation = () => {
-//     const queryClient = useQueryClient();
-//     return useAppMutation({
-//         apiCall: registerSchool,
-//         successMessage: "School registered successfully 🎉",
-//         onSuccessCallback: () => {
-//             queryClient.invalidateQueries(["schoolsList"]);
-//         },
-//         onError: (error) => {
-//             const msg =
-//                 error?.response?.data?.message || // axios error
-//                 error?.message ||               // thrown error
-//                 "Something went wrong ❌";
-//             showError(msg);
-//         },
-//     });
-// }
-
-
 
 export const updateSchoolStatusMutation = () => {
     const queryClient = useQueryClient();
@@ -207,10 +192,6 @@ export const updateSchoolStatusMutation = () => {
         },
     });
 };
-
-
-
-
 
 
 
@@ -314,6 +295,52 @@ export const useCurrentUser = () => {
         retry: false,
     });
 };
+
+
+export const createRoleMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createRole,
+        successMessage: "Role created successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["roles"]);
+        },
+    });
+}
+
+export const getRolesQuery = () => {
+    return useAppQuery({
+        queryKey: ["roles"],
+        apiCall: getRoles,
+    });
+}
+
+export const updateRoleMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateRole,
+        successMessage: "Role updated successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["roles"]);
+        },
+    });
+}
+
+export const deleteRoleMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateRole,
+        successMessage: "Role deleted successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["roles"]);
+        },
+    });
+}
+
+
+
+
+
 
 export const useStudents = () => {
     return useQuery({

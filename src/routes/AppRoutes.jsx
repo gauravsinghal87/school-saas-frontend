@@ -6,6 +6,7 @@ import { ROLE_ROUTES, ROLES } from "../utils/roles";
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
+import Roles from "../modules/superAdmin/roles/Roles";
 
 
 // 🔥 Lazy imports
@@ -58,10 +59,8 @@ const AppRoutes = () => {
             <Route path="dashboard" element={<SuperAdminDashboard />} />
             {/* <Route path="teachers/add" element={<Addteacher />} /> */}
             <Route path="schools" element={<SchoolsPage />} />
-            <Route path="admins" element={<AdminPage />} />
-
             <Route path="subscriptions" element={<Subscription />} />
-
+            <Route path="roles" element={<Roles />} />
             <Route path="*" element={<NotFound />} />
 
           </Route>

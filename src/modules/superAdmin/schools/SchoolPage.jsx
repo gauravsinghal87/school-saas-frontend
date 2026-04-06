@@ -10,6 +10,7 @@ import AppPhoneInput from "../../../components/common/PhoneInput";
 import { Eye } from "lucide-react";
 import { createSchoolMutation, getAdminListQuery, updateSchoolStatusMutation, useSchoolList } from "../../../hooks/useQueryMutations";
 import Button from "../../../components/common/Button";
+import ToggleButton from "../../../components/common/ToggleButton";
 
 
 const PHONE_REGEX = /^[6-9]\d{9}$/;
@@ -99,19 +100,25 @@ function StatusPanel({ row, onConfirm, loading }) {
 
 
 function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
+    console.log("Default values in form >>", defaultValues) // DEBUG
+
+
     const [values, setValues] = useState({
         name: defaultValues?.name ?? "",
         email: defaultValues?.email ?? "",
-        phone: defaultValues?.phone ?? "",
+        phone: defaultValues?.phone ? String(defaultValues.phone) : "",
         address: defaultValues?.address ?? "",
-        adminName: defaultValues?.adminName ?? "",
-        adminEmail: defaultValues?.adminEmail ?? "",
-        adminPhone: defaultValues?.adminPhone ?? "",
+        adminName: defaultValues?.admin?.name ?? "",
+        adminEmail: defaultValues?.admin?.email ?? "",
+        adminPhone: defaultValues?.admin?.phone
+            ? String(defaultValues.admin.phone)
+            : "",
         status: defaultValues?.isActive ?? true,
     });
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
 
+    console.log("Form values >>", defaultValues) // DEBUG
 
     const handleChange = (name, value) => {
         setValues((prev) => ({ ...prev, [name]: value }));
@@ -229,6 +236,42 @@ function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
                 </div>
             )}
 
+            {mode === "view" && (
+                <div className="space-y-5 border-t border-border pt-4">
+                    <p className="text-sm font-semibold text-text-heading">Admin Details</p>
+
+                    <Input
+                        label="Admin Full Name"
+                        name="adminName"
+                        placeholder="e.g. Dilip Kumar"
+                        required
+                        value={values.adminName}
+                        onChange={(e) => handleChange("adminName", e.target.value)}
+                        onBlur={() => handleBlur("adminName")}
+                        error={errors.adminName}
+                    />
+                    <Input
+                        label="Admin Email"
+                        name="adminEmail"
+                        type="email"
+                        placeholder="admin@example.com"
+                        required
+                        value={values.adminEmail}
+                        onChange={(e) => handleChange("adminEmail", e.target.value)}
+                        onBlur={() => handleBlur("adminEmail")}
+                        error={errors.adminEmail}
+                    />
+                    <AppPhoneInput
+                        label="Admin Phone"
+                        name="adminPhone"
+                        value={values.adminPhone}
+                        onChange={(e) => handleChange("adminPhone", e.target.value)}
+                        onBlur={() => handleBlur("adminPhone")}
+                        required
+                        error={errors.adminPhone}
+                    />
+                </div>
+            )}
             {/* ── Add mode: admin details ── */}
             {mode === "add" && (
                 <div className="space-y-5 border-t border-border pt-4">
@@ -363,21 +406,14 @@ export default function SchoolsPage() {
         { key: "email", label: "Email", sortable: true },
         { key: "phone", label: "Phone", sortable: false, width: "140px" },
         { key: "address", label: "Address", sortable: false },
+
         {
             key: "isActive",
             label: "Status",
             sortable: true,
             width: "140px",
             render: (val, row) => (
-                <button
-                    onClick={() => handleStatusToggle(row)}
-                    disabled={isPending && variables?.id === row._id}
-                    className={`relative w-12 h-6 flex items-center rounded-full p-1 transition-all duration-300 
-                        ${isPending && variables?.id === row._id ? "opacity-50 cursor-not-allowed" : ""}
-                        ${row.isActive ? "bg-success shadow-md shadow-success/30" : "bg-border"}`}
-                >
-                    <div className={`bg-white w-4 h-4 rounded-full shadow transform transition-all duration-300 ${row.isActive ? "translate-x-6" : "translate-x-0"}`} />
-                </button>
+                <ToggleButton onToggle={() => handleStatusToggle(row)} isActive={val} disabled={isPending && variables?.id === row._id} />
             ),
         },
         {
