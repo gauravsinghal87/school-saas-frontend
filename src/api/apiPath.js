@@ -44,8 +44,8 @@ export const apiPaths = {
         CREATE_CLASS: '/api/admin/class',
         UPDATE_CLASS: '/api/admin/class',
         DELETE_CLASS: '/api/admin/class',
-        CREATE_SECTION: '/api/admin/section',
-        UPDATE_SECTION: '/api/admin/section',
+        CREATE_SECTION: '/api/admin/create-section',
+        UPDATE_SECTION: '/api/admin/update-section',
         SECTIONS_LIST: '/api/admin/get-sections',
 
         // Fee Management
@@ -54,6 +54,11 @@ export const apiPaths = {
         // Timetable Management
         PERIODS: '/api/timetable/periods',
         TIMETABLE: '/api/timetable/timetable',
+        DELETE_SECTION: '/api/admin/delete-section',
+        CLASS_SUBJECTS: '/api/admin/subjects',
+        UPDATE_CLASS_SUBJECTS: 'api/admin/update-subjects',
+        REMOVE_CLASS_SUBJECTS: 'api/admin/remove-subjects'
+
     }
 
 } 

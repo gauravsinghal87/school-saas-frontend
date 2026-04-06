@@ -12,6 +12,10 @@ import {
     createTimetable,
     getTimetable,
     deleteTimetable,
+    updateClassSubjects,
+    removeClassSubjects,
+    deleteSection,
+    getSectionList,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -329,6 +333,18 @@ export const updateAcademicYearMutation = () => {
 
 
 }
+export const deleteSectionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteSection,
+        successMessage: "Section deleted successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["sectionsList"]);
+        },
+    });
+
+}
+
 export const createClassMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -372,6 +388,24 @@ export const sectionList = (params) => {
     return useAppQuery({
         queryKey: ["sections", params],
         apiCall: () => getSectionList(params),
+    });
+};
+export const updateClassSubjectsMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateClassSubjects,
+        successMessage: "Subjects updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["classesList"]);
+        },
+    });
+};
+
+export const removeClassSubjectsMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: removeClassSubjects,
+        successMessage: "Subjects removed successfully 🎉",
     });
 };
 

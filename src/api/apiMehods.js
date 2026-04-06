@@ -37,6 +37,9 @@ export const createAcademicYear = async (data) => {
     return await api.post(apiPaths.admin.CREATE_ACADEMIC_YEAR, data);
 };
 
+export const deleteSection = async (id) => {
+    return await api.delete(`${apiPaths.admin.DELETE_SECTION}/${id}`);
+};
 export const updateAcademicYear = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_ACADEMIC_YEAR}/${id}`, data);
 };
@@ -47,6 +50,18 @@ export const getAcademicYearList = async (params) => {
 export const getSectionList = async (params) => {
     return await api.get(apiPaths.admin.SECTIONS_LIST, { params });
 }
+
+export const getClassSubjects = (classId) => {
+  return api.get(`${apiPaths.admin.CLASS_SUBJECTS}/${classId}`);
+};
+
+export const updateClassSubjects = ({ id, data }) => {
+  return api.put(`${apiPaths.admin.UPDATE_CLASS_SUBJECTS}/${id}`, data);
+};
+
+export const removeClassSubjects = ({ id, data }) => {
+  return api.delete(`${apiPaths.admin.REMOVE_CLASS_SUBJECTS}/${id}`, { data });
+};
 export const classesList = async (params) => {
     return await api.get(apiPaths.admin.CLASSES_LIST, { params });
 }
