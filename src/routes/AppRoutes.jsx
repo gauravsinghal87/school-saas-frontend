@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
-import { ROLE_ROUTES, ROLES } from "../utils/roles";
+import { ROLES } from "../utils/roles";
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
-import Roles from "../modules/superAdmin/roles/Roles";
+import SubjectPage from "../modules/admin/subjects/SubjectPage";
+import RolesPage from "../modules/superAdmin/roles/RolesPage";
 
 
 // 🔥 Lazy imports
@@ -22,6 +23,8 @@ const AdminPage = lazy(() => import("../modules/superAdmin/admins/AdminPage"));
 const AcademicSessions = lazy(() => import("../modules/admin/academic-sessions/AcademicSessions"));
 const Sections = lazy(() => import("../modules/admin/sections/Sections"));
 const Classes = lazy(()=>import("../modules/admin/classes/Classes"));
+const ClassSubjects = lazy(()=>import("../modules/admin/classes/ClassSubjects"));
+const ExamRoutes = lazy(()=>import("../modules/admin/exams/Exams"));
 const ParentDashboard = lazy(() =>
   import("../modules/parent/dashboard/ParentDashboard")
 );
@@ -60,7 +63,7 @@ const AppRoutes = () => {
             {/* <Route path="teachers/add" element={<Addteacher />} /> */}
             <Route path="schools" element={<SchoolsPage />} />
             <Route path="subscriptions" element={<Subscription />} />
-            <Route path="roles" element={<Roles />} />
+            <Route path="roles" element={<RolesPage />} />
             <Route path="*" element={<NotFound />} />
 
           </Route>
@@ -78,11 +81,15 @@ const AppRoutes = () => {
             <Route path="teachers/add" element={<Addteacher />} />
             <Route path="academic-sessions" element={<AcademicSessions />} />
             <Route path="classes" element={<Classes />} />
+            <Route path="classes/:id/subjects" element={<ClassSubjects />} />
+            <Route path="exams" element={<ExamRoutes />} />
+
             <Route path="sections" element={<Sections />} />
 
 
-            {/* <Route path="teachers" element={<Teachers />} /> */}
+            <Route path="subjects" element={<SubjectPage />} />
 
+            <Route path="*" element={<NotFound />} />
 
           </Route>
 

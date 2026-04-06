@@ -4,7 +4,7 @@ import { useCurrentUser } from "../hooks/useQueryMutations";
 import { login } from "../api/apiMehods";
 import { showError, showSuccess } from "../utils/toast";
 
-const UserContext = createContext(null);
+export const UserContext = createContext(null); // ✅ EXPORT HERE
 
 export const UserProvider = ({ children }) => {
   const queryClient = useQueryClient();
@@ -56,7 +56,7 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("role");
     queryClient.clear();
-    window.location.reload();
+    // window.location.reload();
     console.log("Logged out, cache cleared, reloading...");
   };
 
@@ -68,11 +68,11 @@ export const UserProvider = ({ children }) => {
       error,
       isFetching,
       refetch,
-      login: handleLogin, // 👈 expose here
+      login: handleLogin,
       logout,
       isAuthenticated: !!user,
     }),
-    [user, isLoading, isError, error, isFetching]
+    [user, isLoading, isError, error, isFetching, refetch, handleLogin, logout]
   );
 
   return (
@@ -82,9 +82,6 @@ export const UserProvider = ({ children }) => {
   );
 };
 
+
+
 // hook
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (!context) throw new Error("useUser must be used inside UserProvider");
-  return context;
-};

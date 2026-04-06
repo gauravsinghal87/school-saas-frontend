@@ -3,23 +3,33 @@ import { set, useForm } from "react-hook-form";
 import SidePanel from "../../../components/common/SlidePanel";
 import ClassForm from "./ClassForm";
 import Button from "../../../components/common/Button";
-import { createClassMutation, updateClassMutation, deleteClassMutation, updateSubscriptionStatusMutation } from "../../../hooks/useQueryMutations";
+import { createClassMutation, updateClassMutation, deleteClassMutation, updateSubscriptionStatusMutation, updateClassSubjectsMutation, removeClassSubjectsMutation, getSubjectsQuery } from "../../../hooks/useQueryMutations";
 import { classesListMutation } from "../../../hooks/useQueryMutations";
 import DataTable from "../../../components/common/ReusableTable";
 import ConfirmBox from "../../../components/common/ConfirmBox";
 import ToggleButton from "../../../components/common/ToggleButton";
+import AppSelect from "../../../components/common/Select";
+import { getClassSubjects } from "../../../api/apiMehods";
+import { Eye, Plus, Pencil } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 
 
 export default function Classes() {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [isloading, setIsLoading] = useState(false);
     const [limit, setLimit] = useState(10);
-
+    const [subjectModal, setSubjectModal] = useState(false);
+    const [selectedSubjects, setSelectedSubjects] = useState([]);
+    console.log("selectedsubjects", selectedSubjects);
+    const [classSubjects, setClassSubjects] = useState([]);
+    console.log("classSubjects", classSubjects);
     const [mode, setMode] = useState("create");
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [selected, setSelected] = useState(null);
+
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const STATUS_MAP = {
@@ -43,60 +53,88 @@ export default function Classes() {
             console.error(err);
         }
     };
-const COLUMNS = [
-{
-  key: "name",
-  label: "Name",
-  sortable: true,
-  render: (val) => {
-    if (!val) return "—";
+    const COLUMNS = [
+        {
+            key: "name",
+            label: "Name",
+            sortable: true,
+            render: (val) => {
+                if (!val) return "—";
 
-    const num = parseInt(val);
+                const num = parseInt(val);
 
-    // handle suffix
-    let suffix = "th";
-    if (num % 10 === 1 && num !== 11) suffix = "st";
-    else if (num % 10 === 2 && num !== 12) suffix = "nd";
-    else if (num % 10 === 3 && num !== 13) suffix = "rd";
+                // handle suffix
+                let suffix = "th";
+                if (num % 10 === 1 && num !== 11) suffix = "st";
+                else if (num % 10 === 2 && num !== 12) suffix = "nd";
+                else if (num % 10 === 3 && num !== 13) suffix = "rd";
 
-    return `${num}${suffix} `;
-  },
-},
+                return `${num}${suffix} `;
+            },
+        },
 
-  {
-    key: "studentCount",
-    label: "Students",
-  },
-{
-  key: "sections",
-  label: "Sections",
-  render: (val) => {
-    if (!val || val.length === 0) return "—";
+        {
+            key: "studentCount",
+            label: "Students",
+        },
+        {
+            key: "sections",
+            label: "Sections",
+            render: (val) => {
+                if (!val || val.length === 0) return "—";
 
-    return (
-      <div className="flex gap-1 flex-wrap">
-        {val.map((sec) => (
-          <span
-            key={sec._id}
-            className="px-2 py-0.5 text-xs bg-gray-100 rounded"
-          >
-            {sec.name}
-          </span>
-        ))}
-      </div>
-    );
-  },
-},
-  {
-    key: "createdAt",
-    label: "Created",
-    render: (val) =>
-      val ? new Date(val).toLocaleDateString() : "—",
-  },
-];
+                return (
+                    <div className="flex gap-1 flex-wrap">
+                        {val.map((sec) => (
+                            <span
+                                key={sec._id}
+                                className="px-2 py-0.5 text-xs bg-gray-100 rounded"
+                            >
+                                {sec.name}
+                            </span>
+                        ))}
+                    </div>
+                );
+            },
+        },
+        {
+            key: "createdAt",
+            label: "Created",
+            render: (val) =>
+                val ? new Date(val).toLocaleDateString() : "—",
+        },
+    ];
 
     const { mutateAsync: createClass, isPending } = createClassMutation();
+    const { mutateAsync: updateSubjects } = updateClassSubjectsMutation();
+    const { data: subjectsData } = getSubjectsQuery();
+    const subjectsList = subjectsData?.results?.map((subject) => ({ label: subject.name, value: subject._id })) || [];
+    const { mutateAsync: removeSubjects } = removeClassSubjectsMutation();
+    const handleViewSubjects = async (row) => {
+        setSelected(row);
 
+        try {
+            const res = await getClassSubjects(row._id);
+            setClassSubjects(res.results || []);
+            setSelectedSubjects(res.results.map(s => s._id));
+
+            setSubjectModal(true);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    const handleSubmitSubjects = async () => {
+        try {
+            await updateSubjects({
+                id: selected._id,
+                data: { subjectIds: selectedSubjects }
+            });
+
+            setSubjectModal(false);
+        } catch (err) {
+            console.error(err);
+        }
+    };
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
             name: "",
@@ -109,8 +147,8 @@ const COLUMNS = [
     const { data: apiResponse, isLoading, refetch } = classesListMutation({ page, limit, search });
     const { mutateAsync: updateClass, isPending: isupdating } = updateClassMutation();
     const { mutateAsync: deleteClass } = deleteClassMutation();
-const tableData = apiResponse?.results || [];
-const total = apiResponse?.pagination?.totalItems ?? 0;
+    const tableData = apiResponse?.results || [];
+    const total = apiResponse?.pagination?.totalItems ?? 0;
     // Load data
     //   const fetchData = async () => {
     //     const res = await getSubscriptions();
@@ -122,49 +160,49 @@ const total = apiResponse?.pagination?.totalItems ?? 0;
     //   }, []);
 
     // Open modal
-const openModal = (type, item = null) => {
-  setMode(type);
-  setSelected(item);
+    const openModal = (type, item = null) => {
+        setMode(type);
+        setSelected(item);
 
-  if (type === "edit" && item) {
-    reset({
-      name: item.name,
-      academicSessionId: item.academicSessionId,
-    });
-  } else {
-    reset({
-      name: "",
-      academicSessionId: "",
-    });
-  }
+        if (type === "edit" && item) {
+            reset({
+                name: item.name,
+                academicSessionId: item.academicSessionId,
+            });
+        } else {
+            reset({
+                name: "",
+                academicSessionId: "",
+            });
+        }
 
-  setIsOpen(true);
-};
-
-    // Submit
-const onSubmit = async (formData) => {
-    console.log("formdata",formData);
-  try {
-    const payload = {
-      name: formData.name,
-      academicSessionId: formData.academicSessionId,
+        setIsOpen(true);
     };
 
-    if (mode === "create") {
-      await createClass(payload);
-    } else {
-      await updateClass({
-        id: selected._id,
-        data: payload,
-      });
-    }
+    // Submit
+    const onSubmit = async (formData) => {
+        console.log("formdata", formData);
+        try {
+            const payload = {
+                name: formData.name,
+                academicSessionId: formData.academicSessionId,
+            };
 
-    refetch();
-    setIsOpen(false);
-  } catch (err) {
-    console.error(err);
-  }
-};
+            if (mode === "create") {
+                await createClass(payload);
+            } else {
+                await updateClass({
+                    id: selected._id,
+                    data: payload,
+                });
+            }
+
+            refetch();
+            setIsOpen(false);
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     // Delete
     const handleDelete = async () => {
@@ -220,13 +258,44 @@ const onSubmit = async (formData) => {
                     onAdd={() => openModal("create")}
                     addLabel="Add Subscription"
                     onSearch={(val) => { setSearch(val); setPage(1); }}
+                    actionCell={(row) => (
+                        <div className="flex items-center gap-1">
 
+                            {/* View Subjects */}
+                     <button
+  onClick={() => navigate(`/school-admin/classes/${row._id}/subjects`)}
+  title="View Subjects"
+>
+                                <Eye size={16} />
+                            </button>
+
+                            {/* Add Subjects */}
+                            <button
+                                onClick={() => handleViewSubjects(row)}
+                                title="Add Subjects"
+                                className="w-8 h-8 flex items-center justify-center rounded-lg text-text-secondary hover:text-success hover:bg-success/10 transition"
+                            >
+                                <Plus size={16} />
+                            </button>
+
+                            {/* Edit */}
+                            <button
+                                onClick={() => openModal("edit", row)}
+                                title="Edit"
+                                className="w-8 h-8 flex items-center justify-center rounded-lg text-text-secondary hover:text-warning hover:bg-warning/10 transition"
+                            >
+                                <Pencil size={16} />
+                            </button>
+
+                        </div>
+                    )}
                     onEdit={(row) => openModal("edit", row)}
                     onDelete={(row) => {
                         setSelected(row);
                         setConfirmOpen(true);
+
                     }}
-                    
+
 
 
                     searchPlaceholder="Search classes..."
@@ -258,6 +327,28 @@ const onSubmit = async (formData) => {
                     </div>
                 </form>
 
+            </SidePanel>
+            <SidePanel
+                open={subjectModal}
+                onClose={() => setSubjectModal(false)}
+                title="Manage Subjects"
+            >
+                <div className="flex flex-col gap-4">
+
+                    {/* Your custom multiselect */}
+                    <AppSelect
+                        isMulti
+                        options={subjectsList}
+                        value={selectedSubjects}
+                        name="subjects"
+                        onChange={(e) => setSelectedSubjects(e.target.value)}
+                    />
+                    <div className="flex justify-end">
+                        <Button onClick={handleSubmitSubjects}>
+                            Save Subjects
+                        </Button>
+                    </div>
+                </div>
             </SidePanel>
             <ConfirmBox
                 isOpen={confirmOpen}

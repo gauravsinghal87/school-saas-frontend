@@ -3,17 +3,15 @@ import { set, useForm } from "react-hook-form";
 import SidePanel from "../../../components/common/SlidePanel";
 import SectionForm from "./SectionForm";
 import Button from "../../../components/common/Button";
-import { createSectionMutation, updateSectionMutation, deleteClassMutation, updateSubscriptionStatusMutation } from "../../../hooks/useQueryMutations";
+import { createSectionMutation, updateSectionMutation, deleteSectionMutation } from "../../../hooks/useQueryMutations";
 import { sectionList } from "../../../hooks/useQueryMutations";
 import DataTable from "../../../components/common/ReusableTable";
 import ConfirmBox from "../../../components/common/ConfirmBox";
-import ToggleButton from "../../../components/common/ToggleButton";
 import { classesListMutation } from "../../../hooks/useQueryMutations";
 import Select from "../../../components/common/Select";
 
 export default function Sections() {
     const [isOpen, setIsOpen] = useState(false);
-    const [isloading, setIsLoading] = useState(false);
     const [limit, setLimit] = useState(10);
     const [mode, setMode] = useState("create");
     const [confirmOpen, setConfirmOpen] = useState(false);
@@ -21,12 +19,12 @@ export default function Sections() {
     const [selected, setSelected] = useState(null);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
-    
+
     const STATUS_MAP = {
         active: { label: "Active", bg: "bg-success/10", text: "text-success" },
         inactive: { label: "Inactive", bg: "bg-error/10", text: "text-error" },
     };
-    
+
     const { mutateAsync: updateSection, isPending: isUpdatingStatus } = updateSectionMutation();
 
     const handleToggleStatus = async (row) => {
@@ -64,7 +62,7 @@ export default function Sections() {
             status: "active",
         },
     });
-    
+
     const { data: apiResponse, isLoading, refetch } = sectionList({
         page,
         limit,
@@ -78,7 +76,8 @@ export default function Sections() {
         value: cls._id,
     })) || [];
 
-    const { mutateAsync: deleteClass } = deleteClassMutation();
+
+    const { mutateAsync: deleteSection } = deleteSectionMutation();
     const tableData = apiResponse?.results?.docs || [];
     const total = apiResponse?.results?.totalDocs ?? 0;
 
@@ -86,7 +85,10 @@ export default function Sections() {
         setMode(type);
         setSelected(item);
         if (type === "edit" && item) {
-            reset({ name: item.name });
+            reset({
+                name: item.name,
+                classId: item.classId || "",   // ✅ CORRECT
+            });
         } else {
             reset({ name: "" });
         }
@@ -97,7 +99,7 @@ export default function Sections() {
         try {
             const payload = {
                 name: formData.name,
-                classId: selectedClass,
+                classId: formData.classId,
             };
             if (mode === "create") {
                 await createSection(payload);
@@ -133,7 +135,7 @@ export default function Sections() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                
+
                 {/* Header Section */}
                 <div className="mb-8">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -156,7 +158,7 @@ export default function Sections() {
                                     className="w-48 bg-white/80 backdrop-blur-sm border-gray-200 focus:border-emerald-500 transition-all duration-200"
                                 />
                             </div>
-                            <Button 
+                            <Button
                                 onClick={() => openModal("create")}
                                 className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                             >
@@ -173,8 +175,9 @@ export default function Sections() {
 
                 {/* Data Table Section */}
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-               
+
                     <DataTable
+                    title="All Sections"
                         data={tableData}
                         columns={COLUMNS}
                         loading={isLoading}
@@ -212,10 +215,10 @@ export default function Sections() {
                         />
                         <div className="flex justify-end pt-4 border-t border-gray-100 mt-auto">
                             {mode !== "view" && (
-                                <Button 
-                                    type="submit" 
-                                    loading={mode == "edit" ? isUpdatingStatus : isPending} 
-                                    loadingLabel={mode === "edit" ? "Updating..." : "Creating..."} 
+                                <Button
+                                    type="submit"
+                                    loading={mode == "edit" ? isUpdatingStatus : isPending}
+                                    loadingLabel={mode === "edit" ? "Updating..." : "Creating..."}
                                     variant="primary"
                                     className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-md"
                                 >
@@ -235,7 +238,7 @@ export default function Sections() {
                     onCancel={() => setConfirmOpen(false)}
                     onConfirm={async () => {
                         try {
-                            await deleteClass(selected._id);
+                            await deleteSection(selected._id);
                             refetch();
                             setConfirmOpen(false);
                         } catch (err) {

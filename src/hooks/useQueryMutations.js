@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSection, createAcademicYear, updateAcademicYear, createClass, updateClass, deleteClass, createSection, getAcademicYearList } from "../api/apiMehods";
+import { getCurrentUser, getSchoolList, login, registerSchool, createSubscription, getSubscriptionList, updateSubscription, deleteSubscription, updateSubscriptionStatus, updateSchoolStatus, getAdminList, createRole, getRoles, updateRole, updateSubject, getSubjects, addSubject, deleteSubject, createClass, updateClass, updateAcademicYear, deleteClass, classesList, getAcademicYearList, createAcademicYear, updateSection, createSection, getSectionList, deleteSection, updateClassSubjects, removeClassSubjects } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import useAppQuery from "./useAppQuery";
@@ -22,96 +22,13 @@ export const createTeacherMutation = () => {
 }
 
 
-//admin
-export const createSectionMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: createSection,
-        successMessage: "Section created successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["sectionsList"]);
-        },
-    });
-}
-export const updateSectionMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: updateSection,
-        successMessage: "Section updated successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["sectionsList"]);
-        },
-    });
 
 
-}
-export const createAcademicYearMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: createAcademicYear,
-        successMessage: "Academic year created successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["academicYearsList"]);
-        },
-    });
-}
-export const updateAcademicYearMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: updateAcademicYear,
-        successMessage: "Academic year updated successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["academicYearsList"]);
-        },
-    });
 
 
-}
-export const createClassMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: createClass,
-        successMessage: "Class created successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["classesList"]);
-        },
-    });
-}
-export const updateClassMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: updateClass,
-        successMessage: "Class updated successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["classesList"]);
-        },
-    });
 
 
-}
-export const deleteClassMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: deleteClass,
-        successMessage: "Class deleted successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["classesList"]);
-        },
-    });
 
-}
-export const classesListMutation = (params) => {
-    return useAppQuery({
-        queryKey: ["classesList", params],
-        apiCall: () => classesList(params),
-    });
-};
-export const sectionList = (params) => {
-    return useAppQuery({
-        queryKey: ["sections", params],
-        apiCall: () => getSectionList(params),
-    });
-};
 export const createSchoolMutation = () => {
     return useAppMutation({
         apiCall: registerSchool,
@@ -348,3 +265,170 @@ export const useStudents = () => {
         queryFn: () => { return 1 },
     });
 };
+
+
+
+
+//admin queries & mutations 
+
+//admin
+export const createSectionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createSection,
+        successMessage: "Section created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["sectionsList"]);
+        },
+    });
+}
+export const updateSectionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateSection,
+        successMessage: "Section updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["sectionsList"]);
+        },
+    });
+
+
+}
+export const createAcademicYearMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createAcademicYear,
+        successMessage: "Academic year created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["academicYearsList"]);
+        },
+    });
+}
+export const updateAcademicYearMutation = () => {
+    const queryClient = useQueryClient();updateSection
+    return useAppMutation({
+        apiCall: updateAcademicYear,
+        successMessage: "Academic year updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["academicYearsList"]);
+        },
+    });
+
+
+}
+export const deleteSectionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteSection,
+        successMessage: "Section deleted successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["sectionsList"]);
+        },
+    });
+
+}
+
+export const createClassMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createClass,
+        successMessage: "Class created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["classesList"]);
+        },
+    });
+}
+export const updateClassMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateClass,
+        successMessage: "Class updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["classesList"]);
+        },
+    });
+
+
+}
+export const deleteClassMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteClass,
+        successMessage: "Class deleted successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["classesList"]);
+        },
+    });
+
+}
+export const classesListMutation = (params) => {
+    return useAppQuery({
+        queryKey: ["classesList", params],
+        apiCall: () => classesList(params),
+    });
+};
+export const sectionList = (params) => {
+    return useAppQuery({
+        queryKey: ["sections", params],
+        apiCall: () => getSectionList(params),
+    });
+};
+export const updateClassSubjectsMutation = () => {
+  const queryClient = useQueryClient();
+  return useAppMutation({
+    apiCall: updateClassSubjects,
+    successMessage: "Subjects updated successfully 🎉",
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["classesList"]);
+    },
+  });
+};
+
+export const removeClassSubjectsMutation = () => {
+  const queryClient = useQueryClient();
+  return useAppMutation({
+    apiCall: removeClassSubjects,
+    successMessage: "Subjects removed successfully 🎉",
+  });
+};
+
+export const addSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: addSubject,
+        successMessage: "Subject added successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["subjects"]);
+        },
+    });
+}
+
+export const getSubjectsQuery = () => {
+    return useAppQuery({
+        queryKey: ["subjects"],
+        apiCall: getSubjects,
+    });
+}
+
+export const updateSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateSubject,
+        successMessage: "Subject updated successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["subjects"]);
+        },
+    });
+}
+
+export const deleteSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteSubject,
+        successMessage: "Subject deleted successfully 🎉",
+        onSuccessCallback
+            : (res) => {
+                queryClient.invalidateQueries(["subjects"]);
+            },
+    });
+}
