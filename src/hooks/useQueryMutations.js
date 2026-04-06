@@ -73,6 +73,8 @@ import {
 
     // Other
     fetchRolesList,
+    createExam,
+    updateExam,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -398,6 +400,29 @@ export const useUploadStaffDocumentsMutation = (staffId, userId) => {
 //admin queries & mutations 
 
 //admin
+
+export const createExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createExam,
+        successMessage: "Exam created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examsList"]);
+        },
+    });
+}
+export const updateExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateExam,
+        successMessage: "Exam updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examsList"]);
+        },
+    });
+
+
+}
 export const createSectionMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
