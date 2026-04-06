@@ -139,6 +139,10 @@ export const getTeachers = () => {
     return api.get(apiPaths.teachers.teachersList);
 };
 
+export const getAdminTeachers = () => {
+    return api.get(apiPaths.teachers.ADMIN_TEACHERS);
+};
+
 export const getStudents = () => {
     return api.get(apiPaths.students.list);
 };

@@ -15,6 +15,7 @@ export const apiPaths = {
         create: "/teachers",
         teachersList: "/teachers",
         createTeacher: "/create/teacher",
+        ADMIN_TEACHERS: "/api/admin/teachers",
     },
 
     superAdmin: {

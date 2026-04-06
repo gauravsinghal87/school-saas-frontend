@@ -45,6 +45,8 @@ import {
     getStaffById,
     uploadStaffDocuments,
 
+    getAdminTeachers,
+
     // Admin - Students
     createStudent,
     getStudents,
@@ -268,6 +270,20 @@ export const getTeachersMutation = () => {
         onSuccessCallback: (res) => {
             queryClient.invalidateQueries(["teachersList"]);
         },
+    });
+};
+
+export const getTeachersQuery = () => {
+    return useAppQuery({
+        queryKey: ["teachers"],
+        apiCall: getTeachers,
+    });
+};
+
+export const getAdminTeachersQuery = () => {
+    return useAppQuery({
+        queryKey: ["adminTeachers"],
+        apiCall: getAdminTeachers,
     });
 };
 
@@ -673,3 +689,8 @@ export const deleteTimetableMutation = () => {
         },
     });
 };
+
+
+
+
+
