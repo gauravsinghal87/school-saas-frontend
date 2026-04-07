@@ -252,30 +252,93 @@ export const deleteTimetable = async (params) => {
     return await api.delete(apiPaths.admin.TIMETABLE, { params });
 };
 
-export const fetchStaffList = ({ page, searchTerm, statusFilter }) => {
-    return api.get(
-        `${apiPaths.admin.staff}?page=${page}&limit=10&search=${searchTerm}&status=${statusFilter}`,
-    );
+
+
+// Get single staff
+export const getStaffById = (id) => {
+  return api.get(`${apiPaths.admin.staff}/${id}`);
 };
 
-export const deleteStaff = (id) => {
-    return api.delete(`${apiPaths.admin.staff}/${id}`);
+// Create staff
+export const createStaff = (data) => {
+  return api.post(apiPaths.admin.CREATE_STAFF, data);
 };
-export const getStaffById = (id) => {
-    return api.get(`${apiPaths.admin.staff}/${id}`);
+
+// Update staff
+export const updateStaff = ({ id, data }) => {
+  return api.put(`${apiPaths.admin.staff}/${id}`, data);
 };
 
 export const uploadStaffDocuments = ({ userId, formData }) => {
-    console.log(userId);
-    return api.post(`${apiPaths.admin.staff}/${userId}/documents`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-    });
+  return api.post(
+    `${apiPaths.admin.staff}/${userId}/documents`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};
+export const fetchStaffList = ({ page, searchTerm, statusFilter }) => {
+  return api.get(apiPaths.admin.staff, {
+    params: {
+      page,
+      limit: 10,
+      search: searchTerm,
+      status: statusFilter,
+    },
+  });
+};
+export const deleteStaff = (id) => {
+  return api.delete(`${apiPaths.admin.staff}/${id}`);
 };
 
+export const getStudentById = (id) => {
+  return api.get(`${apiPaths.students.GET_STUDENT_BY_ID}/${id}`);
+};
 
+export const uploadStudentDocuments = ({ userId, formData }) => {
+  return api.post(
+    `${apiPaths.admin.staff}/${userId}/documents`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};
+export const enrollStudent = (data) => {
+  return api.post(apiPaths.students.ENROLL_STUDENT, data);
+};
 
+export const getStudentsList = ({
+  page,
+  searchTerm,
+  classFilter,
+  sectionFilter,
+  sessionFilter,
+}) => {
+  return api.get(apiPaths.students.list, {
+    params: {
+      page,
+      limit: 10,
+      search: searchTerm || undefined,
+      classId: classFilter !== "null" ? classFilter : undefined,
+      sectionId: sectionFilter !== "null" ? sectionFilter : undefined,
+      sessionId: sessionFilter !== "null" ? sessionFilter : undefined,
+    },
+  });
+};
 
+export const getSessions = () => {
+  return api.get(apiPaths.admin.ACADEMIC_YEAR_LIST);
+};
 
+export const getClasses = () => {
+  return api.get(apiPaths.admin.CLASSES_LIST);
+};
 
 
 
