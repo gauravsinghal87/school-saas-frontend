@@ -35,6 +35,7 @@ import {
     FolderOpen,
     Send,
     Star,
+    Calendar,
 } from "lucide-react";
 
 import { ROLES } from "./roles";
@@ -78,12 +79,12 @@ export const MENU_CONFIG = {
 
         // finance
         { id: "admin-fees", name: "Fee Structure", path: "fees", icon: Banknote, section: "finance" },
-        // { id: "admin-payments", name: "Payments", path: "payments", icon: Receipt, section: "finance" },
         { id: "admin-payroll", name: "Payroll", path: "payroll", icon: Wallet, section: "finance" },
         { id: "admin-notices", name: "Notice Board", path: "notices", icon: Megaphone, section: "communication" },
 
 
         // settings
+        { id: "admin-holidays", name: "Holidays", path: "holidays", icon: Calendar, section: "settings" },
         { id: "admin-reports", name: "Reports", path: "reports", icon: FileBarChart, section: "settings" },
         { id: "admin-settings", name: "School Settings", path: "settings", icon: Settings, section: "settings" },
         // { id: "teachers", name: "Teachers", path: "teachers", icon: Briefcase, section: "main" },
@@ -113,10 +114,12 @@ export const MENU_CONFIG = {
         { id: "staff-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "main", badge: 1 },
 
         // // academic
-        // { id: "staff-attendance", name: "Attendance", path: "attendance", icon: CalendarCheck, section: "academic" },
+        { id: "student-attendance", name: "Student Attendance", path: "attendance", icon: CalendarCheck, section: "academic" },
         // { id: "staff-marks", name: "Marks & Exams", path: "marks", icon: BarChart3, section: "academic" },
         // { id: "staff-materials", name: "Study Materials", path: "study-materials", icon: FolderOpen, section: "academic" },
-        // { id: "staff-timetable", name: "Timetable", path: "timetable", icon: ClipboardList, section: "academic" },
+        { id: "staff-timetable", name: "Timetable", path: "timetable", icon: ClipboardList, section: "academic" },
+        { id: "staff-holidays", name: "Holidays", path: "holidays", icon: Calendar, section: "academic" },
+
 
         // // personal
         // { id: "staff-leaves", name: "Leave Requests", path: "leaves", icon: Send, section: "personal" },

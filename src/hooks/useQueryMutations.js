@@ -75,6 +75,13 @@ import {
     fetchRolesList,
     createExam,
     updateExam,
+    markAttendance,
+    getClassAttendance,
+    getStudentAttendance,
+    createHoliday,
+    updateHoliday,
+    deleteHoliday,
+    getHolidays,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -716,6 +723,88 @@ export const deleteTimetableMutation = () => {
 };
 
 
+
+
+
+
+// ==================== Teacher Management ====================
+
+
+export const fetchstudentListQuery = (params) => {
+    return useAppQuery({
+        queryKey: ["students", params],
+        apiCall: () => getStudents(params),
+    });
+}
+
+export const getStudentAttendanceQuery = (studentId, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["studentAttendance", studentId],
+        apiCall: () => getStudentAttendance(studentId),
+        enabled: enabled && !!studentId,
+    });
+};
+
+export const getClassAttendanceQuery = ({ classId, sectionId }, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["classAttendance", classId, sectionId],
+        apiCall: () => getClassAttendance({ classId, sectionId }),
+        enabled:
+            enabled && !!classId && !!sectionId,
+    });
+};
+export const markAttendanceMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: markAttendance,
+        successMessage: "Attendance marked successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["attendance"]);
+        },
+    });
+};
+
+
+
+export const createHolidayMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createHoliday,
+        successMessage: "Holiday created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["holidays"]);
+        },
+    });
+};
+
+export const getHolidaysQuery = (params) => {
+    return useAppQuery({
+        queryKey: ["holidays", params],
+        apiCall: () => getHolidays(params),
+    });
+};
+
+export const updateHolidayMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateHoliday,
+        successMessage: "Holiday updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["holidays"]);
+        },
+    });
+};
+
+export const deleteHolidayMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteHoliday,
+        successMessage: "Holiday deleted successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["holidays"]);
+        },
+    });
+}
 
 
 

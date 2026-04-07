@@ -10,12 +10,22 @@ export const apiPaths = {
         list: "/students",
         create: "/students",
     },
-    teachers: {
+    teacher: {
         // list: "/teachers",
         create: "/teachers",
         teachersList: "/teachers",
         createTeacher: "/create/teacher",
         ADMIN_TEACHERS: "/api/admin/teachers",
+
+        MARK_ATTENDANCE: "/api/attendance/student/mark",
+        GET_ATTENDANCE: "/api/attendance/student?studentId={studentId}",
+        GET_CLASS_ATTENDANCE: "/api/attendance/student/class?classId={classId}&sectionId={sectionId}",
+        GET_STUDENTS: "/api/student?page={page}&limit={limit}&classId={classId}&sectionId={sectionId}&sessionId={sessionId}&status={status}",
+        CREATE_HOLIDAY: "/api/holiday",
+        GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
+        UPDATE_HOLIDAY: "/api/holiday/{holidayId}",
+        DELETE_HOLIDAY: "/api/holiday/{holidayId}",
+
     },
 
     superAdmin: {

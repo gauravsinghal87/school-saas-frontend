@@ -37,7 +37,6 @@ const BaseLayout = ({ title, menu, role, user }) => {
         // setActiveItem(itemId);
     };
 
-    console.log("User in BaseLayout:", menu);
 
 
     return (

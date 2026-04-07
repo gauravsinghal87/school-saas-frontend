@@ -16,6 +16,7 @@ export const login = async (data) => {
 
     return res;
 };
+
 //admin
 
 export const createExam
@@ -154,9 +155,9 @@ export const getAdminTeachers = () => {
     return api.get(apiPaths.teachers.ADMIN_TEACHERS);
 };
 
-export const getStudents = () => {
-    return api.get(apiPaths.students.list);
-};
+// export const getStudents = () => {
+//     return api.get(apiPaths.students.list);
+// };
 
 
 export const createRole = (data) => {
@@ -289,10 +290,65 @@ export const uploadStaffDocuments = ({ userId, formData }) => {
 
 
 
+//teacher api methods would go here
+
+
+// MARK_ATTENDANCE: "/api/attendance/student/mark",
+//     GET_ATTENDANCE: "/api/attendance/student?studentId={studentId}",
+//         GET_CLASS_ATTENDANCE: "/api/attendance/student/class?classId={classId}&sectionId={sectionId}",
+//             GET_STUDENTS: "/api/student?page={page}&limit={limit}&classId={classId}&sectionId={sectionId}&sessionId={sessionId}&status={status}",
 
 
 
+export const markAttendance = async (data) => {
+    return await api.post(apiPaths.teacher.MARK_ATTENDANCE, data);
+};
 
+export const getStudentAttendance = async (studentId) => {
+    return await api.get(apiPaths.teacher.GET_ATTENDANCE.replace("{studentId}", studentId));
+};
+
+export const getClassAttendance = async ({ classId, sectionId }) => {
+    let url = apiPaths.teacher.GET_CLASS_ATTENDANCE.replace("{classId}", classId);
+    url = url.replace("{sectionId}", sectionId);
+    return await api.get(url);
+};
+
+export const getStudents = async (params) => {
+    let url = apiPaths.teacher.GET_STUDENTS;
+    url = url.replace("{page}", params.page || 1);
+    url = url.replace("{limit}", params.limit || 10);
+    url = url.replace("{classId}", params.classId || "");
+    url = url.replace("{sectionId}", params.sectionId || "null");
+    url = url.replace("{sessionId}", params.sessionId || "null");
+    url = url.replace("{status}", params.status || "");
+    return await api.get(url);
+}
+
+
+export const createHoliday = async (data) => {
+    return await api.post(apiPaths.teacher.CREATE_HOLIDAY, data);
+};
+
+export const getHolidays = async ({ page = 1, limit = 10, search = "" }) => {
+    const url = apiPaths.teacher.GET_HOLIDAYS
+        .replace("{page}", page)
+        .replace("{limit}", limit)
+        .replace("{search}", search);
+
+    return await api.get(url);
+};
+
+export const updateHoliday = async ({ holidayId, data }) => {
+    console.log("Updating holiday with ID:", holidayId);
+    const url = apiPaths.teacher.UPDATE_HOLIDAY.replace("{holidayId}", holidayId);
+    return await api.put(url, data);
+};
+
+export const deleteHoliday = async (holidayId) => {
+    const url = apiPaths.teacher.DELETE_HOLIDAY.replace("{holidayId}", holidayId);
+    return await api.delete(url);
+};
 
 
 

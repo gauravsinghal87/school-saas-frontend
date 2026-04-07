@@ -10,6 +10,7 @@ import SubjectPage from "../modules/admin/subjects/SubjectPage";
 import RolesPage from "../modules/superAdmin/roles/RolesPage";
 
 import AdminStaff from "../modules/admin/staff/AdminStaff";
+import HolidaysPage from "../modules/admin/holidays/HolidaysPage";
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
@@ -104,7 +105,7 @@ const AppRoutes = () => {
             <Route path="classes" element={<Classes />} />
             <Route path="classes/:id/subjects" element={<ClassSubjects />} />
             <Route path="exams" element={<ExamRoutes />} />
-
+            <Route path="holidays" element={<HolidaysPage />} />
             <Route path="sections" element={<Sections />} />
             <Route path="fees" element={<Fees />} />
             <Route path="timetable" element={<Timetable />} />
