@@ -26,8 +26,8 @@ const Login = () => {
     const [form, setForm] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
 
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
+    // const token = localStorage.getItem("token");
+    // const role = localStorage.getItem("role");
 
     // useEffect(() => {
     //     if (!token) {
@@ -58,7 +58,8 @@ const Login = () => {
                 email: form.email,
                 password: form.password,
             });
-            const role = res.data?.user?.role;
+            const role = res.data?.user?.role === 'TEACHER' ? 'STAFF' : res.data?.user?.role;
+
             const route = ROLE_ROUTES[role];
             if (route) {
                 navigate(route);

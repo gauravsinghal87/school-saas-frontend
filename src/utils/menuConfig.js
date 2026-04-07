@@ -67,38 +67,40 @@ export const MENU_CONFIG = {
         // main
 
         { id: "admin-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
-        { id: "admin-students", name: "Students", path: "students", icon: GraduationCap, section: "main" },
-        { id: "admin-staff", name: "Staff", path: "staff", icon: Briefcase, section: "main" },
         { id: "academic-sessions", name: "Academic Sessions", path: "academic-sessions", icon: Clock, section: "main" },
+        { id: "admin-staff", name: "Staff", path: "staff", icon: Briefcase, section: "main" },
         { id: "admin-classes", name: "Classes", path: "classes", icon: Layers, section: "main" },
         { id: "admin-sections", name: "Sections", path: "sections", icon: Layers, section: "main" },
-
-
-
-        { id: "teachers", name: "Teachers", path: "teachers", icon: Briefcase, section: "main" },
-
-        { id: "admin-parents", name: "Parents", path: "parents", icon: Users, section: "main" },
-
-        // academic
         { id: "admin-subjects", name: "Subjects", path: "subjects", icon: BookOpen, section: "academic" },
+        { id: "admin-students", name: "Students", path: "students", icon: GraduationCap, section: "main" },
         { id: "admin-timetable", name: "Timetable", path: "timetable", icon: CalendarDays, section: "academic" },
         { id: "admin-exams", name: "Exams", path: "exams", icon: ClipboardList, section: "academic" },
-        { id: "admin-results", name: "Results", path: "results", icon: BarChart3, section: "academic" },
-        { id: "admin-attendance", name: "Attendance", path: "attendance", icon: CalendarCheck, section: "academic" },
-        { id: "admin-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "academic" },
 
         // finance
         { id: "admin-fees", name: "Fee Structure", path: "fees", icon: Banknote, section: "finance" },
-        { id: "admin-payments", name: "Payments", path: "payments", icon: Receipt, section: "finance" },
+        // { id: "admin-payments", name: "Payments", path: "payments", icon: Receipt, section: "finance" },
         { id: "admin-payroll", name: "Payroll", path: "payroll", icon: Wallet, section: "finance" },
-
-        // communication
         { id: "admin-notices", name: "Notice Board", path: "notices", icon: Megaphone, section: "communication" },
-        { id: "admin-messages", name: "Messages", path: "messages", icon: MessageSquare, section: "communication", badge: 3 },
+
 
         // settings
         { id: "admin-reports", name: "Reports", path: "reports", icon: FileBarChart, section: "settings" },
         { id: "admin-settings", name: "School Settings", path: "settings", icon: Settings, section: "settings" },
+        // { id: "teachers", name: "Teachers", path: "teachers", icon: Briefcase, section: "main" },
+
+        // { id: "admin-parents", name: "Parents", path: "parents", icon: Users, section: "main" },
+        // reprot exam report , attendance report, fee report
+
+        // academic
+
+
+        // { id: "admin-results", name: "Results", path: "results", icon: BarChart3, section: "academic" },
+        // { id: "admin-attendance", name: "Attendance", path: "attendance", icon: CalendarCheck, section: "academic" },
+        // { id: "admin-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "academic" },
+        // communication
+        // { id: "admin-messages", name: "Messages", path: "messages", icon: MessageSquare, section: "communication", badge: 3 },
+
+
     ],
 
     // ── STAFF / TEACHER ─────────────────────────────────────────────────────────

@@ -9,16 +9,20 @@ let role = localStorage.getItem("role") || "";
 
 export const login = async (data) => {
     const res = await api.post(apiPaths.auth.login, data);
+
+    if (res?.data?.user?.role === "TEACHER") {
+        res.data.user.role = "STAFF";
+    }
+
     return res;
 };
-
 //admin
 
 export const createExam
     = async (formData) => {
         return await api.post(apiPaths.admin.CREATE_EXAM, formData);
     };
-    export const updateExam = async ({ id, data }) => {
+export const updateExam = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_EXAM}/${id}`, data);
 };
 export const updateSection = async ({ id, data }) => {
