@@ -517,6 +517,9 @@ export const getTeacherTimetable = async ({ classId, sectionId }) => {
     return await api.get(url);
 }
 
+export const getStudentTimetable = async () => {
+    return await api.get(apiPaths.admin.TIMETABLE);
+};
 
 
 export const getClassSecSub = async () => {

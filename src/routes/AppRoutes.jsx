@@ -23,6 +23,8 @@ import HolidaysPage from "../modules/admin/holidays/HolidaysPage";
 import AdminStudents from "../modules/admin/students/AdminStudents";
 import Holidays from "../modules/admin/staff/Holidays";
 import AssignmentsPage from "../modules/staff/assignments/AssignmentPage";
+import StudentHolidays from "../modules/student/holidays/StudentHolidays.jsx";
+import StudentTimetable from "../modules/student/timetable/StudentTimetable.jsx";
 
 import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
 //staff imports
@@ -57,7 +59,9 @@ const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
 
 const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
-const ClassSubjects = lazy(() => import("../modules/admin/classes/ClassSubjects"));
+const ClassSubjects = lazy(
+  () => import("../modules/admin/classes/ClassSubjects"),
+);
 const Exams = lazy(() => import("../modules/admin/exams/Exams"));
 const ExamSubjects = lazy(() => import("../modules/admin/exams/ExamSubjects"));
 const ExamMarks = lazy(() => import("../modules/admin/exams/ExamMarks"));
@@ -142,6 +146,9 @@ const AppRoutes = () => {
               </ProtectedRoute>
             }
           >
+            <Route path="holidays" element={<StudentHolidays />} />
+            <Route path="timetable" element={<StudentTimetable />} />
+
             <Route path="dashboard" element={<StudentDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Route>
