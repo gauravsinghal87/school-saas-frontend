@@ -5,6 +5,7 @@ import {
     login,
 
     // Super Admin
+    getSuperAdminDashboard,
     getSchoolList,
     registerSchool,
     updateSchoolStatus,
@@ -97,6 +98,14 @@ import { showError, showSuccess } from "../utils/toast";
 
 //SUPERADMIN QUERIES & MUTATIONS    
 
+
+export const useSuperAdminDashboard = (year) => {
+    return useAppQuery({
+        queryKey: ["superAdminDashboard", year],
+        apiCall: () => getSuperAdminDashboard({ year }),
+        enabled: !!year,
+    });
+};
 
 export const createTeacherMutation = () => {
     const queryClient = useQueryClient();

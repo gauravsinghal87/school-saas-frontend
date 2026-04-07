@@ -127,6 +127,10 @@ export const updateSubscriptionStatus = async ({ id, data }) => {
 export const deleteSubscription = async (id) => {
     return await api.delete(`${apiPaths.superAdmin.DELETE_SUBSCRIPTION}/${id}`);
 };
+
+export const getSuperAdminDashboard = async (params) => {
+    return await api.get(apiPaths.superAdmin.DASHBOARD, { params });
+};
 export const createStudent = (data) => {
     return api.post(apiPaths.students.create, data);
 };

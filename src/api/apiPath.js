@@ -32,6 +32,7 @@ export const apiPaths = {
         CREATE_ROLE: '/api/super-admin/role',
         GET_ROLES: '/api/super-admin/role',
         UPDATE_ROLE: '/api/super-admin/role/{id}',
+        DASHBOARD: '/api/super-admin/dashboard',
     },
     admin: {
 
