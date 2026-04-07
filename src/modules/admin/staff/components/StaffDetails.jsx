@@ -66,7 +66,7 @@ function StaffDetail({ staffId, onBack }) {
       if (cert.file && !cert.type) {
         certValid = false;
         break;
-      }
+      }     
 
       if (cert.file && cert.type) {
         formData.append("certificates", cert.file);

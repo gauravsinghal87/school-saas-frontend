@@ -484,7 +484,9 @@ export const deleteHoliday = async (holidayId) => {
     return await api.delete(url);
 };
 
-
+export const getStudentTimetable = async () => {
+    return await api.get(apiPaths.admin.TIMETABLE);
+};
 
 
 

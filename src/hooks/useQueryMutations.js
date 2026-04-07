@@ -66,7 +66,7 @@ import {
     createTimetable,
     getTimetable,
     deleteTimetable,
-
+getStudentTimetable,
     // Admin - Class Subjects
     updateClassSubjects,
     removeClassSubjects,
@@ -1068,4 +1068,25 @@ export const useClassesList = () => {
         queryKey: ["classes"],
         apiCall: getClasses,
     });
+};
+
+
+
+export const studentHolidayQuery = ({ page, limit, debouncedSearch }) => {
+  return useAppQuery({
+    queryKey: ["holidays", page, limit, debouncedSearch],
+    apiCall: () =>
+      getHolidays({
+        page,
+        limit,
+        search: debouncedSearch,
+      }),
+  });
+};
+
+export const useStudentTimetable = () => {
+  return useAppQuery({
+    queryKey: ["studentTimetable"],
+    apiCall: getStudentTimetable,
+  });
 };
