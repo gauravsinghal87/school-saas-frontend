@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import SidePanel from "../../../components/common/SlidePanel";
 import TimetableForm from "./TimetableForm";
 import Button from "../../../components/common/Button";
@@ -14,6 +14,7 @@ import { academicYearList } from "../../../hooks/useQueryMutations";
 import ConfirmBox from "../../../components/common/ConfirmBox";
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const BREAK_PERIODS = ["Lunch", "Break", "Recess", "Snack Break"];
 
 export default function TimetableSchedule() {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,14 +26,38 @@ export default function TimetableSchedule() {
 
     // Fetch data
     const { data: classesData } = classesListMutation({ page: 1, limit: 100, search: "" });
-    const { data: sectionsData } = sectionList({ page: 1, limit: 100, search: "", classId: selectedClass });
+    const { data: sectionsResponse } = sectionList({ page: 1, limit: 100, search: "", classId: selectedClass });
     const { data: academicSessions } = academicYearList({ page: 1, limit: 100, search: "" });
     const { data: periodsData } = periodsList({ academicSessionId: selectedAcademicYear });
 
-    const classOptions = classesData?.results || [];
-    const sectionOptions = sectionsData?.results || [];
-    const academicYearOptions = academicSessions?.results || [];
-    const periods = periodsData?.data || periodsData?.results || [];
+    // Handle different response structures
+    const classOptions = classesData?.results || classesData?.data || [];
+
+    let sectionOptions = [];
+    if (sectionsResponse?.results?.docs) {
+        sectionOptions = sectionsResponse.results.docs;
+    } else if (sectionsResponse?.results && Array.isArray(sectionsResponse.results)) {
+        sectionOptions = sectionsResponse.results;
+    } else if (sectionsResponse?.data && Array.isArray(sectionsResponse.data)) {
+        sectionOptions = sectionsResponse.data;
+    } else if (Array.isArray(sectionsResponse)) {
+        sectionOptions = sectionsResponse;
+    }
+
+    const academicYearOptions = academicSessions?.results || academicSessions?.data || [];
+
+    // Filter out break periods
+    let allPeriods = periodsData?.data || periodsData?.results || [];
+    const periods = allPeriods.filter(period => {
+        const isBreak = BREAK_PERIODS.some(breakName =>
+            period.name?.toLowerCase().includes(breakName.toLowerCase())
+        );
+        return !isBreak && !period.isBreak;
+    });
+
+    const filteredSections = sectionOptions.filter(section =>
+        !selectedClass || section.classId === selectedClass || section.class?._id === selectedClass
+    );
 
     // Fetch existing timetable
     const { data: timetableData, refetch: refetchTimetable } = getTimetableQuery(
@@ -49,7 +74,7 @@ export default function TimetableSchedule() {
     const { mutateAsync: deleteTimetable, isPending: isDeleting } = deleteTimetableMutation();
 
     // Form handling
-    const { register, handleSubmit, control, reset, watch, setValue } = useForm({
+    const { register, handleSubmit, control, reset, watch, setValue, formState: { errors } } = useForm({
         defaultValues: {
             academicSessionId: "",
             classId: "",
@@ -70,13 +95,18 @@ export default function TimetableSchedule() {
         if (watchedSection) setSelectedSection(watchedSection);
     }, [watchedAcademicSession, watchedClass, watchedSection]);
 
+    // Reset form entries when selections change
+    useEffect(() => {
+        setValue("entries", []);
+        setExistingTimetable(null);
+    }, [selectedAcademicYear, selectedClass, selectedSection, setValue]);
+
     // Load existing timetable data
     useEffect(() => {
         if (timetableData?.data) {
             const entries = timetableData.data.entries || [];
             setExistingTimetable(timetableData.data);
 
-            // Format entries for form
             const formattedEntries = entries.map(entry => ({
                 day: entry.day,
                 periodId: entry.periodId?._id || entry.periodId,
@@ -85,9 +115,6 @@ export default function TimetableSchedule() {
             }));
 
             setValue("entries", formattedEntries);
-        } else {
-            setExistingTimetable(null);
-            setValue("entries", []);
         }
     }, [timetableData, setValue]);
 
@@ -108,11 +135,16 @@ export default function TimetableSchedule() {
 
     const onSubmit = async (formData) => {
         try {
+            // Filter out entries with no subject or teacher
+            const validEntries = formData.entries.filter(entry =>
+                entry.subjectId && entry.teacherId && entry.subjectId !== "" && entry.teacherId !== ""
+            );
+
             const payload = {
                 academicSessionId: formData.academicSessionId,
                 classId: formData.classId,
                 sectionId: formData.sectionId,
-                entries: formData.entries,
+                entries: validEntries,
             };
 
             await createTimetable(payload);
@@ -137,7 +169,7 @@ export default function TimetableSchedule() {
         }
     };
 
-    // Display timetable in table format
+    // Rest of your render function remains the same...
     const renderTimetable = () => {
         if (!timetableData?.data?.entries || timetableData.data.entries.length === 0) {
             return (
@@ -148,7 +180,15 @@ export default function TimetableSchedule() {
         }
 
         const entries = timetableData.data.entries;
-        const periodsList = [...new Set(entries.map(e => e.periodId?.order || e.periodId?.order))].sort((a, b) => a - b);
+        const uniquePeriods = [...new Map(entries.map(entry => [entry.periodId?._id, entry.periodId])).values()];
+        const sortedPeriods = uniquePeriods
+            .filter(period => {
+                const isBreak = BREAK_PERIODS.some(breakName =>
+                    period?.name?.toLowerCase().includes(breakName.toLowerCase())
+                );
+                return !isBreak && !period?.isBreak;
+            })
+            .sort((a, b) => (a.order || 0) - (b.order || 0));
 
         return (
             <div className="overflow-x-auto">
@@ -156,7 +196,7 @@ export default function TimetableSchedule() {
                     <thead className="bg-gray-50 dark:bg-gray-700">
                         <tr>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Day / Period</th>
-                            {periods.map(period => (
+                            {sortedPeriods.map(period => (
                                 <th key={period._id} className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                                     {period.name}
                                     <br />
@@ -171,7 +211,7 @@ export default function TimetableSchedule() {
                                 <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
                                     {day}
                                 </td>
-                                {periods.map(period => {
+                                {sortedPeriods.map(period => {
                                     const entry = entries.find(
                                         e => e.day === day && (e.periodId?._id === period._id || e.periodId === period._id)
                                     );
@@ -198,7 +238,7 @@ export default function TimetableSchedule() {
 
     return (
         <div>
-            {/* Filters */}
+            {/* Filters - same as before */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div>
                     <label className="block text-sm font-medium mb-1">Academic Session</label>
@@ -242,7 +282,7 @@ export default function TimetableSchedule() {
                         disabled={!selectedClass}
                     >
                         <option value="">Select Section</option>
-                        {sectionOptions.map((section) => (
+                        {filteredSections.map((section) => (
                             <option key={section._id} value={section._id}>
                                 {section.name}
                             </option>
@@ -258,10 +298,7 @@ export default function TimetableSchedule() {
                         {existingTimetable ? "Edit Timetable" : "Create Timetable"}
                     </Button>
                     {existingTimetable && (
-                        <Button
-                            variant="danger"
-                            onClick={() => setConfirmOpen(true)}
-                        >
+                        <Button variant="danger" onClick={() => setConfirmOpen(true)}>
                             Delete Timetable
                         </Button>
                     )}
@@ -290,12 +327,7 @@ export default function TimetableSchedule() {
                     />
 
                     <div className="flex justify-end mt-auto">
-                        <Button
-                            type="submit"
-                            loading={isCreating}
-                            loadingLabel="Saving..."
-                            variant="primary"
-                        >
+                        <Button type="submit" loading={isCreating} loadingLabel="Saving..." variant="primary">
                             Save Timetable
                         </Button>
                     </div>

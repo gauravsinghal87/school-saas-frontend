@@ -1,3 +1,4 @@
+// ExamForm.jsx - FIXED VERSION
 import Input from "../../../components/common/Input";
 import Select from "../../../components/common/Select";
 import { Controller } from "react-hook-form";
@@ -9,13 +10,11 @@ export default function ExamForm({
     control,
     classoptions
 }) {
-
     const isView = mode === "view";
 
     return (
         <div className="flex flex-col gap-4">
-
-           <Input
+            <Input
                 label="Exam Name"
                 id="exam_name"
                 type="text"
@@ -26,79 +25,74 @@ export default function ExamForm({
                 disabled={isView}
             />
 
-<Controller 
-  name="classId"
-  control={control}
-  rules={{ required: "Class is required" }}
-  render={({ field }) => (
-    <Select
-      isMulti
-      label="Class"
-      placeholder="Select class"
-      options={classoptions}
-      value={classoptions.filter(option =>
-        field.value?.includes(option.value)
-      )}
-      onChange={(e) => field.onChange(e.target.value)}
-      error={errors.classId?.message}
-      disabled={isView}
-    />
-  )}
-/>
+            <Controller 
+                name="classId"
+                control={control}
+                rules={{ required: "Class is required" }}
+                render={({ field }) => {
+                    console.log("Field value:", field.value); // Debug log
+                    console.log("Class options:", classoptions); // Debug log
+                    
+                    return (
+                        <Select
+                            // isMulti
+                            name="classId"
+                            label="Class"
+                            placeholder="Select class"
+                            options={classoptions}
+                            value={field.value}
+                            onChange={field.onChange}
+                            error={errors.classId?.message}
+                            disabled={isView}
+                        />
+                    );
+                }}
+            />
+
             <Input
-                label="Exam Date"
-                id="exam_date"
+                label="Start Date"
+                id="start_date"
                 type="date"
-                placeholder="Exam Date"
-                register={register("examDate", { required: "Exam date is required" })}
-                error={errors.examDate?.message}
+                placeholder="Start Date"
+                register={register("startDate", { required: "Start date is required" })}
+                error={errors.startDate?.message}
+                required
+                disabled={isView}
+            />
+                <Input
+                label="End Date"
+                id="end_date"
+                type="date"
+                placeholder="End Date"
+                register={register("endDate", { required: "End date is required" })}
+                error={errors.endDate?.message}
                 required
                 disabled={isView}
             />
 
-
-
-            {/* Status */}
-            {
-                mode !== "create" && (
-                    <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-semibold">Status</label>
-
-                        {/* <select
-          {...register("status")}
-          disabled={isView}
-          className="border border-border rounded-lg px-3 py-2"
-        >
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select> */}
-                        {
-
-                        }
-                        <Controller
-                            name="status"
-                            control={control}
-                            // defaultValue="active"
-                            render={({ field }) => (
-                                <Select
-                                    value={field.value}
-                                    onChange={(val) => field.onChange(val)}
-                                    options={[
-                                        { label: "Active", value: "active" },
-                                        { label: "Completed", value: "completed" },
-                                        { label: "Upcoming", value: "upcoming" },
-
-                                    ]}
-                                    placeholder="Select status"
-                                    error={errors.status?.message}
-                                    disabled={isView}
-                                />
-                            )}
-                        />
-                    </div>
-                )
-            }
-
+            {mode !== "create" && (
+                <div className="flex flex-col gap-1.5">
+                    <label className="text-sm font-semibold">Status</label>
+                    <Controller
+                        name="status"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                value={field.value}
+                                onChange={field.onChange}
+                                options={[
+                                    { label: "Active", value: "active" },
+                                    { label: "Completed", value: "completed" },
+                                    { label: "Upcoming", value: "upcoming" },
+                                ]}
+                                placeholder="Select status"
+                                error={errors.status?.message}
+                                disabled={isView}
+                            />
+                        )}
+                    />
+                </div>
+            )}
         </div>
     );
 }

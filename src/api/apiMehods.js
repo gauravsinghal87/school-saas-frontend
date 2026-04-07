@@ -14,6 +14,13 @@ export const login = async (data) => {
 
 //admin
 
+export const createExam
+    = async (formData) => {
+        return await api.post(apiPaths.admin.CREATE_EXAM, formData);
+    };
+    export const updateExam = async ({ id, data }) => {
+    return await api.put(`${apiPaths.admin.UPDATE_EXAM}/${id}`, data);
+};
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
 };
@@ -137,6 +144,10 @@ export const createTeacher = (data) => {
 
 export const getTeachers = () => {
     return api.get(apiPaths.teachers.teachersList);
+};
+
+export const getAdminTeachers = () => {
+    return api.get(apiPaths.teachers.ADMIN_TEACHERS);
 };
 
 export const getStudents = () => {

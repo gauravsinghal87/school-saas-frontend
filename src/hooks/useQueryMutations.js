@@ -45,6 +45,8 @@ import {
     getStaffById,
     uploadStaffDocuments,
 
+    getAdminTeachers,
+
     // Admin - Students
     createStudent,
     getStudents,
@@ -71,6 +73,8 @@ import {
 
     // Other
     fetchRolesList,
+    createExam,
+    updateExam,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -271,6 +275,20 @@ export const getTeachersMutation = () => {
     });
 };
 
+export const getTeachersQuery = () => {
+    return useAppQuery({
+        queryKey: ["teachers"],
+        apiCall: getTeachers,
+    });
+};
+
+export const getAdminTeachersQuery = () => {
+    return useAppQuery({
+        queryKey: ["adminTeachers"],
+        apiCall: getAdminTeachers,
+    });
+};
+
 export const useCurrentUser = () => {
     return useQuery({
         queryKey: [QUERY_KEYS.ME],
@@ -382,6 +400,29 @@ export const useUploadStaffDocumentsMutation = (staffId, userId) => {
 //admin queries & mutations 
 
 //admin
+
+export const createExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createExam,
+        successMessage: "Exam created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examsList"]);
+        },
+    });
+}
+export const updateExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateExam,
+        successMessage: "Exam updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examsList"]);
+        },
+    });
+
+
+}
 export const createSectionMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -673,3 +714,8 @@ export const deleteTimetableMutation = () => {
         },
     });
 };
+
+
+
+
+
