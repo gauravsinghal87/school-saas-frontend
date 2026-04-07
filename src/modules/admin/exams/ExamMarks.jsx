@@ -210,9 +210,9 @@ export default function ExamMarks() {
             <div className="bg-white  rounded-lg p-4 mb-6 shadow">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium mb-1">Select Student</label>
+                        <label className="block text-sm font-medium   mb-1 text-text-heading">Select Student</label>
                         <select
-                            className="w-full px-3 py-2 border rounded-lg dark:bg-gray-700"
+                            className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                             value={selectedStudent}
                             onChange={(e) => setSelectedStudent(e.target.value)}
                         >

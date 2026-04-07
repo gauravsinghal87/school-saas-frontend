@@ -88,7 +88,7 @@ export default function Classes() {
             {val.map((sec) => (
               <span
                 key={sec._id}
-                className="px-2 py-0.5 text-xs bg-gray-100 rounded"
+                className="px-2 py-0.5 text-xs bg-surface-page rounded"
               >
                 {sec.name}
               </span>

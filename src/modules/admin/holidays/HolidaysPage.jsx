@@ -68,8 +68,9 @@ const HolidaysPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-surface-page p-4 md:p-8 font-['Merriweather']">
-            <div className="max-w-6xl mx-auto space-y-8">
+        <div className="min-h-screen bg-surface-page px-4 py-8">
+            <div className="max-w-7xl mx-auto space-y-6">
+
 
                 {/* --- HEADER --- */}
                 <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">

@@ -233,7 +233,7 @@ export default function FeeForm({
                     register={register("totalAmount")}
                     error={errors.totalAmount?.message}
                     disabled={true}
-                    className="bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
+                    className="bg-gray-100  cursor-not-allowed"
                 />
                 <p className="text-xs text-gray-500">Auto-calculated from fee heads</p>
             </div>

@@ -102,6 +102,12 @@ import {
     generateResult,
     getExamResults,
     getStudentResults,
+    createAssignment,
+    getAssignments,
+    updateAssignment,
+    deleteAssignment,
+    getTeacherTimetable,
+    getClassSecSub,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -1067,5 +1073,70 @@ export const useClassesList = () => {
     return useAppQuery({
         queryKey: ["classes"],
         apiCall: getClasses,
+    });
+};
+
+
+
+
+
+
+export const createAssignmentMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createAssignment,
+        successMessage: "Assignment created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["assignments"]);
+        },
+    });
+};
+
+export const getAssignmentsQuery = (sectionId) => {
+    return useAppQuery({
+        queryKey: ["assignments", sectionId],
+        apiCall: () => getAssignments({ sectionId }),
+        enabled: !!sectionId,
+    });
+};
+
+export const updateAssignmentMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateAssignment,
+        successMessage: "Assignment updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["assignments"]);
+        },
+    });
+};
+
+export const deleteAssignmentMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteAssignment,
+        successMessage: "Assignment deleted successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["assignments"]);
+        },
+    });
+};
+
+
+export const getTeacherTimetableQuery = ({ classId, sectionId }) => {
+    return useAppQuery({
+        queryKey: ["teacherTimetable", classId, sectionId],
+        apiCall: () => getTeacherTimetable({ classId, sectionId }),
+        enabled: !!classId && !!sectionId,
+    });
+};
+
+
+
+export const getClassSecSubQuery = ({ classId, sectionId }) => {
+    return useAppQuery({
+        queryKey: ["classSecSub", classId, sectionId],
+        apiCall: () => getClassSecSub({ classId, sectionId }),
+        enabled: !!classId && !!sectionId,
     });
 };

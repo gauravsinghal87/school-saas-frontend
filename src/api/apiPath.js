@@ -25,10 +25,18 @@ export const apiPaths = {
         GET_CLASS_ATTENDANCE: "/api/attendance/student/class?classId={classId}&sectionId={sectionId}",
         GET_STUDENTS: "/api/student?page={page}&limit={limit}&classId={classId}&sectionId={sectionId}&sessionId={sessionId}&status={status}",
         CREATE_HOLIDAY: "/api/holiday",
-        GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
         UPDATE_HOLIDAY: "/api/holiday/{holidayId}",
         DELETE_HOLIDAY: "/api/holiday/{holidayId}",
+        GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
 
+
+        CREATE_ASSIGNMENT: "/api/teacher/assignment&notes/upload-assignment",
+        UPDATE_ASSIGNMENT: "/api/teacher/assignment&notes/update-assignment/{assignmentId}",
+        GET_ASSIGNMENTS: "/api/teacher/assignment&notes/get-assignment?sectionId={sectionId}",
+        DELETE_ASSIGNMENT: "/api/teacher/assignment&notes/delete-assignment/{assignmentId}",
+
+        GET_TIMETABLE: "/api/timetable/timetable?classId={classId}&sectionId={sectionId}",
+        GET_CLASS_SEC_SUB: '/api/staff/class/get'
     },
 
     superAdmin: {
@@ -87,6 +95,11 @@ export const apiPaths = {
         EXAM_GENERATE_RESULT: '/api/exam/:id/generate-result',
         EXAM_RESULTS: '/api/exam/:id/results',
         EXAM_STUDENT_RESULTS: '/api/exam/student/:id/results',
+
+        CREATE_HOLIDAY: "/api/holiday",
+        UPDATE_HOLIDAY: "/api/holiday/{holidayId}",
+        DELETE_HOLIDAY: "/api/holiday/{holidayId}",
+        GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
 
     }
 

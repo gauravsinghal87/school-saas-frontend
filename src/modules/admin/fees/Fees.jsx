@@ -57,7 +57,7 @@ export default function Fees() {
                         {val.map((head, idx) => (
                             <span
                                 key={idx}
-                                className="px-2 py-0.5 text-xs bg-gray-100 dark:bg-gray-700 rounded"
+                                className="px-2 py-0.5 text-xs bg-gray-100 "
                             >
                                 {head.type}: ₹{head.amount?.toLocaleString()}
                             </span>

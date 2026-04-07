@@ -3,6 +3,15 @@ import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
 import { ROLES } from "../utils/roles";
+
+
+// 🔥 Lazy imports
+const Login = lazy(() => import("../pages/Login"));
+const NotFound = lazy(() => import("../components/common/NotFound"));
+const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
+const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
+const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
+
 import PageLoader from "../components/common/PageLoader";
 import ParentLayout from "../layouts/ParentLayout";
 import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
@@ -12,14 +21,10 @@ import RolesPage from "../modules/superAdmin/roles/RolesPage";
 import AdminStaff from "../modules/admin/staff/AdminStaff";
 import HolidaysPage from "../modules/admin/holidays/HolidaysPage";
 import AdminStudents from "../modules/admin/students/AdminStudents";
+import Holidays from "../modules/admin/staff/Holidays";
+import AssignmentsPage from "../modules/staff/assignments/AssignmentPage";
 
-// 🔥 Lazy imports
-const Login = lazy(() => import("../pages/Login"));
-const NotFound = lazy(() => import("../components/common/NotFound"));
-const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
-const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
-const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
-
+import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
 //staff imports
 const StaffDashboard = lazy(
   () => import("../modules/staff/dashboard/StaffDashboard"),
@@ -50,7 +55,7 @@ const Classes = lazy(() => import("../modules/admin/classes/Classes"));
 const Fees = lazy(() => import("../modules/admin/fees/Fees"));
 const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
- 
+
 const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
 const ClassSubjects = lazy(() => import("../modules/admin/classes/ClassSubjects"));
 const Exams = lazy(() => import("../modules/admin/exams/Exams"));
@@ -127,10 +132,8 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
 
             <Route path="staff" element={<AdminStaff />} />
-            {/* <Route path="teachers" element={<Teachers />} /> */}
           </Route>
 
-          {/* 🎓 Student */}
           <Route
             path="/student"
             element={
@@ -154,17 +157,22 @@ const AppRoutes = () => {
             <Route path="dashboard" element={<ParentDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+
+          {/* staff */}
           <Route
             path="/staff"
             element={
-              // <ProtectedRoute allowedRoles={[ROLES.STAFF]}>
               <StaffLayout />
-              // </ProtectedRoute>
             }
           >
             <Route path="dashboard" element={<StaffDashboard />} />
             <Route path="teachers" element={<StaffTeachers />} />
             <Route path="students" element={<StaffStudents />} />
+            <Route path="holidays" element={<Holidays />} />
+            <Route path="timetable" element={<TeacherTimeTable />} />
+
+            <Route path="assignments" element={<AssignmentsPage />} />
+
             <Route path="parents" element={<StaffParents />} />
             <Route path="*" element={<NotFound />} />
           </Route>
