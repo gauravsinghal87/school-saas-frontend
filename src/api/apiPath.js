@@ -10,7 +10,7 @@ export const apiPaths = {
         list: "/api/student",
         create: "/students",
         UPLOAD_STUDENT_DOCS: "/api/staff",
-        GET_STUDENT_BY_ID:"/api/student/",
+        GET_STUDENT_BY_ID: "/api/student/",
         ENROLL_STUDENT: "/api/student/enroll",
     },
     teacher: {
@@ -80,6 +80,13 @@ export const apiPaths = {
         UPDATE_EXAM: '/api/admin/exam',
         CREATE_STAFF: "/api/staff/create",
         UPLOAD_STAFF_DOCS: "/api/staff",
+        // Exam Management
+        EXAM: '/api/exam',
+        EXAM_SUBJECTS: '/api/exam/:id/subjects',
+        EXAM_MARKS: '/api/exam/:id/marks',
+        EXAM_GENERATE_RESULT: '/api/exam/:id/generate-result',
+        EXAM_RESULTS: '/api/exam/:id/results',
+        EXAM_STUDENT_RESULTS: '/api/exam/student/:id/results',
 
     }
 

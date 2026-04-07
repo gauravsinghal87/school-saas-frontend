@@ -243,7 +243,7 @@ export default function TimetableSchedule() {
                 <div>
                     <label className="block text-sm font-medium mb-1">Academic Session</label>
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border rounded-lg "
                         value={selectedAcademicYear}
                         onChange={(e) => setSelectedAcademicYear(e.target.value)}
                     >
@@ -259,7 +259,7 @@ export default function TimetableSchedule() {
                 <div>
                     <label className="block text-sm font-medium mb-1">Class</label>
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border rounded-lg "
                         value={selectedClass}
                         onChange={(e) => setSelectedClass(e.target.value)}
                         disabled={!selectedAcademicYear}
@@ -276,7 +276,7 @@ export default function TimetableSchedule() {
                 <div>
                     <label className="block text-sm font-medium mb-1">Section</label>
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border rounded-lg "
                         value={selectedSection}
                         onChange={(e) => setSelectedSection(e.target.value)}
                         disabled={!selectedClass}
