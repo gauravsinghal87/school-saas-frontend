@@ -137,15 +137,15 @@ export const createStudent = (data) => {
 };
 
 export const createTeacher = (data) => {
-    return api.post(apiPaths.teachers.createTeacher, data);
+    return api.post(apiPaths.teacher.createTeacher, data);
 };
 
 export const getTeachers = () => {
-    return api.get(apiPaths.teachers.teachersList);
+    return api.get(apiPaths.teacher.teachersList);
 };
 
 export const getAdminTeachers = () => {
-    return api.get(apiPaths.teachers.ADMIN_TEACHERS);
+    return api.get(apiPaths.teacher.ADMIN_TEACHERS);
 };
 
 // export const getStudents = () => {
