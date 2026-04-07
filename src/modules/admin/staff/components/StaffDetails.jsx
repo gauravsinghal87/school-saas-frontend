@@ -12,7 +12,10 @@ import api from "../../../../api/apiConfig";
 
 import Input from "../../../../components/common/Input";
 import SubmitButton from "../../../../components/common/Button";
-import { useStaffDetail } from "../../../../hooks/useQueryMutations";
+import {
+  useStaffDetail,
+  useUploadStaffDocumentsMutation,
+} from "../../../../hooks/useQueryMutations";
 
 const DetailSkeleton = () => (
   <div className="animate-pulse flex flex-col gap-6">
@@ -41,47 +44,39 @@ function StaffDetail({ staffId, onBack }) {
   const removeCertificateField = (index) =>
     setCertificates(certificates.filter((_, i) => i !== index));
 
-  const uploadDocsMutation = useMutation({
-    mutationFn: (formData) =>
-      api.post(`/api/staff/${userId}/documents`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      }),
-    onSuccess: (res) => {
-      toast.success(res.message || "Documents uploaded successfully");
-      queryClient.invalidateQueries({ queryKey: ["staff", staffId] });
-      setAadhar(null);
-      setPan(null);
-      setCertificates([]);
-    },
-    onError: (err) => {
-      toast.error(err.response?.data?.message || "Failed to upload documents");
-    },
-  });
+  const uploadDocsMutation = useUploadStaffDocumentsMutation(staffId, userId);
 
   const handleUpload = (e) => {
     e.preventDefault();
+
     if (!aadhar && !pan && certificates.length === 0) {
-      return toast.error("Please select at least one document to upload.");
+      return; // ❌ no toast here
     }
 
     const formData = new FormData();
+
     if (aadhar) formData.append("aadhar_card", aadhar);
     if (pan) formData.append("pan_card", pan);
 
     let certValid = true;
-    certificates.forEach((cert) => {
+
+    for (let i = 0; i < certificates.length; i++) {
+      const cert = certificates[i];
+
       if (cert.file && !cert.type) {
         certValid = false;
-        toast.error(
-          "Please enter a certificate type (e.g., B.ED) for all selected files.",
-        );
-      } else if (cert.file && cert.type) {
+        break;
+      }
+
+      if (cert.file && cert.type) {
         formData.append("certificates", cert.file);
         formData.append("certificate_types", cert.type);
       }
-    });
+    }
 
-    if (certValid) uploadDocsMutation.mutate(formData);
+    if (!certValid) return;
+
+    uploadDocsMutation.mutate({ formData });
   };
 
   if (isLoading) return <DetailSkeleton />;

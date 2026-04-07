@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { useState } from "react";
 import {
   Search,
   Plus,
@@ -22,7 +20,6 @@ import {
   useRolesList,
 } from "../../../hooks/useQueryMutations";
 export default function AdminStaff() {
-
   const [currentView, setCurrentView] = useState("list");
   const [viewingStaffId, setViewingStaffId] = useState(null);
 
@@ -30,6 +27,11 @@ export default function AdminStaff() {
   const [statusFilter, setStatusFilter] = useState("");
   const [page, setPage] = useState(1);
 
+  const { data: staffRes, isLoading: isLoadingStaff } = getStaffList({
+    page,
+    searchTerm,
+    statusFilter,
+  });
   // Drawer State
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [drawerMode, setDrawerMode] = useState("add");
@@ -38,18 +40,10 @@ export default function AdminStaff() {
   const { data: rolesRes } = useRolesList();
   const roles = rolesRes?.results || [];
 
-  const { data: subjectsData, isLoading, error, refetch } = getSubjectsQuery();
-
-
-  const { data: staffRes, isLoading: isLoadingStaff } = getStaffList({
-    page,
-    searchTerm,
-    statusFilter,
-  });
   const staffList = staffRes?.data || [];
   const pagination = staffRes?.pagination || { totalPages: 1, page: 1 };
 
-  console.log("Subjects Data:", subjectsData);
+  // console.log("Subjects Data:", subjectsData);
 
   const openDrawer = (mode, id = null) => {
     setDrawerMode(mode);

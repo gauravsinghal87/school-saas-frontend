@@ -11,6 +11,7 @@ import RolesPage from "../modules/superAdmin/roles/RolesPage";
 
 import AdminStaff from "../modules/admin/staff/AdminStaff";
 import HolidaysPage from "../modules/admin/holidays/HolidaysPage";
+import AdminStudents from "../modules/admin/students/AdminStudents";
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
@@ -41,13 +42,17 @@ const Subscription = lazy(
   () => import("../modules/superAdmin/subscription/Subscription"),
 );
 const AdminPage = lazy(() => import("../modules/superAdmin/admins/AdminPage"));
-const AcademicSessions = lazy(() => import("../modules/admin/academic-sessions/AcademicSessions"));
+const AcademicSessions = lazy(
+  () => import("../modules/admin/academic-sessions/AcademicSessions"),
+);
 const Sections = lazy(() => import("../modules/admin/sections/Sections"));
 const Classes = lazy(() => import("../modules/admin/classes/Classes"));
 const Fees = lazy(() => import("../modules/admin/fees/Fees"));
 const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
-const ClassSubjects = lazy(() => import("../modules/admin/classes/ClassSubjects"));
+const ClassSubjects = lazy(
+  () => import("../modules/admin/classes/ClassSubjects"),
+);
 const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
 
 const ParentDashboard = lazy(
@@ -109,8 +114,7 @@ const AppRoutes = () => {
             <Route path="sections" element={<Sections />} />
             <Route path="fees" element={<Fees />} />
             <Route path="timetable" element={<Timetable />} />
-
-
+            <Route path="students" element={<AdminStudents />} />
             <Route path="subjects" element={<SubjectPage />} />
 
             <Route path="*" element={<NotFound />} />

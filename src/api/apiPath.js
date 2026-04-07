@@ -7,8 +7,11 @@ export const apiPaths = {
         me: "/api/user/me",
     },
     students: {
-        list: "/students",
+        list: "/api/student",
         create: "/students",
+        UPLOAD_STUDENT_DOCS: "/api/staff",
+        GET_STUDENT_BY_ID:"/api/student/",
+        ENROLL_STUDENT: "/api/student/enroll",
     },
     teacher: {
         // list: "/teachers",
@@ -75,6 +78,8 @@ export const apiPaths = {
         staff: "/api/staff",
         CREATE_EXAM: '/api/admin/exam',
         UPDATE_EXAM: '/api/admin/exam',
+        CREATE_STAFF: "/api/staff/create",
+        UPLOAD_STAFF_DOCS: "/api/staff",
 
     }
 

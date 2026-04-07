@@ -82,6 +82,14 @@ import {
     updateHoliday,
     deleteHoliday,
     getHolidays,
+    createStaff,
+    updateStaff,
+    getStudentById,
+    uploadStudentDocuments,
+    enrollStudent,
+    getClasses,
+    getSessions,
+    getStudentsList,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -362,46 +370,14 @@ export const useStudents = () => {
 };
 
 // <<<--------admin---------->>>
-export const getStaffList = (params) => {
-    return useAppQuery({
-        queryKey: ["staffList", params],
-        apiCall: () => fetchStaffList({ ...params }),
-    });
+
+export const getStaffList = ({ page, searchTerm, statusFilter }) => {
+  return useAppQuery({
+    queryKey: ["staffList", page, searchTerm, statusFilter],
+    apiCall: () =>
+      fetchStaffList({ page, searchTerm, statusFilter }),
+  });
 };
-
-export const deleteStaffMutation = () => {
-    const queryClient = useQueryClient();
-
-    return useAppMutation({
-        apiCall: deleteStaff,
-        successMessage: "Staff deleted successfully 🎉",
-
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["staffList"]);
-        },
-    });
-};
-
-export const useStaffDetail = (staffId) => {
-    return useAppQuery({
-        queryKey: ["staff", staffId],
-        apiCall: () => getStaffById(staffId),
-        enabled: !!staffId,
-    });
-};
-export const useUploadStaffDocumentsMutation = (staffId, userId) => {
-    const queryClient = useQueryClient();
-
-    return useAppMutation({
-        apiCall: ({ formData }) => uploadStaffDocuments({ userId, formData }),
-        successMessage: "Documents uploaded successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["staff", staffId]);
-        },
-    });
-};
-
-
 
 
 //admin queries & mutations 
@@ -723,8 +699,28 @@ export const deleteTimetableMutation = () => {
 };
 
 
+// GET SINGLE STAFF
+export const useStaffDetail = (staffId, enabled = true) => {
+  return useAppQuery({
+    queryKey: ["staff", staffId],
+    apiCall: () => getStaffById(staffId),
+    enabled: enabled && !!staffId,
+  });
+};
 
+// CREATE STAFF
+export const createStaffMutation = ( onClose) => {
+  const queryClient = useQueryClient();
 
+  return useAppMutation({
+    apiCall: createStaff,
+    successMessage: "Staff created successfully 🎉",
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["staffList"]);
+       onClose();
+    },
+  });
+};
 
 
 // ==================== Teacher Management ====================
@@ -808,3 +804,121 @@ export const deleteHolidayMutation = () => {
 
 
 
+// UPDATE STAFF
+export const updateStaffMutation = (onClose) => {
+  const queryClient = useQueryClient();
+
+  return useAppMutation({
+    apiCall: updateStaff,
+    successMessage: "Staff updated successfully 🎉",
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["staffList"]);
+       onClose();
+    },
+  });
+};
+export const useUploadStaffDocumentsMutation = (staffId, userId) => {
+  const queryClient = useQueryClient();
+
+  return useAppMutation({
+    apiCall: ({ formData }) =>
+      uploadStaffDocuments({ userId, formData }),
+
+    successMessage: "Documents uploaded successfully 🎉",
+
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["staff", staffId]);
+    },
+  });
+};
+
+export const deleteStaffMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useAppMutation({
+    apiCall: deleteStaff,
+    successMessage: "Staff deleted successfully 🎉",
+
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["staffList"]);
+    },
+  });
+};
+
+export const useStudentDetail = (studentId) => {
+  return useAppQuery({
+    queryKey: ["student", studentId],
+    apiCall: () => getStudentById(studentId),
+    enabled: !!studentId,
+  });
+};
+
+export const useUploadStudentDocumentsMutation = (studentId, userId) => {
+  const queryClient = useQueryClient();
+
+  return useAppMutation({
+    apiCall: ({ formData }) =>
+      uploadStudentDocuments({ userId, formData }),
+
+    successMessage: "Documents uploaded successfully 🎉",
+
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["student", studentId]);
+    },
+  });
+};
+
+export const enrollStudentMutation = (onClose) => {
+  const queryClient = useQueryClient();
+
+  return useAppMutation({
+    apiCall: enrollStudent,
+    successMessage: "Student enrolled successfully 🎉",
+
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["studentList"]);
+      onClose(); // ✅ close drawer only on success
+    },
+  });
+};
+
+export const useStudentsList = ({
+  page,
+  searchTerm,
+  classFilter,
+  sectionFilter,
+  sessionFilter,
+}) => {
+  return useAppQuery({
+    queryKey: [
+      "studentList",
+      page,
+      searchTerm,
+      classFilter,
+      sectionFilter,
+      sessionFilter,
+    ],
+    apiCall: () =>
+      getStudentsList({
+        page,
+        searchTerm,
+        classFilter,
+        sectionFilter,
+        sessionFilter,
+      }),
+  });
+};
+
+export const useSessionsList = () => {
+  return useAppQuery({
+    queryKey: ["sessions"],
+    apiCall: getSessions,
+  });
+};
+
+export const useClassesList = () => {
+  return useAppQuery({
+    queryKey: ["classes"],
+    apiCall: getClasses,
+  });
+};
