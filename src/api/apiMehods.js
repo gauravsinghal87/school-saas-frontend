@@ -14,17 +14,6 @@ export const login = async (data) => {
 
 //admin
 
-<<<<<<< Updated upstream
-export const createExam
-    = async (formData) => {
-        return await api.post(apiPaths.admin.CREATE_EXAM, formData);
-    };
-    export const updateExam = async ({ id, data }) => {
-    return await api.put(`${apiPaths.admin.UPDATE_EXAM}/${id}`, data);
-};
-=======
-
->>>>>>> Stashed changes
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
 };
