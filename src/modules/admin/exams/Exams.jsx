@@ -1,171 +1,144 @@
-import { useState, useEffect } from "react";
-import { set, useForm } from "react-hook-form";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import SidePanel from "../../../components/common/SlidePanel";
 import ExamForm from "./ExamForm";
 import Button from "../../../components/common/Button";
-import { createAcademicYearMutation, updateAcademicYearMutation, deleteSubscriptionMutation, updateSubscriptionStatusMutation, classesListMutation, createExamMutation, updateExamMutation } from "../../../hooks/useQueryMutations";
-import { academicYearList } from "../../../hooks/useQueryMutations";
+import { createExamMutation, updateExamMutation, deleteExamMutation, examsList } from "../../../hooks/useQueryMutations";
+import { classesListMutation } from "../../../hooks/useQueryMutations";
 import DataTable from "../../../components/common/ReusableTable";
 import ConfirmBox from "../../../components/common/ConfirmBox";
-import ToggleButton from "../../../components/common/ToggleButton";
-import { formatDate } from "../../../utils/commonFunction";
-import Select from "../../../components/common/Select";
-import DateRangePicker from "../../../components/common/DateRangePicker";
-import { Eye } from "lucide-react";
-import { MdEditNote } from "react-icons/md";
+import { Eye, Edit, Trash2, BookOpen, FileText } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-
-
-
+const STATUS_MAP = {
+    draft: { label: "Draft", bg: "bg-gray-100", text: "text-gray-600" },
+    published: { label: "Published", bg: "bg-green-100", text: "text-green-600" },
+    completed: { label: "Completed", bg: "bg-blue-100", text: "text-blue-600" },
+};
 
 export default function Exams() {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const [isloading, setIsLoading] = useState(false);
-    const [limit, setLimit] = useState(10);
-    const [dateRange, setDateRange] = useState({
-        startDate: null,
-        endDate: null,
-    });
     const [mode, setMode] = useState("create");
     const [confirmOpen, setConfirmOpen] = useState(false);
-    const [selectedClass, setSelectedClass] = useState("");
     const [selected, setSelected] = useState(null);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
-    const STATUS_MAP = {
-        active: { label: "Active", bg: "bg-success/10", text: "text-success" },
-        completed: { label: "Completed", bg: "bg-error/10", text: "text-error" },
-        upcoming: { label: "Upcoming", bg: "bg-warning/10", text: "text-warning" },
-    };
+    const [limit, setLimit] = useState(10);
+    const [selectedClass, setSelectedClass] = useState("");
+    const [selectedStatus, setSelectedStatus] = useState("");
 
-
-    const handleToggleStatus = async (row) => {
-        try {
-            const newStatus = row.status === "active" ? "inactive" : "active";
-
-
-            await updateAcademicYear({
-                id: row._id,
-                data: { status: newStatus },
-            });
-
-            refetch();
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    // Columns definition
     const COLUMNS = [
         {
-            key: "academicSession",
-            label: "Session",
+            key: "name",
+            label: "Exam Name",
             sortable: true,
+        },
+        {
+            key: "classId",
+            label: "Class",
+            render: (val) => val?.name || "—",
         },
         {
             key: "startDate",
             label: "Start Date",
-            render: (val) =>
-                val ? new Date(val).toLocaleDateString() : "—",
+            render: (val) => val ? new Date(val).toLocaleDateString() : "—",
         },
         {
             key: "endDate",
             label: "End Date",
-            render: (val) =>
-                val ? new Date(val).toLocaleDateString() : "—",
+            render: (val) => val ? new Date(val).toLocaleDateString() : "—",
         },
         {
             key: "status",
             label: "Status",
-            render: (val, row) => {
-                const status = STATUS_MAP[val] || {};
-
+            render: (val) => {
+                const status = STATUS_MAP[val] || { label: val, bg: "bg-gray-100", text: "text-gray-600" };
                 return (
-                    <div className="flex items-center gap-2">
-                        <ToggleButton
-                            disabled
-                            isActive={val === "active"}
-                            onToggle={() => handleToggleStatus(row)}
-                        />
-
-                        <span className={`text-xs font-medium px-2 py-1 rounded ${status.bg} ${status.text}`}>
-                            {status.label}
-                        </span>
-                    </div>
+                    <span className={`px-2 py-1 text-xs rounded-full ${status.bg} ${status.text}`}>
+                        {status.label}
+                    </span>
                 );
             },
         },
         {
             key: "createdAt",
             label: "Created",
-            render: (val) =>
-                val ? new Date(val).toLocaleDateString() : "—",
+            render: (val) => val ? new Date(val).toLocaleDateString() : "—",
         },
     ];
+
+    // Fetch classes for filter
     const { data: classData } = classesListMutation({ page: 1, limit: 100 });
     const classOptions = classData?.results?.map((cls) => ({
         label: cls.name,
         value: cls._id,
     })) || [];
-    console.log("classoptions", classOptions);
-    const { mutateAsync: createExam, isPending } = createExamMutation();
 
+    const statusOptions = [
+        { label: "All", value: "" },
+        { label: "Draft", value: "draft" },
+        { label: "Published", value: "published" },
+        { label: "Completed", value: "completed" },
+    ];
+
+    // Mutations
+    const { mutateAsync: createExam, isPending: isCreating } = createExamMutation();
+    const { mutateAsync: updateExam, isPending: isUpdating } = updateExamMutation();
+    const { mutateAsync: deleteExam, isPending: isDeleting } = deleteExamMutation();
+
+    // Fetch exams
+    const params = {
+        page,
+        limit,
+        search,
+        classId: selectedClass || undefined,
+        status: selectedStatus || undefined,
+    };
+    const { data: apiResponse, isLoading, refetch } = examsList(params);
+    const tableData = apiResponse?.data?.results || apiResponse?.results || [];
+    const pagination = apiResponse?.data?.pagination || apiResponse?.pagination || {};
+
+    // Form handling
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
-            classId: [],   // ✅ MUST
-        }
+            name: "",
+            classId: "",
+            startDate: "",
+            endDate: "",
+            status: "draft",
+        },
     });
-    const { data: apiResponse, isLoading, refetch } = academicYearList();
-    const { mutateAsync: updateExam, isPending: isupdating } = updateExamMutation();
-    const { mutateAsync: deleteSubscription } = deleteSubscriptionMutation();
-    const tableData = apiResponse?.results || [];
-    const total = apiResponse?.results?.length ?? 0;
 
-    // Load data
-    //   const fetchData = async () => {
-    //     const res = await getSubscriptions();
-    //     setData(res.data);
-    //   };
-
-    //   useEffect(() => {
-    //     fetchData();
-    //   }, []);
-
-    // Open modal
     const openModal = (type, item = null) => {
         setMode(type);
         setSelected(item);
 
-        if (item) {
+        if (type === "edit" && item) {
             reset({
-                startDate: formatDate(item.startDate),
-                endDate: formatDate(item.endDate),
-                status: item.status,
-                classId: item.classIds || [], // ✅ VERY IMPORTANT
+                name: item.name || "",
+                classId: item.classId?._id || item.classId || "",
+                startDate: item.startDate ? item.startDate.split("T")[0] : "",
+                endDate: item.endDate ? item.endDate.split("T")[0] : "",
+                status: item.status || "draft",
             });
         } else {
             reset({
+                name: "",
+                classId: "",
                 startDate: "",
                 endDate: "",
-                status: "active", // default
-                classId: [], // ✅ ADD THIS
+                status: "draft",
             });
         }
 
         setIsOpen(true);
     };
 
-    // Submit
     const onSubmit = async (formData) => {
         try {
-            const createpayload = {
-                name: formData.name,
-                classId: formData.classId,
-                startDate: formData.startDate,
-                endDate: formData.endDate,
-
-
-                //   status: formData.status,
-            };
-            const updatePayload = {
+            const payload = {
                 name: formData.name,
                 classId: formData.classId,
                 startDate: formData.startDate,
@@ -173,167 +146,173 @@ export default function Exams() {
             };
 
             if (mode === "create") {
-                await createExam(createpayload);
+                await createExam(payload);
             } else if (mode === "edit") {
                 await updateExam({
                     id: selected._id,
-                    data: updatePayload,
+                    data: payload,
                 });
             }
 
             refetch();
             setIsOpen(false);
+            reset();
         } catch (err) {
-            console.error(err);
+            console.error("Error saving exam:", err);
         }
     };
 
-    // Delete
     const handleDelete = async () => {
-        await deleteSubscription(selected._id);
-        refetch();
-        setIsOpen(false);
+        try {
+            await deleteExam(selected._id);
+            refetch();
+            setConfirmOpen(false);
+        } catch (err) {
+            console.error("Error deleting exam:", err);
+        }
     };
 
     return (
         <div className="p-6">
-
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-text-heading">Exams</h1>
+                    <h1 className="text-2xl font-bold text-text-heading">Exam Management</h1>
                     <p className="text-sm text-text-secondary mt-0.5">
-                        Manage all exams on EduCore.
+                        Manage exams, subjects, marks, and results
                     </p>
                 </div>
-                <div className="flex justify-end items-center gap-3">
-                    <div>
-                        <DateRangePicker value={dateRange} onChange={setDateRange} />
-                    </div>
-                    <div>
-                        <Select
-                            value={selectedClass}
-                            onChange={(e) => setSelectedClass(e.target.value)}
-                            options={classOptions}
-                            placeholder="Filter by Class"
-                            className="w-48 bg-white/80 backdrop-blur-sm border-gray-200 focus:border-emerald-500 transition-all duration-200"
-                        />
-                    </div>
-                    <div className="relative">
-                        <Button onClick={() => openModal("create")} >
-                            Add Exam
-                        </Button>
-                    </div>
+                <div className="flex justify-end">
+                    <Button onClick={() => openModal("create")}>
+                        Add Exam
+                    </Button>
                 </div>
             </div>
-            {/* Add Button */}
 
-
-            {/* List */}
-            <div className="grid gap-3 mt-6 ">
-                {/* {data.map((item) => (
-                    <div key={item._id} className="border p-4 rounded-md flex justify-between">
-                        <div>
-                            <h3 className="font-bold">{item.name}</h3>
-                            <p>₹ {item.price}</p>
-                        </div>
-
-                        <div className="flex gap-2">
-                            <button onClick={() => openModal("view", item)}>View</button>
-                            <button onClick={() => openModal("edit", item)}>Edit</button>
-                            <button onClick={() => openModal("delete", item)}>Delete</button>
-                        </div>
-                    </div>
-                ))} */}
-
-                <DataTable
-                    title="All Exams"
-                    data={tableData}
-                    columns={COLUMNS}
-                    loading={isLoading}
-                    rowKey="_id"
-                    serverMode
-                    onAdd={() => openModal("create")}
-                    addLabel="Add exam"
-                    onSearch={(val) => { setSearch(val); setPage(1); }}
-
-                    // onEdit={(row) => openModal("edit", row)}
-                    actionCell={(row) => (
-                        <div className="flex items-center gap-1">
-
-                            {/* View Subjects */}
-                            <button className="cursor-pointer"
-                                onClick={() => navigate(`/school-admin/classes/${row._id}/subjects`)}
-                                title="View Subjects"
-                            >
-                                <Eye size={16} />
-                            </button>
-                            <button className="cursor-pointer text-primary"
-                                onClick={() => openModal("edit", row)}
-                                title="Edit Subjects"
-                            >
-                                <MdEditNote size={20} />
-                            </button>
-
-                            {/* Add Subjects */}
-
-
-                        </div>
-                    )}
-                    // onDelete={(row) => {
-                    //     setSelected(row);
-                    //     setConfirmOpen(true);
-                    // }}
-
-
-                    searchPlaceholder="Search exams..."
-                />
+            {/* Filters */}
+            <div className="flex gap-4 mb-4">
+                <div className="w-48">
+                    <select
+                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        value={selectedClass}
+                        onChange={(e) => setSelectedClass(e.target.value)}
+                    >
+                        <option value="">All Classes</option>
+                        {classOptions.map((cls) => (
+                            <option key={cls.value} value={cls.value}>
+                                {cls.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="w-40">
+                    <select
+                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        value={selectedStatus}
+                        onChange={(e) => setSelectedStatus(e.target.value)}
+                    >
+                        {statusOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                                {opt.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
 
-            {/* Modal */}
+            {/* Data Table */}
+            <DataTable
+                title="All Exams"
+                data={tableData}
+                columns={COLUMNS}
+                loading={isLoading}
+                rowKey="_id"
+                serverMode
+                onSearch={(val) => { setSearch(val); setPage(1); }}
+                searchPlaceholder="Search exams..."
+                actionCell={(row) => (
+                    <div className="flex items-center gap-2">
+                        <button
+                            className="text-blue-600 hover:text-blue-800"
+                            onClick={() => navigate(`/school-admin/exams/${row._id}/subjects`)}
+                            title="Manage Subjects"
+                        >
+                            <BookOpen size={18} />
+                        </button>
+                        {/* <button
+                            className="text-green-600 hover:text-green-800"
+                            onClick={() => navigate(`/school-admin/exams/${row._id}/marks`)}
+                            title="Manage Marks"
+                        >
+                            <FileText size={18} />
+                        </button>
+                        <button
+                            className="text-purple-600 hover:text-purple-800"
+                            onClick={() => navigate(`/school-admin/exams/${row._id}/results`)}
+                            title="View Results"
+                        >
+                            <Eye size={18} />
+                        </button> */}
+                        <button
+                            className="text-yellow-600 hover:text-yellow-800"
+                            onClick={() => openModal("edit", row)}
+                            title="Edit Exam"
+                        >
+                            <Edit size={18} />
+                        </button>
+                        <button
+                            className="text-red-600 hover:text-red-800"
+                            onClick={() => {
+                                setSelected(row);
+                                setConfirmOpen(true);
+                            }}
+                            title="Delete Exam"
+                        >
+                            <Trash2 size={18} />
+                        </button>
+                    </div>
+                )}
+            />
+
+            {/* Side Panel Form */}
             <SidePanel
                 open={isOpen}
-                onClose={() => setIsOpen(false)}
-                title={`${mode.toUpperCase()} Exam`}
-
+                onClose={() => {
+                    setIsOpen(false);
+                    reset();
+                }}
+                title={`${mode === "create" ? "Create" : "Edit"} Exam`}
             >
-
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-
                     <ExamForm
                         register={register}
                         errors={errors}
                         mode={mode}
                         control={control}
-                        classoptions={classOptions}
+                        classOptions={classOptions}
                     />
 
                     <div className="flex justify-end mt-auto">
-                        {mode !== "view" && (
-                            <Button type="submit" loading={mode == "edit" ? isupdating : isPending} loadingLabel={mode === "edit" ? "Updating..." : "Creating..."} variant="primary">
-                                {mode === "edit" ? "Update" : "Create"}
-                            </Button>
-                        )}
+                        <Button
+                            type="submit"
+                            loading={mode === "edit" ? isUpdating : isCreating}
+                            loadingLabel={mode === "edit" ? "Updating..." : "Creating..."}
+                            variant="primary"
+                        >
+                            {mode === "edit" ? "Update" : "Create"}
+                        </Button>
                     </div>
                 </form>
-
             </SidePanel>
+
+            {/* Confirm Delete Dialog */}
             <ConfirmBox
                 isOpen={confirmOpen}
-                title="Delete Academic Session"
-                message={`Are you sure you want to delete "${selected?.academicSession}"?`}
-                loading={isPending}
+                title="Delete Exam"
+                message={`Are you sure you want to delete "${selected?.name}"?`}
+                loading={isDeleting}
                 onCancel={() => setConfirmOpen(false)}
-                onConfirm={async () => {
-                    try {
-                        await deleteSubscription(selected._id);
-                        refetch();
-                        setConfirmOpen(false);
-                    } catch (err) {
-                        console.error(err);
-                    }
-                }}
+                onConfirm={handleDelete}
             />
         </div>
     );

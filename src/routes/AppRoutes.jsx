@@ -47,7 +47,10 @@ const Fees = lazy(() => import("../modules/admin/fees/Fees"));
 const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
 const ClassSubjects = lazy(() => import("../modules/admin/classes/ClassSubjects"));
-const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
+const Exams = lazy(() => import("../modules/admin/exams/Exams"));
+const ExamSubjects = lazy(() => import("../modules/admin/exams/ExamSubjects"));
+const ExamMarks = lazy(() => import("../modules/admin/exams/ExamMarks"));
+const ExamResults = lazy(() => import("../modules/admin/exams/ExamResults"));
 
 const ParentDashboard = lazy(
   () => import("../modules/parent/dashboard/ParentDashboard"),
@@ -103,8 +106,10 @@ const AppRoutes = () => {
             <Route path="academic-sessions" element={<AcademicSessions />} />
             <Route path="classes" element={<Classes />} />
             <Route path="classes/:id/subjects" element={<ClassSubjects />} />
-            <Route path="exams" element={<ExamRoutes />} />
-
+            <Route path="exams" element={<Exams />} />
+            <Route path="exams/:id/subjects" element={<ExamSubjects />} />
+            <Route path="exams/:id/marks" element={<ExamMarks />} />
+            <Route path="exams/:id/results" element={<ExamResults />} />
             <Route path="sections" element={<Sections />} />
             <Route path="fees" element={<Fees />} />
             <Route path="timetable" element={<Timetable />} />

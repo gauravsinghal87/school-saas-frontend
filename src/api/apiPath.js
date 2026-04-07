@@ -63,8 +63,13 @@ export const apiPaths = {
         REMOVE_CLASS_SUBJECTS: 'api/admin/remove-subjects',
         roles: "",
         staff: "/api/staff",
-        CREATE_EXAM: '/api/admin/exam',
-        UPDATE_EXAM: '/api/admin/exam',
+        // Exam Management
+        EXAM: '/api/exam',
+        EXAM_SUBJECTS: '/api/exam/:id/subjects',
+        EXAM_MARKS: '/api/exam/:id/marks',
+        EXAM_GENERATE_RESULT: '/api/exam/:id/generate-result',
+        EXAM_RESULTS: '/api/exam/:id/results',
+        EXAM_STUDENT_RESULTS: '/api/exam/student/:id/results',
 
     }
 

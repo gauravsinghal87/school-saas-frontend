@@ -74,7 +74,19 @@ import {
     // Other
     fetchRolesList,
     createExam,
+    getExams,
+    getExamById,
     updateExam,
+    deleteExam,
+    addExamSubjects,
+    getExamSubjects,
+    updateExamSubject,
+    deleteExamSubject,
+    upsertMarks,
+    getExamMarks,
+    generateResult,
+    getExamResults,
+    getStudentResults,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -401,28 +413,7 @@ export const useUploadStaffDocumentsMutation = (staffId, userId) => {
 
 //admin
 
-export const createExamMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: createExam,
-        successMessage: "Exam created successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["examsList"]);
-        },
-    });
-}
-export const updateExamMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: updateExam,
-        successMessage: "Exam updated successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["examsList"]);
-        },
-    });
 
-
-}
 export const createSectionMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -712,6 +703,162 @@ export const deleteTimetableMutation = () => {
         onSuccessCallback: () => {
             queryClient.invalidateQueries(["timetable"]);
         },
+    });
+};
+
+
+// ==================== EXAM MANAGEMENT ====================
+
+// Get Exams List
+export const examsList = (params) => {
+    return useAppQuery({
+        queryKey: ["exams", params],
+        apiCall: () => getExams(params),
+    });
+};
+
+// Get Single Exam
+export const examById = (id, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["exam", id],
+        apiCall: () => getExamById(id),
+        enabled: enabled && !!id,
+    });
+};
+
+// Create Exam
+export const createExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createExam,
+        successMessage: "Exam created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["exams"]);
+        },
+    });
+};
+
+// Update Exam
+export const updateExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateExam,
+        successMessage: "Exam updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["exams"]);
+            queryClient.invalidateQueries(["exam"]);
+        },
+    });
+};
+
+// Delete Exam
+export const deleteExamMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteExam,
+        successMessage: "Exam deleted successfully 🗑️",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["exams"]);
+        },
+    });
+};
+
+// Exam Subjects
+export const examSubjectsList = (examId, params, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["examSubjects", examId, params],
+        apiCall: () => getExamSubjects(examId, params),
+        enabled: enabled && !!examId,
+    });
+};
+
+export const addExamSubjectsMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: addExamSubjects,
+        successMessage: "Subjects added to exam successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examSubjects"]);
+        },
+    });
+};
+
+export const updateExamSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateExamSubject,
+        successMessage: "Exam subject updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examSubjects"]);
+        },
+    });
+};
+
+export const deleteExamSubjectMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteExamSubject,
+        successMessage: "Exam subject deleted successfully 🗑️",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examSubjects"]);
+        },
+    });
+};
+
+// Marks Management
+export const examMarksList = (examId, params, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["examMarks", examId, params],
+        apiCall: () => getExamMarks(examId, params),
+        enabled: enabled && !!examId,
+    });
+};
+
+export const upsertMarksMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: upsertMarks,
+        successMessage: "Marks saved successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examMarks"]);
+            queryClient.invalidateQueries(["examResults"]);
+        },
+    });
+};
+
+// Results Management
+export const generateResultMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: generateResult,
+        successMessage: "Result generated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["examResults"]);
+        },
+    });
+};
+
+export const examResultsList = (examId, params, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["examResults", examId, params],
+        apiCall: () => getExamResults(examId, params),
+        enabled: enabled && !!examId,
+    });
+};
+
+// Add getStudentsQuery if not exists
+export const getStudentsQuery = () => {
+    return useAppQuery({
+        queryKey: ["students"],
+        apiCall: getStudents,
+    });
+};
+
+export const studentResultsList = (studentId, params, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["studentResults", studentId, params],
+        apiCall: () => getStudentResults(studentId, params),
+        enabled: enabled && !!studentId,
     });
 };
 

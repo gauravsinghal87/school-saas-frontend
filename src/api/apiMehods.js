@@ -14,6 +14,7 @@ export const login = async (data) => {
 
 //admin
 
+<<<<<<< Updated upstream
 export const createExam
     = async (formData) => {
         return await api.post(apiPaths.admin.CREATE_EXAM, formData);
@@ -21,6 +22,9 @@ export const createExam
     export const updateExam = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_EXAM}/${id}`, data);
 };
+=======
+
+>>>>>>> Stashed changes
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
 };
@@ -270,6 +274,79 @@ export const uploadStaffDocuments = ({ userId, formData }) => {
     return api.post(`${apiPaths.admin.staff}/${userId}/documents`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
     });
+};
+
+
+// ==================== EXAM MANAGEMENT API METHODS ====================
+
+// Create Exam
+export const createExam = async (data) => {
+    return await api.post(apiPaths.admin.EXAM, data);
+};
+
+// Get Exams List
+export const getExams = async (params) => {
+    return await api.get(apiPaths.admin.EXAM, { params });
+};
+
+// Get Single Exam
+export const getExamById = async (id) => {
+    return await api.get(`${apiPaths.admin.EXAM}/${id}`);
+};
+
+// Update Exam
+export const updateExam = async ({ id, data }) => {
+    return await api.put(`${apiPaths.admin.EXAM}/${id}`, data);
+};
+
+// Delete Exam
+export const deleteExam = async (id) => {
+    return await api.delete(`${apiPaths.admin.EXAM}/${id}`);
+};
+
+// Add Subjects to Exam
+export const addExamSubjects = async ({ id, data }) => {
+    return await api.post(`${apiPaths.admin.EXAM}/${id}/subjects`, data);
+};
+
+// Get Exam Subjects
+export const getExamSubjects = async (id, params) => {
+    return await api.get(`${apiPaths.admin.EXAM}/${id}/subjects`, { params });
+};
+
+// Update Exam Subject
+export const updateExamSubject = async ({ examId, subjectId, data }) => {
+    return await api.put(`${apiPaths.admin.EXAM}/${examId}/subjects/${subjectId}`, data);
+};
+
+// Delete Exam Subject
+export const deleteExamSubject = async ({ examId, subjectId }) => {
+    return await api.delete(`${apiPaths.admin.EXAM}/${examId}/subjects/${subjectId}`);
+};
+
+// Add/Update Marks
+export const upsertMarks = async ({ id, data }) => {
+    return await api.post(`${apiPaths.admin.EXAM}/${id}/marks`, data);
+};
+
+// Get Exam Marks
+export const getExamMarks = async (id, params) => {
+    return await api.get(`${apiPaths.admin.EXAM}/${id}/marks`, { params });
+};
+
+// Generate Result
+export const generateResult = async (id) => {
+    return await api.post(`${apiPaths.admin.EXAM}/${id}/generate-result`, {});
+};
+
+// Get Exam Results
+export const getExamResults = async (id, params) => {
+    return await api.get(`${apiPaths.admin.EXAM}/${id}/results`, { params });
+};
+
+// Get Student Results
+export const getStudentResults = async (studentId, params) => {
+    return await api.get(`${apiPaths.admin.EXAM}/student/${studentId}/results`, { params });
 };
 
 
