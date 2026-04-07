@@ -112,8 +112,8 @@ const Sidebar = ({
     const menuItems = menuConfig[role] || [];
 
     const sections = {
-        main: menuItems.slice(0, 3),
-        secondary: menuItems.slice(3),
+        main: menuItems.slice(0, 6),
+        secondary: menuItems.slice(6),
     };
 
     const handleLogout = async () => {
@@ -198,6 +198,8 @@ const Sidebar = ({
 
     const Section = ({ title, items, sectionId }) => {
 
+        console.log("Rendering section:", title, "with items:", items);
+
         if (!items || items.length === 0) return null;
         return (
             <div className="mb-3">
@@ -232,7 +234,7 @@ const Sidebar = ({
                 <div
                     style={{
                         overflow: "",
-                        maxHeight: expanded[sectionId] ? `${items.length * 46}px` : "0px",
+                        maxHeight: expanded[sectionId] ? `${items.length * 50}px` : "0px",
                         opacity: expanded[sectionId] ? 1 : 0,
                         transition: "max-height 0.28s ease, opacity 0.2s ease",
                     }}
@@ -326,7 +328,7 @@ const Sidebar = ({
                 </div>
 
                 {/* ── SCROLLABLE — Navigation ───────────────────────────────────────── */}
-                <div className="sidebar-scroll flex-1 min-h-0 overflow-y-auto py-[14px] px-3">
+                <div className="sidebar-scroll flex-1 min-h-0 overflow-y-auto py-4 px-3">
                     {sections.main.length > 0 && (
                         <Section title="Main" items={sections.main} sectionId="main" />
                     )}
@@ -337,7 +339,7 @@ const Sidebar = ({
 
                 {/* ── STICKY BOTTOM — User profile / logout ────────────────────────── */}
                 <div
-                    className="flex-shrink-0 p-[14px]"
+                    className="shrink-0 p-[14px]"
                     style={{
                         borderTop: "1px solid color-mix(in srgb, var(--color-sidebar-text) 10%, transparent)",
                         backgroundColor: "var(--color-surface-sidebar)",

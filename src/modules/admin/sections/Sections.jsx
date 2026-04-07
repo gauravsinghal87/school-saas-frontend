@@ -133,8 +133,8 @@ export default function Sections() {
     const [selectedSection, setSelectedSection] = useState(null);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="min-h-screen bg-surface-page px-4 py-8">
+            <div className="max-w-7xl mx-auto space-y-6">
 
                 {/* Header Section */}
                 <div className="mb-8">
@@ -177,7 +177,7 @@ export default function Sections() {
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
                     <DataTable
-                    title="All Sections"
+                        title="All Sections"
                         data={tableData}
                         columns={COLUMNS}
                         loading={isLoading}

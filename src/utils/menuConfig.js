@@ -68,13 +68,14 @@ export const MENU_CONFIG = {
         // main
 
         { id: "admin-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
-        { id: "academic-sessions", name: "Academic Sessions", path: "academic-sessions", icon: Clock, section: "main" },
-        { id: "admin-staff", name: "Staff", path: "staff", icon: Briefcase, section: "main" },
+        { id: "academic-sessions", name: "Sessions", path: "academic-sessions", icon: Clock, section: "main" },
         { id: "admin-classes", name: "Classes", path: "classes", icon: Layers, section: "main" },
         { id: "admin-sections", name: "Sections", path: "sections", icon: Layers, section: "main" },
-        { id: "admin-subjects", name: "Subjects", path: "subjects", icon: BookOpen, section: "academic" },
-        { id: "admin-students", name: "Students", path: "students", icon: GraduationCap, section: "main" },
-        { id: "admin-timetable", name: "Timetable", path: "timetable", icon: CalendarDays, section: "academic" },
+        { id: "admin-subjects", name: "Subjects", path: "subjects", icon: BookOpen, section: "main" },
+
+        { id: "admin-timetable", name: "Timetable", path: "timetable", icon: CalendarDays, section: "main" },
+        { id: "admin-students", name: "Students", path: "students", icon: GraduationCap, section: "academic" },
+        { id: "admin-staff", name: "Staff", path: "staff", icon: Briefcase, section: "academic" },
         { id: "admin-exams", name: "Exams", path: "exams", icon: ClipboardList, section: "academic" },
 
         // finance
