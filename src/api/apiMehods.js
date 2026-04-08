@@ -356,11 +356,37 @@ export const getStudentResults = async (studentId, params) => {
 
 
 
+<<<<<<< Updated upstream
+=======
+export const getClassSecSub = async () => {
+    return await api.get(apiPaths.teacher.GET_CLASS_SEC_SUB);
+}
+>>>>>>> Stashed changes
 
 
 
 
+<<<<<<< Updated upstream
 
 
 
+=======
+// STUDENT MODULE
+
+export const getStudentSubjects = async (studentId) => {
+    return await api.get(apiPaths.students.SUBJECTS, { params: { studentId } });
+};
+
+// ==================== STUDENT ASSIGNMENTS ====================
+
+export const getStudentAssignments = async (params) => {
+    return await api.get(apiPaths.students.ASSIGNMENTS, { params });
+};
+
+export const submitAssignment = async (formData) => {
+    return await api.post(apiPaths.students.SUBMIT_ASSIGNMENT, formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+    });
+};
+>>>>>>> Stashed changes
 
