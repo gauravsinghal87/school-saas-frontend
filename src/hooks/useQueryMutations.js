@@ -109,6 +109,9 @@ import {
     deleteAssignment,
     getTeacherTimetable,
     getClassSecSub,
+    getStudentFeesDetails,
+    addStudentFees,
+    getPaymentHistoryDetails,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -271,6 +274,34 @@ export const deleteSubscriptionMutation = () => {
 };
 
 //admin
+// Add this to your useQueryMutations.js file
+
+export const getPaymentHistory = (params) => {
+    return useAppQuery({
+        queryKey: ["paymentHistory", params],
+        apiCall: () => getStudentFeesDetails(params),
+    });
+};
+export const getPaymentHistoryDetailsQuery = (studentId, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["paymentHistoryDetails", studentId],
+        apiCall: () => getPaymentHistoryDetails(studentId),
+        enabled: enabled && !!studentId,
+    });
+};
+
+// Add Fees Mutation
+export const addFeesMutation = () => {
+  const queryClient = useQueryClient();
+  return useAppMutation({
+    apiCall: addStudentFees,
+    successMessage: "Fees added successfully 🎉",
+    onSuccessCallback: () => {
+      queryClient.invalidateQueries(["studentFees"]);
+      queryClient.invalidateQueries(["feesReport"]);
+    },
+  });
+};
 export const academicYearList = (params) => {
     return useAppQuery({
         queryKey: ["academicYears", params],

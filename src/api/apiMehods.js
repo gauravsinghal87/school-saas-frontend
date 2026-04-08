@@ -18,7 +18,20 @@ export const login = async (data) => {
 };
 
 //admin
+// Add Student Fees
+export const addStudentFees = async (data) => {
+  return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
+};
 
+// Get Student Fees Details
+export const getStudentFeesDetails = async (params) => {
+  return await api.get(`${apiPaths.admin.GET_STUDENT_FEES}`,{params});
+};
+
+// Get Payment History
+export const getPaymentHistoryDetails = async (studentId, params) => {
+  return await api.get(`${apiPaths.admin.PAYMENT_HISTORY}/${studentId}`, { params });
+};
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
 };

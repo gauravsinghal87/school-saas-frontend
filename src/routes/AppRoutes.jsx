@@ -25,6 +25,8 @@ import Holidays from "../modules/admin/staff/Holidays";
 import AssignmentsPage from "../modules/staff/assignments/AssignmentPage";
 import StudentHolidays from "../modules/student/holidays/StudentHolidays.jsx";
 import StudentTimetable from "../modules/student/timetable/StudentTimetable.jsx";
+import FeesReport from "../modules/admin/reports/fees/FeesReport.jsx";
+import FeesDetails from "../modules/admin/reports/fees/FeesDetails.jsx";
 
 import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
 //staff imports
@@ -133,9 +135,12 @@ const AppRoutes = () => {
             <Route path="students" element={<AdminStudents />} />
             <Route path="subjects" element={<SubjectPage />} />
 
+            <Route path="reports/fee" element={<FeesReport />} />
+            <Route path="fees/:id/details" element={<FeesDetails />} />
+
             <Route path="*" element={<NotFound />} />
 
-            <Route path="staff" element={<AdminStaff />} />
+            <Route path="staff" element={<AdminStaff />} /> 
           </Route>
 
           <Route

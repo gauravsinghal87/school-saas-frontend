@@ -102,6 +102,11 @@ export const apiPaths = {
         DELETE_HOLIDAY: "/api/holiday/{holidayId}",
         GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
 
+
+        ADD_STUDENT_FEES: '/api/admin/fees/student-payment',
+        GET_STUDENT_FEES: '/api/admin/student-list',
+        PAYMENT_HISTORY: '/api/admin/student-detail',
+
     }
 
 } 

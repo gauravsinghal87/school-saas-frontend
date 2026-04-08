@@ -86,7 +86,35 @@ export const MENU_CONFIG = {
 
         // settings
         { id: "admin-holidays", name: "Holidays", path: "holidays", icon: Calendar, section: "settings" },
-        { id: "admin-reports", name: "Reports", path: "reports", icon: FileBarChart, section: "settings" },
+        {
+            id: "admin-reports",
+            name: "Reports",
+            path: "reports",
+            icon: FileBarChart,
+            section: "settings",
+
+            // 👇 ADD THIS
+            children: [
+                {
+                    id: "exam-reports",
+                    name: "Exam Reports",
+                    path: "reports/exams",
+                    icon: ClipboardList,
+                },
+                {
+                    id: "fees-reports",
+                    name: "Fees Reports",
+                    path: "reports/fee",
+                    icon: Banknote,
+                },
+                {
+                    id: "attendance-reports",
+                    name: "Attendance Reports",
+                    path: "reports/attendance",
+                    icon: CalendarCheck,
+                }
+            ]
+        },
         { id: "admin-settings", name: "School Settings", path: "settings", icon: Settings, section: "settings" },
         // { id: "teachers", name: "Teachers", path: "teachers", icon: Briefcase, section: "main" },
 
