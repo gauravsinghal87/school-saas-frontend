@@ -17,6 +17,8 @@ export const UserProvider = ({ children }) => {
     isFetching,
   } = useCurrentUser();
 
+  console.log("UserContext - Current User:", user); // 🔥 DEBUGGING
+
   // ✅ LOGIN FUNCTION HERE
   const handleLogin = async (payload) => {
     try {

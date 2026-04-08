@@ -92,24 +92,15 @@ export const fetchRolesList = async () => {
 };
 
 export const getCurrentUser = async () => {
-    // const res = await api.get(apiPaths.teacher.TEACHER_PROFILE);
 
-    const storedUser = localStorage.getItem("user");
-    let user = storedUser ? JSON.parse(storedUser) : null;
-    return user;
-    // const res = await api.get(apiPaths.teacher.TEACHER_PROFILE);
+    const res = await api.get(apiPaths.teacher.TEACHER_PROFILE);
 
-    // if (res.success) {
-    //     const user = res.data;
-    //     console.log("Fetched user profile:", user);
+    if (res.success) {
+        const user = res.data;
+        return user;
+    }
 
-    //     //     // localStorage.setItem("user", JSON.stringify(user));
-    //     //     // localStorage.setItem("role", user?.role);
 
-    //     //     return user;
-    // }
-
-    return user;
 };
 
 export const getSubscriptionList = async (params) => {

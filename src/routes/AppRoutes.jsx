@@ -28,6 +28,7 @@ import StudentTimetable from "../modules/student/timetable/StudentTimetable.jsx"
 
 import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
 import StudentAttendancePage from "../modules/staff/attendance/AttendancePage.jsx";
+import TeacherProfile from "../modules/staff/teachers/TeacherProifle.jsx";
 //staff imports
 const StaffDashboard = lazy(
   () => import("../modules/staff/dashboard/StaffDashboard"),
@@ -180,7 +181,7 @@ const AppRoutes = () => {
             <Route path="timetable" element={<TeacherTimeTable />} />
             <Route path="attendance" element={<StudentAttendancePage />} />
             <Route path="assignments" element={<AssignmentsPage />} />
-
+            <Route path="profile" element={<TeacherProfile />} />
             <Route path="parents" element={<StaffParents />} />
             <Route path="*" element={<NotFound />} />
           </Route>

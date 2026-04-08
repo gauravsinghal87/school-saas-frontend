@@ -39,7 +39,7 @@ export const apiPaths = {
         GET_CLASS_SEC_SUB: '/api/staff/class/get',
         TEACHER_CHECK_IN: '/api/attendance/teacher/checkin',
         TEACHER_CHECK_OUT: '/api/attendance/teacher/checkout',
-        TEACHER_PROFILE: '/api/staff'
+        TEACHER_PROFILE: '/api/staff/teacher'
     },
 
     superAdmin: {
