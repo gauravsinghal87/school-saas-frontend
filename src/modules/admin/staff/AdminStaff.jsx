@@ -43,7 +43,6 @@ export default function AdminStaff() {
   const staffList = staffRes?.data || [];
   const pagination = staffRes?.pagination || { totalPages: 1, page: 1 };
 
-  // console.log("Subjects Data:", subjectsData);
 
   const openDrawer = (mode, id = null) => {
     setDrawerMode(mode);

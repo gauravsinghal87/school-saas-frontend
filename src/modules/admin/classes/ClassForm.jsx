@@ -15,7 +15,6 @@ const academicSessionOptions = academicSessions?.results?.map((session) => ({
   label: session.academicSession,
   value: session._id,
 })) || [];
-console.log("academicsessions",academicSessionOptions);
   return (
     <div className="flex flex-col gap-4">
 

@@ -35,7 +35,6 @@ export default function Addteacher() {
 
   const navigate = useNavigate();
   const [step, setStep] = useState(0);
-  console.log("step", step);
 
   const { register, handleSubmit, watch, control, trigger, reset, formState: { errors } } = useForm({
     mode: "onChange",
@@ -82,7 +81,6 @@ export default function Addteacher() {
 
   const onSubmit = async (formData) => {
     try {
-      console.log("formData", formData);
     } catch (error) {
 
     }

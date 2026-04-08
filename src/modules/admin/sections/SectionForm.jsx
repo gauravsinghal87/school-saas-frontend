@@ -11,16 +11,13 @@ export default function SectionForm({
     selectedSectionCircle,
     classOptions
 }) {
-    console.log("classoptions in form", classOptions);
     const isView = mode === "view";
     const { data: classData } = classesListMutation({ page: 1, limit: 100 });
-    console.log("classdata", classData);
     // const classOptions = classData?.results?.map((cls) => ({
     //     label: cls.name,
     //     value: cls._id,
     // })) || [];
 
-    console.log("classoptions", classOptions);
 
     return (
         <div className="space-y-5">

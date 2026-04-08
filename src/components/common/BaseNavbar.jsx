@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "../../context/ThemContext";
 import { useUser } from "../../hooks/useUser";
+import TeacherCheckInOUt from "../../modules/staff/TeacherCheckIn";
 
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
@@ -191,6 +192,7 @@ export function BaseNavbar({ onMenuClick, }) {
 
                     {/* ── RIGHT: Icons only ── */}
                     <div className="flex items-center lg:gap-6 flex-shrink-0">
+                        <TeacherCheckInOUt />
 
                         {/* Mobile search toggle */}
                         {!searchOpen && (

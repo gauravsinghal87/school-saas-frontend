@@ -22,8 +22,8 @@ export const apiPaths = {
 
         MARK_ATTENDANCE: "/api/attendance/student/mark",
         GET_ATTENDANCE: "/api/attendance/student?studentId={studentId}",
-        GET_CLASS_ATTENDANCE: "/api/attendance/student/class?classId={classId}&sectionId={sectionId}",
-        GET_STUDENTS: "/api/student?page={page}&limit={limit}&classId={classId}&sectionId={sectionId}&sessionId={sessionId}&status={status}",
+        GET_CLASS_ATTENDANCE: "/api/attendance/student/class",
+        GET_STUDENTS: "/api/student",
         CREATE_HOLIDAY: "/api/holiday",
         UPDATE_HOLIDAY: "/api/holiday/{holidayId}",
         DELETE_HOLIDAY: "/api/holiday/{holidayId}",
@@ -32,11 +32,14 @@ export const apiPaths = {
 
         CREATE_ASSIGNMENT: "/api/teacher/assignment&notes/upload-assignment",
         UPDATE_ASSIGNMENT: "/api/teacher/assignment&notes/update-assignment/{assignmentId}",
-        GET_ASSIGNMENTS: "/api/teacher/assignment&notes/get-assignment?sectionId={sectionId}",
+        GET_ASSIGNMENTS: "/api/teacher/assignment&notes/get-assignment",
         DELETE_ASSIGNMENT: "/api/teacher/assignment&notes/delete-assignment/{assignmentId}",
 
         GET_TIMETABLE: "/api/timetable/timetable?classId={classId}&sectionId={sectionId}",
-        GET_CLASS_SEC_SUB: '/api/staff/class/get'
+        GET_CLASS_SEC_SUB: '/api/staff/class/get',
+        TEACHER_CHECK_IN: '/api/attendance/teacher/checkin',
+        TEACHER_CHECK_OUT: '/api/attendance/teacher/checkout',
+        TEACHER_PROFILE: '/api/staff'
     },
 
     superAdmin: {

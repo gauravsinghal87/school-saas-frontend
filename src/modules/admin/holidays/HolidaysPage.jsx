@@ -46,7 +46,6 @@ const HolidaysPage = () => {
     };
 
     const handleSubmit = async () => {
-        console.log("Submitting form:", form, "Edit ID:", editId);
         try {
             if (editId) {
                 await updateMutation.mutateAsync({ holidayId: editId, data: form });

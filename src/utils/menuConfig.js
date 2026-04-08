@@ -110,7 +110,7 @@ export const MENU_CONFIG = {
     [ROLES.STAFF]: [
         // main
         { id: "staff-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
-        { id: "staff-students", name: "My Students", path: "students", icon: GraduationCap, section: "main", badge: 4 },
+        // { id: "staff-students", name: "My Students", path: "students", icon: GraduationCap, section: "main", badge: 4 },
         // { id: "staff-schedule", name: "Schedule", path: "schedule", icon: CalendarDays, section: "main" },
         { id: "staff-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "main", badge: 1 },
 

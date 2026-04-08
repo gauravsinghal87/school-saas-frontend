@@ -57,7 +57,6 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("role");
     queryClient.clear();
     // window.location.reload();
-    console.log("Logged out, cache cleared, reloading...");
   };
 
   const value = useMemo(

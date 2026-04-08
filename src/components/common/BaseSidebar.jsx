@@ -198,7 +198,6 @@ const Sidebar = ({
 
     const Section = ({ title, items, sectionId }) => {
 
-        console.log("Rendering section:", title, "with items:", items);
 
         if (!items || items.length === 0) return null;
         return (

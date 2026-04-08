@@ -92,21 +92,24 @@ export const fetchRolesList = async () => {
 };
 
 export const getCurrentUser = async () => {
+    // const res = await api.get(apiPaths.teacher.TEACHER_PROFILE);
+
     const storedUser = localStorage.getItem("user");
     let user = storedUser ? JSON.parse(storedUser) : null;
     return user;
-    // const res = await api.get(apiPaths.auth.me);
+    // const res = await api.get(apiPaths.teacher.TEACHER_PROFILE);
 
     // if (res.success) {
     //     const user = res.data;
+    //     console.log("Fetched user profile:", user);
 
-    //     localStorage.setItem("user", JSON.stringify(user));
-    //     localStorage.setItem("role", user?.role);
+    //     //     // localStorage.setItem("user", JSON.stringify(user));
+    //     //     // localStorage.setItem("role", user?.role);
 
-    //     return user;
+    //     //     return user;
     // }
 
-    // return null;
+    return user;
 };
 
 export const getSubscriptionList = async (params) => {
@@ -167,7 +170,6 @@ export const getRoles = (params) => {
 
 export const updateRole = (data) => {
     const { _id: id, ...rest } = data;
-    console.log("Updating role with ID:", id, "and data:", rest);
     return api.put(apiPaths.superAdmin.UPDATE_ROLE.replace("{id}", id), rest);
 }
 
@@ -422,7 +424,6 @@ export const createHoliday = async (data) => {
 
 
 export const updateHoliday = async ({ holidayId, data }) => {
-    console.log("Updating holiday with ID:", holidayId);
     const url = apiPaths.admin.UPDATE_HOLIDAY.replace("{holidayId}", holidayId);
     return await api.put(url, data);
 };
@@ -451,22 +452,30 @@ export const getStudentAttendance = async (studentId) => {
     return await api.get(apiPaths.teacher.GET_ATTENDANCE.replace("{studentId}", studentId));
 };
 
-export const getClassAttendance = async ({ classId, sectionId }) => {
-    let url = apiPaths.teacher.GET_CLASS_ATTENDANCE.replace("{classId}", classId);
-    url = url.replace("{sectionId}", sectionId);
+export const getClassAttendance = async ({ classId, sectionId, date }) => {
+    const params = new URLSearchParams();
+
+    if (classId) params.append("classId", classId);
+    if (sectionId) params.append("sectionId", sectionId);
+    if (date) params.append("date", date);
+    const url = `${apiPaths.teacher.GET_CLASS_ATTENDANCE}?${params.toString()}`;
+
     return await api.get(url);
 };
-
 export const getStudents = async (params) => {
-    let url = apiPaths.teacher.GET_STUDENTS;
-    url = url.replace("{page}", params.page || 1);
-    url = url.replace("{limit}", params.limit || 10);
-    url = url.replace("{classId}", params.classId || "");
-    url = url.replace("{sectionId}", params.sectionId || "null");
-    url = url.replace("{sessionId}", params.sessionId || "null");
-    url = url.replace("{status}", params.status || "");
-    return await api.get(url);
-}
+    return await api.get(apiPaths.teacher.GET_STUDENTS, {
+        params: {
+            page: params.page || 1,
+            limit: params.limit || 10,
+            search: params.search || undefined,
+
+            classId: params.classId || undefined,
+            sectionId: params.sectionId || undefined,
+            // sessionId: params.sessionId || undefined,
+            // status: params.status || undefined,
+        }
+    });
+};
 
 export const getHolidays = async ({ page = 1, limit = 10, search = "" }) => {
     const url = apiPaths.admin.GET_HOLIDAYS
@@ -490,21 +499,25 @@ export const createAssignment = async (data) => {
 };
 
 export const getAssignments = async ({ sectionId }) => {
-    const url = apiPaths.teacher.GET_ASSIGNMENTS.replace(
-        "{sectionId}",
-        sectionId
-    );
+    const url = apiPaths.teacher.GET_ASSIGNMENTS
 
     return await api.get(url);
 };
 
-export const updateAssignment = async (assignmentId, data) => {
+export const updateAssignment = async (payload) => {
+    const { id, formData } = payload;
+
+
     const url = apiPaths.teacher.UPDATE_ASSIGNMENT.replace(
         "{assignmentId}",
-        assignmentId
+        id
     );
 
-    return await api.put(url, data);
+    return await api.put(url, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 };
 
 export const deleteAssignment = async (assignmentId) => {
@@ -529,4 +542,16 @@ export const getStudentTimetable = async () => {
 
 export const getClassSecSub = async () => {
     return await api.get(apiPaths.teacher.GET_CLASS_SEC_SUB);
-}   
+}
+
+
+
+export const teacherCheckIn = () => {
+    return api.post(apiPaths.teacher.TEACHER_CHECK_IN);
+};
+
+export const teacherCheckOut = () => {
+    return api.post(apiPaths.teacher.TEACHER_CHECK_OUT);
+};
+
+

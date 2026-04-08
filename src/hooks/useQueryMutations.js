@@ -732,20 +732,7 @@ export const createStaffMutation = (onClose) => {
 // ==================== Teacher Management ====================
 
 
-export const fetchstudentListQuery = (params) => {
-    return useAppQuery({
-        queryKey: ["students", params],
-        apiCall: () => getStudents(params),
-    });
-}
 
-export const getStudentAttendanceQuery = (studentId, enabled = true) => {
-    return useAppQuery({
-        queryKey: ["studentAttendance", studentId],
-        apiCall: () => getStudentAttendance(studentId),
-        enabled: enabled && !!studentId,
-    });
-}
 // ==================== EXAM MANAGEMENT ====================
 
 
@@ -903,14 +890,32 @@ export const studentResultsList = (studentId, params, enabled = true) => {
     });
 };
 
-export const getClassAttendanceQuery = ({ classId, sectionId }, enabled = true) => {
+
+export const fetchstudentListQuery = (params) => {
     return useAppQuery({
-        queryKey: ["classAttendance", classId, sectionId],
-        apiCall: () => getClassAttendance({ classId, sectionId }),
-        enabled:
-            enabled && !!classId && !!sectionId,
+        queryKey: ["students", params],
+        apiCall: () => getStudents(params),
+    });
+}
+
+export const getStudentAttendanceQuery = (studentId, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["studentAttendance", studentId],
+        apiCall: () => getStudentAttendance(studentId),
+        enabled: enabled && !!studentId,
+    });
+}
+
+export const getClassAttendanceQuery = ({ classId, sectionId, date }, enabled = true) => {
+    return useAppQuery({
+        // Add 'date' to the queryKey so it refetches when the date changes
+        queryKey: ["classAttendance", classId, sectionId, date],
+        apiCall: () => getClassAttendance({ classId, sectionId, date }),
+        enabled: enabled && !!classId && !!sectionId && !!date, // Ensure date is present
     });
 };
+
+
 export const markAttendanceMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -1101,11 +1106,11 @@ export const createAssignmentMutation = () => {
     });
 };
 
-export const getAssignmentsQuery = (sectionId) => {
+export const getAssignmentsQuery = (params) => {
     return useAppQuery({
-        queryKey: ["assignments", sectionId],
-        apiCall: () => getAssignments({ sectionId }),
-        enabled: !!sectionId,
+        // queryKey: ["assignments", params.sectionId],
+        apiCall: () => getAssignments(params),
+        // enabled: !!params.sectionId,
     });
 };
 

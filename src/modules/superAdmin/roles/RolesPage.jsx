@@ -132,7 +132,6 @@ export default function RolesPage() {
 
     const handleUpdateRole = (data, reset) => {
         const { name } = data;
-        // console.log("Updating role with data:", name);
         updateRole(data, {
             onSuccess: () => {
                 reset();

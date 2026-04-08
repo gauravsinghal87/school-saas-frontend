@@ -100,7 +100,6 @@ function StatusPanel({ row, onConfirm, loading }) {
 
 
 function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
-    console.log("Default values in form >>", defaultValues) // DEBUG
 
 
     const [values, setValues] = useState({
@@ -118,7 +117,6 @@ function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
 
-    console.log("Form values >>", defaultValues) // DEBUG
 
     const handleChange = (name, value) => {
         setValues((prev) => ({ ...prev, [name]: value }));
