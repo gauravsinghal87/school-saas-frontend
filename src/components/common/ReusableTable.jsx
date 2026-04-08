@@ -302,7 +302,7 @@ export default function DataTable({
 
     const displayRows = isServer
         ? data
-        : sorted.slice((activePage - 1) * internalPageSize, activePage * internalPageSize);
+        : sorted?.slice((activePage - 1) * internalPageSize, activePage * internalPageSize);
 
     const countBadge = isServer ? externalTotal : filtered.length;
     const showActions = true;

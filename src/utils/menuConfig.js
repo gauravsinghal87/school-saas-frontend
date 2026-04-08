@@ -134,20 +134,13 @@ export const MENU_CONFIG = {
     [ROLES.STUDENT]: [
         // main
         { id: "stu-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
-        { id: "stu-schedule", name: "My Schedule", path: "schedule", icon: CalendarDays, section: "main" },
-        { id: "stu-attendance", name: "Attendance", path: "attendance", icon: CalendarCheck, section: "main" },
+        { id: "stu-schedule", name: "Time Table", path: "timetable", icon: CalendarDays, section: "main" },
+        // { id: "stu-attendance", name: "Attendance", path: "attendance", icon: CalendarCheck, section: "main" },
 
         // academic
         { id: "stu-subjects", name: "Subjects", path: "subjects", icon: BookOpen, section: "academic" },
         { id: "stu-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "academic", badge: 2 },
-        { id: "stu-materials", name: "Study Materials", path: "study-materials", icon: FolderOpen, section: "academic" },
-        { id: "stu-results", name: "Results", path: "results", icon: BarChart3, section: "academic" },
-        { id: "stu-marksheet", name: "Marksheets", path: "marksheets", icon: FileBadge, section: "academic" },
-
-        // personal
-        { id: "stu-fees", name: "Fees", path: "fees", icon: Receipt, section: "personal" },
-        { id: "stu-achievements", name: "Achievements", path: "achievements", icon: Trophy, section: "personal" },
-        { id: "stu-health", name: "Health Records", path: "health", icon: HeartPulse, section: "personal" },
+        { id: "stu-materials", name: "Holidays", path: "holidays", icon: FolderOpen, section: "academic" },
         { id: "stu-notices", name: "Notice Board", path: "notices", icon: Bell, section: "personal", badge: 1 },
         { id: "stu-profile", name: "My Profile", path: "profile", icon: UserCircle, section: "personal" },
     ],
@@ -161,17 +154,17 @@ export const MENU_CONFIG = {
         { id: "par-attendance", name: "Attendance", path: "attendance", icon: UserCheck, section: "main" },
 
         // academic
-        { id: "par-results", name: "Results", path: "results", icon: BarChart3, section: "academic" },
-        { id: "par-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "academic" },
-        { id: "par-timetable", name: "Timetable", path: "timetable", icon: CalendarDays, section: "academic" },
+        // { id: "par-results", name: "Results", path: "results", icon: BarChart3, section: "academic" },
+        // { id: "par-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "academic" },
+        // { id: "par-timetable", name: "Timetable", path: "timetable", icon: CalendarDays, section: "academic" },
         { id: "par-marksheets", name: "Marksheets", path: "marksheets", icon: FileBadge, section: "academic" },
 
         // personal
         { id: "par-fees", name: "Fees & Payments", path: "fees", icon: Receipt, section: "personal" },
-        { id: "par-health", name: "Health Records", path: "health", icon: HeartPulse, section: "personal" },
-        { id: "par-achievements", name: "Achievements", path: "achievements", icon: Star, section: "personal" },
-        { id: "par-notices", name: "Notice Board", path: "notices", icon: Megaphone, section: "personal", badge: 2 },
-        { id: "par-messages", name: "Messages", path: "messages", icon: MessageSquare, section: "personal", badge: 1 },
+        // { id: "par-health", name: "Health Records", path: "health", icon: HeartPulse, section: "personal" },
+        // { id: "par-achievements", name: "Achievements", path: "achievements", icon: Star, section: "personal" },
+        // { id: "par-notices", name: "Notice Board", path: "notices", icon: Megaphone, section: "personal", badge: 2 },
+        // { id: "par-messages", name: "Messages", path: "messages", icon: MessageSquare, section: "personal", badge: 1 },
         { id: "par-profile", name: "My Profile", path: "profile", icon: UserCircle, section: "personal" },
     ],
 };

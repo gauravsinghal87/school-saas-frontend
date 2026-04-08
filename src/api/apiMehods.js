@@ -480,7 +480,12 @@ export const getHolidays = async ({ page = 1, limit = 10, search = "" }) => {
 export const createAssignment = async (data) => {
     return await api.post(
         apiPaths.teacher.CREATE_ASSIGNMENT,
-        data
+        data,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
     );
 };
 

@@ -58,8 +58,10 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
 
         if (values.file) {
             formData.append('file', values.file);
+            console.log("Attached file:", values.file);
         }
 
+        console.log("Submitting form with values:", formData);
         onSubmit(formData);
     };
 
@@ -148,14 +150,14 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
 export default function AssignmentsPage() {
     const [panel, setPanel] = useState({ open: false, mode: null, row: null });
 
-    const { data: apiResponse, isLoading, refetch } = getAssignmentsQuery();
+    const { data: apiResponse, isLoading, refetch } = getAssignmentsQuery('69ce4ef9b99f96284e262cb5');
     const { data: classResponse } = getClassSecSubQuery({ classId: '69ce4ef9b99f96284e262cb3', sectionId: '69ce4ef9b99f96284e262cb5' }); // For the dropdowns in form
 
     const createMutation = createAssignmentMutation();
     const updateMutation = updateAssignmentMutation();
     const deleteMutation = deleteAssignmentMutation();
 
-    const assignments = apiResponse?.data ?? [];
+    const assignments = apiResponse?.data?.docs ?? [];
     const classMetaData = classResponse?.results ?? [];
 
     const handleFormSubmit = (formData) => {
