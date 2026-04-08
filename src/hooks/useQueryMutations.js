@@ -103,6 +103,7 @@ import {
     generateResult,
     getExamResults,
     getStudentResults,
+
     createAssignment,
     getAssignments,
     updateAssignment,
@@ -112,6 +113,9 @@ import {
     getStudentFeesDetails,
     addStudentFees,
     getPaymentHistoryDetails,
+    getStudentSubjects,
+    getStudentAssignments,
+    submitAssignment,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -1121,6 +1125,7 @@ export const useClassesList = () => {
 
 
 
+
 export const createAssignmentMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -1197,5 +1202,39 @@ export const useStudentTimetable = () => {
     return useAppQuery({
         queryKey: ["studentTimetable"],
         apiCall: getStudentTimetable,
+    });
+};
+
+
+
+
+
+
+// STUDENT MODULE
+export const useStudentSubjects = (studentId) => {
+    return useAppQuery({
+        queryKey: ["studentSubjects", studentId],
+        apiCall: () => getStudentSubjects(studentId),
+        enabled: !!studentId,
+    });
+};
+
+// ==================== STUDENT ASSIGNMENTS ====================
+
+export const useStudentAssignments = (params) => {
+    return useAppQuery({
+        queryKey: ["studentAssignments", params],
+        apiCall: () => getStudentAssignments(params),
+    });
+};
+
+export const submitAssignmentMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: submitAssignment,
+        successMessage: "Assignment submitted successfully! 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["studentAssignments"]);
+        },
     });
 };
