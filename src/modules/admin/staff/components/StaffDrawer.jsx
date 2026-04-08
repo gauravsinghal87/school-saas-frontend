@@ -23,7 +23,7 @@ const INITIAL_FORM_STATE = {
   salary: "",
   roleId: "",
   status: "active",
-  subjects: [], 
+  subjects: [],
   contact: {
     personal_email: "",
     phone: "",
@@ -274,11 +274,10 @@ function StaffDrawer({ isOpen, onClose, mode, staffId, roles }) {
                             type="button"
                             disabled={isReadOnly}
                             onClick={() => handleSubjectToggle(sub._id)}
-                            className={`px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors ${
-                              isSelected
-                                ? "bg-primary text-white border-primary shadow-sm"
-                                : "bg-surface-page text-text-secondary border-border hover:border-primary/50 hover:text-text-primary"
-                            } ${isReadOnly ? "opacity-60 cursor-default" : "cursor-pointer"}`}
+                            className={`px-3 py-1.5 rounded-lg text-[12px] font-medium border transition-colors ${isSelected
+                              ? "bg-primary text-white border-primary shadow-sm"
+                              : "bg-surface-page text-text-secondary border-border hover:border-primary/50 hover:text-text-primary"
+                              } ${isReadOnly ? "opacity-60 cursor-default" : "cursor-pointer"}`}
                           >
                             {sub.name}
                           </button>

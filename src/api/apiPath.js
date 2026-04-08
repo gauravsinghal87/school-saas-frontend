@@ -9,9 +9,6 @@ export const apiPaths = {
     students: {
         list: "/api/student",
         create: "/students",
-        UPLOAD_STUDENT_DOCS: "/api/staff",
-        GET_STUDENT_BY_ID: "/api/student/",
-        ENROLL_STUDENT: "/api/student/enroll",
     },
     teacher: {
         // list: "/teachers",
@@ -104,6 +101,11 @@ export const apiPaths = {
         UPDATE_HOLIDAY: "/api/holiday/{holidayId}",
         DELETE_HOLIDAY: "/api/holiday/{holidayId}",
         GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
+
+
+        ADD_STUDENT_FEES: '/api/admin/fees/student-payment',
+        GET_STUDENT_FEES: '/api/admin/student-list',
+        PAYMENT_HISTORY: '/api/admin/student-detail',
 
     }
 
