@@ -84,6 +84,9 @@ const AdminDashboard = lazy(
 const StudentDashboard = lazy(
   () => import("../modules/student/dashboard/Dashboard"),
 );
+const StudentExamTimetable = lazy(() => import("../modules/student/exams/ExamTimetable"));
+const StudentProfile = lazy(() => import("../modules/student/profile/Profile"));
+
 const StudentSubjects = lazy(() => import("../modules/student/subjects/Subjects"));
 const StudentAssignments = lazy(() => import("../modules/student/assignments/Assignments"));
 const SuperAdminDashboard = lazy(
@@ -169,6 +172,8 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
             <Route path="subjects" element={<StudentSubjects />} />
             <Route path="assignments" element={<StudentAssignments />} />
+            <Route path="exam-timetable" element={<StudentExamTimetable />} />
+            <Route path="profile" element={<StudentProfile />} />
 
 
           </Route>

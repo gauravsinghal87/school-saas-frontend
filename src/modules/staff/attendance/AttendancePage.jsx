@@ -57,8 +57,12 @@ export default function StudentAttendancePage() {
     });
 
 
-    const { data: studentAttendanceData, refetch: refetchStudentAttendance, isLoading: loadingStudentHistory } = getStudentAttendanceQuery(
-        selectedStudent?.user?._id);
+
+    const { data: studentAttendanceData, refetch: refetchStudentAttendance, isLoading: loadingStudentHistory } = getStudentAttendanceQuery({
+        studentId: selectedStudent?.user?._id || '',
+        startDate: null,
+        endDate: null,
+    });
 
     const markMutation = markAttendanceMutation();
     const [attendanceData, setAttendanceData] = useState({});
@@ -112,6 +116,7 @@ export default function StudentAttendancePage() {
     };
 
     const handleViewStudent = (student) => {
+        console.log('studentn', student)
         setSelectedStudent(student);
         setShowStudentModal(true);
         // Reset date range to last 30 days

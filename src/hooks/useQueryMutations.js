@@ -103,7 +103,6 @@ import {
     generateResult,
     getExamResults,
     getStudentResults,
-
     createAssignment,
     getAssignments,
     updateAssignment,
@@ -116,6 +115,8 @@ import {
     getStudentSubjects,
     getStudentAssignments,
     submitAssignment,
+    getStudentExamTimetable,
+    getStudentProfile,
     giveFeedbackOnSubmission,
     getTeacherAssignmentSubmissions,
     getTeacherInOutTimes,
@@ -1173,7 +1174,6 @@ export const useClassesList = () => {
 
 
 
-
 export const createAssignmentMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -1310,5 +1310,22 @@ export const submitAssignmentMutation = () => {
         onSuccessCallback: () => {
             queryClient.invalidateQueries(["studentAssignments"]);
         },
+    });
+};
+
+
+export const useStudentExamTimetable = () => {
+    return useAppQuery({
+        queryKey: ["studentExamTimetable"],
+        apiCall: () => getStudentExamTimetable(),
+        enabled: true,
+    });
+};
+
+export const useStudentProfile = () => {
+    return useAppQuery({
+        queryKey: ["studentProfile"],
+        apiCall: () => getStudentProfile(),
+        enabled: true,
     });
 };

@@ -9,6 +9,16 @@ export const apiPaths = {
     students: {
         list: "/api/student",
         create: "/students",
+        UPLOAD_STUDENT_DOCS: "/api/staff",
+        GET_STUDENT_BY_ID: "/api/student/",
+        ENROLL_STUDENT: "/api/student/enroll",
+        SUBJECTS: "/api/student/subjects",
+        ASSIGNMENTS: "/api/student/assignments",
+        STUDENT_TIMETABLE: '/api/timetable/timetable',
+        SUBMIT_ASSIGNMENT: "/api/student/submit",
+        EXAMS: "/api/student/exam-timetable",
+        PROFILE: "/api/student/profile",
+
     },
     teacher: {
         // list: "/teachers",

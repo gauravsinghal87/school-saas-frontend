@@ -20,7 +20,7 @@ export const login = async (data) => {
 //admin
 //userlist for attendance report
 export const getUsersList = async (params) => {
-  return await api.get(apiPaths.admin.USERS_LIST, { params });
+    return await api.get(apiPaths.admin.USERS_LIST, { params });
 };
 export const addStudentFees = async (data) => {
     return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
@@ -109,7 +109,7 @@ export const fetchRolesList = async () => {
 
 export const getCurrentUser = async () => {
     const role = localStorage.getItem("role");
-    
+
     switch (role) {
         case "SUPER_ADMIN":
             return await api.get(apiPaths.superAdmin.PROFILE);
@@ -470,6 +470,20 @@ export const deleteHoliday = async (holidayId) => {
 //teacher api methods would go here
 
 
+
+// TEACHER_ASSIGNMENT_SUBMISSIONS
+export const getTeacherAssignmentSubmissions = async (params) => {
+    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_SUBMISSIONS;
+    return await api.get(url);
+}
+
+export const giveFeedbackOnSubmission = async (data) => {
+    const { submissionId, feedback } = data;
+    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_FEEDBACK.replace("{submissionId}", submissionId);
+    return await api.put(url, { feedback });
+}
+
+
 export const markAttendance = async (data) => {
     return await api.post(apiPaths.teacher.MARK_ATTENDANCE, data);
 };
@@ -480,7 +494,7 @@ export const getTeacherAttendance = async (params) => {
     if (startDate) queryParams.append("startDate", startDate);
     if (endDate) queryParams.append("endDate", endDate);
     if (teacherId) queryParams.append("teacherId", teacherId);
-    
+
     const url = `/api/attendance/teacher${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
     return await api.get(url);
 };
@@ -492,7 +506,7 @@ export const getStudentAttendance = async (params) => {
     if (startDate) queryParams.append("startDate", startDate);
     if (endDate) queryParams.append("endDate", endDate);
     if (studentId) queryParams.append("studentId", studentId);
-    
+
     const url = `/api/attendance/student${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
     return await api.get(url);
 };
@@ -575,19 +589,10 @@ export const deleteAssignment = async (assignmentId) => {
 };
 
 
-// TEACHER_ASSIGNMENT_SUBMISSIONS
-export const getTeacherAssignmentSubmissions = async (params) => {
-    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_SUBMISSIONS;
-    return await api.get(url);
-}
 
-export const giveFeedbackOnSubmission = async (data) => {
-    const { submissionId, feedback } = data;
-    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_FEEDBACK.replace("{submissionId}", submissionId);
-    return await api.put(url, { feedback });
-}
-
-
+export const getStudentTimetable = async () => {
+    return await api.get(apiPaths.students.STUDENT_TIMETABLE);
+};
 
 export const getTeacherTimetable = async ({ classId, sectionId }) => {
     let url = apiPaths.teacher.GET_TIMETABLE.replace("{classId}", classId);
@@ -595,9 +600,6 @@ export const getTeacherTimetable = async ({ classId, sectionId }) => {
     return await api.get(url);
 }
 
-export const getStudentTimetable = async () => {
-    return await api.get(apiPaths.admin.TIMETABLE);
-};
 
 
 export const getClassSecSub = async () => {
@@ -640,3 +642,14 @@ export const submitAssignment = async (formData) => {
     });
 };
 
+// ==================== STUDENT EXAM TIMETABLE ====================
+
+export const getStudentExamTimetable = async (params) => {
+    return await api.get(apiPaths.students.EXAMS, { params });
+};
+
+// ==================== STUDENT PROFILE ====================
+
+export const getStudentProfile = async () => {
+    return await api.get(apiPaths.students.PROFILE);
+};
