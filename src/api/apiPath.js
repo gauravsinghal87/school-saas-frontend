@@ -9,6 +9,14 @@ export const apiPaths = {
     students: {
         list: "/api/student",
         create: "/students",
+  STUDENT_ATTENDANCE: "/api/attendance/student",
+
+    },
+   parent: {
+  MY_CHILDREN: "/api/parent/my-children",
+    MY_PROFILE: "/api/parent",
+      PAYMENTS: "/api/parent/payments",
+
     },
     teacher: {
         // list: "/teachers",

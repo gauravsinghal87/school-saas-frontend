@@ -4,7 +4,6 @@ import { lazy, Suspense } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import { ROLES } from "../utils/roles";
 
-
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
 const NotFound = lazy(() => import("../components/common/NotFound"));
@@ -31,6 +30,10 @@ import FeesDetails from "../modules/admin/reports/fees/FeesDetails.jsx";
 import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
 import StudentAttendancePage from "../modules/staff/attendance/AttendancePage.jsx";
 import TeacherProfile from "../modules/staff/teachers/TeacherProifle.jsx";
+import ParentChildrenAttendance from "../modules/parent/children/ParentChildrenAttendance.jsx";
+import ParentProfile from "../modules/parent/profile/ParentProfile.jsx";
+import ParentPayments from "../modules/parent/payments/ParentPayments.jsx";
+import ParentAssignments from "../modules/parent/assignments/ParentAssignments.jsx";
 //staff imports
 const StaffDashboard = lazy(
   () => import("../modules/staff/dashboard/StaffDashboard"),
@@ -61,7 +64,6 @@ const Classes = lazy(() => import("../modules/admin/classes/Classes"));
 const Fees = lazy(() => import("../modules/admin/fees/Fees"));
 const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
-
 const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
 const ClassSubjects = lazy(
   () => import("../modules/admin/classes/ClassSubjects"),
@@ -80,8 +82,12 @@ const AdminDashboard = lazy(
 const StudentDashboard = lazy(
   () => import("../modules/student/dashboard/Dashboard"),
 );
-const StudentSubjects = lazy(() => import("../modules/student/subjects/Subjects"));
-const StudentAssignments = lazy(() => import("../modules/student/assignments/Assignments"));
+const StudentSubjects = lazy(
+  () => import("../modules/student/subjects/Subjects"),
+);
+const StudentAssignments = lazy(
+  () => import("../modules/student/assignments/Assignments"),
+);
 const SuperAdminDashboard = lazy(
   () => import("../modules/superAdmin/dashboard/SuperAdminDashboard"),
 );
@@ -144,7 +150,7 @@ const AppRoutes = () => {
 
             <Route path="*" element={<NotFound />} />
 
-            <Route path="staff" element={<AdminStaff />} /> 
+            <Route path="staff" element={<AdminStaff />} />
           </Route>
 
           <Route
@@ -162,8 +168,6 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
             <Route path="subjects" element={<StudentSubjects />} />
             <Route path="assignments" element={<StudentAssignments />} />
-
-
           </Route>
 
           <Route
@@ -175,16 +179,15 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<ParentDashboard />} />
+            <Route path="children" element={<ParentChildrenAttendance />} />
+            <Route path="payments" element={<ParentPayments />} />
+            <Route path="profile" element={<ParentProfile />} />
+            <Route path="assignments" element={<ParentAssignments />} />
             <Route path="*" element={<NotFound />} />
           </Route>
 
           {/* staff */}
-          <Route
-            path="/staff"
-            element={
-              <StaffLayout />
-            }
-          >
+          <Route path="/staff" element={<StaffLayout />}>
             <Route path="dashboard" element={<StaffDashboard />} />
             <Route path="teachers" element={<StaffTeachers />} />
             <Route path="students" element={<StaffStudents />} />

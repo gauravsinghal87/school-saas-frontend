@@ -179,7 +179,7 @@ export const MENU_CONFIG = {
         // main
         { id: "par-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
         { id: "par-children", name: "My Children", path: "children", icon: Users, section: "main" },
-        { id: "par-attendance", name: "Attendance", path: "attendance", icon: UserCheck, section: "main" },
+        { id: "par-attendance", name: "Assignments", path: "assignments", icon: BookMarked, section: "main" },
 
         // academic
         // { id: "par-results", name: "Results", path: "results", icon: BarChart3, section: "academic" },
@@ -188,7 +188,7 @@ export const MENU_CONFIG = {
         { id: "par-marksheets", name: "Marksheets", path: "marksheets", icon: FileBadge, section: "academic" },
 
         // personal
-        { id: "par-fees", name: "Fees & Payments", path: "fees", icon: Receipt, section: "personal" },
+        { id: "par-fees", name: "Fees & Payments", path: "payments", icon: Receipt, section: "personal" },
         // { id: "par-health", name: "Health Records", path: "health", icon: HeartPulse, section: "personal" },
         // { id: "par-achievements", name: "Achievements", path: "achievements", icon: Star, section: "personal" },
         // { id: "par-notices", name: "Notice Board", path: "notices", icon: Megaphone, section: "personal", badge: 2 },

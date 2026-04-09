@@ -580,3 +580,28 @@ export const submitAssignment = async (formData) => {
     });
 };
 
+export const getMyChildren = () => {
+  return api.get(apiPaths.parent.MY_CHILDREN);
+};
+
+export const getParentStudentAttendance = ({
+  studentId,
+  startDate,
+  endDate,
+}) => {
+  return api.get(apiPaths.students.STUDENT_ATTENDANCE, {
+    params: {
+      studentId,
+      startDate,
+      endDate,
+    },
+  });
+};
+
+export const getParentProfile = () => {
+  return api.get(apiPaths.parent.MY_PROFILE);
+};
+
+export const getParentPayments = () => {
+  return api.get(apiPaths.parent.PAYMENTS);
+};
