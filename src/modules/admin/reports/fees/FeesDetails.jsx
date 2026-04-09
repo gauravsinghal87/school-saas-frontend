@@ -16,6 +16,8 @@ export default function FeeDetails() {
     const [remarks, setRemarks] = useState("");
     const [paymentHistory, setPaymentHistory] = useState([]);
     const [studentDetails, setStudentDetails] = useState(null);
+    const [transactionList,setTransactionList] = useState([]);
+    console.log("studentDetails",studentDetails);
     const [feeStructure, setFeeStructure] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [feeSummary, setFeeSummary] = useState({
@@ -37,9 +39,12 @@ export default function FeeDetails() {
 
     // Process student details when API response changes
     useEffect(() => {
-        if (studentDetailsResponse?.result && studentDetailsResponse.result[0]) {
-            const student = studentDetailsResponse.result[0];
-
+        if (studentDetailsResponse?.result && studentDetailsResponse?.result?.data[0]) {
+            const student = studentDetailsResponse.result?.data[0];
+            const transactionDetails = studentDetailsResponse.result?.paymentData || [];
+            setTransactionList(transactionDetails);
+            console.log("transactionDetails",transactionDetails);
+            console.log("student", student);
             // Extract student information
             const studentInfo = {
                 _id: student._id,
@@ -80,8 +85,8 @@ export default function FeeDetails() {
                 });
 
                 // For now, set paid amount to 0 (you can fetch from payment history API)
-                const paidAmount = 0;
-                const dueAmount = totalFees - paidAmount;
+                const paidAmount = student.totalPaid;
+                const dueAmount = student.dueAmount;
                 const status = dueAmount === 0 ? "paid" : paidAmount > 0 ? "partial" : "unpaid";
 
                 setFeeSummary({
@@ -159,7 +164,9 @@ export default function FeeDetails() {
         );
     };
 
-    const handleAddFees = async () => {
+    const handleAddFees = async (e) => {
+        e.preventDefault(); // ✅ STOP refresh
+        e?.stopPropagation();
         // Validation
         if (!amount || parseFloat(amount) <= 0) {
             showError("Please enter a valid amount");
@@ -367,7 +374,7 @@ export default function FeeDetails() {
                     )}
 
                     {/* Payment History Card */}
-                    <div className="bg-surface-card rounded-xl border border-border p-6">
+                    <div className="bg-surface-card h-[45vh] overflow-y-auto rounded-xl border border-border p-6">
                         <h2 className="text-lg font-semibold text-text-heading mb-4">
                             Payment History
                         </h2>
@@ -383,14 +390,14 @@ export default function FeeDetails() {
                                         <tr className="text-left text-sm text-text-secondary">
                                             <th className="pb-2">Date</th>
                                             <th className="pb-2">Amount (₹)</th>
-                                            <th className="pb-2">Payment Method</th>
-                                            <th className="pb-2">Receipt No</th>
+                                            {/* <th className="pb-2">Payment Method</th> */}
+                                            {/* <th className="pb-2">Receipt No</th> */}
                                             <th className="pb-2">Status</th>
-                                            <th className="pb-2">Actions</th>
+                                            {/* <th className="pb-2">Actions</th> */}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {paymentHistory.map((payment) => (
+                                        {transactionList.map((payment) => (
                                             <tr key={payment._id} className="border-b border-border">
                                                 <td className="py-2 text-sm">
                                                     {new Date(payment.date || payment.paymentDate).toLocaleDateString()}
@@ -398,16 +405,16 @@ export default function FeeDetails() {
                                                 <td className="py-2 text-sm font-medium">
                                                     ₹ {payment.amount?.toLocaleString()}
                                                 </td>
-                                                <td className="py-2 text-sm">
+                                                {/* <td className="py-2 text-sm">
                                                     {payment.method || payment.paymentMethod}
-                                                </td>
-                                                <td className="py-2 text-sm">
+                                                </td> */}
+                                                {/* <td className="py-2 text-sm">
                                                     {payment.receiptNo || payment.receiptNumber}
-                                                </td>
+                                                </td> */}
                                                 <td className="py-2">
                                                     {getStatusBadge(payment.status || "success")}
                                                 </td>
-                                                <td className="py-2">
+                                                {/* <td className="py-2">
                                                     <div className="flex gap-2">
                                                         <button
                                                             onClick={() => handlePrintReceipt(payment)}
@@ -424,7 +431,7 @@ export default function FeeDetails() {
                                                             <Download size={14} />
                                                         </button>
                                                     </div>
-                                                </td>
+                                                </td> */}
                                             </tr>
                                         ))}
                                     </tbody>
@@ -517,10 +524,10 @@ export default function FeeDetails() {
                                         className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-surface text-text-heading"
                                     >
                                         <option value="CASH">Cash</option>
-                                        <option value="ONLINE">Online</option>
-                                        <option value="CHEQUE">Cheque</option>
-                                        <option value="CARD">Card</option>
-                                        <option value="BANK_TRANSFER">Bank Transfer</option>
+                                        {/* <option value="ONLINE">Online</option> */}
+                                        {/* <option value="CHEQUE">Cheque</option> */}
+                                        {/* <option value="CARD">Card</option> */}
+                                        {/* <option value="BANK_TRANSFER">Bank Transfer</option> */}
                                     </select>
                                 </div>
 
@@ -539,6 +546,7 @@ export default function FeeDetails() {
 
                                 <div className="flex gap-2">
                                     <Button
+                                        type="button"
                                         onClick={handleAddFees}
                                         loading={isAddingFees}
                                         loadingLabel="Processing..."

@@ -6,6 +6,7 @@ import { useUser } from "../hooks/useUser";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, isLoading, isAuthenticated } = useUser();
+  console.log("user", user);
   const location = useLocation();
 
 
