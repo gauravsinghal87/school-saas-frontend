@@ -13,7 +13,24 @@ export const login = async (data) => {
 };
 
 //admin
+<<<<<<< Updated upstream
 
+=======
+// Add Student Fees
+export const addStudentFees = async (data) => {
+    return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
+};
+
+// Get Student Fees Details
+export const getStudentFeesDetails = async (params) => {
+    return await api.get(`${apiPaths.admin.GET_STUDENT_FEES}`, { params });
+};
+
+// Get Payment History
+export const getPaymentHistoryDetails = async (studentId, params) => {
+    return await api.get(`${apiPaths.admin.PAYMENT_HISTORY}/${studentId}`, { params });
+};
+>>>>>>> Stashed changes
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
 };
@@ -92,11 +109,16 @@ export const getCurrentUser = async () => {
     return user;
     // const res = await api.get(apiPaths.auth.me);
 
+<<<<<<< Updated upstream
     // if (res.success) {
     //     const user = res.data;
 
     //     localStorage.setItem("user", JSON.stringify(user));
     //     localStorage.setItem("role", user?.role);
+=======
+    const user = JSON.parse(localStorage.getItem('user'))
+    return user
+>>>>>>> Stashed changes
 
     //     return user;
     // }
@@ -354,6 +376,103 @@ export const getStudentResults = async (studentId, params) => {
 
 
 
+<<<<<<< Updated upstream
+=======
+export const markAttendance = async (data) => {
+    return await api.post(apiPaths.teacher.MARK_ATTENDANCE, data);
+};
+
+export const getStudentAttendance = async (studentId) => {
+    return await api.get(apiPaths.teacher.GET_ATTENDANCE.replace("{studentId}", studentId));
+};
+
+export const getClassAttendance = async ({ classId, sectionId, date }) => {
+    const params = new URLSearchParams();
+
+    if (classId) params.append("classId", classId);
+    if (sectionId) params.append("sectionId", sectionId);
+    if (date) params.append("date", date);
+    const url = `${apiPaths.teacher.GET_CLASS_ATTENDANCE}?${params.toString()}`;
+
+    return await api.get(url);
+};
+export const getStudents = async (params) => {
+    return await api.get(apiPaths.teacher.GET_STUDENTS, {
+        params: {
+            page: params.page || 1,
+            limit: params.limit || 10,
+            search: params.search || undefined,
+
+            classId: params.classId || undefined,
+            sectionId: params.sectionId || undefined,
+            // sessionId: params.sessionId || undefined,
+            // status: params.status || undefined,
+        }
+    });
+};
+
+export const getHolidays = async ({ page = 1, limit = 10, search = "" }) => {
+    const url = apiPaths.admin.GET_HOLIDAYS
+        .replace("{page}", page)
+        .replace("{limit}", limit)
+        .replace("{search}", search);
+
+    return await api.get(url);
+};
+
+export const createAssignment = async (data) => {
+    return await api.post(
+        apiPaths.teacher.CREATE_ASSIGNMENT,
+        data,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+};
+
+export const getAssignments = async ({ sectionId }) => {
+    const url = apiPaths.teacher.GET_ASSIGNMENTS
+
+    return await api.get(url);
+};
+
+export const updateAssignment = async (payload) => {
+    const { id, formData } = payload;
+
+
+    const url = apiPaths.teacher.UPDATE_ASSIGNMENT.replace(
+        "{assignmentId}",
+        id
+    );
+
+    return await api.put(url, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+};
+
+export const deleteAssignment = async (assignmentId) => {
+    const url = apiPaths.teacher.DELETE_ASSIGNMENT.replace(
+        "{assignmentId}",
+        assignmentId
+    );
+
+    return await api.delete(url);
+};
+
+export const getTeacherTimetable = async ({ classId, sectionId }) => {
+    let url = apiPaths.teacher.GET_TIMETABLE.replace("{classId}", classId);
+    url = url.replace("{sectionId}", sectionId);
+    return await api.get(url);
+}
+
+export const getStudentTimetable = async () => {
+    return await api.get(apiPaths.students.STUDENT_TIMETABLE);
+};
+>>>>>>> Stashed changes
 
 
 <<<<<<< Updated upstream
@@ -390,3 +509,14 @@ export const submitAssignment = async (formData) => {
 };
 >>>>>>> Stashed changes
 
+// ==================== STUDENT EXAM TIMETABLE ====================
+
+export const getStudentExamTimetable = async (params) => {
+    return await api.get(apiPaths.students.EXAMS, { params });
+};
+
+// ==================== STUDENT PROFILE ====================
+
+export const getStudentProfile = async () => {
+    return await api.get(apiPaths.students.PROFILE);
+};

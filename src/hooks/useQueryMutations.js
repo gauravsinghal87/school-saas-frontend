@@ -99,6 +99,11 @@ import {
     getStudentSubjects,
     getStudentAssignments,
     submitAssignment,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+    getStudentExamTimetable,
+    getStudentProfile,
 >>>>>>> Stashed changes
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
@@ -262,6 +267,37 @@ export const deleteSubscriptionMutation = () => {
 };
 
 //admin
+<<<<<<< Updated upstream
+=======
+// Add this to your useQueryMutations.js file
+
+export const getPaymentHistory = (params) => {
+    return useAppQuery({
+        queryKey: ["paymentHistory", params],
+        apiCall: () => getStudentFeesDetails(params),
+    });
+};
+export const getPaymentHistoryDetailsQuery = (studentId, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["paymentHistoryDetails", studentId],
+        apiCall: () => getPaymentHistoryDetails(studentId),
+        enabled: enabled && !!studentId,
+    });
+};
+
+// Add Fees Mutation
+export const addFeesMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: addStudentFees,
+        successMessage: "Fees added successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["studentFees"]);
+            queryClient.invalidateQueries(["feesReport"]);
+        },
+    });
+};
+>>>>>>> Stashed changes
 export const academicYearList = (params) => {
     return useAppQuery({
         queryKey: ["academicYears", params],
@@ -1003,4 +1039,25 @@ export const submitAssignmentMutation = () => {
         },
     });
 };
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+
+
+export const useStudentExamTimetable = () => {
+    return useAppQuery({
+        queryKey: ["studentExamTimetable"],
+        apiCall: () => getStudentExamTimetable(),
+        enabled: true,
+    });
+};
+
+export const useStudentProfile = () => {
+    return useAppQuery({
+        queryKey: ["studentProfile"],
+        apiCall: () => getStudentProfile(),
+        enabled: true,
+    });
+};
+
 >>>>>>> Stashed changes
