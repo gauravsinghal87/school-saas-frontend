@@ -85,9 +85,9 @@ export default function ParentAssignments() {
     queryKey: ["parentAssignments"],
     queryFn: () => api.get("/api/parent/my-children-assignments"),
   });
-  
+
   const payload = response?.data;
-  const assignmentsList = payload?.children || payload || [];
+  const assignmentsList = payload?.data || payload || [];
 
   // Group assignments by studentName dynamically
   const groupedAssignments = useMemo(() => {

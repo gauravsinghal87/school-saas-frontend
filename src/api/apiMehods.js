@@ -642,7 +642,6 @@ export const submitAssignment = async (formData) => {
     });
 };
 
-<<<<<<< HEAD
 // ==================== STUDENT EXAM TIMETABLE ====================
 
 export const getStudentExamTimetable = async (params) => {
@@ -654,7 +653,6 @@ export const getStudentExamTimetable = async (params) => {
 export const getStudentProfile = async () => {
     return await api.get(apiPaths.students.PROFILE);
 };
-=======
 export const getMyChildren = () => {
   return api.get(apiPaths.parent.MY_CHILDREN);
 };
@@ -680,4 +678,3 @@ export const getParentProfile = () => {
 export const getParentPayments = () => {
   return api.get(apiPaths.parent.PAYMENTS);
 };
->>>>>>> b15a5c63c250ec74b64269ea07a4fcdedeee195c
