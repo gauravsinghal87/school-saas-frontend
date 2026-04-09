@@ -229,7 +229,7 @@ export default function StudentAttendancePage() {
             <div className="max-w-7xl mx-auto space-y-6">
 
                 {/* Header & Date Selector */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-border shadow-sm">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4  p-6 rounded-3xl border border-border shadow-sm">
                     <div className="flex items-center gap-4">
                         <div className="p-3 bg-primary/10 rounded-2xl text-primary">
                             <Users size={30} />

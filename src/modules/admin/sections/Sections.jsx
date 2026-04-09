@@ -155,7 +155,7 @@ export default function Sections() {
                                     onChange={(e) => setSelectedClass(e.target.value)}
                                     options={classOptions}
                                     placeholder="Filter by Class"
-                                    className="w-48 bg-white/80 backdrop-blur-sm border-gray-200 focus:border-emerald-500 transition-all duration-200"
+                                    className="w-48 bg-surface-page backdrop-blur-sm border-border focus:border-emerald-500 transition-all duration-200"
                                 />
                             </div>
                             <Button
@@ -174,7 +174,7 @@ export default function Sections() {
                 {/* Modern Section Cards */}
 
                 {/* Data Table Section */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="bg-surface-page rounded-2xl shadow-sm border border-border overflow-hidden">
 
                     <DataTable
                         title="All Sections"

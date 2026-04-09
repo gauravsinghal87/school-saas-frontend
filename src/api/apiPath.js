@@ -36,7 +36,13 @@ export const apiPaths = {
         GET_CLASS_SEC_SUB: '/api/staff/class/get',
         TEACHER_CHECK_IN: '/api/attendance/teacher/checkin',
         TEACHER_CHECK_OUT: '/api/attendance/teacher/checkout',
-        TEACHER_PROFILE: '/api/staff/teacher'
+        TEACHER_PROFILE: '/api/staff/teacher',
+        TEACHER_ASSIGNMENT_SUBMISSIONS: '/api/teacher/assignment&notes/teacher/submissions',
+        TEACHER_ASSIGNMENT_FEEDBACK: '/api/teacher/assignment&notes/feedback/{submissionId}',
+        // curl --location --request GET 'http://localhost:4000/api/attendance/teacher?teacherId=69cf4ec419bb01485740b6d3' \
+        TEACHER_IN_OUT_TIMES: '/api/attendance/teacher?teacherId={teacherId}',
+
+
     },
 
     superAdmin: {

@@ -104,8 +104,8 @@ export function BaseNavbar({ onMenuClick }) {
     const userName = getUserName();
     const userEmail = getUserEmail();
     const userRole = getUserRole();
- 
-    const designation = getDesignation(); 
+
+    const designation = getDesignation();
 
     const initials = userName
         .split(" ")
@@ -543,14 +543,14 @@ export function BaseNavbar({ onMenuClick }) {
                                     </div>
 
                                     {/* Quick Stats - Teacher Info */}
-                                  
 
-                               
+
+
 
                                     {/* Menu items */}
                                     <div className="p-2">
                                         {[
-                                            { label: "My Profile", Icon: User, path: "/profile" },
+                                            { label: "My Profile", Icon: User, path: "/staff/profile" },
                                             { label: "Settings", Icon: Settings, path: "/settings" },
                                         ].map(({ label, Icon, path }) => (
                                             <button

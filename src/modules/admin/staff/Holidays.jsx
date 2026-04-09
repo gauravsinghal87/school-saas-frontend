@@ -50,7 +50,7 @@ const Holidays = () => {
                             placeholder="Search by holiday name..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-12 py-3.5 bg-surface-card border border-border rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-['Montserrat'] text-sm shadow-sm"
+                            className="w-full pl-12 pr-12 py-3.5 text-text-heading bg-surface-page border border-border rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all font-['Montserrat'] text-sm shadow-sm"
                         />
                         {searchTerm && (
                             <button

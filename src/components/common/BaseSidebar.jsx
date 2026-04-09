@@ -142,160 +142,158 @@ const Sidebar = ({
     //     return location.pathname.split("/").includes(path);
     // };
     const isActivePath = (path) => {
-    return location.pathname.includes(path);
-};
+        return location.pathname.includes(path);
+    };
 
-const NavItem = ({ item }) => {
-    const Icon = item?.icon;
-    const isActive = isActivePath(item.path);
+    const NavItem = ({ item }) => {
+        const Icon = item?.icon;
+        const isActive = isActivePath(item.path);
 
-    const [open, setOpen] = useState(false);
+        const [open, setOpen] = useState(false);
 
-    const hasChildren = item.children && item.children.length > 0;
+        const hasChildren = item.children && item.children.length > 0;
 
-    // ✅ auto open if child active
-    useEffect(() => {
-        if (hasChildren) {
-            const isChildActive = item.children.some(child =>
-                location.pathname.includes(child.path)
-            );
-            if (isChildActive) setOpen(true);
-        }
-    }, [location.pathname]);
+        // ✅ auto open if child active
+        useEffect(() => {
+            if (hasChildren) {
+                const isChildActive = item.children.some(child =>
+                    location.pathname.includes(child.path)
+                );
+                if (isChildActive) setOpen(true);
+            }
+        }, [location.pathname]);
 
-    return (
-        <div className="w-full">
-            {/* 🔹 Parent Item (SAME UI AS BEFORE) */}
-            <button
-                onClick={() => {
-                    if (hasChildren) {
-                        setOpen(!open);
-                    } else {
-                        goTo(item.path, item.name);
-                    }
-                }}
-                className={`w-full flex items-center justify-between px-3 py-[9px] rounded-xl mb-[2px] transition-all duration-200 cursor-pointer overflow-visible ${
-                    isActive ? "nav-active-item" : ""
-                }`}
-                style={{
-                    backgroundColor: isActive
-                        ? "var(--color-sidebar-active)"
-                        : "transparent",
-                    color: isActive
-                        ? "var(--color-sidebar-text-active)"
-                        : "var(--color-sidebar-text)",
-                }}
-                onMouseEnter={(e) => {
-                    if (!isActive) {
-                        e.currentTarget.style.backgroundColor = "var(--color-sidebar-hover)";
-                        e.currentTarget.style.color = "var(--color-sidebar-text-hover)";
-                    }
-                }}
-                onMouseLeave={(e) => {
-                    if (!isActive) {
-                        e.currentTarget.style.backgroundColor = "transparent";
-                        e.currentTarget.style.color = "var(--color-sidebar-text)";
-                    }
-                }}
-            >
-                <div className="flex items-center gap-[10px] min-w-0">
-                    {/* ICON BOX SAME */}
-                    <div
-                        className="w-[30px] h-[30px] rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200"
-                        style={{
-                            backgroundColor: isActive
-                                ? "color-mix(in srgb, var(--color-primary) 14%, transparent)"
-                                : "var(--color-sidebar-hover)",
-                        }}
-                    >
-                        <Icon
-                            size={15}
-                            strokeWidth={isActive ? 2.2 : 1.8}
-                            style={{
-                                color: isActive
-                                    ? "var(--color-primary)"
-                                    : "var(--color-sidebar-text)",
-                            }}
-                        />
-                    </div>
-
-                    {/* TEXT SAME */}
-                    <span
-                        className={`truncate ${
-                            isActive ? "text-primary" : "text-sidebar-text"
-                        } text-[13px] font-medium`}
-                    >
-                        {item.name}
-                    </span>
-                </div>
-
-                {/* 🔹 Chevron */}
-                {hasChildren && (
-                    <ChevronRight
-                        size={14}
-                        strokeWidth={2.5}
-                        style={{
-                            transform: open ? "rotate(90deg)" : "rotate(0deg)",
-                            transition: "transform 0.25s ease",
-                            color: "color-mix(in srgb, var(--color-sidebar-text) 50%, transparent)",
-                        }}
-                    />
-                )}
-            </button>
-
-            {/* 🔹 Submenu (styled same theme) */}
-            {hasChildren && (
-                <div
+        return (
+            <div className="w-full">
+                {/* 🔹 Parent Item (SAME UI AS BEFORE) */}
+                <button
+                    onClick={() => {
+                        if (hasChildren) {
+                            setOpen(!open);
+                        } else {
+                            goTo(item.path, item.name);
+                        }
+                    }}
+                    className={`w-full flex items-center justify-between px-3 py-[9px] rounded-xl mb-[2px] transition-all duration-200 cursor-pointer overflow-visible ${isActive ? "nav-active-item" : ""
+                        }`}
                     style={{
-                        maxHeight: open ? `${item.children.length * 42}px` : "0px",
-                        overflow: "hidden",
-                        opacity: open ? 1 : 0,
-                        transition: "all 0.25s ease",
+                        backgroundColor: isActive
+                            ? "var(--color-sidebar-active)"
+                            : "transparent",
+                        color: isActive
+                            ? "var(--color-sidebar-text-active)"
+                            : "var(--color-sidebar-text)",
+                    }}
+                    onMouseEnter={(e) => {
+                        if (!isActive) {
+                            e.currentTarget.style.backgroundColor = "var(--color-sidebar-hover)";
+                            e.currentTarget.style.color = "var(--color-sidebar-text-hover)";
+                        }
+                    }}
+                    onMouseLeave={(e) => {
+                        if (!isActive) {
+                            e.currentTarget.style.backgroundColor = "transparent";
+                            e.currentTarget.style.color = "var(--color-sidebar-text)";
+                        }
                     }}
                 >
-                    <div className="ml-10 mt-1">
-                        {item.children.map((child) => {
-                            const isChildActive = location.pathname.includes(child.path);
+                    <div className="flex items-center gap-[10px] min-w-0">
+                        {/* ICON BOX SAME */}
+                        <div
+                            className="w-[30px] h-[30px] rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200"
+                            style={{
+                                backgroundColor: isActive
+                                    ? "color-mix(in srgb, var(--color-primary) 14%, transparent)"
+                                    : "var(--color-sidebar-hover)",
+                            }}
+                        >
+                            <Icon
+                                size={15}
+                                strokeWidth={isActive ? 2.2 : 1.8}
+                                style={{
+                                    color: isActive
+                                        ? "var(--color-primary)"
+                                        : "var(--color-sidebar-text)",
+                                }}
+                            />
+                        </div>
 
-                            return (
-                                <button
-                                    key={child.id}
-                                    onClick={() => goTo(child.path, child.name)}
-                                    className="w-full text-left px-3 py-[7px] rounded-lg text-[12px] transition-all duration-200"
-                                    style={{
-                                        backgroundColor: isChildActive
-                                            ? "var(--color-sidebar-active)"
-                                            : "transparent",
-                                        color: isChildActive
-                                            ? "var(--color-sidebar-text-active)"
-                                            : "var(--color-sidebar-text)",
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        if (!isChildActive) {
-                                            e.currentTarget.style.backgroundColor =
-                                                "var(--color-sidebar-hover)";
-                                            e.currentTarget.style.color =
-                                                "var(--color-sidebar-text-hover)";
-                                        }
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        if (!isChildActive) {
-                                            e.currentTarget.style.backgroundColor = "transparent";
-                                            e.currentTarget.style.color =
-                                                "var(--color-sidebar-text)";
-                                        }
-                                    }}
-                                >
-                                    {child.name}
-                                </button>
-                            );
-                        })}
+                        {/* TEXT SAME */}
+                        <span
+                            className={`truncate ${isActive ? "text-primary" : "text-sidebar-text"
+                                } text-[13px] font-medium`}
+                        >
+                            {item.name}
+                        </span>
                     </div>
-                </div>
-            )}
-        </div>
-    );
-};
+
+                    {/* 🔹 Chevron */}
+                    {hasChildren && (
+                        <ChevronRight
+                            size={14}
+                            strokeWidth={2.5}
+                            style={{
+                                transform: open ? "rotate(90deg)" : "rotate(0deg)",
+                                transition: "transform 0.25s ease",
+                                color: "color-mix(in srgb, var(--color-sidebar-text) 50%, transparent)",
+                            }}
+                        />
+                    )}
+                </button>
+
+                {/* 🔹 Submenu (styled same theme) */}
+                {hasChildren && (
+                    <div
+                        style={{
+                            maxHeight: open ? `${item.children.length * 42}px` : "0px",
+                            overflow: "hidden",
+                            opacity: open ? 1 : 0,
+                            transition: "all 0.25s ease",
+                        }}
+                    >
+                        <div className="ml-10 mt-1">
+                            {item.children.map((child) => {
+                                const isChildActive = location.pathname.includes(child.path);
+
+                                return (
+                                    <button
+                                        key={child.id}
+                                        onClick={() => goTo(child.path, child.name)}
+                                        className="w-full text-left px-3 py-[7px] rounded-lg text-[12px] transition-all duration-200"
+                                        style={{
+                                            backgroundColor: isChildActive
+                                                ? "var(--color-text-active)"
+                                                : "transparent",
+                                            color: isChildActive
+                                                ? "var(--color-sidebar-text-active)"
+                                                : "var(--color-sidebar-text)",
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            if (!isChildActive) {
+                                                e.currentTarget.style.backgroundColor =
+                                                    "var(--color-sidebar-hover)";
+                                                e.currentTarget.style.color =
+                                                    "var(--color-sidebar-text-hover)";
+                                            }
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            if (!isChildActive) {
+                                                e.currentTarget.style.backgroundColor = "transparent";
+                                                e.currentTarget.style.color =
+                                                    "var(--color-sidebar-text)";
+                                            }
+                                        }}
+                                    >
+                                        {child.name}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+            </div>
+        );
+    };
     // ── Section ─────────────────────────────────────────────────────────────────
 
     const Section = ({ title, items, sectionId }) => {

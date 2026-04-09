@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
-import { Plus, BookOpen, Eye, Edit3, Trash2, UploadCloud, FileText } from "lucide-react"; // Added icons
+import { Plus, BookOpen, Eye, Edit3, Trash2, UploadCloud, FileText, Users } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import DataTable from "../../../components/common/ReusableTable";
 import SlidePanel from "../../../components/common/SlidePanel";
 import Button from "../../../components/common/Button";
@@ -16,18 +17,16 @@ import Textarea from "../../../components/common/Textarea";
 
 const PANEL_MODE = { ADD: "add", EDIT: "edit", VIEW: "view" };
 
-
 function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
-    // 1. Correct the mapping based on your API response structure
     const [values, setValues] = useState({
-        classId: defaultValues?.class?._id ?? "",    // Changed from classId to class
-        sectionId: defaultValues?.section?._id ?? "", // Changed from sectionId to section
-        subjectId: defaultValues?.subject?._id ?? "", // Changed from subjectId to subject
+        classId: defaultValues?.class?._id ?? "",
+        sectionId: defaultValues?.section?._id ?? "",
+        subjectId: defaultValues?.subject?._id ?? "",
         title: defaultValues?.title ?? "",
         description: defaultValues?.description ?? "",
         dueDate: defaultValues?.dueDate ? defaultValues.dueDate.split("T")[0] : "",
-        file: null, // This holds the NEW file to upload
-        existingFile: defaultValues?.fileUrl?.secure_url ?? null, // URL from Cloudinary
+        file: null,
+        existingFile: defaultValues?.fileUrl?.secure_url ?? null,
     });
 
     const isView = mode === PANEL_MODE.VIEW;
@@ -66,7 +65,6 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Selection Block */}
             <div className="grid grid-cols-1 gap-4 p-4 bg-surface-page rounded-2xl border border-border">
                 <p className="text-[10px] font-bold text-primary uppercase tracking-widest mb-1">Target Audience</p>
                 <div className="space-y-1">
@@ -113,21 +111,13 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
             <Input label="Due Date" type="date" value={values.dueDate} onChange={(e) => setValues({ ...values, dueDate: e.target.value })} readOnly={isView} required />
             <Textarea label="Instructions" value={values.description} onChange={(e) => setValues({ ...values, description: e.target.value })} readOnly={isView} rows={3} />
 
-            {/* File Upload / View Section */}
             <div className="space-y-2">
                 <label className="text-sm font-semibold text-text-heading">Attachment</label>
-
-                {/* 1. Show existing Cloudinary file if in View/Edit mode */}
                 {values.existingFile && !values.file && (
                     <div className="flex items-center justify-between p-3 bg-primary/5 border border-primary/20 rounded-xl">
                         <div className="flex items-center gap-3 overflow-hidden">
                             <FileText size={20} className="text-primary flex-shrink-0" />
-                            <a
-                                href={values.existingFile}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="text-xs font-bold text-primary hover:underline truncate"
-                            >
+                            <a href={values.existingFile} target="_blank" rel="noreferrer" className="text-xs font-bold text-primary hover:underline truncate">
                                 View Current Attachment
                             </a>
                         </div>
@@ -138,8 +128,6 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
                         )}
                     </div>
                 )}
-
-                {/* 2. Show new file selected for upload */}
                 {values.file && (
                     <div className="flex items-center justify-between p-3 bg-amber-50 border border-amber-200 rounded-xl">
                         <div className="flex items-center gap-3">
@@ -151,15 +139,9 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
                         </button>
                     </div>
                 )}
-
-                {/* 3. Upload Box (only show if no file is present and not in View mode) */}
                 {!isView && !values.file && !values.existingFile && (
                     <div className="relative group border-2 border-dashed border-border rounded-2xl p-6 text-center hover:border-primary hover:bg-primary/5 transition-all">
-                        <input
-                            type="file"
-                            className="absolute inset-0 opacity-0 cursor-pointer"
-                            onChange={(e) => setValues({ ...values, file: e.target.files[0] })}
-                        />
+                        <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" onChange={(e) => setValues({ ...values, file: e.target.files[0] })} />
                         <UploadCloud className="mx-auto text-text-secondary group-hover:text-primary mb-1" size={24} />
                         <p className="text-xs font-medium text-text-secondary group-hover:text-primary">Click to upload assignment file</p>
                     </div>
@@ -176,32 +158,35 @@ export default function AssignmentsPage() {
     const [limit, setLimit] = useState(10);
     const [search, setSearch] = useState("");
     const [panel, setPanel] = useState({ open: false, mode: null, row: null });
+    const navigate = useNavigate();
+
+    // Get teacher/section ID from localStorage or context
+    const sectionId = localStorage.getItem('teacherSectionId') || '69ce4ef9b99f96284e262cb5';
+    const classId = localStorage.getItem('teacherClassId') || '69ce4ef9b99f96284e262cb3';
 
     const { data: apiResponse, isLoading, refetch } = getAssignmentsQuery({
-        id: '69ce4ef9b99f96284e262cb5',
+        sectionId: sectionId, // Make sure your hook accepts sectionId
         page,
         limit,
         search
     });
 
     const { data: classResponse } = getClassSecSubQuery({
-        classId: '69ce4ef9b99f96284e262cb3',
-        sectionId: '69ce4ef9b99f96284e262cb5'
+        classId: classId,
+        sectionId: sectionId
     });
 
     const createMutation = createAssignmentMutation();
     const updateMutation = updateAssignmentMutation();
     const deleteMutation = deleteAssignmentMutation();
 
-    const assignments = apiResponse?.data?.docs ?? [];
-    const total = apiResponse?.data?.totalDocs ?? 0;
-    const classMetaData = classResponse?.results ?? [];
+    const assignments = apiResponse?.data?.docs ?? apiResponse?.data ?? [];
+    const total = apiResponse?.data?.totalDocs ?? apiResponse?.totalDocs ?? 0;
+    const classMetaData = classResponse?.results ?? classResponse?.data ?? [];
 
     const handleFormSubmit = (formData) => {
         const isAdd = panel.mode === PANEL_MODE.ADD;
         const action = isAdd ? createMutation.mutate : updateMutation.mutate;
-
-        // If editing, we need to pass the ID and the data
         const payload = isAdd ? formData : { id: panel.row._id, formData };
 
         action(payload, {
@@ -226,16 +211,23 @@ export default function AssignmentsPage() {
         }
     };
 
+
+
     return (
         <div className="min-h-screen bg-surface-page px-4 py-8">
             <div className="max-w-7xl mx-auto space-y-6">
-                <div className="flex justify-between items-center">
-                    <div>
-                        <h1 className="text-2xl font-bold text-text-heading italic flex items-center gap-2">
-                            <BookOpen className="text-primary" /> Assignments
-                        </h1>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4  p-6 rounded-3xl border border-border shadow-sm">
+                    <div className="flex items-center gap-4">
+                        <div className="p-3 bg-primary/10 rounded-2xl text-primary">
+                            <BookOpen size={30} />
+                        </div>
+                        <div>
+                            <h1 className="text-2xl font-bold text-text-heading">Assignments</h1>
+                            <p className="text-sm text-text-secondary font-medium">Create and manage assignments for your students</p>
+                        </div>
                     </div>
-                    <Button onClick={() => setPanel({ open: true, mode: PANEL_MODE.ADD, row: null })} className="flex items-center gap-2">
+
+                    <Button onClick={() => setPanel({ open: true, mode: PANEL_MODE.ADD, row: null })} className="flex items-center gap-2 h-12 px-6 rounded-2xl shadow-lg shadow-primary/20">
                         <Plus size={18} /> New Assignment
                     </Button>
                 </div>
@@ -277,7 +269,6 @@ export default function AssignmentsPage() {
                     onPageSizeChange={(val) => { setLimit(val); setPage(1); }}
                     onSearch={(val) => { setSearch(val); setPage(1); }}
                     searchPlaceholder="Search assignments..."
-                    // ── UPDATED ACTION CELL ──
                     actionCell={(row) => (
                         <div className="flex items-center gap-1">
                             <button
@@ -300,6 +291,13 @@ export default function AssignmentsPage() {
                                 title="Delete Assignment"
                             >
                                 <Trash2 size={18} />
+                            </button>
+                            <button
+                                onClick={() => navigate(`/staff/assignments/${row._id}/submissions`)}
+                                className="p-2 hover:bg-success/10 rounded-lg text-success transition-colors"
+                                title="View Submissions"
+                            >
+                                <Users size={18} />
                             </button>
                         </div>
                     )}

@@ -116,6 +116,9 @@ import {
     getStudentSubjects,
     getStudentAssignments,
     submitAssignment,
+    giveFeedbackOnSubmission,
+    getTeacherAssignmentSubmissions,
+    getTeacherInOutTimes,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -296,15 +299,15 @@ export const getPaymentHistoryDetailsQuery = (studentId, enabled = true) => {
 
 // Add Fees Mutation
 export const addFeesMutation = () => {
-  const queryClient = useQueryClient();
-  return useAppMutation({
-    apiCall: addStudentFees,
-    successMessage: "Fees added successfully 🎉",
-    onSuccessCallback: () => {
-      queryClient.invalidateQueries(["studentFees"]);
-      queryClient.invalidateQueries(["feesReport"]);
-    },
-  });
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: addStudentFees,
+        successMessage: "Fees added successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["studentFees"]);
+            queryClient.invalidateQueries(["feesReport"]);
+        },
+    });
 };
 export const academicYearList = (params) => {
     return useAppQuery({
@@ -1173,6 +1176,23 @@ export const deleteAssignmentMutation = () => {
 };
 
 
+export const getStudentSubmissionsQuery = (assignmentId) => {
+    return useAppQuery({
+        queryKey: ["studentSubmissions", assignmentId],
+        apiCall: () => getTeacherAssignmentSubmissions({ assignmentId }),
+        enabled: !!assignmentId,
+    });
+};
+
+
+export const giveFeedbackOnSubmissionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: giveFeedbackOnSubmission,
+        successMessage: "Feedback submitted successfully 🎉",
+    });
+};
+
 export const getTeacherTimetableQuery = ({ classId, sectionId }) => {
     return useAppQuery({
         queryKey: ["teacherTimetable", classId, sectionId],
@@ -1180,6 +1200,15 @@ export const getTeacherTimetableQuery = ({ classId, sectionId }) => {
         enabled: !!classId && !!sectionId,
     });
 };
+// 
+
+export const getTeacherInOutTimesQuery = ({ teacherId }) => {
+    return useAppQuery({
+        queryKey: ["teacherInOutTimes", teacherId],
+        apiCall: () => getTeacherInOutTimes({ teacherId }),
+        enabled: !!teacherId,
+    });
+}
 
 
 

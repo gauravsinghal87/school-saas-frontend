@@ -20,17 +20,17 @@ export const login = async (data) => {
 //admin
 // Add Student Fees
 export const addStudentFees = async (data) => {
-  return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
+    return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
 };
 
 // Get Student Fees Details
 export const getStudentFeesDetails = async (params) => {
-  return await api.get(`${apiPaths.admin.GET_STUDENT_FEES}`,{params});
+    return await api.get(`${apiPaths.admin.GET_STUDENT_FEES}`, { params });
 };
 
 // Get Payment History
 export const getPaymentHistoryDetails = async (studentId, params) => {
-  return await api.get(`${apiPaths.admin.PAYMENT_HISTORY}/${studentId}`, { params });
+    return await api.get(`${apiPaths.admin.PAYMENT_HISTORY}/${studentId}`, { params });
 };
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
@@ -105,15 +105,31 @@ export const fetchRolesList = async () => {
 };
 
 export const getCurrentUser = async () => {
+    const role = localStorage.getItem("role");
+    
+    switch (role) {
+        case "SUPER_ADMIN":
+            return await api.get(apiPaths.superAdmin.PROFILE);
+        case "SCHOOL_ADMIN":
+            return await api.get(apiPaths.admin.PROFILE);
+        case "STAFF":
+            return await api.get(apiPaths.teacher.TEACHER_PROFILE);
+        case "STUDENT":
+            return await api.get(apiPaths.students.STUDENT_PROFILE);
+        case "PARENT":
+            return await api.get(apiPaths.parent.PROFILE);
+        default:
+            return null;
+    }
+};
+
+export const getTeacherProfile = async () => {
 
     const res = await api.get(apiPaths.teacher.TEACHER_PROFILE);
-
     if (res.success) {
         const user = res.data;
         return user;
     }
-
-
 };
 
 export const getSubscriptionList = async (params) => {
@@ -158,6 +174,9 @@ export const getTeachers = () => {
 export const getAdminTeachers = () => {
     return api.get(apiPaths.teacher.ADMIN_TEACHERS);
 };
+
+
+
 
 // export const getStudents = () => {
 //     return api.get(apiPaths.students.list);
@@ -533,6 +552,21 @@ export const deleteAssignment = async (assignmentId) => {
     return await api.delete(url);
 };
 
+
+// TEACHER_ASSIGNMENT_SUBMISSIONS
+export const getTeacherAssignmentSubmissions = async (params) => {
+    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_SUBMISSIONS;
+    return await api.get(url);
+}
+
+export const giveFeedbackOnSubmission = async (data) => {
+    const { submissionId, feedback } = data;
+    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_FEEDBACK.replace("{submissionId}", submissionId);
+    return await api.put(url, { feedback });
+}
+
+
+
 export const getTeacherTimetable = async ({ classId, sectionId }) => {
     let url = apiPaths.teacher.GET_TIMETABLE.replace("{classId}", classId);
     url = url.replace("{sectionId}", sectionId);
@@ -558,7 +592,11 @@ export const teacherCheckOut = () => {
     return api.post(apiPaths.teacher.TEACHER_CHECK_OUT);
 };
 
-
+export const getTeacherInOutTimes = ({ teacherId }) => {
+    console.log('Fetching in/out times for teacherId:', teacherId); // Debug log
+    const url = apiPaths.teacher.TEACHER_IN_OUT_TIMES.replace("{teacherId}", teacherId);
+    return api.get(url);
+};
 
 
 
