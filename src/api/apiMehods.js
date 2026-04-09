@@ -13,24 +13,6 @@ export const login = async (data) => {
 };
 
 //admin
-<<<<<<< Updated upstream
-
-=======
-// Add Student Fees
-export const addStudentFees = async (data) => {
-    return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
-};
-
-// Get Student Fees Details
-export const getStudentFeesDetails = async (params) => {
-    return await api.get(`${apiPaths.admin.GET_STUDENT_FEES}`, { params });
-};
-
-// Get Payment History
-export const getPaymentHistoryDetails = async (studentId, params) => {
-    return await api.get(`${apiPaths.admin.PAYMENT_HISTORY}/${studentId}`, { params });
-};
->>>>>>> Stashed changes
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
 };
@@ -109,16 +91,11 @@ export const getCurrentUser = async () => {
     return user;
     // const res = await api.get(apiPaths.auth.me);
 
-<<<<<<< Updated upstream
     // if (res.success) {
     //     const user = res.data;
 
     //     localStorage.setItem("user", JSON.stringify(user));
     //     localStorage.setItem("role", user?.role);
-=======
-    const user = JSON.parse(localStorage.getItem('user'))
-    return user
->>>>>>> Stashed changes
 
     //     return user;
     // }
@@ -169,9 +146,9 @@ export const getAdminTeachers = () => {
     return api.get(apiPaths.teachers.ADMIN_TEACHERS);
 };
 
-export const getStudents = () => {
-    return api.get(apiPaths.students.list);
-};
+// export const getStudents = () => {
+//     return api.get(apiPaths.students.list);
+// };
 
 
 export const createRole = (data) => {
@@ -376,8 +353,6 @@ export const getStudentResults = async (studentId, params) => {
 
 
 
-<<<<<<< Updated upstream
-=======
 export const markAttendance = async (data) => {
     return await api.post(apiPaths.teacher.MARK_ATTENDANCE, data);
 };
@@ -472,24 +447,18 @@ export const getTeacherTimetable = async ({ classId, sectionId }) => {
 export const getStudentTimetable = async () => {
     return await api.get(apiPaths.students.STUDENT_TIMETABLE);
 };
->>>>>>> Stashed changes
 
 
-<<<<<<< Updated upstream
-=======
 export const getClassSecSub = async () => {
     return await api.get(apiPaths.teacher.GET_CLASS_SEC_SUB);
 }
->>>>>>> Stashed changes
 
 
 
 
-<<<<<<< Updated upstream
 
 
 
-=======
 // STUDENT MODULE
 
 export const getStudentSubjects = async (studentId) => {
@@ -507,7 +476,6 @@ export const submitAssignment = async (formData) => {
         headers: { "Content-Type": "multipart/form-data" }
     });
 };
->>>>>>> Stashed changes
 
 // ==================== STUDENT EXAM TIMETABLE ====================
 

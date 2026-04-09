@@ -9,24 +9,14 @@ export const apiPaths = {
     students: {
         list: "/students",
         create: "/students",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
-        STUDENT_TIMETABLE: '/api/timetable/timetable',
->>>>>>> Stashed changes
         UPLOAD_STUDENT_DOCS: "/api/staff",
         GET_STUDENT_BY_ID: "/api/student/",
         ENROLL_STUDENT: "/api/student/enroll",
         SUBJECTS: "/api/student/subjects",
         ASSIGNMENTS: "/api/student/assignments",
         SUBMIT_ASSIGNMENT: "/api/student/submit",
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
         EXAMS: "/api/student/exam-timetable",
         PROFILE: "/api/student/profile",
->>>>>>> Stashed changes
     },
     teachers: {
         // list: "/teachers",

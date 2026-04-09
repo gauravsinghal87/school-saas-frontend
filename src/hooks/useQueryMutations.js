@@ -88,8 +88,6 @@ import {
     generateResult,
     getExamResults,
     getStudentResults,
-<<<<<<< Updated upstream
-=======
     createAssignment,
     getAssignments,
     updateAssignment,
@@ -99,12 +97,8 @@ import {
     getStudentSubjects,
     getStudentAssignments,
     submitAssignment,
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
     getStudentExamTimetable,
     getStudentProfile,
->>>>>>> Stashed changes
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -267,8 +261,6 @@ export const deleteSubscriptionMutation = () => {
 };
 
 //admin
-<<<<<<< Updated upstream
-=======
 // Add this to your useQueryMutations.js file
 
 export const getPaymentHistory = (params) => {
@@ -297,7 +289,6 @@ export const addFeesMutation = () => {
         },
     });
 };
->>>>>>> Stashed changes
 export const academicYearList = (params) => {
     return useAppQuery({
         queryKey: ["academicYears", params],
@@ -923,9 +914,6 @@ export const studentResultsList = (studentId, params, enabled = true) => {
 
 
 
-<<<<<<< Updated upstream
-=======
-
 
 export const createAssignmentMutation = () => {
     const queryClient = useQueryClient();
@@ -1039,9 +1027,6 @@ export const submitAssignmentMutation = () => {
         },
     });
 };
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 
 
 export const useStudentExamTimetable = () => {
@@ -1059,5 +1044,3 @@ export const useStudentProfile = () => {
         enabled: true,
     });
 };
-
->>>>>>> Stashed changes

@@ -125,10 +125,6 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
 
             <Route path="staff" element={<AdminStaff />} />
-<<<<<<< Updated upstream
-            {/* <Route path="teachers" element={<Teachers />} /> */}
-=======
->>>>>>> Stashed changes
           </Route>
 
           {/* 🎓 Student */}
