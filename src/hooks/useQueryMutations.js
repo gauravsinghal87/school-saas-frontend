@@ -115,12 +115,19 @@ import {
     getStudentSubjects,
     getStudentAssignments,
     submitAssignment,
+<<<<<<< HEAD
     getStudentExamTimetable,
     getStudentProfile,
     giveFeedbackOnSubmission,
     getTeacherAssignmentSubmissions,
     getTeacherInOutTimes,
     getUsersList,
+=======
+    getParentStudentAttendance,
+    getMyChildren,
+    getParentProfile,
+    getParentPayments,
+>>>>>>> b15a5c63c250ec74b64269ea07a4fcdedeee195c
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -1313,6 +1320,7 @@ export const submitAssignmentMutation = () => {
     });
 };
 
+<<<<<<< HEAD
 
 export const useStudentExamTimetable = () => {
     return useAppQuery({
@@ -1329,3 +1337,40 @@ export const useStudentProfile = () => {
         enabled: true,
     });
 };
+=======
+export const useMyChildren = () => {
+  return useAppQuery({
+    queryKey: ["myChildren"],
+    apiCall: getMyChildren,
+    staleTime: 1000 * 60 * 10, // cache for 10 min
+  });
+};
+
+export const useParentStudentAttendance = ({
+  studentId,
+  startDate,
+  endDate,
+}) => {
+  return useAppQuery({
+    queryKey: ["attendance", studentId, startDate, endDate],
+    apiCall: () =>
+      getParentStudentAttendance({ studentId, startDate, endDate }),
+    enabled: !!studentId,
+  });
+};
+
+export const useParentProfile = () => {
+  return useAppQuery({
+    queryKey: ["parentProfile"],
+    apiCall: getParentProfile,
+    staleTime: 1000 * 60 * 5, // cache 5 min
+  });
+};
+export const useParentPayments = () => {
+  return useAppQuery({
+    queryKey: ["parentPayments"],
+    apiCall: getParentPayments,
+    staleTime: 1000 * 60 * 5, // 5 min cache
+  });
+};
+>>>>>>> b15a5c63c250ec74b64269ea07a4fcdedeee195c

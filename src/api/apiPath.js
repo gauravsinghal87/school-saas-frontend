@@ -9,6 +9,7 @@ export const apiPaths = {
     students: {
         list: "/api/student",
         create: "/students",
+<<<<<<< HEAD
         UPLOAD_STUDENT_DOCS: "/api/staff",
         GET_STUDENT_BY_ID: "/api/student/",
         ENROLL_STUDENT: "/api/student/enroll",
@@ -18,6 +19,15 @@ export const apiPaths = {
         SUBMIT_ASSIGNMENT: "/api/student/submit",
         EXAMS: "/api/student/exam-timetable",
         PROFILE: "/api/student/profile",
+=======
+  STUDENT_ATTENDANCE: "/api/attendance/student",
+
+    },
+   parent: {
+  MY_CHILDREN: "/api/parent/my-children",
+    MY_PROFILE: "/api/parent",
+      PAYMENTS: "/api/parent/payments",
+>>>>>>> b15a5c63c250ec74b64269ea07a4fcdedeee195c
 
     },
     teacher: {

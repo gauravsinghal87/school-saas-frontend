@@ -4,7 +4,6 @@ import { lazy, Suspense } from "react";
 import ProtectedRoute from "./ProtectedRoute";
 import { ROLES } from "../utils/roles";
 
-
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
 const NotFound = lazy(() => import("../components/common/NotFound"));
@@ -31,10 +30,17 @@ import FeesDetails from "../modules/admin/reports/fees/FeesDetails.jsx";
 import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
 import StudentAttendancePage from "../modules/staff/attendance/AttendancePage.jsx";
 import TeacherProfile from "../modules/staff/teachers/TeacherProifle.jsx";
+<<<<<<< HEAD
 import AssignmentSubmission from "../modules/staff/assignments/AssignmentSubmission.jsx";
 import TeacherAttendanceRecords from "../modules/staff/TeacherAttendanceRecords.jsx";
 import AttendanceReport from "../modules/admin/reports/attendance/AttendanceReport.jsx";
 import AttendanceDetail from "../modules/admin/reports/attendance/AttendanceDetail.jsx";
+=======
+import ParentChildrenAttendance from "../modules/parent/children/ParentChildrenAttendance.jsx";
+import ParentProfile from "../modules/parent/profile/ParentProfile.jsx";
+import ParentPayments from "../modules/parent/payments/ParentPayments.jsx";
+import ParentAssignments from "../modules/parent/assignments/ParentAssignments.jsx";
+>>>>>>> b15a5c63c250ec74b64269ea07a4fcdedeee195c
 //staff imports
 const StaffDashboard = lazy(
   () => import("../modules/staff/dashboard/StaffDashboard"),
@@ -65,7 +71,6 @@ const Classes = lazy(() => import("../modules/admin/classes/Classes"));
 const Fees = lazy(() => import("../modules/admin/fees/Fees"));
 const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
-
 const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
 const ClassSubjects = lazy(
   () => import("../modules/admin/classes/ClassSubjects"),
@@ -84,11 +89,20 @@ const AdminDashboard = lazy(
 const StudentDashboard = lazy(
   () => import("../modules/student/dashboard/Dashboard"),
 );
+<<<<<<< HEAD
 const StudentExamTimetable = lazy(() => import("../modules/student/exams/ExamTimetable"));
 const StudentProfile = lazy(() => import("../modules/student/profile/Profile"));
 
 const StudentSubjects = lazy(() => import("../modules/student/subjects/Subjects"));
 const StudentAssignments = lazy(() => import("../modules/student/assignments/Assignments"));
+=======
+const StudentSubjects = lazy(
+  () => import("../modules/student/subjects/Subjects"),
+);
+const StudentAssignments = lazy(
+  () => import("../modules/student/assignments/Assignments"),
+);
+>>>>>>> b15a5c63c250ec74b64269ea07a4fcdedeee195c
 const SuperAdminDashboard = lazy(
   () => import("../modules/superAdmin/dashboard/SuperAdminDashboard"),
 );
@@ -172,10 +186,13 @@ const AppRoutes = () => {
             <Route path="*" element={<NotFound />} />
             <Route path="subjects" element={<StudentSubjects />} />
             <Route path="assignments" element={<StudentAssignments />} />
+<<<<<<< HEAD
             <Route path="exam-timetable" element={<StudentExamTimetable />} />
             <Route path="profile" element={<StudentProfile />} />
 
 
+=======
+>>>>>>> b15a5c63c250ec74b64269ea07a4fcdedeee195c
           </Route>
 
           <Route
@@ -187,16 +204,15 @@ const AppRoutes = () => {
             }
           >
             <Route path="dashboard" element={<ParentDashboard />} />
+            <Route path="children" element={<ParentChildrenAttendance />} />
+            <Route path="payments" element={<ParentPayments />} />
+            <Route path="profile" element={<ParentProfile />} />
+            <Route path="assignments" element={<ParentAssignments />} />
             <Route path="*" element={<NotFound />} />
           </Route>
 
           {/* staff */}
-          <Route
-            path="/staff"
-            element={
-              <StaffLayout />
-            }
-          >
+          <Route path="/staff" element={<StaffLayout />}>
             <Route path="dashboard" element={<StaffDashboard />} />
             <Route path="teachers" element={<StaffTeachers />} />
             <Route path="students" element={<StaffStudents />} />
