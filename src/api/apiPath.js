@@ -14,9 +14,11 @@ export const apiPaths = {
         ENROLL_STUDENT: "/api/student/enroll",
         SUBJECTS: "/api/student/subjects",
         ASSIGNMENTS: "/api/student/assignments",
+        STUDENT_TIMETABLE: '/api/timetable/timetable',
         SUBMIT_ASSIGNMENT: "/api/student/submit",
         EXAMS: "/api/student/exam-timetable",
         PROFILE: "/api/student/profile",
+
     },
     teacher: {
         // list: "/teachers",
