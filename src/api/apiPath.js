@@ -7,7 +7,7 @@ export const apiPaths = {
         me: "/api/user/me",
     },
     students: {
-        list: "/students",
+        list: "/api/student",
         create: "/students",
         UPLOAD_STUDENT_DOCS: "/api/staff",
         GET_STUDENT_BY_ID: "/api/student/",
@@ -18,12 +18,39 @@ export const apiPaths = {
         EXAMS: "/api/student/exam-timetable",
         PROFILE: "/api/student/profile",
     },
-    teachers: {
+    teacher: {
         // list: "/teachers",
         create: "/teachers",
         teachersList: "/teachers",
         createTeacher: "/create/teacher",
         ADMIN_TEACHERS: "/api/admin/teachers",
+
+        MARK_ATTENDANCE: "/api/attendance/student/mark",
+        GET_ATTENDANCE: "/api/attendance/student?studentId={studentId}",
+        GET_CLASS_ATTENDANCE: "/api/attendance/student/class",
+        GET_STUDENTS: "/api/student",
+        CREATE_HOLIDAY: "/api/holiday",
+        UPDATE_HOLIDAY: "/api/holiday/{holidayId}",
+        DELETE_HOLIDAY: "/api/holiday/{holidayId}",
+        GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
+
+
+        CREATE_ASSIGNMENT: "/api/teacher/assignment&notes/upload-assignment",
+        UPDATE_ASSIGNMENT: "/api/teacher/assignment&notes/update-assignment/{assignmentId}",
+        GET_ASSIGNMENTS: "/api/teacher/assignment&notes/get-assignment",
+        DELETE_ASSIGNMENT: "/api/teacher/assignment&notes/delete-assignment/{assignmentId}",
+
+        GET_TIMETABLE: "/api/timetable/timetable?classId={classId}&sectionId={sectionId}",
+        GET_CLASS_SEC_SUB: '/api/staff/class/get',
+        TEACHER_CHECK_IN: '/api/attendance/teacher/checkin',
+        TEACHER_CHECK_OUT: '/api/attendance/teacher/checkout',
+        TEACHER_PROFILE: '/api/staff/teacher',
+        TEACHER_ASSIGNMENT_SUBMISSIONS: '/api/teacher/assignment&notes/teacher/submissions',
+        TEACHER_ASSIGNMENT_FEEDBACK: '/api/teacher/assignment&notes/feedback/{submissionId}',
+        // curl --location --request GET 'http://localhost:4000/api/attendance/teacher?teacherId=69cf4ec419bb01485740b6d3' \
+        TEACHER_IN_OUT_TIMES: '/api/attendance/teacher?teacherId={teacherId}',
+
+
     },
 
     superAdmin: {
@@ -72,6 +99,10 @@ export const apiPaths = {
         REMOVE_CLASS_SUBJECTS: 'api/admin/remove-subjects',
         roles: "",
         staff: "/api/staff",
+        CREATE_EXAM: '/api/admin/exam',
+        UPDATE_EXAM: '/api/admin/exam',
+        CREATE_STAFF: "/api/staff/create",
+        UPLOAD_STAFF_DOCS: "/api/staff",
         // Exam Management
         EXAM: '/api/exam',
         EXAM_SUBJECTS: '/api/exam/:id/subjects',
@@ -79,6 +110,16 @@ export const apiPaths = {
         EXAM_GENERATE_RESULT: '/api/exam/:id/generate-result',
         EXAM_RESULTS: '/api/exam/:id/results',
         EXAM_STUDENT_RESULTS: '/api/exam/student/:id/results',
+
+        CREATE_HOLIDAY: "/api/holiday",
+        UPDATE_HOLIDAY: "/api/holiday/{holidayId}",
+        DELETE_HOLIDAY: "/api/holiday/{holidayId}",
+        GET_HOLIDAYS: "/api/holiday?page={page}&limit={limit}&search={search}",
+
+
+        ADD_STUDENT_FEES: '/api/admin/fees/student-payment',
+        GET_STUDENT_FEES: '/api/admin/student-list',
+        PAYMENT_HISTORY: '/api/admin/student-detail',
 
     }
 

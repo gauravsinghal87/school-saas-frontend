@@ -4,16 +4,15 @@ import { useNavigate } from "react-router-dom";
 import {
     Bell, Settings, Search, X,
     Sun, Moon, Palette, LogOut,
-    User, Menu,
-    Laptop,
+    User, Menu, Laptop, Briefcase, BookOpen, Users as UsersIcon, Mail, Phone, MapPin, Calendar,
 } from "lucide-react";
 import { useTheme } from "../../context/ThemContext";
 import { useUser } from "../../hooks/useUser";
-
+import TeacherCheckInOUt from "../../modules/staff/TeacherCheckIn";
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
 
-export function BaseNavbar({ onMenuClick, }) {
+export function BaseNavbar({ onMenuClick }) {
     const navigate = useNavigate();
     const { logout, user } = useUser();
     const { themeId, setThemeId, isDark, COLOR_THEMES, themeMode, setThemeMode } = useTheme();
@@ -57,8 +56,7 @@ export function BaseNavbar({ onMenuClick, }) {
     const handleLogout = async () => {
         await logout();
         navigate("/");
-
-    }
+    };
 
     const options = [
         { id: "light", label: "Light", icon: Sun },
@@ -69,17 +67,52 @@ export function BaseNavbar({ onMenuClick, }) {
     function applyTheme(themeId, isDark) {
         setThemeId(themeId);
         setThemeMode(isDark ? "dark" : "light");
-
     }
 
-
-
     const switchTheme = (id) => { setActiveTheme(id); applyTheme(id, isDark); };
-    const toggleDark = () => { const next = !isDark; setThemeMode(next); applyTheme(themeId, next); };
+    const toggleDark = () => { const next = !isDark; setThemeMode(next ? "dark" : "light"); applyTheme(themeId, next); };
 
-    const initials = user?.name
-        ? user.name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
-        : "U";
+    // Safely extract user information from the nested structure
+    const getUserName = () => {
+        if (user?.user?.name) return user.user.name;
+        if (user?.name) return user.name;
+        return "User";
+    };
+
+    const getUserEmail = () => {
+        if (user?.user?.email) return user.user.email;
+        if (user?.email) return user.email;
+        if (user?.contact?.personal_email) return user.contact.personal_email;
+        return "";
+    };
+
+    const getUserRole = () => {
+        if (user?.role?.name) return user.role.name;
+        if (user?.role) return user.role;
+        return "STAFF";
+    };
+
+    const getUserPhone = () => {
+        if (user?.user?.phone) return user.user.phone;
+        if (user?.contact?.phone) return user.contact.phone;
+        return "";
+    };
+
+    const getDesignation = () => user?.designation || "";
+    const getClassTeacherOf = () => user?.classTeacherOf || [];
+
+    const userName = getUserName();
+    const userEmail = getUserEmail();
+    const userRole = getUserRole();
+
+    const designation = getDesignation();
+
+    const initials = userName
+        .split(" ")
+        .map((n) => n[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
 
     const NOTIFS = [
         { id: 1, icon: "📝", title: "Unit Test 1 Marks Updated", time: "2 hrs ago", unread: true },
@@ -123,7 +156,7 @@ export function BaseNavbar({ onMenuClick, }) {
                     {/* ── LEFT: Hamburger (mobile only) ── */}
                     <button
                         onClick={onMenuClick}
-                        className="p-2 rounded-lg  lg:hidden transition-colors duration-150 flex-shrink-0"
+                        className="p-2 rounded-lg lg:hidden transition-colors duration-150 flex-shrink-0"
                         {...iconBtn()}
                         aria-label="Toggle sidebar"
                     >
@@ -132,7 +165,6 @@ export function BaseNavbar({ onMenuClick, }) {
 
                     {/* ── CENTRE: Search ── */}
                     <div className="flex-1 flex justify-start px-8">
-
                         {/* Desktop — always visible, fixed ~400px */}
                         <div
                             className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl border transition-all duration-200 w-full"
@@ -159,7 +191,6 @@ export function BaseNavbar({ onMenuClick, }) {
                                 className="flex-1 bg-transparent text-[13px] outline-none min-w-0"
                                 style={{ color: "var(--color-text-primary)", fontFamily: "'DM Sans', sans-serif" }}
                             />
-
                         </div>
 
                         {/* Mobile — expands full-width when open */}
@@ -191,6 +222,7 @@ export function BaseNavbar({ onMenuClick, }) {
 
                     {/* ── RIGHT: Icons only ── */}
                     <div className="flex items-center lg:gap-6 flex-shrink-0">
+                        <TeacherCheckInOUt />
 
                         {/* Mobile search toggle */}
                         {!searchOpen && (
@@ -203,30 +235,6 @@ export function BaseNavbar({ onMenuClick, }) {
                                 <Search size={18} strokeWidth={2} />
                             </button>
                         )}
-
-                        {/* Custom action buttons */}
-                        {/* {actions?.length > 0 && (
-                            <div className="hidden md:flex items-center gap-1 mr-1">
-                                {actions.map((action, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={action.onClick}
-                                        className="px-3 py-[7px] rounded-lg text-[13px] font-medium transition-all flex items-center gap-1.5"
-                                        style={action.primary ? {
-                                            backgroundColor: "var(--color-button-primary)",
-                                            color: "var(--color-button-primary-text)",
-                                        } : {
-                                            backgroundColor: "var(--color-surface-page)",
-                                            color: "var(--color-text-primary)",
-                                            border: "1px solid var(--color-border)",
-                                        }}
-                                    >
-                                        {action.icon}
-                                        <span className="hidden lg:inline">{action.label}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )} */}
 
                         {/* Dark mode */}
                         <button
@@ -251,7 +259,6 @@ export function BaseNavbar({ onMenuClick, }) {
                             >
                                 <div className="relative">
                                     <Palette size={18} strokeWidth={2} />
-                                    {/* Live-color dot */}
                                     <div
                                         className="absolute -bottom-[2px] -right-[2px] w-[8px] h-[8px] rounded-full border-2"
                                         style={{
@@ -271,7 +278,6 @@ export function BaseNavbar({ onMenuClick, }) {
                                         boxShadow: "0 10px 30px color-mix(in srgb, var(--color-text-heading) 14%, transparent)",
                                     }}
                                 >
-                                    {/* Header */}
                                     <div
                                         className="flex items-center justify-between px-4 py-[10px] border-b"
                                         style={{ borderColor: "var(--color-border)" }}
@@ -293,7 +299,6 @@ export function BaseNavbar({ onMenuClick, }) {
                                         </span>
                                     </div>
 
-                                    {/* Colour grid — 5 cols × 4 rows = all 20 */}
                                     <div className="p-3 grid grid-cols-5 gap-[6px]">
                                         {COLOR_THEMES.map((t) => {
                                             const isActive = activeTheme === t.id;
@@ -307,7 +312,6 @@ export function BaseNavbar({ onMenuClick, }) {
                                                         backgroundColor: isActive
                                                             ? "color-mix(in srgb, var(--color-primary) 10%, transparent)"
                                                             : "transparent",
-
                                                         outline: isActive
                                                             ? `2px solid var(--color-primary)`
                                                             : "2px solid transparent",
@@ -333,25 +337,24 @@ export function BaseNavbar({ onMenuClick, }) {
                                         })}
                                     </div>
 
-                                    {/* Dark mode toggle row */}
-                                    <div className="grid grid-cols-3 gap-2 p-4 ">
+                                    <div className="grid grid-cols-3 gap-2 p-4">
                                         {options.map((opt) => {
                                             const Icon = opt.icon;
                                             const active = themeMode === opt.id;
-
                                             return (
                                                 <button
                                                     key={opt.id}
                                                     onClick={() => setThemeMode(opt.id)}
-                                                    className="flex flex-col items-center justify-center gap-1 p-3 text-text-heading border-2 border-border rounded-2xl transition"
-                                                // style={{
-                                                //     backgroundColor: active
-                                                //         ? "var(--color-sidebar-hover)"
-                                                //         : "transparent",
-                                                //     color: active
-                                                //         ? "var(--color-primary)"
-                                                //         : "var(--color-text-primary)",
-                                                // }}
+                                                    className="flex flex-col items-center justify-center gap-1 p-3 rounded-2xl transition-all"
+                                                    style={{
+                                                        backgroundColor: active
+                                                            ? "color-mix(in srgb, var(--color-primary) 10%, transparent)"
+                                                            : "transparent",
+                                                        color: active
+                                                            ? "var(--color-primary)"
+                                                            : "var(--color-text-secondary)",
+                                                        border: `1px solid ${active ? "var(--color-primary)" : "var(--color-border)"}`,
+                                                    }}
                                                 >
                                                     <Icon size={20} />
                                                     <span className="text-xs">{opt.label}</span>
@@ -396,8 +399,7 @@ export function BaseNavbar({ onMenuClick, }) {
                                         className="flex items-center justify-between px-4 py-[11px] border-b"
                                         style={{ borderColor: "var(--color-border)" }}
                                     >
-                                        <span className="text-[13px] font-semibold"
-                                            style={{ color: "var(--color-text-heading)" }}>
+                                        <span className="text-[13px] font-semibold" style={{ color: "var(--color-text-heading)" }}>
                                             Notifications
                                         </span>
                                         <span
@@ -434,12 +436,10 @@ export function BaseNavbar({ onMenuClick, }) {
                                                     {n.icon}
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <p className="text-[13px] font-medium truncate"
-                                                        style={{ color: "var(--color-text-primary)" }}>
+                                                    <p className="text-[13px] font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
                                                         {n.title}
                                                     </p>
-                                                    <p className="text-[11px] mt-[2px]"
-                                                        style={{ color: "var(--color-text-secondary)" }}>
+                                                    <p className="text-[11px] mt-[2px]" style={{ color: "var(--color-text-secondary)" }}>
                                                         {n.time}
                                                     </p>
                                                 </div>
@@ -467,17 +467,7 @@ export function BaseNavbar({ onMenuClick, }) {
                             )}
                         </div>
 
-                        {/* Settings */}
-                        {/* <button
-                            className="p-2 rounded-lg transition-all duration-200 hidden sm:block"
-                            aria-label="Settings"
-                            {...iconBtn()}
-                            onClick={() => navigate("/settings")}
-                        >
-                            <Settings size={18} strokeWidth={2} />
-                        </button> */}
-
-                        {/* ── User avatar (icon only — no name) ── */}
+                        {/* ── User Profile Dropdown ── */}
                         <div className="relative ml-[2px]" ref={profileRef}>
                             <button
                                 onClick={() => { setShowProfile(!showProfile); setShowNotifs(false); setShowPalette(false); }}
@@ -499,7 +489,7 @@ export function BaseNavbar({ onMenuClick, }) {
 
                             {showProfile && (
                                 <div
-                                    className="drop-in absolute right-0 mt-2 w-[220px] rounded-2xl border overflow-hidden z-50"
+                                    className="drop-in absolute right-0 mt-2 w-[320px] rounded-2xl border overflow-hidden z-50"
                                     style={{
                                         backgroundColor: "var(--color-surface-card)",
                                         borderColor: "var(--color-border)",
@@ -508,11 +498,11 @@ export function BaseNavbar({ onMenuClick, }) {
                                 >
                                     {/* User info header */}
                                     <div
-                                        className="flex items-center gap-3 px-4 py-3 border-b"
+                                        className="flex items-center gap-3 px-4 py-4 border-b"
                                         style={{ borderColor: "var(--color-border)" }}
                                     >
                                         <div
-                                            className="h-9 w-9 rounded-xl flex items-center justify-center font-bold text-[13px] flex-shrink-0"
+                                            className="h-12 w-12 rounded-xl flex items-center justify-center font-bold text-[16px] flex-shrink-0"
                                             style={{
                                                 background: "linear-gradient(135deg, var(--color-primary), var(--color-info))",
                                                 color: "var(--color-surface-card)",
@@ -520,58 +510,80 @@ export function BaseNavbar({ onMenuClick, }) {
                                         >
                                             {initials}
                                         </div>
-                                        <div className="min-w-0">
-                                            <p className="text-[13px] font-semibold truncate"
-                                                style={{ color: "var(--color-text-primary)" }}>
-                                                {user?.name ?? "User"}
+                                        <div className="min-w-0 flex-1">
+                                            <p className="text-[14px] font-bold truncate" style={{ color: "var(--color-text-heading)" }}>
+                                                {userName}
                                             </p>
-                                            <p className="text-[11px] truncate"
-                                                style={{ color: "var(--color-text-secondary)" }}>
-                                                {user?.email ?? user?.role ?? ""}
+                                            <p className="text-[11px] truncate mt-0.5" style={{ color: "var(--color-text-secondary)" }}>
+                                                {userEmail}
                                             </p>
+                                            <div className="flex items-center gap-2 mt-1">
+                                                <span
+                                                    className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                                                    style={{
+                                                        backgroundColor: "color-mix(in srgb, var(--color-primary) 10%, transparent)",
+                                                        color: "var(--color-primary)",
+                                                    }}
+                                                >
+                                                    {userRole}
+                                                </span>
+                                                {designation && (
+                                                    <span
+                                                        className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+                                                        style={{
+                                                            backgroundColor: "color-mix(in srgb, var(--color-info) 10%, transparent)",
+                                                            color: "var(--color-info)",
+                                                        }}
+                                                    >
+                                                        {designation}
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
 
+                                    {/* Quick Stats - Teacher Info */}
+
+
+
+
                                     {/* Menu items */}
-                                    <div className="p-1">
+                                    <div className="p-2">
                                         {[
-                                            { label: "Profile", Icon: User, path: "/profile" },
+                                            { label: "My Profile", Icon: User, path: "/staff/profile" },
                                             { label: "Settings", Icon: Settings, path: "/settings" },
                                         ].map(({ label, Icon, path }) => (
                                             <button
                                                 key={label}
                                                 onClick={() => { navigate(path); setShowProfile(false); }}
-                                                className="w-full flex items-center gap-3 px-3 py-[8px] rounded-lg text-[13px] font-medium transition-colors duration-150"
+                                                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150"
                                                 style={{ color: "var(--color-text-primary)" }}
                                                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "color-mix(in srgb, var(--color-text-secondary) 8%, transparent)")}
                                                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                                             >
-                                                <Icon size={15} strokeWidth={2}
-                                                    style={{ color: "var(--color-text-secondary)" }} />
+                                                <Icon size={16} strokeWidth={2} style={{ color: "var(--color-text-secondary)" }} />
                                                 {label}
                                             </button>
                                         ))}
                                     </div>
 
                                     {/* Logout */}
-                                    <div className="p-1 border-t" style={{ borderColor: "var(--color-border)" }}>
+                                    <div className="p-2 border-t" style={{ borderColor: "var(--color-border)" }}>
                                         <button
-                                            className="w-full flex items-center gap-3 px-3 py-[8px] rounded-lg text-[13px] font-medium transition-colors duration-150"
+                                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150"
                                             style={{ color: "var(--color-error)" }}
                                             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "color-mix(in srgb, var(--color-error) 8%, transparent)")}
                                             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                                             onClick={handleLogout}
                                         >
-                                            <LogOut size={15} strokeWidth={2}
-                                                style={{ color: "var(--color-error)" }} />
+                                            <LogOut size={16} strokeWidth={2} style={{ color: "var(--color-error)" }} />
                                             Logout
                                         </button>
                                     </div>
                                 </div>
                             )}
                         </div>
-
-                    </div>{/* end RIGHT */}
+                    </div>
                 </div>
             </header>
         </>

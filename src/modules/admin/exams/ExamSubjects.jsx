@@ -270,7 +270,7 @@ export default function ExamSubjects() {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Subject *</label>
+                                    <label className="block text-sm font-medium text-text-heading  mb-1">Subject *</label>
                                     <Controller
                                         name={`subjects.${index}.subjectId`}
                                         control={control}
@@ -288,7 +288,7 @@ export default function ExamSubjects() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Exam Date *</label>
+                                    <label className="block text-sm font-medium text-text-heading  mb-1">Exam Date *</label>
                                     <Input
                                         type="date"
                                         register={register(`subjects.${index}.examDate`, {
@@ -299,7 +299,7 @@ export default function ExamSubjects() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Max Marks *</label>
+                                    <label className="block text-sm font-medium text-text-heading  mb-1">Max Marks *</label>
                                     <Input
                                         type="number"
                                         placeholder="e.g., 100"
@@ -312,7 +312,7 @@ export default function ExamSubjects() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Pass Marks *</label>
+                                    <label className="block text-sm font-medium text-text-heading  mb-1">Pass Marks *</label>
                                     <Input
                                         type="number"
                                         placeholder="e.g., 40"
@@ -364,7 +364,7 @@ export default function ExamSubjects() {
             >
                 <div className="flex flex-col gap-4">
                     <div>
-                        <label className="block text-sm font-medium mb-1">Subject</label>
+                        <label className="block text-sm font-medium text-text-heading  mb-1">Subject</label>
                         <Input
                             value={selectedSubject?.subjectId?.name || ""}
                             disabled
@@ -373,7 +373,7 @@ export default function ExamSubjects() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium mb-1">Exam Date *</label>
+                        <label className="block text-sm font-medium text-text-heading  mb-1">Exam Date *</label>
                         <Input
                             type="date"
                             value={editForm.examDate}
@@ -382,7 +382,7 @@ export default function ExamSubjects() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium mb-1">Max Marks *</label>
+                        <label className="block text-sm font-medium text-text-heading  mb-1">Max Marks *</label>
                         <Input
                             type="number"
                             value={editForm.maxMarks}
@@ -392,7 +392,7 @@ export default function ExamSubjects() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium mb-1">Pass Marks *</label>
+                        <label className="block text-sm font-medium text-text-heading  mb-1">Pass Marks *</label>
                         <Input
                             type="number"
                             value={editForm.passMarks}

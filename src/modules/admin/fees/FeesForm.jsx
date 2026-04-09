@@ -145,7 +145,7 @@ export default function FeeForm({
                 )}
 
                 {fields.map((field, index) => (
-                    <div key={field.id} className="border rounded-lg p-3 space-y-3 bg-gray-50 dark:bg-gray-800">
+                    <div key={field.id} className="border rounded-lg p-3 space-y-3 bg-gray-50 ">
                         <div className="flex justify-between items-center">
                             <span className="text-sm font-medium">Fee Head {index + 1}</span>
                             {!isView && (
@@ -233,7 +233,7 @@ export default function FeeForm({
                     register={register("totalAmount")}
                     error={errors.totalAmount?.message}
                     disabled={true}
-                    className="bg-gray-100 dark:bg-gray-700 cursor-not-allowed"
+                    className="bg-gray-100  cursor-not-allowed"
                 />
                 <p className="text-xs text-gray-500">Auto-calculated from fee heads</p>
             </div>

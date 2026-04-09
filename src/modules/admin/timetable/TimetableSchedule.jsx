@@ -193,7 +193,7 @@ export default function TimetableSchedule() {
         return (
             <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead className="bg-gray-50 dark:bg-gray-700">
+                    <thead className="bg-gray-50 ">
                         <tr>
                             <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Day / Period</th>
                             {sortedPeriods.map(period => (
@@ -241,9 +241,9 @@ export default function TimetableSchedule() {
             {/* Filters - same as before */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div>
-                    <label className="block text-sm font-medium mb-1">Academic Session</label>
+                    <label className="block text-sm font-medium text-text-heading  mb-1">Academic Session</label>
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                         value={selectedAcademicYear}
                         onChange={(e) => setSelectedAcademicYear(e.target.value)}
                     >
@@ -257,9 +257,9 @@ export default function TimetableSchedule() {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-1">Class</label>
+                    <label className="block text-sm font-medium text-text-heading  mb-1">Class</label>
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading rounded-lg "
                         value={selectedClass}
                         onChange={(e) => setSelectedClass(e.target.value)}
                         disabled={!selectedAcademicYear}
@@ -274,9 +274,9 @@ export default function TimetableSchedule() {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-1">Section</label>
+                    <label className="block text-sm font-medium text-text-heading  mb-1">Section</label>
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                         value={selectedSection}
                         onChange={(e) => setSelectedSection(e.target.value)}
                         disabled={!selectedClass}

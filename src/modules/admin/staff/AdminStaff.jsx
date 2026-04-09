@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { useState } from "react";
 import {
   Search,
   Plus,
@@ -18,10 +16,10 @@ import StaffDetail from "./components/StaffDetails";
 import {
   deleteStaffMutation,
   getStaffList,
+  getSubjectsQuery,
   useRolesList,
 } from "../../../hooks/useQueryMutations";
 export default function AdminStaff() {
-
   const [currentView, setCurrentView] = useState("list");
   const [viewingStaffId, setViewingStaffId] = useState(null);
 
@@ -29,6 +27,11 @@ export default function AdminStaff() {
   const [statusFilter, setStatusFilter] = useState("");
   const [page, setPage] = useState(1);
 
+  const { data: staffRes, isLoading: isLoadingStaff } = getStaffList({
+    page,
+    searchTerm,
+    statusFilter,
+  });
   // Drawer State
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [drawerMode, setDrawerMode] = useState("add");
@@ -37,13 +40,9 @@ export default function AdminStaff() {
   const { data: rolesRes } = useRolesList();
   const roles = rolesRes?.results || [];
 
-  const { data: staffRes, isLoading: isLoadingStaff } = getStaffList({
-    page,
-    searchTerm,
-    statusFilter,
-  });
   const staffList = staffRes?.data || [];
   const pagination = staffRes?.pagination || { totalPages: 1, page: 1 };
+
 
   const openDrawer = (mode, id = null) => {
     setDrawerMode(mode);
@@ -159,91 +158,91 @@ export default function AdminStaff() {
               <tbody>
                 {!isLoadingStaff && staffList.length > 0
                   ? staffList.map((staff) => (
-                      <tr
-                        key={staff._id}
-                        className="hover:bg-surface-page/80 transition-colors group"
-                      >
-                        <td className="py-4 px-6 border-b border-border group-last:border-0">
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm uppercase flex-shrink-0">
-                              {staff.user_id.name.substring(0, 2)}
+                    <tr
+                      key={staff._id}
+                      className="hover:bg-surface-page/80 transition-colors group"
+                    >
+                      <td className="py-4 px-6 border-b border-border group-last:border-0">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm uppercase flex-shrink-0">
+                            {staff.user_id.name.substring(0, 2)}
+                          </div>
+                          <div>
+                            <div className="font-semibold text-text-primary text-[14px]">
+                              {staff.user_id.name}
                             </div>
-                            <div>
-                              <div className="font-semibold text-text-primary text-[14px]">
-                                {staff.user_id.name}
-                              </div>
-                              <div className="text-[12px] text-text-secondary mt-0.5 font-medium">
-                                {staff.employee_id}
-                              </div>
+                            <div className="text-[12px] text-text-secondary mt-0.5 font-medium">
+                              {staff.employee_id}
                             </div>
                           </div>
-                        </td>
-                        <td className="py-4 px-6 border-b border-border group-last:border-0">
-                          <div className="text-[13px] text-text-primary font-medium">
-                            {staff.designation}
-                          </div>
-                          <div className="text-[12px] text-text-secondary mt-0.5 flex items-center gap-1.5">
-                            <Briefcase size={12} /> {staff.roleId.name} •{" "}
-                            {staff.department}
-                          </div>
-                        </td>
-                        <td className="py-4 px-6 border-b border-border group-last:border-0">
-                          <div className="text-[12px] text-text-primary flex items-center gap-2 mb-1.5">
-                            <Mail size={13} className="text-text-secondary" />{" "}
-                            {staff.user_id.email}
-                          </div>
-                          <div className="text-[12px] text-text-primary flex items-center gap-2">
-                            <Phone size={13} className="text-text-secondary" />{" "}
-                            {staff.user_id.phone}
-                          </div>
-                        </td>
-                        <td className="py-4 px-6 border-b border-border group-last:border-0">
-                          <span
-                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold capitalize border ${staff.status === "active" ? "bg-success/10 text-success border-success/20" : "bg-error/10 text-error border-error/20"}`}
-                          >
-                            <span
-                              className={`w-1.5 h-1.5 rounded-full ${staff.status === "active" ? "bg-success" : "bg-error"}`}
-                            ></span>
-                            {staff.status}
-                          </span>
-                        </td>
-                        <td className="py-4 px-6 border-b border-border group-last:border-0 text-right">
-                          <div className="flex items-center justify-end gap-1">
-                            <button
-                              onClick={() => handleViewDetail(staff._id)}
-                              className="p-2 text-text-secondary hover:text-info hover:bg-info/10 rounded-lg transition-colors cursor-pointer"
-                              title="View Profile & Docs"
-                            >
-                              <Eye size={16} />
-                            </button>
-                            <button
-                              onClick={() => openDrawer("edit", staff._id)}
-                              className="p-2 text-text-secondary hover:text-primary hover:bg-primary/10 rounded-lg transition-colors cursor-pointer"
-                              title="Edit"
-                            >
-                              <Edit2 size={16} />
-                            </button>
-                            <button
-                              onClick={() => handleDelete(staff._id)}
-                              className="p-2 text-text-secondary hover:text-error hover:bg-error/10 rounded-lg transition-colors cursor-pointer"
-                              title="Delete"
-                            >
-                              <Trash2 size={16} />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  : !isLoadingStaff && (
-                      <tr>
-                        <td
-                          colSpan="5"
-                          className="py-12 text-center text-text-secondary text-sm"
+                        </div>
+                      </td>
+                      <td className="py-4 px-6 border-b border-border group-last:border-0">
+                        <div className="text-[13px] text-text-primary font-medium">
+                          {staff.designation}
+                        </div>
+                        <div className="text-[12px] text-text-secondary mt-0.5 flex items-center gap-1.5">
+                          <Briefcase size={12} /> {staff.roleId.name} •{" "}
+                          {staff.department}
+                        </div>
+                      </td>
+                      <td className="py-4 px-6 border-b border-border group-last:border-0">
+                        <div className="text-[12px] text-text-primary flex items-center gap-2 mb-1.5">
+                          <Mail size={13} className="text-text-secondary" />{" "}
+                          {staff.user_id.email}
+                        </div>
+                        <div className="text-[12px] text-text-primary flex items-center gap-2">
+                          <Phone size={13} className="text-text-secondary" />{" "}
+                          {staff.user_id.phone}
+                        </div>
+                      </td>
+                      <td className="py-4 px-6 border-b border-border group-last:border-0">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold capitalize border ${staff.status === "active" ? "bg-success/10 text-success border-success/20" : "bg-error/10 text-error border-error/20"}`}
                         >
-                          No staff found.
-                        </td>
-                      </tr>
-                    )}
+                          <span
+                            className={`w-1.5 h-1.5 rounded-full ${staff.status === "active" ? "bg-success" : "bg-error"}`}
+                          ></span>
+                          {staff.status}
+                        </span>
+                      </td>
+                      <td className="py-4 px-6 border-b border-border group-last:border-0 text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <button
+                            onClick={() => handleViewDetail(staff._id)}
+                            className="p-2 text-text-secondary hover:text-info hover:bg-info/10 rounded-lg transition-colors cursor-pointer"
+                            title="View Profile & Docs"
+                          >
+                            <Eye size={16} />
+                          </button>
+                          <button
+                            onClick={() => openDrawer("edit", staff._id)}
+                            className="p-2 text-text-secondary hover:text-primary hover:bg-primary/10 rounded-lg transition-colors cursor-pointer"
+                            title="Edit"
+                          >
+                            <Edit2 size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(staff._id)}
+                            className="p-2 text-text-secondary hover:text-error hover:bg-error/10 rounded-lg transition-colors cursor-pointer"
+                            title="Delete"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                  : !isLoadingStaff && (
+                    <tr>
+                      <td
+                        colSpan="5"
+                        className="py-12 text-center text-text-secondary text-sm"
+                      >
+                        No staff found.
+                      </td>
+                    </tr>
+                  )}
               </tbody>
             </table>
 

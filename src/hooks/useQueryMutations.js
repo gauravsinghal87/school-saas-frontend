@@ -67,7 +67,7 @@ import {
     createTimetable,
     getTimetable,
     deleteTimetable,
-
+    getStudentTimetable,
     // Admin - Class Subjects
     updateClassSubjects,
     removeClassSubjects,
@@ -78,6 +78,21 @@ import {
     getExams,
     getExamById,
     updateExam,
+    markAttendance,
+    getClassAttendance,
+    getStudentAttendance,
+    createHoliday,
+    updateHoliday,
+    deleteHoliday,
+    getHolidays,
+    createStaff,
+    updateStaff,
+    getStudentById,
+    uploadStudentDocuments,
+    enrollStudent,
+    getClasses,
+    getSessions,
+    getStudentsList,
     deleteExam,
     addExamSubjects,
     getExamSubjects,
@@ -94,11 +109,17 @@ import {
     deleteAssignment,
     getTeacherTimetable,
     getClassSecSub,
+    getStudentFeesDetails,
+    addStudentFees,
+    getPaymentHistoryDetails,
     getStudentSubjects,
     getStudentAssignments,
     submitAssignment,
     getStudentExamTimetable,
     getStudentProfile,
+    giveFeedbackOnSubmission,
+    getTeacherAssignmentSubmissions,
+    getTeacherInOutTimes,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -415,46 +436,14 @@ export const useStudents = () => {
 };
 
 // <<<--------admin---------->>>
-export const getStaffList = (params) => {
+
+export const getStaffList = ({ page, searchTerm, statusFilter }) => {
     return useAppQuery({
-        queryKey: ["staffList", params],
-        apiCall: () => fetchStaffList({ ...params }),
+        queryKey: ["staffList", page, searchTerm, statusFilter],
+        apiCall: () =>
+            fetchStaffList({ page, searchTerm, statusFilter }),
     });
 };
-
-export const deleteStaffMutation = () => {
-    const queryClient = useQueryClient();
-
-    return useAppMutation({
-        apiCall: deleteStaff,
-        successMessage: "Staff deleted successfully 🎉",
-
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["staffList"]);
-        },
-    });
-};
-
-export const useStaffDetail = (staffId) => {
-    return useAppQuery({
-        queryKey: ["staff", staffId],
-        apiCall: () => getStaffById(staffId),
-        enabled: !!staffId,
-    });
-};
-export const useUploadStaffDocumentsMutation = (staffId, userId) => {
-    const queryClient = useQueryClient();
-
-    return useAppMutation({
-        apiCall: ({ formData }) => uploadStaffDocuments({ userId, formData }),
-        successMessage: "Documents uploaded successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["staff", staffId]);
-        },
-    });
-};
-
-
 
 
 //admin queries & mutations 
@@ -755,7 +744,37 @@ export const deleteTimetableMutation = () => {
 };
 
 
+// GET SINGLE STAFF
+export const useStaffDetail = (staffId, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["staff", staffId],
+        apiCall: () => getStaffById(staffId),
+        enabled: enabled && !!staffId,
+    });
+};
+
+// CREATE STAFF
+export const createStaffMutation = (onClose) => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: createStaff,
+        successMessage: "Staff created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["staffList"]);
+            onClose();
+        },
+    });
+};
+
+
+// ==================== Teacher Management ====================
+
+
+
 // ==================== EXAM MANAGEMENT ====================
+
+
 
 // Get Exams List
 export const examsList = (params) => {
@@ -911,6 +930,206 @@ export const studentResultsList = (studentId, params, enabled = true) => {
 };
 
 
+export const fetchstudentListQuery = (params) => {
+    return useAppQuery({
+        queryKey: ["students", params],
+        apiCall: () => getStudents(params),
+    });
+}
+
+export const getStudentAttendanceQuery = (studentId, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["studentAttendance", studentId],
+        apiCall: () => getStudentAttendance(studentId),
+        enabled: enabled && !!studentId,
+    });
+}
+
+export const getClassAttendanceQuery = ({ classId, sectionId, date }, enabled = true) => {
+    return useAppQuery({
+        // Add 'date' to the queryKey so it refetches when the date changes
+        queryKey: ["classAttendance", classId, sectionId, date],
+        apiCall: () => getClassAttendance({ classId, sectionId, date }),
+        enabled: enabled && !!classId && !!sectionId && !!date, // Ensure date is present
+    });
+};
+
+
+export const markAttendanceMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: markAttendance,
+        successMessage: "Attendance marked successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["attendance"]);
+        },
+    });
+};
+
+
+
+export const createHolidayMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: createHoliday,
+        successMessage: "Holiday created successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["holidays"]);
+        },
+    });
+};
+
+export const getHolidaysQuery = (params) => {
+    return useAppQuery({
+        queryKey: ["holidays", params],
+        apiCall: () => getHolidays(params),
+    });
+};
+
+export const updateHolidayMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: updateHoliday,
+        successMessage: "Holiday updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["holidays"]);
+        },
+    });
+};
+
+export const deleteHolidayMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: deleteHoliday,
+        successMessage: "Holiday deleted successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["holidays"]);
+        },
+    });
+}
+
+
+
+// UPDATE STAFF
+export const updateStaffMutation = (onClose) => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: updateStaff,
+        successMessage: "Staff updated successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["staffList"]);
+            onClose();
+        },
+    });
+};
+export const useUploadStaffDocumentsMutation = (staffId, userId) => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: ({ formData }) =>
+            uploadStaffDocuments({ userId, formData }),
+
+        successMessage: "Documents uploaded successfully 🎉",
+
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["staff", staffId]);
+        },
+    });
+};
+
+export const deleteStaffMutation = () => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: deleteStaff,
+        successMessage: "Staff deleted successfully 🎉",
+
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["staffList"]);
+        },
+    });
+};
+
+export const useStudentDetail = (studentId) => {
+    return useAppQuery({
+        queryKey: ["student", studentId],
+        apiCall: () => getStudentById(studentId),
+        enabled: !!studentId,
+    });
+};
+
+export const useUploadStudentDocumentsMutation = (studentId, userId) => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: ({ formData }) =>
+            uploadStudentDocuments({ userId, formData }),
+
+        successMessage: "Documents uploaded successfully 🎉",
+
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["student", studentId]);
+        },
+    });
+};
+
+export const enrollStudentMutation = (onClose) => {
+    const queryClient = useQueryClient();
+
+    return useAppMutation({
+        apiCall: enrollStudent,
+        successMessage: "Student enrolled successfully 🎉",
+
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["studentList"]);
+            onClose(); // ✅ close drawer only on success
+        },
+    });
+};
+
+export const useStudentsList = ({
+    page,
+    searchTerm,
+    classFilter,
+    sectionFilter,
+    sessionFilter,
+}) => {
+    return useAppQuery({
+        queryKey: [
+            "studentList",
+            page,
+            searchTerm,
+            classFilter,
+            sectionFilter,
+            sessionFilter,
+        ],
+        apiCall: () =>
+            getStudentsList({
+                page,
+                searchTerm,
+                classFilter,
+                sectionFilter,
+                sessionFilter,
+            }),
+    });
+};
+
+export const useSessionsList = () => {
+    return useAppQuery({
+        queryKey: ["sessions"],
+        apiCall: getSessions,
+    });
+};
+
+export const useClassesList = () => {
+    return useAppQuery({
+        queryKey: ["classes"],
+        apiCall: getClasses,
+    });
+};
+
+
 
 
 
@@ -926,11 +1145,11 @@ export const createAssignmentMutation = () => {
     });
 };
 
-export const getAssignmentsQuery = (sectionId) => {
+export const getAssignmentsQuery = (params) => {
     return useAppQuery({
-        queryKey: ["assignments", sectionId],
-        apiCall: () => getAssignments({ sectionId }),
-        enabled: !!sectionId,
+        // queryKey: ["assignments", params.sectionId],
+        apiCall: () => getAssignments(params),
+        // enabled: !!params.sectionId,
     });
 };
 
@@ -957,6 +1176,23 @@ export const deleteAssignmentMutation = () => {
 };
 
 
+export const getStudentSubmissionsQuery = (assignmentId) => {
+    return useAppQuery({
+        queryKey: ["studentSubmissions", assignmentId],
+        apiCall: () => getTeacherAssignmentSubmissions({ assignmentId }),
+        enabled: !!assignmentId,
+    });
+};
+
+
+export const giveFeedbackOnSubmissionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: giveFeedbackOnSubmission,
+        successMessage: "Feedback submitted successfully 🎉",
+    });
+};
+
 export const getTeacherTimetableQuery = ({ classId, sectionId }) => {
     return useAppQuery({
         queryKey: ["teacherTimetable", classId, sectionId],
@@ -964,6 +1200,15 @@ export const getTeacherTimetableQuery = ({ classId, sectionId }) => {
         enabled: !!classId && !!sectionId,
     });
 };
+// 
+
+export const getTeacherInOutTimesQuery = ({ teacherId }) => {
+    return useAppQuery({
+        queryKey: ["teacherInOutTimes", teacherId],
+        apiCall: () => getTeacherInOutTimes({ teacherId }),
+        enabled: !!teacherId,
+    });
+}
 
 
 

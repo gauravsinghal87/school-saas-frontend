@@ -133,8 +133,8 @@ export default function Sections() {
     const [selectedSection, setSelectedSection] = useState(null);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="min-h-screen bg-surface-page px-4 py-8">
+            <div className="max-w-7xl mx-auto space-y-6">
 
                 {/* Header Section */}
                 <div className="mb-8">
@@ -155,7 +155,7 @@ export default function Sections() {
                                     onChange={(e) => setSelectedClass(e.target.value)}
                                     options={classOptions}
                                     placeholder="Filter by Class"
-                                    className="w-48 bg-white/80 backdrop-blur-sm border-gray-200 focus:border-emerald-500 transition-all duration-200"
+                                    className="w-48 bg-surface-page backdrop-blur-sm border-border focus:border-emerald-500 transition-all duration-200"
                                 />
                             </div>
                             <Button
@@ -174,10 +174,10 @@ export default function Sections() {
                 {/* Modern Section Cards */}
 
                 {/* Data Table Section */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="bg-surface-page rounded-2xl shadow-sm border border-border overflow-hidden">
 
                     <DataTable
-                    title="All Sections"
+                        title="All Sections"
                         data={tableData}
                         columns={COLUMNS}
                         loading={isLoading}

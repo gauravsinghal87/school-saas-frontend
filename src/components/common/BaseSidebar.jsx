@@ -4,6 +4,7 @@ import { LogOut, ChevronRight, LayoutDashboard, School, CreditCard, Users, UserC
 import { useNavigate, useLocation } from "react-router-dom";
 import { ROLE_ROUTES, ROLE_ROUTES_SIDEBAR, ROLES } from "../../utils/roles";
 import { useUser } from "../../hooks/useUser";
+import { useEffect } from "react";
 
 // ─── ICON MAPPING ──────────────────────────────────────────────────────────────
 
@@ -112,8 +113,8 @@ const Sidebar = ({
     const menuItems = menuConfig[role] || [];
 
     const sections = {
-        main: menuItems.slice(0, 3),
-        secondary: menuItems.slice(3),
+        main: menuItems.slice(0, 6),
+        secondary: menuItems.slice(6),
     };
 
     const handleLogout = async () => {
@@ -137,66 +138,166 @@ const Sidebar = ({
     const roleLabel = meta.roleLabel(user);
 
     // Check if a menu item is active
+    // const isActivePath = (path) => {
+    //     return location.pathname.split("/").includes(path);
+    // };
     const isActivePath = (path) => {
-        return location.pathname.split("/").includes(path);
+        return location.pathname.includes(path);
     };
 
-    const NavItem = ({ item, index }) => {
-
-        const Icon = item?.icon
+    const NavItem = ({ item }) => {
+        const Icon = item?.icon;
         const isActive = isActivePath(item.path);
+
+        const [open, setOpen] = useState(false);
+
+        const hasChildren = item.children && item.children.length > 0;
+
+        // ✅ auto open if child active
+        useEffect(() => {
+            if (hasChildren) {
+                const isChildActive = item.children.some(child =>
+                    location.pathname.includes(child.path)
+                );
+                if (isChildActive) setOpen(true);
+            }
+        }, [location.pathname]);
+
         return (
-            <button
-                onClick={() => goTo(item.path, item.name)}
-                className={`w-full  flex items-center justify-between px-3 py-[9px] rounded-xl mb-[2px] transition-all duration-200 cursor-pointer overflow-visible ${isActive ? "nav-active-item" : ""}`}
-                style={{
-                    backgroundColor: isActive
-                        ? "var(--color-sidebar-active)"
-                        : "transparent",
-                    color: isActive
-                        ? "var(--color-sidebar-text-active)"
-                        : "var(--color-sidebar-text)",
-                }}
-                onMouseEnter={(e) => {
-                    if (!isActive) {
-                        e.currentTarget.style.backgroundColor = "var(--color-sidebar-hover)";
-                        e.currentTarget.style.color = "var(--color-sidebar-text-hover)";
-                    }
-                }}
-                onMouseLeave={(e) => {
-                    if (!isActive) {
-                        e.currentTarget.style.backgroundColor = "transparent";
-                        e.currentTarget.style.color = "var(--color-sidebar-text)";
-                    }
-                }}
-            >
-                <div className="flex items-center gap-[10px] min-w-0">
-                    <div
-                        className="w-[30px] h-[30px] rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200"
-                        style={{
-                            backgroundColor: isActive
-                                ? "color-mix(in srgb, var(--color-primary) 14%, transparent)"
-                                : "var(--color-sidebar-hover)",
-                        }}
-                    >
-                        <Icon
-                            size={15}
-                            strokeWidth={isActive ? 2.2 : 1.8}
+            <div className="w-full">
+                {/* 🔹 Parent Item (SAME UI AS BEFORE) */}
+                <button
+                    onClick={() => {
+                        if (hasChildren) {
+                            setOpen(!open);
+                        } else {
+                            goTo(item.path, item.name);
+                        }
+                    }}
+                    className={`w-full flex items-center justify-between px-3 py-[9px] rounded-xl mb-[2px] transition-all duration-200 cursor-pointer overflow-visible ${isActive ? "nav-active-item" : ""
+                        }`}
+                    style={{
+                        backgroundColor: isActive
+                            ? "var(--color-sidebar-active)"
+                            : "transparent",
+                        color: isActive
+                            ? "var(--color-sidebar-text-active)"
+                            : "var(--color-sidebar-text)",
+                    }}
+                    onMouseEnter={(e) => {
+                        if (!isActive) {
+                            e.currentTarget.style.backgroundColor = "var(--color-sidebar-hover)";
+                            e.currentTarget.style.color = "var(--color-sidebar-text-hover)";
+                        }
+                    }}
+                    onMouseLeave={(e) => {
+                        if (!isActive) {
+                            e.currentTarget.style.backgroundColor = "transparent";
+                            e.currentTarget.style.color = "var(--color-sidebar-text)";
+                        }
+                    }}
+                >
+                    <div className="flex items-center gap-[10px] min-w-0">
+                        {/* ICON BOX SAME */}
+                        <div
+                            className="w-[30px] h-[30px] rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200"
                             style={{
-                                color: isActive ? "var(--color-primary)" : "var(--color-sidebar-text)",
+                                backgroundColor: isActive
+                                    ? "color-mix(in srgb, var(--color-primary) 14%, transparent)"
+                                    : "var(--color-sidebar-hover)",
                             }}
-                        />
+                        >
+                            <Icon
+                                size={15}
+                                strokeWidth={isActive ? 2.2 : 1.8}
+                                style={{
+                                    color: isActive
+                                        ? "var(--color-primary)"
+                                        : "var(--color-sidebar-text)",
+                                }}
+                            />
+                        </div>
+
+                        {/* TEXT SAME */}
+                        <span
+                            className={`truncate ${isActive ? "text-primary" : "text-sidebar-text"
+                                } text-[13px] font-medium`}
+                        >
+                            {item.name}
+                        </span>
                     </div>
 
-                    <span className={`truncate  ${isActive ? 'text-primary' : 'text-sidebar-text'} text-[13px] font-medium`}>{item.name}</span>
-                </div>
-            </button >
+                    {/* 🔹 Chevron */}
+                    {hasChildren && (
+                        <ChevronRight
+                            size={14}
+                            strokeWidth={2.5}
+                            style={{
+                                transform: open ? "rotate(90deg)" : "rotate(0deg)",
+                                transition: "transform 0.25s ease",
+                                color: "color-mix(in srgb, var(--color-sidebar-text) 50%, transparent)",
+                            }}
+                        />
+                    )}
+                </button>
+
+                {/* 🔹 Submenu (styled same theme) */}
+                {hasChildren && (
+                    <div
+                        style={{
+                            maxHeight: open ? `${item.children.length * 42}px` : "0px",
+                            overflow: "hidden",
+                            opacity: open ? 1 : 0,
+                            transition: "all 0.25s ease",
+                        }}
+                    >
+                        <div className="ml-10 mt-1">
+                            {item.children.map((child) => {
+                                const isChildActive = location.pathname.includes(child.path);
+
+                                return (
+                                    <button
+                                        key={child.id}
+                                        onClick={() => goTo(child.path, child.name)}
+                                        className="w-full text-left px-3 py-[7px] rounded-lg text-[12px] transition-all duration-200"
+                                        style={{
+                                            backgroundColor: isChildActive
+                                                ? "var(--color-text-active)"
+                                                : "transparent",
+                                            color: isChildActive
+                                                ? "var(--color-sidebar-text-active)"
+                                                : "var(--color-sidebar-text)",
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            if (!isChildActive) {
+                                                e.currentTarget.style.backgroundColor =
+                                                    "var(--color-sidebar-hover)";
+                                                e.currentTarget.style.color =
+                                                    "var(--color-sidebar-text-hover)";
+                                            }
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            if (!isChildActive) {
+                                                e.currentTarget.style.backgroundColor = "transparent";
+                                                e.currentTarget.style.color =
+                                                    "var(--color-sidebar-text)";
+                                            }
+                                        }}
+                                    >
+                                        {child.name}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+            </div>
         );
     };
-
     // ── Section ─────────────────────────────────────────────────────────────────
 
     const Section = ({ title, items, sectionId }) => {
+
 
         if (!items || items.length === 0) return null;
         return (
@@ -232,7 +333,7 @@ const Sidebar = ({
                 <div
                     style={{
                         overflow: "",
-                        maxHeight: expanded[sectionId] ? `${items.length * 46}px` : "0px",
+                        maxHeight: expanded[sectionId] ? `${items.length * 50}px` : "0px",
                         opacity: expanded[sectionId] ? 1 : 0,
                         transition: "max-height 0.28s ease, opacity 0.2s ease",
                     }}
@@ -267,7 +368,7 @@ const Sidebar = ({
             <aside
                 className={`
           fixed lg:sticky top-0 left-0 z-50
-          h-screen lg:min-w-67
+          h-screen lg:w-[280px] w-full
           flex flex-col
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
@@ -326,7 +427,7 @@ const Sidebar = ({
                 </div>
 
                 {/* ── SCROLLABLE — Navigation ───────────────────────────────────────── */}
-                <div className="sidebar-scroll flex-1 min-h-0 overflow-y-auto py-[14px] px-3">
+                <div className="sidebar-scroll flex-1 min-h-0 overflow-y-auto py-4 px-3">
                     {sections.main.length > 0 && (
                         <Section title="Main" items={sections.main} sectionId="main" />
                     )}
@@ -337,7 +438,7 @@ const Sidebar = ({
 
                 {/* ── STICKY BOTTOM — User profile / logout ────────────────────────── */}
                 <div
-                    className="flex-shrink-0 p-[14px]"
+                    className="shrink-0 p-[14px]"
                     style={{
                         borderTop: "1px solid color-mix(in srgb, var(--color-sidebar-text) 10%, transparent)",
                         backgroundColor: "var(--color-surface-sidebar)",

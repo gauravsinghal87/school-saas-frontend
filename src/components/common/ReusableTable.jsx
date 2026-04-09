@@ -226,6 +226,7 @@ export default function DataTable({
     onSearch,
     onPageChange,
     onPageSizeChange,
+    showActions = true
 }) {
     const isServer = serverMode;
 
@@ -302,10 +303,9 @@ export default function DataTable({
 
     const displayRows = isServer
         ? data
-        : sorted.slice((activePage - 1) * internalPageSize, activePage * internalPageSize);
+        : sorted?.slice((activePage - 1) * internalPageSize, activePage * internalPageSize);
 
     const countBadge = isServer ? externalTotal : filtered.length;
-    const showActions = true;
     const allCols = showActions
         ? [...columns, { key: "__actions__", label: "Actions", sortable: false }]
         : columns;

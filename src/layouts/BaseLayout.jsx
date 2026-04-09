@@ -38,6 +38,7 @@ const BaseLayout = ({ title, menu, role, user }) => {
     };
 
 
+
     return (
         <div className="flex h-screen bg-surface-page">
             {/* Modern Sidebar */}

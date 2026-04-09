@@ -23,9 +23,7 @@ export default function Classes() {
   const [limit, setLimit] = useState(10);
   const [subjectModal, setSubjectModal] = useState(false);
   const [selectedSubjects, setSelectedSubjects] = useState([]);
-  console.log("selectedsubjects", selectedSubjects);
   const [classSubjects, setClassSubjects] = useState([]);
-  console.log("classSubjects", classSubjects);
   const [mode, setMode] = useState("create");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -88,7 +86,7 @@ export default function Classes() {
             {val.map((sec) => (
               <span
                 key={sec._id}
-                className="px-2 py-0.5 text-xs bg-gray-100 rounded"
+                className="px-2 py-0.5 text-xs bg-surface-page rounded"
               >
                 {sec.name}
               </span>
@@ -181,7 +179,6 @@ export default function Classes() {
 
   // Submit
   const onSubmit = async (formData) => {
-    console.log("formdata", formData);
     try {
       const payload = {
         name: formData.name,

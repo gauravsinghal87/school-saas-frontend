@@ -172,19 +172,19 @@ export default function ExamResults() {
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+                <div className="bg-white  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Total Students</p>
                     <p className="text-2xl font-bold">{summary.totalStudents}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+                <div className="bg-white  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Passed</p>
                     <p className="text-2xl font-bold text-green-600">{summary.passed}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+                <div className="bg-white  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Failed</p>
                     <p className="text-2xl font-bold text-red-600">{summary.failed}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+                <div className="bg-white  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Average Percentage</p>
                     <p className="text-2xl font-bold text-blue-600">{summary.averagePercentage}%</p>
                 </div>
@@ -194,7 +194,7 @@ export default function ExamResults() {
             <div className="flex gap-4 mb-4">
                 <div className="w-64">
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                         value={selectedStudent}
                         onChange={(e) => setSelectedStudent(e.target.value)}
                     >
@@ -208,7 +208,7 @@ export default function ExamResults() {
                 </div>
                 <div className="w-40">
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                         value={resultStatus}
                         onChange={(e) => setResultStatus(e.target.value)}
                     >

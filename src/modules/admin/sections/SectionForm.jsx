@@ -11,45 +11,42 @@ export default function SectionForm({
     selectedSectionCircle,
     classOptions
 }) {
-    console.log("classoptions in form", classOptions);
     const isView = mode === "view";
     const { data: classData } = classesListMutation({ page: 1, limit: 100 });
-    console.log("classdata", classData);
     // const classOptions = classData?.results?.map((cls) => ({
     //     label: cls.name,
     //     value: cls._id,
     // })) || [];
 
-    console.log("classoptions", classOptions);
 
     return (
         <div className="space-y-5">
             {/* Class Select */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-text-heading  text-gray-700 mb-1">
                     Class <span className="text-red-500">*</span>
                 </label>
-<Controller
-    name="classId"
-    control={control}
-    rules={{ required: "Class is required" }}
-    render={({ field }) => {
-        return (
-            <Select
-                value={field.value || ""}   // ✅ IMPORTANT FIX
-                onChange={(val) => field.onChange(val?.value || val)}
-                options={classOptions}
-                placeholder="Choose a class"
-                error={errors.classId?.message}
-            />
-        );
-    }}
-/>
+                <Controller
+                    name="classId"
+                    control={control}
+                    rules={{ required: "Class is required" }}
+                    render={({ field }) => {
+                        return (
+                            <Select
+                                value={field.value || ""}   // ✅ IMPORTANT FIX
+                                onChange={(val) => field.onChange(val?.value || val)}
+                                options={classOptions}
+                                placeholder="Choose a class"
+                                error={errors.classId?.message}
+                            />
+                        );
+                    }}
+                />
             </div>
 
             {/* Section Name */}
             <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-text-heading  text-gray-700 mb-1">
                     Section Name <span className="text-red-500">*</span>
                 </label>
                 <Input

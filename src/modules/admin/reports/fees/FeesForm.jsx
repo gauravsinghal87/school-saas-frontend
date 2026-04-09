@@ -1,9 +1,9 @@
-import Input from "../../../components/common/Input";
-import Select from "../../../components/common/Select";
+import Input from "../../../../components/common/Input";
+import Select from "../../../../components/common/Select";
 import { Controller } from "react-hook-form";
-import { academicYearList } from "../../../hooks/useQueryMutations";
+import { academicYearList } from "../../../../hooks/useQueryMutations";
 
-export default function ClassForm({
+export default function FeesForm({
   register,
   errors,
   mode = "create",
@@ -15,6 +15,7 @@ const academicSessionOptions = academicSessions?.results?.map((session) => ({
   label: session.academicSession,
   value: session._id,
 })) || [];
+console.log("academicsessions",academicSessionOptions);
   return (
     <div className="flex flex-col gap-4">
 

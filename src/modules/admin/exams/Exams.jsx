@@ -193,7 +193,7 @@ export default function Exams() {
             <div className="flex gap-4 mb-4">
                 <div className="w-48">
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                         value={selectedClass}
                         onChange={(e) => setSelectedClass(e.target.value)}
                     >
@@ -207,7 +207,7 @@ export default function Exams() {
                 </div>
                 <div className="w-40">
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                         value={selectedStatus}
                         onChange={(e) => setSelectedStatus(e.target.value)}
                     >

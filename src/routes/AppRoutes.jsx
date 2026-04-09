@@ -3,13 +3,7 @@ import { lazy, Suspense } from "react";
 
 import ProtectedRoute from "./ProtectedRoute";
 import { ROLES } from "../utils/roles";
-import PageLoader from "../components/common/PageLoader";
-import ParentLayout from "../layouts/ParentLayout";
-import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
-import SubjectPage from "../modules/admin/subjects/SubjectPage";
-import RolesPage from "../modules/superAdmin/roles/RolesPage";
 
-import AdminStaff from "../modules/admin/staff/AdminStaff";
 
 // 🔥 Lazy imports
 const Login = lazy(() => import("../pages/Login"));
@@ -18,6 +12,27 @@ const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
 const StudentLayout = lazy(() => import("../layouts/StudentLayout"));
 const SuperAdminLayout = lazy(() => import("../layouts/SuperAdminLayout"));
 
+import PageLoader from "../components/common/PageLoader";
+import ParentLayout from "../layouts/ParentLayout";
+import SchoolsPage from "../modules/superAdmin/schools/SchoolPage";
+import SubjectPage from "../modules/admin/subjects/SubjectPage";
+import RolesPage from "../modules/superAdmin/roles/RolesPage";
+
+import AdminStaff from "../modules/admin/staff/AdminStaff";
+import HolidaysPage from "../modules/admin/holidays/HolidaysPage";
+import AdminStudents from "../modules/admin/students/AdminStudents";
+import Holidays from "../modules/admin/staff/Holidays";
+import AssignmentsPage from "../modules/staff/assignments/AssignmentPage";
+import StudentHolidays from "../modules/student/holidays/StudentHolidays.jsx";
+import StudentTimetable from "../modules/student/timetable/StudentTimetable.jsx";
+import FeesReport from "../modules/admin/reports/fees/FeesReport.jsx";
+import FeesDetails from "../modules/admin/reports/fees/FeesDetails.jsx";
+
+import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
+import StudentAttendancePage from "../modules/staff/attendance/AttendancePage.jsx";
+import TeacherProfile from "../modules/staff/teachers/TeacherProifle.jsx";
+import AssignmentSubmission from "../modules/staff/assignments/AssignmentSubmission.jsx";
+import TeacherAttendanceRecords from "../modules/staff/TeacherAttendanceRecords.jsx";
 //staff imports
 const StaffDashboard = lazy(
   () => import("../modules/staff/dashboard/StaffDashboard"),
@@ -40,13 +55,19 @@ const Subscription = lazy(
   () => import("../modules/superAdmin/subscription/Subscription"),
 );
 const AdminPage = lazy(() => import("../modules/superAdmin/admins/AdminPage"));
-const AcademicSessions = lazy(() => import("../modules/admin/academic-sessions/AcademicSessions"));
+const AcademicSessions = lazy(
+  () => import("../modules/admin/academic-sessions/AcademicSessions"),
+);
 const Sections = lazy(() => import("../modules/admin/sections/Sections"));
 const Classes = lazy(() => import("../modules/admin/classes/Classes"));
 const Fees = lazy(() => import("../modules/admin/fees/Fees"));
 const Timetable = lazy(() => import("../modules/admin/timetable/Timetable"));
 
-const ClassSubjects = lazy(() => import("../modules/admin/classes/ClassSubjects"));
+
+const ExamRoutes = lazy(() => import("../modules/admin/exams/Exams"));
+const ClassSubjects = lazy(
+  () => import("../modules/admin/classes/ClassSubjects"),
+);
 const Exams = lazy(() => import("../modules/admin/exams/Exams"));
 const ExamSubjects = lazy(() => import("../modules/admin/exams/ExamSubjects"));
 const ExamMarks = lazy(() => import("../modules/admin/exams/ExamMarks"));
@@ -111,6 +132,8 @@ const AppRoutes = () => {
             <Route path="academic-sessions" element={<AcademicSessions />} />
             <Route path="classes" element={<Classes />} />
             <Route path="classes/:id/subjects" element={<ClassSubjects />} />
+            <Route path="exams" element={<ExamRoutes />} />
+            <Route path="holidays" element={<HolidaysPage />} />
             <Route path="exams" element={<Exams />} />
             <Route path="exams/:id/subjects" element={<ExamSubjects />} />
             <Route path="exams/:id/marks" element={<ExamMarks />} />
@@ -118,16 +141,17 @@ const AppRoutes = () => {
             <Route path="sections" element={<Sections />} />
             <Route path="fees" element={<Fees />} />
             <Route path="timetable" element={<Timetable />} />
-
-
+            <Route path="students" element={<AdminStudents />} />
             <Route path="subjects" element={<SubjectPage />} />
+
+            <Route path="reports/fee" element={<FeesReport />} />
+            <Route path="fees/:id/details" element={<FeesDetails />} />
 
             <Route path="*" element={<NotFound />} />
 
             <Route path="staff" element={<AdminStaff />} />
           </Route>
 
-          {/* 🎓 Student */}
           <Route
             path="/student"
             element={
@@ -136,6 +160,9 @@ const AppRoutes = () => {
               </ProtectedRoute>
             }
           >
+            <Route path="holidays" element={<StudentHolidays />} />
+            <Route path="timetable" element={<StudentTimetable />} />
+
             <Route path="dashboard" element={<StudentDashboard />} />
             <Route path="*" element={<NotFound />} />
             <Route path="subjects" element={<StudentSubjects />} />
@@ -157,17 +184,25 @@ const AppRoutes = () => {
             <Route path="dashboard" element={<ParentDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+
+          {/* staff */}
           <Route
             path="/staff"
             element={
-              // <ProtectedRoute allowedRoles={[ROLES.STAFF]}>
               <StaffLayout />
-              // </ProtectedRoute>
             }
           >
             <Route path="dashboard" element={<StaffDashboard />} />
             <Route path="teachers" element={<StaffTeachers />} />
             <Route path="students" element={<StaffStudents />} />
+            <Route path="holidays" element={<Holidays />} />
+            <Route path="timetable" element={<TeacherTimeTable />} />
+            <Route path="attendance" element={<StudentAttendancePage />} />
+
+            <Route path="assignments" element={<AssignmentsPage />} />
+            <Route path="assignments/:id/submissions" element={<AssignmentSubmission />} />
+            <Route path="attendance-records" element={<TeacherAttendanceRecords />} />
+            <Route path="profile" element={<TeacherProfile />} />
             <Route path="parents" element={<StaffParents />} />
             <Route path="*" element={<NotFound />} />
           </Route>

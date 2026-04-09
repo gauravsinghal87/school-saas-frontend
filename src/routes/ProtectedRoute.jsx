@@ -23,8 +23,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   //   return <Navigate to="/" state={{ from: location }} replace />;
   // }
 
-  const userRole = user?.role;
-  // 🚀 ROLE MISMATCH → redirect to correct dashboard
+  const userRole = localStorage.getItem("role");
   if (allowedRoles && !allowedRoles.includes(userRole)) {
     const redirectPath = ROLE_ROUTES[(userRole)] // default to home if role is unknown
 

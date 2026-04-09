@@ -9,10 +9,29 @@ let role = localStorage.getItem("role") || "";
 
 export const login = async (data) => {
     const res = await api.post(apiPaths.auth.login, data);
+
+    if (res?.data?.user?.role === "TEACHER") {
+        res.data.user.role = "STAFF";
+    }
+
     return res;
 };
 
 //admin
+// Add Student Fees
+export const addStudentFees = async (data) => {
+    return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
+};
+
+// Get Student Fees Details
+export const getStudentFeesDetails = async (params) => {
+    return await api.get(`${apiPaths.admin.GET_STUDENT_FEES}`, { params });
+};
+
+// Get Payment History
+export const getPaymentHistoryDetails = async (studentId, params) => {
+    return await api.get(`${apiPaths.admin.PAYMENT_HISTORY}/${studentId}`, { params });
+};
 export const updateSection = async ({ id, data }) => {
     return await api.put(`${apiPaths.admin.UPDATE_SECTION}/${id}`, data);
 };
@@ -86,21 +105,31 @@ export const fetchRolesList = async () => {
 };
 
 export const getCurrentUser = async () => {
-    const storedUser = localStorage.getItem("user");
-    let user = storedUser ? JSON.parse(storedUser) : null;
-    return user;
-    // const res = await api.get(apiPaths.auth.me);
+    const role = localStorage.getItem("role");
 
-    // if (res.success) {
-    //     const user = res.data;
+    switch (role) {
+        case "SUPER_ADMIN":
+            return await api.get(apiPaths.superAdmin.PROFILE);
+        case "SCHOOL_ADMIN":
+            return await api.get(apiPaths.admin.PROFILE);
+        case "STAFF":
+            return await api.get(apiPaths.teacher.TEACHER_PROFILE);
+        case "STUDENT":
+            return await api.get(apiPaths.students.STUDENT_PROFILE);
+        case "PARENT":
+            return await api.get(apiPaths.parent.PROFILE);
+        default:
+            return null;
+    }
+};
 
-    //     localStorage.setItem("user", JSON.stringify(user));
-    //     localStorage.setItem("role", user?.role);
+export const getTeacherProfile = async () => {
 
-    //     return user;
-    // }
-
-    // return null;
+    const res = await api.get(apiPaths.teacher.TEACHER_PROFILE);
+    if (res.success) {
+        const user = res.data;
+        return user;
+    }
 };
 
 export const getSubscriptionList = async (params) => {
@@ -135,16 +164,19 @@ export const createStudent = (data) => {
 };
 
 export const createTeacher = (data) => {
-    return api.post(apiPaths.teachers.createTeacher, data);
+    return api.post(apiPaths.teacher.createTeacher, data);
 };
 
 export const getTeachers = () => {
-    return api.get(apiPaths.teachers.teachersList);
+    return api.get(apiPaths.teacher.teachersList);
 };
 
 export const getAdminTeachers = () => {
-    return api.get(apiPaths.teachers.ADMIN_TEACHERS);
+    return api.get(apiPaths.teacher.ADMIN_TEACHERS);
 };
+
+
+
 
 // export const getStudents = () => {
 //     return api.get(apiPaths.students.list);
@@ -161,7 +193,6 @@ export const getRoles = (params) => {
 
 export const updateRole = (data) => {
     const { _id: id, ...rest } = data;
-    console.log("Updating role with ID:", id, "and data:", rest);
     return api.put(apiPaths.superAdmin.UPDATE_ROLE.replace("{id}", id), rest);
 }
 
@@ -248,24 +279,92 @@ export const deleteTimetable = async (params) => {
     return await api.delete(apiPaths.admin.TIMETABLE, { params });
 };
 
-export const fetchStaffList = ({ page, searchTerm, statusFilter }) => {
-    return api.get(
-        `${apiPaths.admin.staff}?page=${page}&limit=10&search=${searchTerm}&status=${statusFilter}`,
-    );
-};
 
-export const deleteStaff = (id) => {
-    return api.delete(`${apiPaths.admin.staff}/${id}`);
-};
+
+// Get single staff
 export const getStaffById = (id) => {
     return api.get(`${apiPaths.admin.staff}/${id}`);
 };
 
+// Create staff
+export const createStaff = (data) => {
+    return api.post(apiPaths.admin.CREATE_STAFF, data);
+};
+
+// Update staff
+export const updateStaff = ({ id, data }) => {
+    return api.put(`${apiPaths.admin.staff}/${id}`, data);
+};
+
 export const uploadStaffDocuments = ({ userId, formData }) => {
-    console.log(userId);
-    return api.post(`${apiPaths.admin.staff}/${userId}/documents`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+    return api.post(
+        `${apiPaths.admin.staff}/${userId}/documents`,
+        formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+};
+export const fetchStaffList = ({ page, searchTerm, statusFilter }) => {
+    return api.get(apiPaths.admin.staff, {
+        params: {
+            page,
+            limit: 10,
+            search: searchTerm,
+            status: statusFilter,
+        },
     });
+};
+export const deleteStaff = (id) => {
+    return api.delete(`${apiPaths.admin.staff}/${id}`);
+};
+
+export const getStudentById = (id) => {
+    return api.get(`${apiPaths.students.GET_STUDENT_BY_ID}/${id}`);
+};
+
+export const uploadStudentDocuments = ({ userId, formData }) => {
+    return api.post(
+        `${apiPaths.admin.staff}/${userId}/documents`,
+        formData,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }
+    );
+};
+export const enrollStudent = (data) => {
+    return api.post(apiPaths.students.ENROLL_STUDENT, data);
+};
+
+export const getStudentsList = ({
+    page,
+    searchTerm,
+    classFilter,
+    sectionFilter,
+    sessionFilter,
+}) => {
+    return api.get(apiPaths.students.list, {
+        params: {
+            page,
+            limit: 10,
+            search: searchTerm || undefined,
+            classId: classFilter !== "null" ? classFilter : undefined,
+            sectionId: sectionFilter !== "null" ? sectionFilter : undefined,
+            sessionId: sessionFilter !== "null" ? sessionFilter : undefined,
+        },
+    });
+};
+
+export const getSessions = () => {
+    return api.get(apiPaths.admin.ACADEMIC_YEAR_LIST);
+};
+
+export const getClasses = () => {
+    return api.get(apiPaths.admin.CLASSES_LIST);
 };
 
 
@@ -342,6 +441,20 @@ export const getStudentResults = async (studentId, params) => {
 };
 
 
+export const createHoliday = async (data) => {
+    return await api.post(apiPaths.admin.CREATE_HOLIDAY, data);
+};
+
+
+export const updateHoliday = async ({ holidayId, data }) => {
+    const url = apiPaths.admin.UPDATE_HOLIDAY.replace("{holidayId}", holidayId);
+    return await api.put(url, data);
+};
+
+export const deleteHoliday = async (holidayId) => {
+    const url = apiPaths.admin.DELETE_HOLIDAY.replace("{holidayId}", holidayId);
+    return await api.delete(url);
+};
 
 
 
@@ -351,6 +464,21 @@ export const getStudentResults = async (studentId, params) => {
 
 
 
+//teacher api methods would go here
+
+
+
+// TEACHER_ASSIGNMENT_SUBMISSIONS
+export const getTeacherAssignmentSubmissions = async (params) => {
+    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_SUBMISSIONS;
+    return await api.get(url);
+}
+
+export const giveFeedbackOnSubmission = async (data) => {
+    const { submissionId, feedback } = data;
+    const url = apiPaths.teacher.TEACHER_ASSIGNMENT_FEEDBACK.replace("{submissionId}", submissionId);
+    return await api.put(url, { feedback });
+}
 
 
 export const markAttendance = async (data) => {
@@ -438,15 +566,18 @@ export const deleteAssignment = async (assignmentId) => {
     return await api.delete(url);
 };
 
+
+
+export const getStudentTimetable = async () => {
+    return await api.get(apiPaths.students.STUDENT_TIMETABLE);
+};
+
 export const getTeacherTimetable = async ({ classId, sectionId }) => {
     let url = apiPaths.teacher.GET_TIMETABLE.replace("{classId}", classId);
     url = url.replace("{sectionId}", sectionId);
     return await api.get(url);
 }
 
-export const getStudentTimetable = async () => {
-    return await api.get(apiPaths.students.STUDENT_TIMETABLE);
-};
 
 
 export const getClassSecSub = async () => {
@@ -455,7 +586,19 @@ export const getClassSecSub = async () => {
 
 
 
+export const teacherCheckIn = () => {
+    return api.post(apiPaths.teacher.TEACHER_CHECK_IN);
+};
 
+export const teacherCheckOut = () => {
+    return api.post(apiPaths.teacher.TEACHER_CHECK_OUT);
+};
+
+export const getTeacherInOutTimes = ({ teacherId }) => {
+    console.log('Fetching in/out times for teacherId:', teacherId); // Debug log
+    const url = apiPaths.teacher.TEACHER_IN_OUT_TIMES.replace("{teacherId}", teacherId);
+    return api.get(url);
+};
 
 
 

@@ -175,7 +175,7 @@ export default function Periods() {
             <div className="mb-4 flex gap-4">
                 <div className="w-64">
                     <select
-                        className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800"
+                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
                         value={selectedAcademicYear}
                         onChange={(e) => {
                             setSelectedAcademicYear(e.target.value);

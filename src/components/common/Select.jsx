@@ -258,7 +258,7 @@ const AppSelect = ({
   return (
     <div className="w-full">
       {label && (
-        <label className="block text-xs font-semibold mb-1 uppercase text-[var(--color-text-secondary)]">
+        <label className="block text-xs font-semibold mb-1 uppercase text-text-heading">
           {label}
         </label>
       )}
@@ -280,7 +280,7 @@ const AppSelect = ({
       />
 
       {error && (
-        <p className="text-xs mt-1 text-[var(--color-error)]">
+        <p className="text-xs mt-1 text-error">
           {error}
         </p>
       )}
