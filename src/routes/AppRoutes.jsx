@@ -31,6 +31,8 @@ import FeesDetails from "../modules/admin/reports/fees/FeesDetails.jsx";
 import TeacherTimeTable from "../modules/staff/TeacherTimeTable";
 import StudentAttendancePage from "../modules/staff/attendance/AttendancePage.jsx";
 import TeacherProfile from "../modules/staff/teachers/TeacherProifle.jsx";
+import AttendanceReport from "../modules/admin/reports/attendance/AttendanceReport.jsx";
+import AttendanceDetail from "../modules/admin/reports/attendance/AttendanceDetail.jsx";
 //staff imports
 const StaffDashboard = lazy(
   () => import("../modules/staff/dashboard/StaffDashboard"),
@@ -142,9 +144,12 @@ const AppRoutes = () => {
             <Route path="reports/fee" element={<FeesReport />} />
             <Route path="fees/:id/details" element={<FeesDetails />} />
 
+            <Route path="reports/attendance" element={<AttendanceReport />} />
+            <Route path="reports/attendance/:id" element={<AttendanceDetail />} />
+
             <Route path="*" element={<NotFound />} />
 
-            <Route path="staff" element={<AdminStaff />} /> 
+            <Route path="staff" element={<AdminStaff />} />
           </Route>
 
           <Route

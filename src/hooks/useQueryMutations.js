@@ -116,6 +116,7 @@ import {
     getStudentSubjects,
     getStudentAssignments,
     submitAssignment,
+    getUsersList,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -279,7 +280,13 @@ export const deleteSubscriptionMutation = () => {
 
 //admin
 // Add this to your useQueryMutations.js file
-
+// ✅ Attendance Users List
+export const getUsersListQuery = (params) => {
+  return useAppQuery({
+    queryKey: ["usersList", params],
+    apiCall: () => getUsersList(params),
+  });
+};
 export const getPaymentHistory = (params) => {
     return useAppQuery({
         queryKey: ["paymentHistory", params],
@@ -446,7 +453,55 @@ export const getStaffList = ({ page, searchTerm, statusFilter }) => {
 
 //admin
 
+// Add these to your existing useQueryMutations.js file
 
+// ✅ Get Teacher Attendance Query
+export const getTeacherAttendanceQuery = (params, enabled = true) => {
+    const { teacherId, startDate, endDate } = params;
+    return useAppQuery({
+        queryKey: ["teacherAttendance", teacherId, startDate, endDate],
+        apiCall: () => getTeacherAttendance(params),
+        enabled: enabled && !!teacherId,
+    });
+};
+
+// ✅ Get Student Attendance Query
+export const getStudentAttendanceQuery = (params, enabled = true) => {
+    const { studentId, startDate, endDate } = params;
+    return useAppQuery({
+        queryKey: ["studentAttendance", studentId, startDate, endDate],
+        apiCall: () => getStudentAttendance(params),
+        enabled: enabled && !!studentId,
+    });
+};
+
+// ✅ Mark/Update Attendance Mutation
+export const markAttendanceMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: markAttendance,
+        successMessage: "Attendance updated successfully 🎉",
+        onSuccessCallback: (res, variables) => {
+            // Invalidate both teacher and student attendance queries
+            queryClient.invalidateQueries(["teacherAttendance"]);
+            queryClient.invalidateQueries(["studentAttendance"]);
+            queryClient.invalidateQueries(["usersList"]);
+        },
+    });
+};
+
+// ✅ Get Single User Details (for the attendance page)
+export const getUserDetailsQuery = (userId, enabled = true) => {
+    return useAppQuery({
+        queryKey: ["userDetails", userId],
+        apiCall: () => getUsersList({ page: 1, limit: 1, search: userId }),
+        select: (res) => {
+            const users = res?.data?.users || [];
+            return users.find(u => u._id === userId);
+        },
+        enabled: enabled && !!userId,
+    });
+};
 export const createSectionMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -933,13 +988,7 @@ export const fetchstudentListQuery = (params) => {
     });
 }
 
-export const getStudentAttendanceQuery = (studentId, enabled = true) => {
-    return useAppQuery({
-        queryKey: ["studentAttendance", studentId],
-        apiCall: () => getStudentAttendance(studentId),
-        enabled: enabled && !!studentId,
-    });
-}
+
 
 export const getClassAttendanceQuery = ({ classId, sectionId, date }, enabled = true) => {
     return useAppQuery({
@@ -951,16 +1000,7 @@ export const getClassAttendanceQuery = ({ classId, sectionId, date }, enabled = 
 };
 
 
-export const markAttendanceMutation = () => {
-    const queryClient = useQueryClient();
-    return useAppMutation({
-        apiCall: markAttendance,
-        successMessage: "Attendance marked successfully 🎉",
-        onSuccessCallback: () => {
-            queryClient.invalidateQueries(["attendance"]);
-        },
-    });
-};
+
 
 
 

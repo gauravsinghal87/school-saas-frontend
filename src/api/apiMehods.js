@@ -18,7 +18,10 @@ export const login = async (data) => {
 };
 
 //admin
-// Add Student Fees
+//userlist for attendance report
+export const getUsersList = async (params) => {
+  return await api.get(apiPaths.admin.USERS_LIST, { params });
+};
 export const addStudentFees = async (data) => {
   return await api.post(apiPaths.admin.ADD_STUDENT_FEES, data);
 };
@@ -452,8 +455,27 @@ export const markAttendance = async (data) => {
     return await api.post(apiPaths.teacher.MARK_ATTENDANCE, data);
 };
 
-export const getStudentAttendance = async (studentId) => {
-    return await api.get(apiPaths.teacher.GET_ATTENDANCE.replace("{studentId}", studentId));
+export const getTeacherAttendance = async (params) => {
+    const { teacherId, startDate, endDate } = params;
+    const queryParams = new URLSearchParams();
+    if (startDate) queryParams.append("startDate", startDate);
+    if (endDate) queryParams.append("endDate", endDate);
+    if (teacherId) queryParams.append("teacherId", teacherId);
+    
+    const url = `/api/attendance/teacher${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+    return await api.get(url);
+};
+
+// Get Student Attendance
+export const getStudentAttendance = async (params) => {
+    const { studentId, startDate, endDate } = params;
+    const queryParams = new URLSearchParams();
+    if (startDate) queryParams.append("startDate", startDate);
+    if (endDate) queryParams.append("endDate", endDate);
+    if (studentId) queryParams.append("studentId", studentId);
+    
+    const url = `/api/attendance/student${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+    return await api.get(url);
 };
 
 export const getClassAttendance = async ({ classId, sectionId, date }) => {

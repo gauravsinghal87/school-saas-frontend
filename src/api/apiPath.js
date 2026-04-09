@@ -107,6 +107,9 @@ export const apiPaths = {
         GET_STUDENT_FEES: '/api/admin/student-list',
         PAYMENT_HISTORY: '/api/admin/student-detail',
 
+
+        USERS_LIST:'/api/user/list-users'
+
     }
 
 } 

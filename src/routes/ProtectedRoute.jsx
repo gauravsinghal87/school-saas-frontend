@@ -6,6 +6,7 @@ import { useUser } from "../hooks/useUser";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, isLoading, isAuthenticated } = useUser();
+  console.log("user", user);
   const location = useLocation();
 
 
@@ -23,7 +24,9 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   //   return <Navigate to="/" state={{ from: location }} replace />;
   // }
 
-  const userRole = user?.role;
+  // const userRole = user?.role;
+  let userRole = localStorage.getItem("role");
+  console.log("userRole", userRole);
   // 🚀 ROLE MISMATCH → redirect to correct dashboard
   if (allowedRoles && !allowedRoles.includes(userRole)) {
     const redirectPath = ROLE_ROUTES[(userRole)] // default to home if role is unknown
