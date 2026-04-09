@@ -193,7 +193,7 @@ export default function StudentAttendancePage() {
                     placeholder="Add note..."
                     value={attendanceData[row._id]?.remarks || ""}
                     onChange={(e) => handleRemarkChange(row._id, e.target.value)}
-                    className="w-full h-9 px-3 rounded-lg border border-border bg-white text-xs outline-none focus:border-primary transition-colors"
+                    className="w-full h-9 px-3 rounded-lg border border-border  text-xs outline-none focus:border-primary transition-colors"
                 />
             )
         },

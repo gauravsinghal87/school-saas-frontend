@@ -50,14 +50,13 @@ export const MENU_CONFIG = {
         { id: "sa-dashboard", name: "Dashboard", path: "dashboard", icon: LayoutDashboard, section: "main" },
         { id: "sa-schools", name: "Schools", path: "schools", icon: School, section: "main" },
         { id: "sa-subscriptions", name: "Subscriptions", path: "subscriptions", icon: CreditCard, section: "main" },
-        { id: "sa-analytics", name: "Analytics", path: "analytics", icon: PieChart, section: "main" },
+        // { id: "sa-analytics", name: "Analytics", path: "analytics", icon: PieChart, section: "main" },
 
         // management
         { id: "sa-roles", name: "Roles & Perms", path: "roles", icon: ShieldCheck, section: "management" },
 
-        // system
-        { id: "sa-reports", name: "Reports", path: "reports", icon: FileBarChart, section: "system" },
-        { id: "sa-announcements", name: "Announcements", path: "announcements", icon: Megaphone, section: "system" },
+        // { id: "sa-reports", name: "Reports", path: "reports", icon: FileBarChart, section: "system" },
+        // { id: "sa-announcements", name: "Announcements", path: "announcements", icon: Megaphone, section: "system" },
         { id: "sa-settings", name: "Settings", path: "settings", icon: Settings, section: "system" },
 
     ],
