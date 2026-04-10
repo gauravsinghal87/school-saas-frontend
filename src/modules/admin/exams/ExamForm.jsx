@@ -85,8 +85,10 @@ export default function ExamForm({
                                 onChange={(val) => field.onChange(val)}
                                 options={[
                                     { label: "Draft", value: "draft" },
-                                    { label: "Published", value: "published" },
+                                    { label: "Scheduled", value: "scheduled" },
                                     { label: "Completed", value: "completed" },
+                                    { label: "Result Published", value: "result_published" },
+                                    { label: "Published (Legacy)", value: "published" },
                                 ]}
                                 placeholder="Select status"
                                 error={errors.status?.message}

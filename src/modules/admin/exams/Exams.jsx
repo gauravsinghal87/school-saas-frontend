@@ -137,12 +137,14 @@ export default function Exams() {
     };
 
     const onSubmit = async (formData) => {
+        console.log("Form Data:", formData,);
         try {
             const payload = {
                 name: formData.name,
                 classId: formData.classId,
                 startDate: formData.startDate,
                 endDate: formData.endDate,
+                status: formData.status,
             };
 
             if (mode === "create") {

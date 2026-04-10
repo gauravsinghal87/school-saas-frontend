@@ -460,6 +460,25 @@ export const deleteHoliday = async (holidayId) => {
 };
 
 
+// ADMIN_PLAN_LIST
+
+export const getAdminPlanList = async (params) => {
+    return await api.get(apiPaths.admin.SUBSCRIPTIONS_PLAN_LIST, { params });
+}
+
+export const getActiveSubscriptions = async (params) => {
+    return await api.get(apiPaths.admin.ACTIVE_SUBSCRIPTIONS, { params });
+}
+
+export const renewSubscription = async (data) => {
+    return await api.put(apiPaths.admin.RENEW_SUBSCRIPTION, data);
+}
+
+
+export const verifySubscription = async (data) => {
+    return await api.post(apiPaths.admin.VERIFY_SUBSCRIPTION, data);
+}
+
 
 
 
@@ -594,9 +613,9 @@ export const getStudentTimetable = async () => {
     return await api.get(apiPaths.students.STUDENT_TIMETABLE);
 };
 
-export const getTeacherTimetable = async ({ classId, sectionId }) => {
-    let url = apiPaths.teacher.GET_TIMETABLE.replace("{classId}", classId);
-    url = url.replace("{sectionId}", sectionId);
+export const getTeacherTimetable = async () => {
+    let url = apiPaths.teacher.GET_TIMETABLE;
+    // url = url.replace("{sectionId}", sectionId);
     return await api.get(url);
 }
 
@@ -623,6 +642,88 @@ export const getTeacherInOutTimes = ({ teacherId }) => {
 };
 
 
+// ==================== TEACHER EXAM MANAGEMENT API METHODS ====================
+
+
+export const getTeacherExamList = () => {
+    return api.get(apiPaths.teacher.TEACHER_EXAM_LIST);
+};
+
+export const getTeacherExamClasses = ({ examId }) => {
+    return api.get(apiPaths.teacher.TEACHER_EXAM_CLASSES, {
+        params: { exam_id: examId },
+    });
+};
+
+export const getTeacherExamSubjects = ({ examId, classId }) => {
+    return api.get(apiPaths.teacher.TEACHER_EXAM_SUBJECTS, {
+        params: {
+            exam_id: examId,
+            class_id: classId,
+        },
+    });
+};
+
+export const getTeacherExamStudents = ({
+    examId,
+    classId,
+    subjectId,
+}) => {
+    return api.get(apiPaths.teacher.TEACHER_EXAM_STUDENTS, {
+        params: {
+            exam_id: examId,
+            class_id: classId,
+            subject_id: subjectId,
+        },
+    });
+};
+
+export const updateTeacherExamMarks = (data) => {
+    return api.post(apiPaths.teacher.TEACHER_UPDATE_MARKS, data);
+};
+
+
+export const getTeacherExamMarks = ({
+    examId,
+    classId,
+    subjectId,
+}) => {
+    return api.get(apiPaths.teacher.TEACHER_GET_MARKS, {
+        params: {
+            exam_id: examId,
+            class_id: classId,
+            subject_id: subjectId,
+        },
+    });
+};
+
+
+export const downloadMarksTemplate = ({
+    examId,
+    classId,
+    subjectId,
+}) => {
+    return api.get(apiPaths.teacher.TEACHER_MARKS_TEMPLATE, {
+        params: {
+            exam_id: examId,
+            class_id: classId,
+            subject_id: subjectId,
+        },
+        responseType: 'blob',
+    });
+};
+
+export const uploadMarksBulk = (formData) => {
+    return api.post(
+        apiPaths.teacher.TEACHER_BULK_UPLOAD_MARKS,
+        formData,
+        {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }
+    );
+};
 
 // STUDENT MODULE
 
@@ -654,27 +755,27 @@ export const getStudentProfile = async () => {
     return await api.get(apiPaths.students.PROFILE);
 };
 export const getMyChildren = () => {
-  return api.get(apiPaths.parent.MY_CHILDREN);
+    return api.get(apiPaths.parent.MY_CHILDREN);
 };
 
 export const getParentStudentAttendance = ({
-  studentId,
-  startDate,
-  endDate,
+    studentId,
+    startDate,
+    endDate,
 }) => {
-  return api.get(apiPaths.students.STUDENT_ATTENDANCE, {
-    params: {
-      studentId,
-      startDate,
-      endDate,
-    },
-  });
+    return api.get(apiPaths.students.STUDENT_ATTENDANCE, {
+        params: {
+            studentId,
+            startDate,
+            endDate,
+        },
+    });
 };
 
 export const getParentProfile = () => {
-  return api.get(apiPaths.parent.MY_PROFILE);
+    return api.get(apiPaths.parent.MY_PROFILE);
 };
 
 export const getParentPayments = () => {
-  return api.get(apiPaths.parent.PAYMENTS);
+    return api.get(apiPaths.parent.PAYMENTS);
 };

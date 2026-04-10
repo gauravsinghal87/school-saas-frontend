@@ -1,0 +1,2992 @@
+[
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d1"
+        },
+        "name": "HEMOSIDERIN - URINE",
+        "code": "H006",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Urine",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d2"
+        },
+        "name": "HEPATITIS A VIRUS (HAV IgG)",
+        "code": "S033",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 450,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d3"
+        },
+        "name": "HEPATITIS A VIRUS (HAV IgM)",
+        "code": "S032",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 450,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d4"
+        },
+        "name": "HEPATITIS B ENVELOPE ANTIBODY (Anti HBe)",
+        "code": "S034",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d5"
+        },
+        "name": "HEPATITIS B ENVELOPE ANTIGEN (HBeAg)",
+        "code": "S035",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d6"
+        },
+        "name": "HEPATITIS B SURFACE ANTIBODY TOTAL (Anti Hbs)",
+        "code": "S036",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "Negative or >10",
+        "unit": "mIU/mL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d7"
+        },
+        "name": "HEPATITIS B SURFACE ANTIGEN (HBsAg)",
+        "code": "S037",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 200,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d8"
+        },
+        "name": "HEPATITIS B VIRUS - VIRAL LOAD (QUANTITATIVE)",
+        "code": "P001",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2400,
+        "normalRange": "Not Detected",
+        "unit": "IU/mL",
+        "sampleType": "Whole Blood/Plasma/Serum",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001d9"
+        },
+        "name": "HEPATITIS B VIRUS DNA (QUALITATIVE)",
+        "code": "P002",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1450,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "Whole Blood/Plasma/Serum",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001da"
+        },
+        "name": "HEPATITIS C ANTIBODY (HCV Antibody)",
+        "code": "S038",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 300,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001db"
+        },
+        "name": "HEPATITIS C VIRUS - GENOTYPING",
+        "code": "P019",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 5500,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "EDTA Plasma",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001dc"
+        },
+        "name": "HEPATITIS C VIRUS - VIRAL LOAD (QUANTITATIVE)",
+        "code": "P003",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2400,
+        "normalRange": "Not Detected",
+        "unit": "IU/mL",
+        "sampleType": "Whole Blood/Plasma/Serum",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001dd"
+        },
+        "name": "HEPATITIS C VIRUS (HCV Antibody)-IgG",
+        "code": "S121",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 600,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001de"
+        },
+        "name": "HEPATITIS C VIRUS (HCV Antibody)-IgM",
+        "code": "S051",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 600,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001df"
+        },
+        "name": "HEPATITIS C VIRUS-QUALITATIVE",
+        "code": "P004",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1450,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "Whole Blood/Plasma/Serum",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e0"
+        },
+        "name": "HEPATITIS CORE ANTIBODY IgM (Anti HBc-IgM)",
+        "code": "S039",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e1"
+        },
+        "name": "HEPATITIS CORE ANTIBODY TOTAL (HBcAb-Total)",
+        "code": "S040",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e2"
+        },
+        "name": "HEPATITIS DELTA VIRUS - IgM (HDV IgM) ANTIBODY",
+        "code": "S166",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2050,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e3"
+        },
+        "name": "HEPATITIS E VIRUS - IGG (HEV IGG)",
+        "code": "S041",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 600,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e4"
+        },
+        "name": "HEPATITIS E VIRUS - IGM (HEV IGM)",
+        "code": "S042",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 600,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e5"
+        },
+        "name": "HERPES SIMPLEX VIRUS 1 & 2 IgG",
+        "code": "S044",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e6"
+        },
+        "name": "HERPES SIMPLEX VIRUS 1 & 2 IgM",
+        "code": "S043",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e7"
+        },
+        "name": "HERPES SIMPLEX VIRUS 1 IgG",
+        "code": "S045",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 115,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e8"
+        },
+        "name": "HERPES SIMPLEX VIRUS 1 IgM",
+        "code": "S046",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 115,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001e9"
+        },
+        "name": "HERPES SIMPLEX VIRUS 2 IgG",
+        "code": "S047",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 115,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001ea"
+        },
+        "name": "HERPES SIMPLEX VIRUS 2 IgM",
+        "code": "S048",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 115,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001eb"
+        },
+        "name": "HERPES SIMPLEX VIRUS- DNA PCR",
+        "code": "P024",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2450,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "Whole Blood/Plasma/CSF",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001ec"
+        },
+        "name": "HEV RNA QUANTITATIVE ASSSAY",
+        "code": "P195",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2450,
+        "normalRange": "Not Detected",
+        "unit": "IU/mL",
+        "sampleType": "Serum",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001ed"
+        },
+        "name": "HIGH SENSITIVE CRP (HSCRP)",
+        "code": "C110",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "<1",
+        "unit": "mg/L",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001ee"
+        },
+        "name": "HISTONE ANTIBODY",
+        "code": "S140",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1950,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001ef"
+        },
+        "name": "HIV - QUANTITATIVE (VIRAL LOAD)",
+        "code": "P005",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2400,
+        "normalRange": "Not Detected",
+        "unit": "Copies/mL",
+        "sampleType": "Whole Blood/Plasma/Serum",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f0"
+        },
+        "name": "HIV 1 & 2 ANTIBODY - Qualitative",
+        "code": "S237",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 175,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f1"
+        },
+        "name": "HIV 1 & 2 ANTIBODY by ELISA",
+        "code": "S050",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 200,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f2"
+        },
+        "name": "HIV 1 WESTERN BLOT",
+        "code": "S049",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1350,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f3"
+        },
+        "name": "HIV 1,2 AND 3",
+        "code": "S123",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f4"
+        },
+        "name": "HIV AG & AB - 4TH GENERATION",
+        "code": "S118",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f5"
+        },
+        "name": "HIV P24 ANTIGEN",
+        "code": "C313",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 700,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f6"
+        },
+        "name": "HIV-DNA PCR - QUALITATIVE",
+        "code": "P007",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2050,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "EDTA Plasma/Serum",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f7"
+        },
+        "name": "HIV-I DRUG RESISTANCE ASSAY (PI)",
+        "code": "P030",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 10500,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Whole Blood/Plasma/Serum",
+        "reportTime": "22nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f8"
+        },
+        "name": "HIV-I DRUG RESISTANCE ASSAY (RT)",
+        "code": "P029",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 10500,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Whole Blood/Plasma/Serum",
+        "reportTime": "22nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001f9"
+        },
+        "name": "HIV-RNA PCR - QUALITATIVE",
+        "code": "P006",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1850,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "EDTA Plasma/Serum",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001fa"
+        },
+        "name": "HLA - DR4 (DRB1*04)",
+        "code": "H190",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 3850,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001fb"
+        },
+        "name": "HLA B-27",
+        "code": "H035",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 950,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001fc"
+        },
+        "name": "HLA B-27 - PCR",
+        "code": "P034",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1600,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001fd"
+        },
+        "name": "HOMA -IR",
+        "code": "C335",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 550,
+        "normalRange": "<1.9",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001fe"
+        },
+        "name": "HOMOCYSTEINE",
+        "code": "C111",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 525,
+        "normalRange": "5-15",
+        "unit": "µmol/L",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f9180000000000000001ff"
+        },
+        "name": "HUMAN EPIDIDYMIS PROTEIN 4 (HE-4)",
+        "code": "C296",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1550,
+        "normalRange": "<70",
+        "unit": "pmol/L",
+        "sampleType": "Serum",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000200"
+        },
+        "name": "HUMAN PAPILOMA VIRUS (16&18) DNA BY REAL TIME PCR",
+        "code": "P036",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1150,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "Cervical Scrapings",
+        "reportTime": "2nd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000201"
+        },
+        "name": "IHC- BETA HUMAN CHORIONIC GONADOTROPIN (BHCG)",
+        "code": "A044",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000202"
+        },
+        "name": "IHC - CD99",
+        "code": "A028",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000203"
+        },
+        "name": "IHC - CHROMOGRANIN",
+        "code": "A054",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Sections/Blocks",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000204"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 10 (CD10)",
+        "code": "A018",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000205"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 117 (CD117)",
+        "code": "A027",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000206"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 15 (CD15)",
+        "code": "A019",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000207"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 19 (CD19)",
+        "code": "A113",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000208"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 20 (CD20)",
+        "code": "A021",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000209"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 21 (CD21)",
+        "code": "A112",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000020a"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 23 (CD23)",
+        "code": "A023",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000020b"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 3 (CD3)",
+        "code": "A016",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000020c"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 30 (CD30)",
+        "code": "A024",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000020d"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 43(CD43)",
+        "code": "A058",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000020e"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 45(CD45)",
+        "code": "A025",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000020f"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 5(CD5)",
+        "code": "A017",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000210"
+        },
+        "name": "IHC - CLUSTER OF DIFFERENTIATION 68(CD68)",
+        "code": "A026",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Sections/Blocks",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000211"
+        },
+        "name": "IHC - CYTOKERATIN 5/6",
+        "code": "A036",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000212"
+        },
+        "name": "IHC - CYTOKERATIN 7",
+        "code": "A035",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000213"
+        },
+        "name": "IHC - ER/PR",
+        "code": "A068",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1750,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000214"
+        },
+        "name": "IHC - GROSS CYSTIC DISEASE FLUID PROTEIN (GCDFP)",
+        "code": "A045",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000215"
+        },
+        "name": "IHC - HIGH MOLECULAR WEIGHT- KINIOGEN (HMW-K)",
+        "code": "A041",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000216"
+        },
+        "name": "IHC - HUMAN MELANOMA BLACK 45 (HMB 45)",
+        "code": "A050",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000217"
+        },
+        "name": "IHC - INHIBIN",
+        "code": "A015",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000218"
+        },
+        "name": "IHC - KI 67-MARKER",
+        "code": "A059",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000219"
+        },
+        "name": "IHC - LOW MOLECULAR WEIGHT- KININOGEN (LMW-K)",
+        "code": "A040",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Sections/Blocks",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000021a"
+        },
+        "name": "IHC - MULTIPLE MYELOMA ONCOGENE 1 (MUM1)",
+        "code": "A031",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000021b"
+        },
+        "name": "IHC - MYELOPEROXIDASE(MPO)",
+        "code": "A034",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000021c"
+        },
+        "name": "IHC - NEURON SPECIFIC ENOLASE",
+        "code": "A048",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000021d"
+        },
+        "name": "IHC - P - 63",
+        "code": "A067",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000021e"
+        },
+        "name": "IHC - PLACENTAL ALKALINE PHOSPHATASE (PLAP)",
+        "code": "A043",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000021f"
+        },
+        "name": "IHC - S100",
+        "code": "A049",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000220"
+        },
+        "name": "IHC - SMOOTH MUSCLE ACTIN (SMA)",
+        "code": "A053",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000221"
+        },
+        "name": "IHC - SYNAPTOPHYSIN",
+        "code": "A055",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000222"
+        },
+        "name": "IHC - TERMINAL DEOXYNUCLEOTIDYL TRANSFERASE (TdT)",
+        "code": "A033",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000223"
+        },
+        "name": "IHC - THYROGLOBULIN",
+        "code": "A051",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000224"
+        },
+        "name": "IHC - THYROID TRANSCRIPTION FACTOR",
+        "code": "A042",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000225"
+        },
+        "name": "IHC - VIMENTIN",
+        "code": "A047",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000226"
+        },
+        "name": "IHC- CARCINOEMBRYONIC ANTIGEN (CEA)",
+        "code": "A065",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000227"
+        },
+        "name": "IHC -CK 20",
+        "code": "A115",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000228"
+        },
+        "name": "IHC -DOG1",
+        "code": "A116",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000229"
+        },
+        "name": "IHC -ESTROGEN RECEPTOR / PROGESTERONE RECEPTOR (ER & PR)",
+        "code": "A012",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Paraffin Blocks",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000022a"
+        },
+        "name": "IHC- P53",
+        "code": "A064",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000022b"
+        },
+        "name": "IHC- PANCYTOKERATIN",
+        "code": "A039",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000022c"
+        },
+        "name": "IHC1",
+        "code": "A118",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000022d"
+        },
+        "name": "IHC-ANAPLASTIC LYMPHOMA KINASE 1(AKL1)",
+        "code": "A029",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000022e"
+        },
+        "name": "IHC-B-CELL LEUKEMIA/LYMPHOMA 6 (BCL6)",
+        "code": "A030",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000022f"
+        },
+        "name": "IHC-CD34",
+        "code": "A114",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000230"
+        },
+        "name": "IHC-CYCLIN-D",
+        "code": "A032",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000231"
+        },
+        "name": "IHC-CYTOKERATIN 19",
+        "code": "A111",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000232"
+        },
+        "name": "IHC-CYTOKERATIN 20",
+        "code": "A037",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000233"
+        },
+        "name": "IHC-DESMIN",
+        "code": "A038",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000234"
+        },
+        "name": "IHC-EPITHELIAL MEMBRANE ANTIGEN",
+        "code": "A063",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000235"
+        },
+        "name": "IHC-GLIAL FIBRILLARY ACIDIC PROTEIN (GFAP)",
+        "code": "A046",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "FFPE Tissue Block",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000236"
+        },
+        "name": "IMMUNOFIXATION ELECTROPHORESIS - URINE",
+        "code": "C281",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 3850,
+        "normalRange": "No Monoclonal Band",
+        "unit": "",
+        "sampleType": "Urine",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000237"
+        },
+        "name": "IMMUNOFIXATION ELECTROPHORESIS- SERUM",
+        "code": "C112",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 3850,
+        "normalRange": "No Monoclonal Band",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000238"
+        },
+        "name": "IMMUNOGLOBULIN A (IgA)",
+        "code": "C113",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "70-400",
+        "unit": "mg/dL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000239"
+        },
+        "name": "IMMUNOGLOBULIN G4 (IgG4)",
+        "code": "C1242",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 3150,
+        "normalRange": "4-86",
+        "unit": "mg/dL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000023a"
+        },
+        "name": "IMMUNOGLOBULIN IgA,IgG,IgM",
+        "code": "C1245",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 650,
+        "normalRange": "See Report",
+        "unit": "mg/dL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000023b"
+        },
+        "name": "IMMUNOGLOBULIN IgG",
+        "code": "C115",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "700-1600",
+        "unit": "mg/dL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000023c"
+        },
+        "name": "IMMUNOGLOBULIN IgM",
+        "code": "C116",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "40-230",
+        "unit": "mg/dL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000023d"
+        },
+        "name": "IMMUNOHISTOCHEMISTRY HER2NEU",
+        "code": "A117",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1225,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Tissue",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000023e"
+        },
+        "name": "IMMUNOPHENOTYPING FROM BONE MARROW/ PERIPHERAL BLOOD ON FACS CANTO",
+        "code": "H561",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 12500,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Whole Blood/Bone Marrow",
+        "reportTime": "5th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000023f"
+        },
+        "name": "INFECTIOUS MONONUCLEOSIS (Heterophilic antibodies- Monospot test)",
+        "code": "S052",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 575,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000240"
+        },
+        "name": "INHIBIN B",
+        "code": "S139",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1600,
+        "normalRange": "See Report",
+        "unit": "pg/mL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000241"
+        },
+        "name": "INSULIN - FASTING",
+        "code": "C117",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "2-25",
+        "unit": "µIU/mL",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000242"
+        },
+        "name": "INSULIN - LIKE GROWTH FACTOR (IGF-I), SOMATOMEDIN- C",
+        "code": "C192",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1500,
+        "normalRange": "See Report",
+        "unit": "ng/mL",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000243"
+        },
+        "name": "INSULIN - POST PRANDIAL(PP)",
+        "code": "C219",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "See Report",
+        "unit": "µIU/mL",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000244"
+        },
+        "name": "INSULIN (RANDOM) - HORMONE ASSAYS",
+        "code": "C314",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 230,
+        "normalRange": "See Report",
+        "unit": "µIU/mL",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000245"
+        },
+        "name": "INSULIN LIKE GROWTH FACTOR BONDING PROTEIN (IGF-BP3)",
+        "code": "C285",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2300,
+        "normalRange": "See Report",
+        "unit": "mg/L",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000246"
+        },
+        "name": "INTACT PARATHYROID HORMONE (IPTH)",
+        "code": "C245",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 600,
+        "normalRange": "15-65",
+        "unit": "pg/mL",
+        "sampleType": "EDTA Plasma/Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000247"
+        },
+        "name": "INTERLEUKIN - 28B (RS12979860) GENOTYPING",
+        "code": "P039",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 3250,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "7th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000248"
+        },
+        "name": "INTERLEUKIN 28B RS12979860 GENOTYPING - QUALITATIVE (PCR)",
+        "code": "P086",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 3250,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "7th Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000249"
+        },
+        "name": "INTERLUKIN-6 (IL-6)",
+        "code": "C1326",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 2250,
+        "normalRange": "<7",
+        "unit": "pg/mL",
+        "sampleType": "Serum",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000024a"
+        },
+        "name": "INTRINSIC FACTOR IGG ANTIBODY",
+        "code": "S107",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1550,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000024b"
+        },
+        "name": "INV 16 MUTATION ASSAY (QUALITATIVE)",
+        "code": "P090",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 3450,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000024c"
+        },
+        "name": "IRON",
+        "code": "C118",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 175,
+        "normalRange": "M: 65-175, F: 50-170",
+        "unit": "µg/dL",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000024d"
+        },
+        "name": "IRON DEFICIENCY PROFILE",
+        "code": "C1296",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 350,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000024e"
+        },
+        "name": "IRON PROFILE BASIC",
+        "code": "C1297",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 200,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f91800000000000000024f"
+        },
+        "name": "IRON STUDIES (FOR ANEMIA PROFILE)",
+        "code": "C1310",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1150,
+        "normalRange": "See Report",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Same Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000250"
+        },
+        "name": "ISLET CELL ANTIBODY",
+        "code": "C318",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 1750,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000251"
+        },
+        "name": "JAK2(EXON 12) MUTATION ANALYSIS",
+        "code": "P038",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 4500,
+        "normalRange": "Not Detected",
+        "unit": "",
+        "sampleType": "Whole Blood",
+        "reportTime": "3rd Working Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "67f918000000000000000252"
+        },
+        "name": "JAPANESE ENCEPHALITIES VIRUS ANTIBODY-IGM",
+        "code": "S137",
+        "labId": {
+            "$oid": "69bbaf37405f30c26f8e1881"
+        },
+        "price": 800,
+        "normalRange": "Negative",
+        "unit": "",
+        "sampleType": "Serum",
+        "reportTime": "Next Day",
+        "isDeleted": false,
+        "status": "active",
+        "createdAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        },
+        "updatedAt": {
+            "$date": "2025-04-11T00:00:00.000Z"
+        }
+    }
+]

@@ -114,6 +114,7 @@ export const MENU_CONFIG = {
                 }
             ]
         },
+        { id: 'sa-active-plans', name: 'Active Plans', path: 'active-plans', icon: Database, section: 'system' },
         { id: "admin-settings", name: "School Settings", path: "settings", icon: Settings, section: "settings" },
         // { id: "teachers", name: "Teachers", path: "teachers", icon: Briefcase, section: "main" },
 
@@ -143,7 +144,7 @@ export const MENU_CONFIG = {
 
         // // academic
         { id: "student-attendance", name: "Student Attendance", path: "attendance", icon: CalendarCheck, section: "academic" },
-        // { id: "staff-marks", name: "Marks & Exams", path: "marks", icon: BarChart3, section: "academic" },
+        { id: "staff-marks", name: "Marks & Exams", path: "exams", icon: BarChart3, section: "academic" },
         // { id: "staff-materials", name: "Study Materials", path: "study-materials", icon: FolderOpen, section: "academic" },
         { id: "staff-timetable", name: "Timetable", path: "timetable", icon: ClipboardList, section: "academic" },
         { id: "staff-holidays", name: "Holidays", path: "holidays", icon: Calendar, section: "academic" },

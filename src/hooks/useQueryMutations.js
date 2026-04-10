@@ -125,6 +125,17 @@ import {
     getMyChildren,
     getParentProfile,
     getParentPayments,
+    getAdminPlanList,
+    getActiveSubscriptions,
+    renewSubscription,
+    verifySubscription,
+    getTeacherExamList,
+    getTeacherExamClasses,
+    getTeacherExamSubjects,
+    getTeacherExamStudents,
+    getTeacherExamMarks,
+    updateTeacherExamMarks,
+    uploadMarksBulk,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -287,8 +298,45 @@ export const deleteSubscriptionMutation = () => {
 };
 
 //admin
-// Add this to your useQueryMutations.js file
-// ✅ Attendance Users List
+
+export const getSubscriptionPlanListQuery = (params) => {
+    return useAppQuery({
+        queryKey: ["subscriptionPlans", params],
+        apiCall: () => getAdminPlanList(params),
+    });
+};
+
+export const getActiveSubscriptionsQuery = (params) => {
+    return useAppQuery({
+        queryKey: ["activeSubscriptions", params],
+        apiCall: () => getActiveSubscriptions(params),
+    });
+};
+
+export const renewSubscriptionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: (data) => renewSubscription(data), // Reuse createSubscription for renewal
+        successMessage: "Subscription renewed successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["activeSubscriptions"]);
+            queryClient.invalidateQueries(["subscriptionPlans"]);
+        }
+    });
+};
+
+export const verifySubscriptionMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: (data) => verifySubscription(data),
+        successMessage: "Subscription verified successfully 🎉",
+        onSuccessCallback: () => {
+            queryClient.invalidateQueries(["activeSubscriptions"]);
+            queryClient.invalidateQueries(["subscriptionPlans"]);
+        }
+    });
+};
+
 export const getUsersListQuery = (params) => {
     return useAppQuery({
         queryKey: ["usersList", params],
@@ -1237,11 +1285,11 @@ export const giveFeedbackOnSubmissionMutation = () => {
     });
 };
 
-export const getTeacherTimetableQuery = ({ classId, sectionId }) => {
+export const getTeacherTimetableQuery = () => {
     return useAppQuery({
-        queryKey: ["teacherTimetable", classId, sectionId],
-        apiCall: () => getTeacherTimetable({ classId, sectionId }),
-        enabled: !!classId && !!sectionId,
+        queryKey: ["teacherTimetable"],
+        apiCall: () => getTeacherTimetable(),
+        // enabled: !!classId && !!sectionId,
     });
 };
 // 
@@ -1253,6 +1301,95 @@ export const getTeacherInOutTimesQuery = ({ teacherId }) => {
         enabled: !!teacherId,
     });
 }
+
+// teacher exam  management
+
+
+// ==================== TEACHER EXAM MANAGEMENT QUERIES ====================
+
+// 📚 Get Exam List
+export const getTeacherExamListQuery = () => {
+    return useAppQuery({
+        queryKey: ["teacherExamList"],
+        apiCall: () => getTeacherExamList(),
+    });
+};
+
+// 🏫 Get Classes
+export const getTeacherExamClassesQuery = ({ examId }) => {
+    return useAppQuery({
+        queryKey: ["teacherExamClasses", examId],
+        apiCall: () => getTeacherExamClasses({ examId }),
+        enabled: !!examId,
+    });
+};
+
+// 📘 Get Subjects
+export const getTeacherExamSubjectsQuery = ({ examId, classId }) => {
+    return useAppQuery({
+        queryKey: ["teacherExamSubjects", examId, classId],
+        apiCall: () => getTeacherExamSubjects({ examId, classId }),
+        enabled: !!examId && !!classId,
+    });
+};
+
+// 👨‍🎓 Get Students
+export const getTeacherExamStudentsQuery = ({
+    examId,
+    classId,
+    subjectId,
+}) => {
+    return useAppQuery({
+        queryKey: ["teacherExamStudents", examId, classId, subjectId],
+        apiCall: () =>
+            getTeacherExamStudents({ examId, classId, subjectId }),
+        enabled: !!examId && !!classId && !!subjectId,
+    });
+};
+
+// 📊 Get Marks
+export const getTeacherExamMarksQuery = ({
+    examId,
+    classId,
+    subjectId,
+}) => {
+    return useAppQuery({
+        queryKey: ["teacherExamMarks", examId, classId, subjectId],
+        apiCall: () =>
+            getTeacherExamMarks({ examId, classId, subjectId }),
+        enabled: !!examId && !!classId && !!subjectId,
+    });
+};
+
+// ==================== MUTATIONS ====================
+
+// ✍️ Update Marks
+// inside your useTeacherExams.js or hooks file
+export const updateTeacherExamMarksMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        // FIX: Ensure this is a function calling your API utility
+        mutationFn: (payload) => updateTeacherExamMarks(payload),
+        onSuccess: (res) => {
+            // Optional: Show success toast here
+            queryClient.invalidateQueries(["teacherExamMarks"]);
+        },
+    });
+};
+
+// 📤 Bulk Upload Marks
+export const uploadMarksBulkMutation = () => {
+    const queryClient = useQueryClient();
+    return useAppMutation({
+        mutationFn: (formData) => uploadMarksBulk(formData),
+
+        onSuccess: () => {
+            queryClient.invalidateQueries(["teacherExamMarks"]);
+        },
+    });
+};
+
+
 
 
 
@@ -1334,37 +1471,37 @@ export const useStudentProfile = () => {
     });
 };
 export const useMyChildren = () => {
-  return useAppQuery({
-    queryKey: ["myChildren"],
-    apiCall: getMyChildren,
-    staleTime: 1000 * 60 * 10, // cache for 10 min
-  });
+    return useAppQuery({
+        queryKey: ["myChildren"],
+        apiCall: getMyChildren,
+        staleTime: 1000 * 60 * 10, // cache for 10 min
+    });
 };
 
 export const useParentStudentAttendance = ({
-  studentId,
-  startDate,
-  endDate,
+    studentId,
+    startDate,
+    endDate,
 }) => {
-  return useAppQuery({
-    queryKey: ["attendance", studentId, startDate, endDate],
-    apiCall: () =>
-      getParentStudentAttendance({ studentId, startDate, endDate }),
-    enabled: !!studentId,
-  });
+    return useAppQuery({
+        queryKey: ["attendance", studentId, startDate, endDate],
+        apiCall: () =>
+            getParentStudentAttendance({ studentId, startDate, endDate }),
+        enabled: !!studentId,
+    });
 };
 
 export const useParentProfile = () => {
-  return useAppQuery({
-    queryKey: ["parentProfile"],
-    apiCall: getParentProfile,
-    staleTime: 1000 * 60 * 5, // cache 5 min
-  });
+    return useAppQuery({
+        queryKey: ["parentProfile"],
+        apiCall: getParentProfile,
+        staleTime: 1000 * 60 * 5, // cache 5 min
+    });
 };
 export const useParentPayments = () => {
-  return useAppQuery({
-    queryKey: ["parentPayments"],
-    apiCall: getParentPayments,
-    staleTime: 1000 * 60 * 5, // 5 min cache
-  });
+    return useAppQuery({
+        queryKey: ["parentPayments"],
+        apiCall: getParentPayments,
+        staleTime: 1000 * 60 * 5, // 5 min cache
+    });
 };

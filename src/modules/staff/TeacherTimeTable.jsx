@@ -1,163 +1,135 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getTeacherTimetableQuery } from '../../hooks/useQueryMutations';
-import DataTable from "../../components/common/ReusableTable";
-import SlidePanel from "../../components/common/SlidePanel";
-import { Eye, CalendarDays } from "lucide-react";
-
-const PANEL_MODE = { VIEW: "view" };
+import { Clock, GraduationCap, Utensils } from "lucide-react";
 
 const TeacherTimeTable = () => {
-    // ── State ──
-    const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10);
-    const [search, setSearch] = useState("");
-    const [panel, setPanel] = useState({ open: false, mode: null, row: null });
-
     // ── Data Fetching ──
-    const { data: response, isLoading } = getTeacherTimetableQuery({
-        classId: '69ce4ef9b99f96284e262cb3',
-        sectionId: '69ce4ef9b99f96284e262cb5',
-        page,
-        limit,
-        search
-    });
+    const { data: response, isLoading } = getTeacherTimetableQuery();
 
-    const timetableData = response?.data?.entries || [];
-    const total = response?.data?.pagination?.total || timetableData.length;
+    const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    // ── Panel Handlers ──
-    const openView = (row) => setPanel({ open: true, mode: PANEL_MODE.VIEW, row });
-    const closePanel = () => setPanel({ open: false, mode: null, row: null });
+    // Rows and Data mapping from new API response
+    const allPeriods = response?.data?.allPeriods || [];
+    const groupedByDay = response?.data?.groupedByDay || {};
 
-    // ── Table Columns ──
-    const COLUMNS = [
-        {
-            key: "day",
-            label: "Day",
-            sortable: true,
-            render: (val) => <span className="font-semibold text-text-heading">{val}</span>
-        },
-        {
-            key: "periodId.name",
-            label: "Period",
-            render: (_, row) => (
-                <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary border border-primary/20">
-                    {row.periodId.name}
-                </span>
-            )
-        },
-        {
-            key: "subjectId.name",
-            label: "Subject",
-            render: (_, row) => <span className="font-medium">{row.subjectId.name}</span>
-        },
-        {
-            key: "timing",
-            label: "Timing",
-            render: (_, row) => (
-                <div className="text-xs font-bold text-text-secondary uppercase tracking-tight">
-                    {row.periodId.startTime} — {row.periodId.endTime}
-                </div>
-            )
-        },
-        {
-            key: "teacherId.name",
-            label: "Teacher",
-            render: (_, row) => (
-                <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold text-[10px]">
-                        {row.teacherId.name.charAt(0)}
-                    </div>
-                    <span className="text-sm">{row.teacherId.name}</span>
-                </div>
-            )
-        }
-    ];
+    // Helper to find the specific entry for a Day and Period ID
+    const getCellData = (day, periodId) => {
+        return groupedByDay[day]?.find(item => item.period._id === periodId);
+    };
+
+    if (isLoading) return (
+        <div className="min-h-screen flex items-center justify-center bg-slate-50">
+            <div className="flex flex-col items-center gap-4">
+                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-slate-500 font-bold animate-pulse">Syncing Schedule...</p>
+            </div>
+        </div>
+    );
 
     return (
-        <div className="min-h-screen bg-surface-page px-4 py-8">
-            <div className="max-w-7xl mx-auto space-y-6">
+        <div className="min-h-screen bg-slate-50 p-4 sm:p-8">
+            <div className="max-w-7xl mx-auto">
 
-                {/* Header Section */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                {/* Header */}
+                <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                     <div>
-                        <h1 className="text-2xl font-bold text-text-heading italic flex items-center gap-2">
-                            {/* <CalendarDays className="w-6 h-6 text-primary" /> */}
-                            Teacher Timetable
+                        <h1 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                            <GraduationCap className="text-primary w-10 h-10" />
+                            FACULTY SCHEDULE
                         </h1>
-                        <p className="text-sm text-text-secondary mt-0.5">
-                            Manage and track academic schedules and subject allocations.
-                        </p>
+                        <p className="text-slate-500 font-medium mt-1">Manage your weekly lecture allocations and breaks.</p>
                     </div>
                 </div>
 
-                {/* Main Table */}
-                <DataTable
-                    title="Schedule Overview"
-                    columns={COLUMNS}
-                    data={timetableData}
-                    loading={isLoading}
-                    rowKey={(row) => row.periodId._id}
-                    emptyMessage="No schedule found for this class/section."
-                    searchPlaceholder="Search by day, subject or teacher..."
-                    serverMode
-                    page={page}
-                    total={total}
-                    onSearch={(val) => { setSearch(val); setPage(1); }}
-                    onPageChange={setPage}
-                    onPageSizeChange={(val) => { setLimit(val); setPage(1); }}
-                    actionCell={(row) => (
-                        <button
-                            onClick={() => openView(row)}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-primary/10 text-text-secondary hover:text-primary transition-colors"
-                        >
-                            <Eye className="w-4 h-4" />
-                        </button>
-                    )}
-                />
-            </div>
+                {/* ── Timetable Grid ── */}
+                <div className="bg-white border border-slate-200 rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden overflow-x-auto">
+                    <table className="w-full border-collapse min-w-[1000px]">
+                        <thead>
+                            <tr className="bg-slate-900">
+                                <th className="p-5 text-left text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-r border-slate-800 w-44">
+                                    Time Slot
+                                </th>
+                                {DAYS.map(day => (
+                                    <th key={day} className="p-5 text-center text-xs font-black text-white uppercase tracking-wider border-r border-slate-800 last:border-0">
+                                        {day}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {allPeriods.map((period) => {
+                                const isLunch = period.name.toLowerCase() === 'lunch';
 
-            {/* View Details Slide Panel */}
-            <SlidePanel
-                open={panel.open}
-                onClose={closePanel}
-                title="Class Details"
-                subtitle={`${panel.row?.day} - ${panel.row?.periodId?.name}`}
-            >
-                {panel.mode === PANEL_MODE.VIEW && (
-                    <div className="space-y-6">
-                        <div className="rounded-2xl border border-border bg-surface-page p-5 space-y-4">
-                            <div>
-                                <label className="text-[10px] uppercase font-bold text-text-secondary tracking-wider">Subject</label>
-                                <p className="text-lg font-bold text-text-heading">{panel.row?.subjectId?.name}</p>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="text-[10px] uppercase font-bold text-text-secondary tracking-wider">Start Time</label>
-                                    <p className="font-semibold text-primary">{panel.row?.periodId?.startTime}</p>
-                                </div>
-                                <div>
-                                    <label className="text-[10px] uppercase font-bold text-text-secondary tracking-wider">End Time</label>
-                                    <p className="font-semibold text-primary">{panel.row?.periodId?.endTime}</p>
-                                </div>
-                            </div>
+                                return (
+                                    <tr key={period._id} className={`border-b border-slate-100 last:border-0 transition-colors ${isLunch ? 'bg-amber-50/50' : 'hover:bg-slate-50/50'}`}>
+
+                                        {/* Time Column */}
+                                        <td className={`p-5 border-r border-slate-100 ${isLunch ? 'bg-amber-100/30' : 'bg-slate-50/30'}`}>
+                                            <div className="flex flex-col gap-1">
+                                                <span className={`text-[10px] font-black uppercase tracking-widest ${isLunch ? 'text-amber-600' : 'text-primary'}`}>
+                                                    {period.name}
+                                                </span>
+                                                <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                                                    <Clock className={`w-3.5 h-3.5 ${isLunch ? 'text-amber-400' : 'text-slate-300'}`} />
+                                                    {period.startTime} — {period.endTime}
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        {/* Days Columns */}
+                                        {DAYS.map(day => {
+                                            const session = getCellData(day, period._id);
+
+                                            return (
+                                                <td key={day} className="p-3 border-r border-slate-100 last:border-0 align-middle">
+                                                    {isLunch ? (
+                                                        <div className="flex flex-col items-center justify-center py-2 opacity-60">
+                                                            <Utensils className="w-4 h-4 text-amber-500 mb-1" />
+                                                            <span className="text-[9px] font-black text-amber-600 uppercase tracking-tighter">Refectory Break</span>
+                                                        </div>
+                                                    ) : session?.subject ? (
+                                                        <div className="bg-white border-2 border-slate-100 rounded-2xl p-4 shadow-sm group hover:border-primary hover:shadow-md transition-all">
+                                                            <div className="space-y-3">
+                                                                <span className="inline-flex items-center px-2 py-0.5 rounded-lg bg-primary/10 text-primary text-[10px] font-bold">
+                                                                    Class {session.class}
+                                                                </span>
+                                                                <p className="text-sm font-black text-slate-800 leading-tight group-hover:text-primary transition-colors">
+                                                                    {session.subject.name}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="flex items-center justify-center group py-6">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-slate-300 transition-colors"></div>
+                                                        </div>
+                                                    )}
+                                                </td>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+
+                {/* Status Legend */}
+                <div className="mt-8 flex flex-wrap items-center justify-between gap-4 px-2">
+                    <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 rounded-full bg-primary shadow-sm shadow-primary/40"></div>
+                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Active Lecture</span>
                         </div>
-
-                        <div className="p-5 border border-border rounded-2xl space-y-3">
-                            <p className="text-sm font-semibold text-text-heading">Assigned Faculty</p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-xl bg-primary text-white flex items-center justify-center font-bold text-xl">
-                                    {panel.row?.teacherId?.name?.charAt(0)}
-                                </div>
-                                <div>
-                                    <p className="font-bold text-text-heading">{panel.row?.teacherId?.name}</p>
-                                    <p className="text-xs text-text-secondary">Faculty ID: {panel.row?.teacherId?._id?.slice(-6).toUpperCase()}</p>
-                                </div>
-                            </div>
+                        <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/40"></div>
+                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Lunch Break</span>
                         </div>
                     </div>
-                )}
-            </SlidePanel>
+                    <div className="text-[10px] font-bold text-slate-400 bg-slate-100 px-4 py-2 rounded-full uppercase tracking-tighter">
+                        Teacher Ref ID: {response?.data?.teacherId}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

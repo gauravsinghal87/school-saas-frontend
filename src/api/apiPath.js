@@ -49,16 +49,24 @@ export const apiPaths = {
         GET_ASSIGNMENTS: "/api/teacher/assignment&notes/get-assignment",
         DELETE_ASSIGNMENT: "/api/teacher/assignment&notes/delete-assignment/{assignmentId}",
 
-        GET_TIMETABLE: "/api/timetable/timetable?classId={classId}&sectionId={sectionId}",
+        GET_TIMETABLE: "/api/timetable/timetable/teacher",
         GET_CLASS_SEC_SUB: '/api/staff/class/get',
         TEACHER_CHECK_IN: '/api/attendance/teacher/checkin',
         TEACHER_CHECK_OUT: '/api/attendance/teacher/checkout',
         TEACHER_PROFILE: '/api/staff/teacher',
         TEACHER_ASSIGNMENT_SUBMISSIONS: '/api/teacher/assignment&notes/teacher/submissions',
         TEACHER_ASSIGNMENT_FEEDBACK: '/api/teacher/assignment&notes/feedback/{submissionId}',
-        // curl --location --request GET 'http://localhost:4000/api/attendance/teacher?teacherId=69cf4ec419bb01485740b6d3' \
         TEACHER_IN_OUT_TIMES: '/api/attendance/teacher?teacherId={teacherId}',
 
+        // Exam Management
+        TEACHER_EXAM_LIST: '/api/teacher/exams',
+        TEACHER_EXAM_CLASSES: '/api/teacher/exams/classes',
+        TEACHER_EXAM_SUBJECTS: '/api/teacher/exams/subjects',
+        TEACHER_EXAM_STUDENTS: '/api/teacher/exams/students',
+        TEACHER_UPDATE_MARKS: '/api/teacher/exams/marks',
+        TEACHER_GET_MARKS: '/api/teacher/exams/marks',
+        TEACHER_MARKS_TEMPLATE: '/api/teacher/exams/marks/template',
+        TEACHER_BULK_UPLOAD_MARKS: '/api/teacher/exams/marks/bulk-upload',
 
     },
 
@@ -131,7 +139,13 @@ export const apiPaths = {
         PAYMENT_HISTORY: '/api/admin/student-detail',
 
 
-        USERS_LIST: '/api/user/list-users'
+        USERS_LIST: '/api/user/list-users',
+        SUBSCRIPTIONS_PLAN_LIST: '/api/subscription-plan',
+        ACTIVE_SUBSCRIPTIONS: '/api/subscription/school',
+        RENEW_SUBSCRIPTION: '/api/subscription/renew',
+        VERIFY_SUBSCRIPTION: '/api/subscription/verify-payment',
+
+
 
     }
 
