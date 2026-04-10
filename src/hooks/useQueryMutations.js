@@ -121,6 +121,9 @@ import {
     getTeacherAssignmentSubmissions,
     getTeacherInOutTimes,
     getUsersList,
+    getTeacherAttendance,
+    generateStaffSalary,
+    getStaffSalaryDetails,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -291,6 +294,7 @@ export const getUsersListQuery = (params) => {
         apiCall: () => getUsersList(params),
     });
 };
+
 export const getPaymentHistory = (params) => {
     return useAppQuery({
         queryKey: ["paymentHistory", params],
@@ -453,6 +457,8 @@ export const getStaffList = ({ page, searchTerm, statusFilter }) => {
 };
 
 
+
+
 //admin queries & mutations 
 
 //admin
@@ -469,6 +475,25 @@ export const getTeacherAttendanceQuery = (params, enabled = true) => {
     });
 };
 
+
+export const generateStaffSalaryMutation=()=>
+{
+        const queryClient = useQueryClient();
+    return useAppMutation({
+        apiCall: generateStaffSalary,
+        successMessage: "Salary generated successfully 🎉",
+        onSuccessCallback: (res) => {
+            queryClient.invalidateQueries(["staffList"]);
+        },
+    });
+}
+export const useStaffSalaryDetails = (staffId) => {
+  return useQuery({
+    queryKey: ["staffSalary", staffId],
+    queryFn: () => getStaffSalaryDetails(staffId),
+    enabled: !!staffId, // only call when staffId exists
+  });
+};
 // ✅ Get Student Attendance Query
 export const getStudentAttendanceQuery = (params, enabled = true) => {
     const { studentId, startDate, endDate } = params;

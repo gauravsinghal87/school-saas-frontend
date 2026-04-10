@@ -124,7 +124,9 @@ export const apiPaths = {
         PAYMENT_HISTORY: '/api/admin/student-detail',
 
 
-        USERS_LIST:'/api/user/list-users'
+        USERS_LIST:'/api/user/list-users',
+        GENERATE_STAFF_SALARY: '/api/staff/salary/generate',
+
 
     }
 
