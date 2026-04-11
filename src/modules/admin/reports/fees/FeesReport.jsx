@@ -186,7 +186,7 @@ export default function FeesReport() {
     };
 
     return (
-        <div className="p-6">
+        <div className="md:p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                 <div>
                     <h1 className="text-2xl font-bold text-text-heading">Fees Report</h1>
@@ -258,7 +258,7 @@ export default function FeesReport() {
             </div>
 
             <div className="w-full">
-                <div className="w-[100vw] md:w-auto">
+                <div className="w-[93vw] md:w-auto">
                     <DataTable
                         title="Student Fees List"
                         data={studentsData}

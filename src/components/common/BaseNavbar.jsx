@@ -9,12 +9,14 @@ import {
 import { useTheme } from "../../context/ThemContext";
 import { useUser } from "../../hooks/useUser";
 import TeacherCheckInOUt from "../../modules/staff/TeacherCheckIn";
+import { ROLE_ROUTES_SIDEBAR } from "../../utils/roles";
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
 
 export function BaseNavbar({ onMenuClick }) {
     const navigate = useNavigate();
     const { logout, user } = useUser();
+
     const { themeId, setThemeId, isDark, COLOR_THEMES, themeMode, setThemeMode } = useTheme();
 
     const [isScrolled, setIsScrolled] = useState(false);
@@ -74,7 +76,7 @@ export function BaseNavbar({ onMenuClick }) {
 
     // Safely extract user information from the nested structure
     const getUserName = () => {
-        if (user?.user?.name) return user.user.name;
+        if (user?.data?.name) return user.data.name;
         if (user?.name) return user.name;
         return "User";
     };
@@ -103,7 +105,8 @@ export function BaseNavbar({ onMenuClick }) {
 
     const userName = getUserName();
     const userEmail = getUserEmail();
-    const userRole = getUserRole();
+    // const userRole = getUserRole();
+    const userRole = localStorage.getItem("role") || getUserRole(); // 🔑 key fix to ensure role is always available
 
     const designation = getDesignation();
 
@@ -555,8 +558,15 @@ export function BaseNavbar({ onMenuClick }) {
                                         ].map(({ label, Icon, path }) => (
                                             <button
                                                 key={label}
-                                                onClick={() => { navigate(path); setShowProfile(false); }}
-                                                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150"
+                                                onClick={() => {
+                                                    const role = localStorage.getItem('role');
+                                                    console.log("role", role);
+                                                    const base = ROLE_ROUTES_SIDEBAR[role] || "";
+                                                    console.log("base", base);
+
+                                                    navigate(`${base}/profile`);
+                                                    setShowProfile(false);
+                                                }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150"
                                                 style={{ color: "var(--color-text-primary)" }}
                                                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "color-mix(in srgb, var(--color-text-secondary) 8%, transparent)")}
                                                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}

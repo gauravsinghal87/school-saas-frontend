@@ -62,9 +62,9 @@ export default function StaffSalaryDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-surface-page py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
-
+    <div className="min-h-screen bg-surface-page py-8 md:px-4 sm:px-6 lg:px-8">
+      <div className="w-[93vw] md:w-auto mx-auto space-y-8">
+        
         {/* Header with Back Button */}
         <button
           onClick={() => navigate(-1)}

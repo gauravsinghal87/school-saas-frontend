@@ -9,6 +9,8 @@ import DataTable from "../../../components/common/ReusableTable";
 import ConfirmBox from "../../../components/common/ConfirmBox";
 import { Eye, Edit, Trash2, BookOpen, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { MdGridView } from "react-icons/md";
+
 
 const STATUS_MAP = {
     draft: { label: "Draft", bg: "bg-gray-100", text: "text-gray-600" },
@@ -271,6 +273,17 @@ export default function Exams() {
                             title="Delete Exam"
                         >
                             <Trash2 size={18} />
+                        </button>
+                        <button
+                            className="text-primary cursor-pointer hover:shadow-primary/10 transition rounded-lg p-1"
+                            onClick={() => {
+                                navigate(
+                                    `/school-admin/exams/${row._id}/results?classId=${row.classId._id}`
+                                );
+                            }}
+                            title="View Exam Result"
+                        >
+                            <MdGridView size={18} />
                         </button>
                     </div>
                 )}

@@ -46,6 +46,7 @@ import PayRollList from "../modules/admin/payroll/PayRollList.jsx";
 import SchoolSetting from "../modules/admin/school-setting/SchoolSetting.jsx";
 import ExamAndResultsParentPage from "../modules/parent/results/ExamAndResultsParentPage.jsx";
 import StdExamAndResults from "../modules/student/exams/StdExamAndResults.jsx";
+import AdminProfile from "../modules/admin/profile/AdminProfile.jsx";
 
 //staff imports
 const StaffDashboard = lazy(
@@ -168,6 +169,8 @@ const AppRoutes = () => {
             <Route path="payroll/:id" element={<PayRollDetails />} />
             <Route path="settings" element={<SchoolSetting />} />
 
+
+            <Route path="profile" element={<AdminProfile />} />
 
             <Route path="*" element={<NotFound />} />
 

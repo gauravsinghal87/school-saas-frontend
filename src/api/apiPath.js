@@ -151,6 +151,9 @@ export const apiPaths = {
         USERS_LIST: '/api/user/list-users',
         GENERATE_STAFF_SALARY: '/api/staff/salary/generate',
 
+        ADMIN_PROFILE:'/api/user/profile',
+        SECTIONS_LISTBYID:'/api/admin/sections/by-class',
+
 
     }
 

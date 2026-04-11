@@ -133,7 +133,7 @@ export default function Sections() {
     const [selectedSection, setSelectedSection] = useState(null);
 
     return (
-        <div className="min-h-screen bg-surface-page px-4 py-8">
+        <div className="min-h-screen bg-surface-page md:px-4 py-8">
             <div className="max-w-7xl mx-auto space-y-6">
 
                 {/* Header Section */}
@@ -185,6 +185,10 @@ export default function Sections() {
                         serverMode
                         onAdd={() => openModal("create")}
                         addLabel="Add Section"
+                        total={total}
+                        page={page}
+                        onPageChange={(newPage) => setPage(newPage)}
+
                         onSearch={(val) => { setSearch(val); setPage(1); }}
                         onEdit={(row) => openModal("edit", row)}
                         onDelete={(row) => {

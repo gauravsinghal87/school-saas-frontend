@@ -141,6 +141,9 @@ import {
     getStaffSalaryDetails,
     getStudntExamResults,
     getStudentResultForParent,
+    getAdminProfile,
+    getExamResultsOfStudents,
+    getSectionById,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
@@ -309,6 +312,12 @@ export const getSubscriptionPlanListQuery = (params) => {
     return useAppQuery({
         queryKey: ["subscriptionPlans", params],
         apiCall: () => getAdminPlanList(params),
+    });
+};
+export const getAdminProfileMutation = (params) => {
+    return useAppQuery({
+        queryKey: ["adminProfile", params],
+        apiCall: () => getAdminProfile(params),
     });
 };
 
@@ -531,6 +540,8 @@ export const getTeacherAttendanceQuery = (params, enabled = true) => {
 };
 
 
+
+
 export const generateStaffSalaryMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -547,6 +558,31 @@ export const useStaffSalaryDetails = (staffId) => {
         queryFn: () => getStaffSalaryDetails(staffId),
         enabled: !!staffId, // only call when staffId exists
     });
+};
+
+export const examResultsOfStudentsMutation = ({
+  examId,
+  classId,
+  sectionId,
+  page,
+  limit,
+  search,
+}) => {
+  return useQuery({
+    queryKey: ["examResults", examId, classId, sectionId, page, limit, search],
+
+    queryFn: () =>
+      getExamResultsOfStudents({
+        examId,
+        classId,
+        sectionId,
+        page,
+        limit,
+        search,
+      }),
+
+    enabled: !!examId && !!classId,
+  });
 };
 // ✅ Get Student Attendance Query
 export const getStudentAttendanceQuery = (params, enabled = true) => {
@@ -686,6 +722,12 @@ export const sectionList = (params) => {
         apiCall: () => getSectionList(params),
     });
 };
+export const sectionListById = (id) => {
+    return useAppQuery({
+        queryKey: ["sections", id],
+        apiCall: () => getSectionById(id),
+    });
+};
 export const updateClassSubjectsMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
@@ -704,6 +746,8 @@ export const removeClassSubjectsMutation = () => {
         successMessage: "Subjects removed successfully 🎉",
     });
 };
+
+
 
 export const addSubjectMutation = () => {
     const queryClient = useQueryClient();

@@ -71,6 +71,9 @@ export const getSectionList = async (params) => {
     return await api.get(apiPaths.admin.SECTIONS_LIST, { params });
 }
 
+export const getSectionById = async (id) => {
+    return await api.get(`${apiPaths.admin.SECTIONS_LISTBYID}/${id}`);
+};
 export const getClassSubjects = (classId) => {
     return api.get(`${apiPaths.admin.CLASS_SUBJECTS}/${classId}`);
 };
@@ -113,8 +116,8 @@ export const getCurrentUser = async () => {
     switch (role) {
         case "SUPER_ADMIN":
             return await api.get(apiPaths.superAdmin.PROFILE);
-        case "SCHOOL_ADMIN":
-            return await api.get(apiPaths.admin.PROFILE);
+        case "ADMIN":
+            return await api.get(apiPaths.admin.ADMIN_PROFILE);
         case "STAFF":
             return await api.get(apiPaths.teacher.TEACHER_PROFILE);
         case "STUDENT":
@@ -215,6 +218,26 @@ export const generateStaffSalary = ({ staffId, ...data }) => {
 }
 export const getStaffSalaryDetails = (staffId) => {
     return api.get(`/api/staff/${staffId}/salary`);
+};
+
+export const getExamResultsOfStudents = ({
+    examId,
+    classId,
+    sectionId,
+    page = 1,
+    limit = 10,
+    search
+}) => {
+    return api.get("/api/admin/exam/results", {
+        params: {
+            exam_id: examId,
+            class_id: classId,
+            ...(sectionId && { section_id: sectionId }), // ✅ FIX
+            page,
+            limit,
+            ...(search && { search }), // optional clean
+        },
+    });
 };
 export const addSubject = (data) => {
     return api.post(apiPaths.admin.ADD_SUBJECT, data);
@@ -475,6 +498,9 @@ export const getAdminPlanList = async (params) => {
     return await api.get(apiPaths.admin.SUBSCRIPTIONS_PLAN_LIST, { params });
 }
 
+export const getAdminProfile = async (params) => {
+    return await api.get(apiPaths.admin.ADMIN_PROFILE, { params });
+}
 export const getActiveSubscriptions = async (params) => {
     return await api.get(apiPaths.admin.ACTIVE_SUBSCRIPTIONS, { params });
 }
