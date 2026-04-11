@@ -181,7 +181,7 @@ export default function ExamSubjects() {
             <div className="flex items-center gap-4 mb-6">
                 <button
                     onClick={() => navigate("/school-admin/exams")}
-                    className="text-gray-600 hover:text-gray-800 dark:text-gray-400"
+                    className="text-gray-600 hover: "
                 >
                     <ArrowLeft size={24} />
                 </button>

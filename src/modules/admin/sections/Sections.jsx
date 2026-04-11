@@ -201,7 +201,7 @@ export default function Sections() {
                     open={isOpen}
                     onClose={() => setIsOpen(false)}
                     title={`${mode.toUpperCase()} Section`}
-                    className="bg-gradient-to-br from-white to-gray-50"
+                    className="bg-surface-page from-white to-gray-50"
                 >
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 p-1">
                         <SectionForm

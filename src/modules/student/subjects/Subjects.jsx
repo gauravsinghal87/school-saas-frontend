@@ -72,14 +72,14 @@ const SubjectCard = ({ subject, index }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 h-full transform hover:-translate-y-1">
+            <div className="bg-surface-page dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700 h-full transform hover:-translate-y-1">
                 {/* Gradient top bar */}
                 <div className={`h-2 bg-gradient-to-r ${gradientColor}`}></div>
 
                 <div className="p-6">
                     {/* Icon and Number */}
                     <div className="flex items-start justify-between mb-4">
-                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradientColor} flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover:scale-110`}>
+                        <div className={`w-14 h-14 rounded-xl bg-surface-page ${gradientColor} flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover:scale-110`}>
                             <Icon className="w-7 h-7 text-white" />
                         </div>
                         <span className="text-xs font-mono text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">
@@ -88,7 +88,7 @@ const SubjectCard = ({ subject, index }) => {
                     </div>
 
                     {/* Subject Name */}
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2 line-clamp-1">
+                    <h3 className="text-xl font-bold   mb-2 line-clamp-1">
                         {subject.name}
                     </h3>
 
@@ -112,7 +112,7 @@ const SubjectCard = ({ subject, index }) => {
 const SubjectsSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
         {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
+            <div key={i} className="bg-surface-page dark:bg-gray-800 rounded-2xl overflow-hidden">
                 <div className="h-2 bg-gray-200 dark:bg-gray-700"></div>
                 <div className="p-6">
                     <div className="w-14 h-14 bg-gray-200 dark:bg-gray-700 rounded-xl mb-4"></div>
@@ -126,14 +126,14 @@ const SubjectsSkeleton = () => (
 
 // Empty State Component
 const EmptyState = () => (
-    <div className="flex flex-col items-center justify-center py-16 text-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
-        <div className="w-24 h-24 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center mb-6 shadow-md">
+    <div className="flex flex-col items-center justify-center py-16 text-center bg-surface-page from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
+        <div className="w-24 h-24 bg-surface-page dark:bg-gray-800 rounded-full flex items-center justify-center mb-6 shadow-md">
             <BookOpen className="text-gray-400" size={40} />
         </div>
         <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
             No Subjects Found
         </h3>
-        <p className="text-gray-500 dark:text-gray-400 max-w-sm">
+        <p className="text-gray-500  max-w-sm">
             No subjects have been assigned to your class yet. Please contact your class teacher.
         </p>
     </div>
@@ -168,10 +168,10 @@ export default function StudentSubjects() {
                     <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                         <BookOpen className="text-red-500" size={32} />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <h3 className="text-lg font-semibold   mb-2">
                         Unable to Load Subjects
                     </h3>
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="text-gray-500 ">
                         There was an error loading your subjects. Please try again later.
                     </p>
                 </div>
@@ -180,7 +180,7 @@ export default function StudentSubjects() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="min-h-screen bg-surface-page">
             <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
                 {/* Header */}
                 <div className="mb-8">
@@ -190,10 +190,10 @@ export default function StudentSubjects() {
                                 <GraduationCap className="text-primary" size={28} />
                             </div>
                             <div>
-                                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
+                                <h1 className="text-2xl sm:text-3xl font-bold  ">
                                     My Subjects
                                 </h1>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                <p className="text-sm text-gray-500  mt-1">
                                     Class {className} • {subjects.length} Subjects
                                 </p>
                             </div>
@@ -207,7 +207,7 @@ export default function StudentSubjects() {
                                 placeholder="Search subjects..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent w-full sm:w-64"
+                                className="pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-surface-page dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent w-full sm:w-64"
                             />
                         </div>
                     </div>
@@ -215,7 +215,7 @@ export default function StudentSubjects() {
 
                 {/* Stats Card - Simplified */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page p-4">
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-sm text-blue-600 dark:text-blue-400">Total Subjects</p>
@@ -224,10 +224,10 @@ export default function StudentSubjects() {
                             <BookOpen className="w-8 h-8 text-blue-500 opacity-50" />
                         </div>
                     </div>
-                    <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page  rounded-xl p-4">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-purple-600 dark:text-purple-400">Class</p>
+                                <p className="text-sm ">Class</p>
                                 <p className="text-2xl font-bold text-purple-700 dark:text-purple-300">{className}</p>
                             </div>
                             <GraduationCap className="w-8 h-8 text-purple-500 opacity-50" />

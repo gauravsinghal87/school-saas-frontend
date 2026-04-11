@@ -221,7 +221,7 @@ function SchoolForm({ defaultValues, onSubmit, loading, mode }) {
                             disabled={mode === "view"}
                             className={`w-12 h-6 flex items-center rounded-full p-1 transition-all duration-300 ${values.status ? "bg-success shadow-md shadow-success/30" : "bg-border"}`}
                         >
-                            <div className={`bg-white w-4 h-4 rounded-full shadow transform transition-all duration-300 ${values.status ? "translate-x-6" : "translate-x-0"}`} />
+                            <div className={`bg-surface-page w-4 h-4 rounded-full shadow transform transition-all duration-300 ${values.status ? "translate-x-6" : "translate-x-0"}`} />
                         </button>
                     </div>
 

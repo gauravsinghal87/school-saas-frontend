@@ -42,7 +42,7 @@ const TeacherTimeTable = () => {
                 </div>
 
                 {/* ── Timetable Grid ── */}
-                <div className="bg-white border border-slate-200 rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden overflow-x-auto">
+                <div className="bg-surface-page border border-slate-200 rounded-[2rem] shadow-xl shadow-slate-200/50 overflow-hidden overflow-x-auto">
                     <table className="w-full border-collapse min-w-[1000px]">
                         <thead>
                             <tr className="bg-slate-900">
@@ -88,7 +88,7 @@ const TeacherTimeTable = () => {
                                                             <span className="text-[9px] font-black text-amber-600 uppercase tracking-tighter">Refectory Break</span>
                                                         </div>
                                                     ) : session?.subject ? (
-                                                        <div className="bg-white border-2 border-slate-100 rounded-2xl p-4 shadow-sm group hover:border-primary hover:shadow-md transition-all">
+                                                        <div className="bg-surface-page border-2 border-slate-100 rounded-2xl p-4 shadow-sm group hover:border-primary hover:shadow-md transition-all">
                                                             <div className="space-y-3">
                                                                 <span className="inline-flex items-center px-2 py-0.5 rounded-lg bg-primary/10 text-primary text-[10px] font-bold">
                                                                     Class {session.class}

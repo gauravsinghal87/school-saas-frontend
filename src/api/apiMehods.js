@@ -214,7 +214,7 @@ export const generateStaffSalary = ({ staffId, ...data }) => {
     );
 }
 export const getStaffSalaryDetails = (staffId) => {
-  return api.get(`/api/staff/${staffId}/salary`);
+    return api.get(`/api/staff/${staffId}/salary`);
 };
 export const addSubject = (data) => {
     return api.post(apiPaths.admin.ADD_SUBJECT, data);
@@ -688,6 +688,7 @@ export const getTeacherExamStudents = ({
 };
 
 export const updateTeacherExamMarks = (data) => {
+    console
     return api.post(apiPaths.teacher.TEACHER_UPDATE_MARKS, data);
 };
 
@@ -752,6 +753,14 @@ export const submitAssignment = async (formData) => {
     });
 };
 
+
+export const getStudntExamResults = async (params) => {
+    return await api.get(apiPaths.students.EXAM_RESULTS, { params });
+};
+
+export const getStudentResultForParent = async (params) => {
+    return await api.get(apiPaths.parent.EXAM_RESULTS, { params });
+};
 // ==================== STUDENT EXAM TIMETABLE ====================
 
 export const getStudentExamTimetable = async (params) => {

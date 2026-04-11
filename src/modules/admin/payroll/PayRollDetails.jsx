@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useStaffSalaryDetails } from "../../../hooks/useQueryMutations";
-import { 
-  FaUserCircle, 
-  FaBriefcase, 
-  FaIdCard, 
-  FaRupeeSign, 
-  FaCalendarAlt, 
-  FaChartLine, 
+import {
+  FaUserCircle,
+  FaBriefcase,
+  FaIdCard,
+  FaRupeeSign,
+  FaCalendarAlt,
+  FaChartLine,
   FaUsers,
   FaCheckCircle,
   FaTimesCircle,
@@ -64,19 +64,19 @@ export default function StaffSalaryDetails() {
   return (
     <div className="min-h-screen bg-surface-page py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
-        
+
         {/* Header with Back Button */}
-             <button
-              onClick={() => navigate(-1)}
-              className="group cursor-pointer flex items-center gap-2 px-4 py-2 bg-surface-card border border-border rounded-lg text-text-secondary hover:text-text-primary hover:border-primary/30 transition-all duration-200 "
-            >
-              <FaArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-              <span className="font-medium">Back</span>
-            </button>
+        <button
+          onClick={() => navigate(-1)}
+          className="group cursor-pointer flex items-center gap-2 px-4 py-2 bg-surface-card border border-border rounded-lg text-text-secondary hover:text-text-primary hover:border-primary/30 transition-all duration-200 "
+        >
+          <FaArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+          <span className="font-medium">Back</span>
+        </button>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            
+
           <div className="flex items-center gap-4">
-       
+
             <div>
               <h1 className="text-3xl font-bold text-text-heading" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                 Salary Details
@@ -96,7 +96,7 @@ export default function StaffSalaryDetails() {
         <div className="bg-surface-card backdrop-blur-lg rounded-2xl  border border-border p-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-full bg-surface-page from-primary to-secondary flex items-center justify-center shadow-lg">
                 <FaUserCircle className="w-10 h-10 text-white" />
               </div>
               <div>
@@ -129,7 +129,7 @@ export default function StaffSalaryDetails() {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex flex-col items-start lg:items-end gap-2">
               <div className="bg-gradient-to-r from-primary to-secondary rounded-xl px-6 py-3 shadow-md">
                 <p className="text-white/80 text-xs flex items-center gap-1">
@@ -148,7 +148,7 @@ export default function StaffSalaryDetails() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
+          <div className="bg-surface-page from-primary to-primary/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <FaFileInvoice className="w-8 h-8 opacity-80" />
               <span className="text-3xl font-bold">{salaries.length}</span>
@@ -156,7 +156,7 @@ export default function StaffSalaryDetails() {
             <p className="mt-2 text-white/80 text-sm">Total Records</p>
           </div>
 
-          <div className="bg-gradient-to-br from-success to-success/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
+          <div className="bg-surface-page from-success to-success/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <FaRupeeSign className="w-8 h-8 opacity-80" />
               <span className="text-3xl font-bold">{formatCurrency(salaries[0]?.generatedSalary || 0)}</span>
@@ -164,7 +164,7 @@ export default function StaffSalaryDetails() {
             <p className="mt-2 text-white/80 text-sm">Latest Salary</p>
           </div>
 
-          <div className="bg-gradient-to-br from-warning to-warning/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
+          <div className="bg-surface-page from-warning to-warning/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <MdAttachMoney className="w-8 h-8 opacity-80" />
               <span className="text-3xl font-bold">{formatCurrency(salaries[0]?.perDaySalary || 0)}</span>
@@ -172,7 +172,7 @@ export default function StaffSalaryDetails() {
             <p className="mt-2 text-white/80 text-sm">Per Day Salary</p>
           </div>
 
-          <div className="bg-gradient-to-br from-info to-info/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
+          <div className="bg-surface-page from-info to-info/80 rounded-xl p-5 text-white shadow-lg transform transition-all duration-300 hover:scale-105">
             <div className="flex items-center justify-between">
               <FaCalendarAlt className="w-8 h-8 opacity-80" />
               <span className="text-3xl font-bold">{salaries[0]?.presentDays || 0}</span>

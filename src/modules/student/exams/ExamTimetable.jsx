@@ -46,7 +46,7 @@ const SubjectExamCard = ({ exam, index }) => {
     const examTime = exam.examTime ? format(parseISO(`2000-01-01T${exam.examTime}`), "hh:mm a") : null;
 
     return (
-        <div className={`bg-white dark:bg-gray-800 rounded-xl p-4 border transition-all duration-300 hover:shadow-md ${isToday ? 'border-primary bg-primary/5' : 'border-gray-200 dark:border-gray-700'
+        <div className={`bg-surface-page dark:bg-gray-800 rounded-xl p-4 border transition-all duration-300 hover:shadow-md ${isToday ? 'border-primary bg-primary/5' : 'border-gray-200 dark:border-gray-700'
             }`}>
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 {/* Left side - Subject Info */}
@@ -57,12 +57,12 @@ const SubjectExamCard = ({ exam, index }) => {
                     </div>
                     <div className="flex-1">
                         <div className="flex flex-wrap items-center gap-2 mb-1">
-                            <h3 className="font-semibold text-gray-800 dark:text-white">
+                            <h3 className="font-semibold  ">
                                 {exam.subject}
                             </h3>
                             <ExamStatusBadge status={exam.examStatus} />
                         </div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-sm text-gray-500 ">
                             {exam.examName}
                         </p>
                         <div className="flex flex-wrap gap-3 mt-2">
@@ -80,7 +80,7 @@ const SubjectExamCard = ({ exam, index }) => {
 
                 {/* Right side - Date & Time */}
                 <div className="flex flex-row lg:flex-col items-center lg:items-end gap-4 lg:gap-1">
-                    <div className={`flex items-center gap-2 ${isToday ? 'text-primary' : 'text-gray-600 dark:text-gray-400'}`}>
+                    <div className={`flex items-center gap-2 ${isToday ? 'text-primary' : 'text-gray-600 '}`}>
                         <Calendar size={14} />
                         <span className="font-medium">
                             {format(examDate, "dd MMM yyyy")}
@@ -119,7 +119,7 @@ const ExamGroupCard = ({ examName, subjects, examStatus }) => {
     const endDate = new Date(Math.max(...examDates));
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+        <div className="bg-surface-page dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
             {/* Exam Header */}
             <div
                 onClick={() => setExpanded(!expanded)}
@@ -131,7 +131,7 @@ const ExamGroupCard = ({ examName, subjects, examStatus }) => {
                             <GraduationCap className="w-5 h-5 text-primary" />
                         </div>
                         <div>
-                            <h2 className="text-lg font-bold text-gray-800 dark:text-white">
+                            <h2 className="text-lg font-bold  ">
                                 {examName}
                             </h2>
                             <div className="flex flex-wrap gap-3 mt-1">
@@ -169,7 +169,7 @@ const ExamGroupCard = ({ examName, subjects, examStatus }) => {
 const TimetableSkeleton = () => (
     <div className="space-y-6 animate-pulse">
         {[1, 2].map((i) => (
-            <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
+            <div key={i} className="bg-surface-page dark:bg-gray-800 rounded-2xl overflow-hidden">
                 <div className="p-5">
                     <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
@@ -198,7 +198,7 @@ const EmptyState = () => (
         <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
             No Exam Timetable Available
         </h3>
-        <p className="text-gray-500 dark:text-gray-400 max-w-sm">
+        <p className="text-gray-500  max-w-sm">
             There are no exams scheduled for your class at the moment. Check back later!
         </p>
     </div>
@@ -292,10 +292,10 @@ export default function StudentExamTimetable() {
                     <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                         <AlertCircle className="w-10 h-10 text-red-500" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <h3 className="text-lg font-semibold   mb-2">
                         Unable to Load Timetable
                     </h3>
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="text-gray-500 ">
                         There was an error loading your exam timetable. Please try again later.
                     </p>
                 </div>
@@ -304,7 +304,7 @@ export default function StudentExamTimetable() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="min-h-screen   bg-surface-page">
             <div className="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
                 {/* Header */}
                 <div className="mb-8">
@@ -314,10 +314,10 @@ export default function StudentExamTimetable() {
                                 <Calendar className="text-primary" size={28} />
                             </div>
                             <div>
-                                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
+                                <h1 className="text-2xl sm:text-3xl font-bold  ">
                                     Exam Timetable
                                 </h1>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                <p className="text-sm text-gray-500  mt-1">
                                     {classInfo?.name && `Class ${classInfo.name}`}
                                     {sectionInfo?.name && ` - Section ${sectionInfo.name}`}
                                 </p>
@@ -328,19 +328,19 @@ export default function StudentExamTimetable() {
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page p-4">
                         <p className="text-sm text-blue-600 dark:text-blue-400">Total Exams</p>
                         <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">{stats.totalExams}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-4">
-                        <p className="text-sm text-purple-600 dark:text-purple-400">Total Subjects</p>
+                    <div className="bg-surface-page  rounded-xl p-4">
+                        <p className="text-sm ">Total Subjects</p>
                         <p className="text-2xl font-bold text-purple-700 dark:text-purple-300">{stats.totalSubjects}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page  rounded-xl p-4">
                         <p className="text-sm text-green-600 dark:text-green-400">Published</p>
-                        <p className="text-2xl font-bold text-green-700 dark:text-green-300">{stats.published}</p>
+                        <p className="text-2xl font-bold text-green-700 ">{stats.published}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page  rounded-xl p-4">
                         <p className="text-sm text-orange-600 dark:text-orange-400">Upcoming</p>
                         <p className="text-2xl font-bold text-orange-700 dark:text-orange-300">{stats.upcoming}</p>
                     </div>
@@ -355,7 +355,7 @@ export default function StudentExamTimetable() {
                             placeholder="Search by exam name or subject..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-surface-page dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50"
                         />
                     </div>
                     <div className="relative w-full sm:w-48">
@@ -363,7 +363,7 @@ export default function StudentExamTimetable() {
                         <select
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-surface-page dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none"
                         >
                             <option value="all">All Exams</option>
                             <option value="published">Published</option>

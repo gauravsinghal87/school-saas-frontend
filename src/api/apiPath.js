@@ -19,12 +19,14 @@ export const apiPaths = {
         EXAMS: "/api/student/exam-timetable",
         PROFILE: "/api/student/profile",
         STUDENT_ATTENDANCE: "/api/attendance/student",
+        EXAM_RESULTS: "/api/student/results",
 
     },
     parent: {
         MY_CHILDREN: "/api/parent/my-children",
         MY_PROFILE: "/api/parent",
         PAYMENTS: "/api/parent/payments",
+        EXAM_RESULTS: "/api/parent/results",
 
     },
     teacher: {
@@ -67,6 +69,7 @@ export const apiPaths = {
         TEACHER_GET_MARKS: '/api/teacher/exams/marks',
         TEACHER_MARKS_TEMPLATE: '/api/teacher/exams/marks/template',
         TEACHER_BULK_UPLOAD_MARKS: '/api/teacher/exams/marks/bulk-upload',
+
 
     },
 
@@ -145,7 +148,7 @@ export const apiPaths = {
         RENEW_SUBSCRIPTION: '/api/subscription/renew',
         VERIFY_SUBSCRIPTION: '/api/subscription/verify-payment',
 
-        USERS_LIST:'/api/user/list-users',
+        USERS_LIST: '/api/user/list-users',
         GENERATE_STAFF_SALARY: '/api/staff/salary/generate',
 
 

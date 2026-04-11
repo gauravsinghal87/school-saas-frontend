@@ -139,11 +139,14 @@ import {
     getTeacherAttendance,
     generateStaffSalary,
     getStaffSalaryDetails,
+    getStudntExamResults,
+    getStudentResultForParent,
 } from "../api/apiMehods";
 import useAppMutation from "./useAppMutation";
 import { QUERY_KEYS } from "../services/queryKeys";
 import useAppQuery from "./useAppQuery";
 import { showError, showSuccess } from "../utils/toast";
+import { use } from "react";
 
 
 
@@ -1036,6 +1039,7 @@ export const generateResultMutation = () => {
     });
 };
 
+
 export const examResultsList = (examId, params, enabled = true) => {
     return useAppQuery({
         queryKey: ["examResults", examId, params],
@@ -1044,6 +1048,7 @@ export const examResultsList = (examId, params, enabled = true) => {
     });
 };
 
+
 // Add getStudentsQuery if not exists
 export const getStudentsQuery = () => {
     return useAppQuery({
@@ -1051,6 +1056,7 @@ export const getStudentsQuery = () => {
         apiCall: getStudents,
     });
 };
+
 
 export const studentResultsList = (studentId, params, enabled = true) => {
     return useAppQuery({
@@ -1069,7 +1075,6 @@ export const fetchstudentListQuery = (params) => {
 }
 
 
-
 export const getClassAttendanceQuery = ({ classId, sectionId, date }, enabled = true) => {
     return useAppQuery({
         // Add 'date' to the queryKey so it refetches when the date changes
@@ -1078,10 +1083,6 @@ export const getClassAttendanceQuery = ({ classId, sectionId, date }, enabled = 
         enabled: enabled && !!classId && !!sectionId && !!date, // Ensure date is present
     });
 };
-
-
-
-
 
 
 export const createHolidayMutation = () => {
@@ -1094,6 +1095,7 @@ export const createHolidayMutation = () => {
         },
     });
 };
+
 
 export const getHolidaysQuery = (params) => {
     return useAppQuery({
@@ -1153,6 +1155,8 @@ export const useUploadStaffDocumentsMutation = (staffId, userId) => {
         },
     });
 };
+
+
 
 export const deleteStaffMutation = () => {
     const queryClient = useQueryClient();
@@ -1388,27 +1392,29 @@ export const getTeacherExamMarksQuery = ({
 // ==================== MUTATIONS ====================
 
 // ✍️ Update Marks
-// inside your useTeacherExams.js or hooks file
+
+
 export const updateTeacherExamMarksMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
-        // FIX: Ensure this is a function calling your API utility
-        mutationFn: (payload) => updateTeacherExamMarks(payload),
-        onSuccess: (res) => {
-            // Optional: Show success toast here
+        apiCall: updateTeacherExamMarks,
+        successMessage: "Marks updated successfully 🎉",
+        onSuccessCallback: () => {
             queryClient.invalidateQueries(["teacherExamMarks"]);
+            queryClient.invalidateQueries(["examResults"]);
         },
     });
-};
+}
 
 // 📤 Bulk Upload Marks
 export const uploadMarksBulkMutation = () => {
     const queryClient = useQueryClient();
     return useAppMutation({
-        mutationFn: (formData) => uploadMarksBulk(formData),
-
-        onSuccess: () => {
+        apiCall: uploadMarksBulk,
+        successMessage: "Marks uploaded successfully 🎉",
+        onSuccessCallback: () => {
             queryClient.invalidateQueries(["teacherExamMarks"]);
+            queryClient.invalidateQueries(["examResults"]);
         },
     });
 };
@@ -1529,3 +1535,21 @@ export const useParentPayments = () => {
         staleTime: 1000 * 60 * 5, // 5 min cache
     });
 };
+
+
+
+
+
+export const useStudentExamResults = (params) => {
+    return useAppQuery({
+        queryKey: ["studentExamResults", params],
+        apiCall: () => getStudntExamResults(params),
+    });
+}
+
+export const useStudentResultForParent = (params) => {
+    return useAppQuery({
+        queryKey: ["studentResultForParent", params],
+        apiCall: () => getStudentResultForParent(params),
+    });
+}

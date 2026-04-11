@@ -7,9 +7,9 @@ const STEPS = [
   { id: "documents", label: "Documents", short: "05", icon: "📄" },
   { id: "review", label: "Review", short: "06", icon: "✓" },
 ];
-export default function StepIndicator({step, setStep}) {
+export default function StepIndicator({ step, setStep }) {
   return (
-       <div className="flex items-center justify-center mb-8 overflow-x-auto pb-1">
+    <div className="flex items-center justify-center mb-8 overflow-x-auto pb-1">
       {STEPS.map((s, i) => {
         const done = i < step;
         const active = i === step;
@@ -26,8 +26,8 @@ export default function StepIndicator({step, setStep}) {
             >
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-700 transition-all duration-300 border-[1.5px]
                 ${active ? "bg-primary border-primary text-white shadow-lg shadow-indigo-200 scale-110" : ""}
-                ${done ? "bg-white border-primary text-primary hover:scale-105" : ""}
-                ${future ? "bg-white border-slate-200 text-slate-400" : ""}
+                ${done ? "bg-surface-page border-primary text-primary hover:scale-105" : ""}
+                ${future ? "bg-surface-page border-slate-200 text-slate-400" : ""}
               `}>
                 {done ? (
                   <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">

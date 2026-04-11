@@ -66,7 +66,7 @@ const TimetableSkeleton = () => (
     </div>
     <div className="space-y-4">
       {[1, 2, 3, 4, 5].map((i) => (
-        <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm">
+        <div key={i} className="bg-surface-page dark:bg-gray-800 rounded-2xl p-5 shadow-sm">
           <div className="flex items-start gap-4">
             <div className="w-20 h-20 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
             <div className="flex-1 space-y-2">
@@ -111,20 +111,20 @@ const ClassCard = ({ entry, index }) => {
       {/* Progress line on the left */}
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-primary/40 to-primary/10 rounded-l-2xl"></div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-primary/30 transform hover:-translate-y-0.5">
+      <div className="bg-surface-page dark:bg-gray-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:border-primary/30 transform hover:-translate-y-0.5">
         <div className="flex flex-col sm:flex-row sm:items-start gap-4">
           {/* Time Card */}
           <div className="sm:w-28 flex-shrink-0">
             <div className={`${getPeriodStyle(periodType).bg} rounded-xl p-3 text-center border border-gray-100 dark:border-gray-700`}>
               <PeriodIcon className={`w-5 h-5 ${getPeriodStyle(periodType).color} mx-auto mb-1`} />
-              <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+              <p className="text-xs font-medium text-gray-500 ">
                 {getPeriodStyle(periodType).bg.includes('amber') ? 'Morning' :
                   getPeriodStyle(periodType).bg.includes('orange') ? 'Afternoon' : 'Evening'}
               </p>
-              <p className="text-sm font-bold text-gray-800 dark:text-white mt-1">
+              <p className="text-sm font-bold   mt-1">
                 {formatTime(entry.periodId?.startTime)}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-gray-500 ">
                 - {formatTime(entry.periodId?.endTime)}
               </p>
             </div>
@@ -141,7 +141,7 @@ const ClassCard = ({ entry, index }) => {
               </div>
             </div>
 
-            <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-3 flex items-center gap-2">
+            <h3 className="text-lg font-bold   mb-3 flex items-center gap-2">
               <BookOpen className="text-primary" size={18} />
               {entry.subjectId?.name || "Subject Not Assigned"}
             </h3>
@@ -151,7 +151,7 @@ const ClassCard = ({ entry, index }) => {
                 <div className="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                   <User size={12} className="text-gray-500" />
                 </div>
-                <span>Teacher: <span className="font-medium text-gray-800 dark:text-white">
+                <span>Teacher: <span className="font-medium  ">
                   {entry.teacherId?.name || "TBA"}
                 </span></span>
               </div>
@@ -186,14 +186,14 @@ const ClassCard = ({ entry, index }) => {
 
 // Empty State Component
 const EmptyState = ({ day }) => (
-  <div className="flex flex-col items-center justify-center py-16 text-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
-    <div className="w-20 h-20 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 shadow-md">
+  <div className="flex flex-col items-center justify-center py-16 text-center bg-surface-page from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
+    <div className="w-20 h-20 bg-surface-page dark:bg-gray-800 rounded-full flex items-center justify-center mb-4 shadow-md">
       <Coffee className="text-gray-400" size={32} />
     </div>
     <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
       No Classes Today! 🎉
     </h3>
-    <p className="text-gray-500 dark:text-gray-400 max-w-sm px-4">
+    <p className="text-gray-500  max-w-sm px-4">
       You have a free day on {day}. Use this time to catch up on assignments,
       review your notes, or take a well-deserved break!
     </p>
@@ -212,25 +212,25 @@ const StatisticsSummary = ({ schedule }) => {
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-      <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-3 text-center">
+      <div className="bg-surface-page p-3 text-center">
         <GraduationCap className="w-5 h-5 text-blue-600 mx-auto mb-1" />
         <p className="text-2xl font-bold text-blue-600">{totalClasses}</p>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Total Classes</p>
+        <p className="text-xs text-gray-600 ">Total Classes</p>
       </div>
-      <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-3 text-center">
+      <div className="bg-surface-page f rounded-xl p-3 text-center">
         <CalendarDays className="w-5 h-5 text-green-600 mx-auto mb-1" />
         <p className="text-2xl font-bold text-green-600">{avgClassesPerDay}</p>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Avg/Day</p>
+        <p className="text-xs text-gray-600 ">Avg/Day</p>
       </div>
-      <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 rounded-xl p-3 text-center">
+      <div className="bg-surface-page  rounded-xl p-3 text-center">
         <Clock className="w-5 h-5 text-purple-600 mx-auto mb-1" />
         <p className="text-2xl font-bold text-purple-600">6</p>
-        <p className="text-xs text-gray-600 dark:text-gray-400">Periods/Day</p>
+        <p className="text-xs text-gray-600 ">Periods/Day</p>
       </div>
-      <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-xl p-3 text-center">
+      <div className="bg-surface-page from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-xl p-3 text-center">
         <Bell className="w-5 h-5 text-orange-600 mx-auto mb-1" />
         <p className="text-2xl font-bold text-orange-600">{DAYS_OF_WEEK.length}</p>
-        <p className="text-xs text-gray-600 dark:text-gray-400">School Days</p>
+        <p className="text-xs text-gray-600 ">School Days</p>
       </div>
     </div>
   );
@@ -293,7 +293,7 @@ export default function StudentTimetable() {
   }, [groupedSchedule]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-surface-page">
       <div className="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8">
         {/* Header */}
         <div className="mb-8">
@@ -302,10 +302,10 @@ export default function StudentTimetable() {
               <CalendarDays className="text-primary" size={28} />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
+              <h1 className="text-2xl sm:text-3xl font-bold  ">
                 My Weekly Schedule
               </h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <p className="text-sm text-gray-500  mt-1">
                 Your personalized academic timetable for the current session
               </p>
             </div>
@@ -335,8 +335,8 @@ export default function StudentTimetable() {
                       key={day}
                       onClick={() => setActiveDay(day)}
                       className={`relative flex flex-col items-center px-5 py-2.5 rounded-xl transition-all duration-300 cursor-pointer ${isActive
-                          ? "bg-primary text-white shadow-lg shadow-primary/30"
-                          : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
+                        ? "bg-primary text-white shadow-lg shadow-primary/30"
+                        : "bg-surface-page dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700"
                         }`}
                     >
                       <span className="text-sm font-semibold">{day}</span>

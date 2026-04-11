@@ -13,12 +13,12 @@ export default function ConfirmBox({ isOpen, title = "Are you sure?", message = 
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="bg-white rounded-xl shadow-lg w-[90%] max-w-sm p-6 text-center"
+          className="bg-surface-page rounded-xl shadow-lg w-[90%] max-w-sm p-6 text-center"
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.8 }}
         >
-          <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
+          <h2 className="text-lg font-semibold ">{title}</h2>
           {message && <p className="text-sm text-gray-600 mt-2">{message}</p>}
 
           <div className="mt-6 flex justify-center gap-4">

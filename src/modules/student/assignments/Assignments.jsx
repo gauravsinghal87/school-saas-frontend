@@ -46,7 +46,7 @@ const AssignmentCard = ({ assignment, onViewDetails, onSubmit }) => {
     const submissionStatus = assignment.submissionStatus;
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700">
+        <div className="bg-surface-page dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700">
             <div className="p-5">
                 {/* Header */}
                 <div className="flex items-start justify-between mb-3">
@@ -54,7 +54,7 @@ const AssignmentCard = ({ assignment, onViewDetails, onSubmit }) => {
                         <div className="p-2 bg-primary/10 rounded-lg">
                             <FileText className="w-5 h-5 text-primary" />
                         </div>
-                        <h3 className="font-semibold text-gray-800 dark:text-white line-clamp-1">
+                        <h3 className="font-semibold   line-clamp-1">
                             {assignment.title}
                         </h3>
                     </div>
@@ -63,7 +63,7 @@ const AssignmentCard = ({ assignment, onViewDetails, onSubmit }) => {
 
                 {/* Subject */}
                 <div className="mb-3">
-                    <span className="inline-flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400">
+                    <span className="inline-flex items-center gap-1 text-xs text-gray-500 ">
                         <BookOpen size={12} />
                         {assignment.subjectId?.name || "Unknown Subject"}
                     </span>
@@ -78,7 +78,7 @@ const AssignmentCard = ({ assignment, onViewDetails, onSubmit }) => {
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2 text-sm">
                         <Calendar size={14} className="text-gray-400" />
-                        <span className="text-gray-600 dark:text-gray-400">Due Date:</span>
+                        <span className="text-gray-600 ">Due Date:</span>
                         <span className={`font-medium ${isOverdue ? 'text-red-600 dark:text-red-400' : 'text-gray-700 dark:text-gray-300'}`}>
                             {format(dueDate, "dd MMM yyyy")}
                         </span>
@@ -142,9 +142,9 @@ const AssignmentDetailsModal = ({ assignment, isOpen, onClose }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-                <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-5 flex justify-between items-center">
-                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">{assignment.title}</h2>
+            <div className="bg-surface-page dark:bg-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                <div className="sticky top-0 bg-surface-page dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-5 flex justify-between items-center">
+                    <h2 className="text-xl font-bold  ">{assignment.title}</h2>
                     <button onClick={onClose} className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
                         <X size={20} />
                     </button>
@@ -154,7 +154,7 @@ const AssignmentDetailsModal = ({ assignment, isOpen, onClose }) => {
                     {/* Subject */}
                     <div>
                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Subject</label>
-                        <p className="text-gray-800 dark:text-white mt-1">{assignment.subjectId?.name || "Unknown Subject"}</p>
+                        <p className="  mt-1">{assignment.subjectId?.name || "Unknown Subject"}</p>
                     </div>
 
                     {/* Description */}
@@ -168,7 +168,7 @@ const AssignmentDetailsModal = ({ assignment, isOpen, onClose }) => {
                     {/* Due Date */}
                     <div>
                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Due Date</label>
-                        <p className={`mt-1 font-medium ${isOverdue ? 'text-red-600 dark:text-red-400' : 'text-gray-800 dark:text-white'}`}>
+                        <p className={`mt-1 font-medium ${isOverdue ? 'text-red-600 dark:text-red-400' : ' '}`}>
                             {format(dueDate, "dd MMMM yyyy, hh:mm a")}
                             {isOverdue && " (Overdue)"}
                         </p>
@@ -231,9 +231,9 @@ const SubmitAssignmentModal = ({ assignment, isOpen, onClose, onSubmit }) => {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+            <div className="bg-surface-page dark:bg-gray-800 rounded-2xl max-w-md w-full" onClick={(e) => e.stopPropagation()}>
                 <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                    <h2 className="text-xl font-bold text-gray-800 dark:text-white">Submit Assignment</h2>
+                    <h2 className="text-xl font-bold  ">Submit Assignment</h2>
                     <button onClick={onClose} className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
                         <X size={20} />
                     </button>
@@ -241,8 +241,8 @@ const SubmitAssignmentModal = ({ assignment, isOpen, onClose, onSubmit }) => {
 
                 <div className="p-5 space-y-4">
                     <div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Assignment:</p>
-                        <p className="font-semibold text-gray-800 dark:text-white">{assignment.title}</p>
+                        <p className="text-sm text-gray-600 ">Assignment:</p>
+                        <p className="font-semibold  ">{assignment.title}</p>
                     </div>
 
                     <div>
@@ -257,7 +257,7 @@ const SubmitAssignmentModal = ({ assignment, isOpen, onClose, onSubmit }) => {
                             />
                             <label htmlFor="file-upload" className="cursor-pointer">
                                 <Upload className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                <p className="text-sm text-gray-600 ">
                                     {file ? file.name : "Click to upload or drag and drop"}
                                 </p>
                                 <p className="text-xs text-gray-500 mt-1">
@@ -302,7 +302,7 @@ const SubmitAssignmentModal = ({ assignment, isOpen, onClose, onSubmit }) => {
 const AssignmentsSkeleton = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
         {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden">
+            <div key={i} className="bg-surface-page dark:bg-gray-800 rounded-2xl overflow-hidden">
                 <div className="p-5">
                     <div className="flex items-start justify-between mb-3">
                         <div className="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
@@ -330,7 +330,7 @@ const EmptyState = ({ hasFilters }) => (
         <h3 className="text-xl font-bold text-gray-700 dark:text-gray-300 mb-2">
             {hasFilters ? "No matching assignments" : "No Assignments Yet"}
         </h3>
-        <p className="text-gray-500 dark:text-gray-400 max-w-sm">
+        <p className="text-gray-500  max-w-sm">
             {hasFilters
                 ? "Try adjusting your search or filter criteria"
                 : "You don't have any assignments at the moment. Check back later!"}
@@ -398,7 +398,7 @@ export default function StudentAssignments() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="min-h-screen bg-surface-page">
             <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
                 {/* Header */}
                 <div className="mb-8">
@@ -408,10 +408,10 @@ export default function StudentAssignments() {
                                 <FileText className="text-primary" size={28} />
                             </div>
                             <div>
-                                <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
+                                <h1 className="text-2xl sm:text-3xl font-bold  ">
                                     My Assignments
                                 </h1>
-                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                <p className="text-sm text-gray-500  mt-1">
                                     Track and submit your assignments
                                 </p>
                             </div>
@@ -421,19 +421,19 @@ export default function StudentAssignments() {
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page p-4">
                         <p className="text-sm text-blue-600 dark:text-blue-400">Total</p>
                         <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">{stats.total}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 rounded-xl p-4">
                         <p className="text-sm text-yellow-600 dark:text-yellow-400">Pending</p>
                         <p className="text-2xl font-bold text-yellow-700 dark:text-yellow-300">{stats.pending}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page f rounded-xl p-4">
                         <p className="text-sm text-green-600 dark:text-green-400">Submitted</p>
                         <p className="text-2xl font-bold text-green-700 dark:text-green-300">{stats.submitted}</p>
                     </div>
-                    <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-xl p-4">
+                    <div className="bg-surface-page from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 rounded-xl p-4">
                         <p className="text-sm text-red-600 dark:text-red-400">Late</p>
                         <p className="text-2xl font-bold text-red-700 dark:text-red-300">{stats.late}</p>
                     </div>
@@ -448,7 +448,7 @@ export default function StudentAssignments() {
                             placeholder="Search by title or subject..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-surface-page dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50"
                         />
                     </div>
                     <div className="relative w-full sm:w-48">
@@ -456,7 +456,7 @@ export default function StudentAssignments() {
                         <select
                             value={statusFilter}
                             onChange={(e) => setStatusFilter(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-xl bg-surface-page dark:bg-gray-800 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/50 appearance-none"
                         >
                             <option value="all">All Status</option>
                             <option value="Pending">Pending</option>

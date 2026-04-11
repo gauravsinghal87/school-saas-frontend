@@ -112,7 +112,7 @@ export default function TimetableForm({
                             const dayEntries = getEntriesByDay(day);
                             return (
                                 <tr key={day} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                                    <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                                    <td className="px-4 py-3 text-sm font-medium text-gray-900 ">
                                         {day}
                                     </td>
                                     {dayEntries.map((entry) => {

@@ -57,7 +57,7 @@ export default function ParentProfile() {
   const parent = response?.data;
   const childrenList = parent?.children || [];
 
-  console.log(parent,childrenList)
+  console.log(parent, childrenList)
   if (isLoading) {
     return (
       <div className="p-4 sm:p-6 lg:p-8 min-h-screen bg-surface-page">
@@ -111,7 +111,7 @@ export default function ParentProfile() {
             {/* Top color block */}
             <div className="h-24 bg-gradient-to-r from-primary/80 to-primary/40 relative">
               {/* Decorative blobs */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-surface-page/10 rounded-full blur-2xl"></div>
             </div>
 
             <div className="px-6 pb-6 relative">
@@ -178,7 +178,7 @@ export default function ParentProfile() {
           <div className="flex items-center gap-2 mb-2">
             <Users className="text-primary" size={20} />
             <h3 className="text-lg font-['Montserrat'] font-bold text-text-heading">
-               Children ({parent.childrenCount})
+              Children ({parent.childrenCount})
             </h3>
           </div>
 
@@ -260,7 +260,7 @@ export default function ParentProfile() {
                 <Users className="text-text-secondary opacity-60" size={28} />
               </div>
               <h3 className="text-[16px] font-bold text-text-primary mb-1">
-                No Children 
+                No Children
               </h3>
               <p className="text-sm text-text-secondary max-w-[280px]">
                 There are currently no students to this parent account.
