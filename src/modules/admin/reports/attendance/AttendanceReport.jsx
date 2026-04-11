@@ -71,7 +71,7 @@ export default function AttendanceReport() {
   };
 
   return (
-    <div className="p-6">
+    <div className="md:p-6">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
@@ -134,7 +134,8 @@ export default function AttendanceReport() {
       </div>
 
       {/* 📊 TABLE */}
-      <DataTable
+ <div className="w-[94vw] md:w-auto">
+       <DataTable
         title="Users Attendance List"
         data={users}
         columns={COLUMNS}
@@ -166,6 +167,7 @@ export default function AttendanceReport() {
 
         searchPlaceholder="Search by name or email..."
       />
+ </div>
     </div>
   );
 }

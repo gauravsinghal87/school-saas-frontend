@@ -67,7 +67,7 @@ export default function AdminStudents() {
   };
 
   return (
-    <div className="p-6 lg:p-8 min-h-screen bg-surface-page">
+    <div className="md:p-6 lg:p-8 min-h-screen bg-surface-page">
       {currentView === "detail" ? (
         <StudentDetail
           studentId={viewingStudentId}
@@ -153,7 +153,7 @@ export default function AdminStudents() {
           </div>
 
           {/* Data Table */}
-          <div className="bg-surface-card border border-border border-t-0 rounded-b-xl overflow-x-auto relative min-h-[300px]">
+          <div className="bg-surface-card w-[92vw] md:w-auto border border-border border-t-0 rounded-b-xl overflow-x-auto relative min-h-[300px]">
             {isLoadingStudents && (
               <div className="absolute inset-0 bg-surface-card/60 backdrop-blur-sm z-10 flex items-center justify-center">
                 <Loader2 className="animate-spin text-primary" size={32} />

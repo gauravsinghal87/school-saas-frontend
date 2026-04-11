@@ -1,236 +1,169 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Button from "../../../components/common/Button";
 import DataTable from "../../../components/common/ReusableTable";
+import {sectionList} from "../../../hooks/useQueryMutations";
+import {sectionListById} from "../../../hooks/useQueryMutations";
+
 import {
-    examResultsList,
-    generateResultMutation,
-    examById
+    examResultsOfStudentsMutation,
+
 } from "../../../hooks/useQueryMutations";
-import { getStudentsQuery } from "../../../hooks/useQueryMutations";
-import { ArrowLeft, Download, RefreshCw, FileBarChart } from "lucide-react";
+
+import { ArrowLeft, RefreshCw } from "lucide-react";
 import { showSuccess, showError } from "../../../utils/toast";
 
 export default function ExamResults() {
-    const { id } = useParams();
+    const { id } = useParams(); // examIdx
+    const location = useLocation();
     const navigate = useNavigate();
+
+    // ✅ GET classId from URL
+    const queryParams = new URLSearchParams(location.search);
+    const classId = queryParams.get("classId");
+
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
-    const [selectedStudent, setSelectedStudent] = useState("");
-    const [resultStatus, setResultStatus] = useState("");
+    const [sectionId, setSectionId] = useState(""); // ✅ NEW
+    console.log("sectionId",sectionId);
     const [generating, setGenerating] = useState(false);
 
     // Fetch exam details
-    const { data: examData } = examById(id);
-    const exam = examData?.data?.results || examData?.results;
+    // const { data: examData } = examById(id);
+    // const exam = examData?.data?.results || examData?.results;
 
-    // Fetch students
-    const { data: studentsData } = getStudentsQuery();
-    const students = studentsData?.data?.results || studentsData?.results || [];
+    // ✅ API PARAMS (MAIN LOGIC)
 
-    // Fetch exam results
-    const params = {
-        page,
-        limit,
-        search,
-        studentId: selectedStudent || undefined,
-        resultStatus: resultStatus || undefined,
-    };
-    const { data: resultsResponse, isLoading, refetch } = examResultsList(id, params);
-    const tableData = resultsResponse?.data?.results || resultsResponse?.results || [];
-    const pagination = resultsResponse?.data?.pagination || resultsResponse?.pagination || {};
 
-    // Mutations
-    const { mutateAsync: generateResult } = generateResultMutation();
+    const { data: resultsResponse, isLoading, refetch } =
+        examResultsOfStudentsMutation({
+            examId: id,
+            classId: classId,
+            sectionId: sectionId,
+            page: page,
+            limit: limit,
+            search: search,
+        });
+        const {data:sectionsData} = sectionListById(classId);
+        const sectionOptions = sectionsData?.data?.sections.map((sec) => ({
+            label: sec.name,
+            value: sec._id,
+        })) || [];
+       console.log("classsections",sectionOptions);
 
-    const studentOptions = students.map(student => ({
-        label: `${student.firstName} ${student.lastName} (${student.admissionNumber})`,
-        value: student._id,
-    }));
+        console.log("sectionsData",sectionsData);
+    console.log("resultsresponse", resultsResponse);
+    const tableData = resultsResponse?.data?.results || [];
+    const pagination = resultsResponse?.data?.pagination || {};
 
-    const statusOptions = [
-        { label: "All", value: "" },
-        { label: "Pass", value: "pass" },
-        { label: "Fail", value: "fail" },
-    ];
+    // ✅ SECTION OPTIONS (from API response)
 
-    const handleGenerateResults = async () => {
-        setGenerating(true);
-        try {
-            await generateResult(id);
-            refetch();
-            showSuccess("Results generated successfully!");
-        } catch (err) {
-            console.error("Error generating results:", err);
-            showError("Failed to generate results");
-        } finally {
-            setGenerating(false);
-        }
-    };
 
-    const getGradeColor = (grade) => {
-        const colors = {
-            'A+': 'text-green-600',
-            'A': 'text-green-500',
-            'B+': 'text-blue-600',
-            'B': 'text-blue-500',
-            'C+': 'text-yellow-600',
-            'C': 'text-yellow-500',
-            'D': 'text-orange-500',
-            'F': 'text-red-600',
-        };
-        return colors[grade] || 'text-gray-600';
-    };
+    // Generate Results
+    // const { mutateAsync: generateResult } = generateResultMutation();
 
-    const getResultStatusColor = (status) => {
-        return status === 'pass'
-            ? 'bg-green-100 text-green-800'
-            : 'bg-red-100 text-red-800';
-    };
+    // const handleGenerateResults = async () => {
+    //     setGenerating(true);
+    //     try {
+    //         await generateResult(id);
+    //         refetch();
+    //         showSuccess("Results generated successfully!");
+    //     } catch (err) {
+    //         showError("Failed to generate results");
+    //     } finally {
+    //         setGenerating(false);
+    //     }
+    // };
 
+    // TABLE COLUMNS (based on API)
     const COLUMNS = [
         {
-            key: "studentId",
-            label: "Student",
-            sortable: true,
-            render: (val) => val ? `${val.firstName} ${val.lastName}` : "—",
+            key: "student",
+            label: "Student Name",
+            render: (_, row) => row.student?.name || "—",
         },
         {
-            key: "admissionNumber",
-            label: "Admission No",
-            render: (val, row) => row.studentId?.admissionNumber || "—",
+            key: "roll",
+            label: "Roll No",
+            render: (_, row) => row.student?.roll_number || "—",
         },
         {
-            key: "totalMarks",
+            key: "class",
+            label: "Class",
+            render: (_, row) => row.class?.name || "—",
+        },
+        {
+            key: "section",
+            label: "Section",
+            render: (_, row) => row.section?.name || "—",
+        },
+        {
+            key: "total",
             label: "Total Marks",
-            render: (val) => val || "—",
+            render: (_, row) => `${row.total_obtained}/${row.total_max}`,
         },
         {
             key: "percentage",
             label: "Percentage",
-            render: (val) => val ? `${val}%` : "—",
+            render: (_, row) => `${row.percentage}%`,
         },
         {
-            key: "grade",
-            label: "Grade",
-            render: (val) => (
-                <span className={`font-semibold ${getGradeColor(val)}`}>
-                    {val || "—"}
-                </span>
-            ),
-        },
-        {
-            key: "resultStatus",
-            label: "Status",
-            render: (val) => (
-                <span className={`px-2 py-1 text-xs rounded-full ${getResultStatusColor(val)}`}>
-                    {val === 'pass' ? 'Pass' : 'Fail'}
-                </span>
-            ),
-        },
-        {
-            key: "createdAt",
-            label: "Generated On",
-            render: (val) => val ? new Date(val).toLocaleDateString() : "—",
+            key: "status",
+            label: "Result",
+            render: (_, row) => row.result_status || "—",
         },
     ];
 
-    // Calculate summary statistics
-    const summary = {
-        totalStudents: tableData.length,
-        passed: tableData.filter(r => r.resultStatus === 'pass').length,
-        failed: tableData.filter(r => r.resultStatus === 'fail').length,
-        averagePercentage: tableData.length > 0
-            ? (tableData.reduce((sum, r) => sum + (r.percentage || 0), 0) / tableData.length).toFixed(2)
-            : 0,
-    };
-
     return (
         <div className="p-6">
-            {/* Header */}
+
+            {/* HEADER */}
             <div className="flex items-center gap-4 mb-6">
-                <button
-                    onClick={() => navigate("/school-admin/exams")}
-                    className="text-gray-600 hover:text-gray-800 dark:text-gray-400"
-                >
-                    <ArrowLeft size={24} />
+                <button onClick={() => navigate("/school-admin/exams")}>
+                    <ArrowLeft size={22} />
                 </button>
-                <div className="flex-1">
-                    <h1 className="text-2xl font-bold text-text-heading">
-                        Exam Results: {exam?.name || "Loading..."}
-                    </h1>
-                    <p className="text-sm text-text-secondary mt-0.5">
-                        View and manage exam results
-                    </p>
-                </div>
-                <Button onClick={handleGenerateResults} loading={generating}>
-                    <RefreshCw className="w-4 h-4 mr-2" />
-                    Generate Results
-                </Button>
+
+                <h1 className="text-xl font-semibold">
+                    Exam Results
+                </h1>
             </div>
 
-            {/* Summary Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white  rounded-lg p-4 shadow">
-                    <p className="text-sm text-gray-500">Total Students</p>
-                    <p className="text-2xl font-bold">{summary.totalStudents}</p>
-                </div>
-                <div className="bg-white  rounded-lg p-4 shadow">
-                    <p className="text-sm text-gray-500">Passed</p>
-                    <p className="text-2xl font-bold text-green-600">{summary.passed}</p>
-                </div>
-                <div className="bg-white  rounded-lg p-4 shadow">
-                    <p className="text-sm text-gray-500">Failed</p>
-                    <p className="text-2xl font-bold text-red-600">{summary.failed}</p>
-                </div>
-                <div className="bg-white  rounded-lg p-4 shadow">
-                    <p className="text-sm text-gray-500">Average Percentage</p>
-                    <p className="text-2xl font-bold text-blue-600">{summary.averagePercentage}%</p>
-                </div>
-            </div>
-
-            {/* Filters */}
+            {/* FILTER */}
             <div className="flex gap-4 mb-4">
-                <div className="w-64">
-                    <select
-                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
-                        value={selectedStudent}
-                        onChange={(e) => setSelectedStudent(e.target.value)}
-                    >
-                        <option value="">All Students</option>
-                        {studentOptions.map(opt => (
-                            <option key={opt.value} value={opt.value}>
-                                {opt.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className="w-40">
-                    <select
-                        className="w-full px-3 py-2 border border-border  text-text-heading  rounded-lg "
-                        value={resultStatus}
-                        onChange={(e) => setResultStatus(e.target.value)}
-                    >
-                        {statusOptions.map(opt => (
-                            <option key={opt.value} value={opt.value}>
-                                {opt.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <select
+                    className="px-3 py-2 border border-gray-200 rounded"
+                    value={sectionId}
+                    onChange={(e) => {
+                        setSectionId(e.target.value);
+                        setPage(1);
+                    }}
+                >
+                    {sectionOptions.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                        </option>
+                    ))}
+                </select>
             </div>
 
-            {/* Results Table */}
+            {/* ✅ DATATABLE */}
             <DataTable
-                title="Student Results"
+                title="Exam Results"
                 data={tableData}
                 columns={COLUMNS}
                 loading={isLoading}
-                rowKey="_id"
+                rowKey="student.id"
                 serverMode
-                onSearch={(val) => { setSearch(val); setPage(1); }}
-                searchPlaceholder="Search by student name..."
+
+                // ✅ SEARCH
+                onSearch={(val) => {
+                    setSearch(val);
+                    setPage(1);
+                }}
+                searchPlaceholder="Search student..."
+
+                // ✅ PAGINATION
                 pagination={{
                     currentPage: pagination.page || page,
                     totalPages: pagination.totalPages || 1,
@@ -239,16 +172,6 @@ export default function ExamResults() {
                 }}
             />
 
-            {/* No Results Message */}
-            {!isLoading && tableData.length === 0 && (
-                <div className="text-center py-12">
-                    <FileBarChart className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-                    <p className="text-gray-500">No results generated yet</p>
-                    <p className="text-sm text-gray-400 mt-1">
-                        Click "Generate Results" to calculate results for this exam
-                    </p>
-                </div>
-            )}
         </div>
     );
 }

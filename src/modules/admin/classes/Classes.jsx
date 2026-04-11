@@ -209,7 +209,7 @@ export default function Classes() {
   };
 
   return (
-    <div className="p-6">
+    <div className="md:p-6">
 
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -251,10 +251,14 @@ export default function Classes() {
           columns={COLUMNS}
           loading={isLoading}
           rowKey="_id"
+          total={total}
           serverMode
           onAdd={() => openModal("create")}
+          page={page}
           addLabel="Add Subscription"
           onSearch={(val) => { setSearch(val); setPage(1); }}
+                onPageChange={(newPage) => setPage(newPage)}
+  // ✅ FIX
           actionCell={(row) => (
             <div className="flex items-center gap-1">
 

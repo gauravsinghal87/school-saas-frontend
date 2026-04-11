@@ -55,7 +55,7 @@ const BaseLayout = ({ title, menu, role, user }) => {
             {/* Main Content Area */}
             <div className="flex flex-col flex-1 ">
                 {/* Topbar with mobile menu toggle */}
-                <BaseNavbar onMenuToggleonMenuClick={toggleSidebar} />
+             <BaseNavbar onMenuClick={toggleSidebar} />
 
                 {/* Main Content */}
                 <main className="flex-1 overflow-y-auto bg-surface-page p-4">

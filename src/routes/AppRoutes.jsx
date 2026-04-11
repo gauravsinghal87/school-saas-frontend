@@ -44,6 +44,7 @@ import GiveExamMarkorUpload from "../modules/staff/GiveExamMarkorUpload.jsx";
 import PayRollDetails from "../modules/admin/payroll/PayRollDetails.jsx";
 import PayRollList from "../modules/admin/payroll/PayRollList.jsx";
 import SchoolSetting from "../modules/admin/school-setting/SchoolSetting.jsx";
+import AdminProfile from "../modules/admin/profile/AdminProfile.jsx";
 
 //staff imports
 const StaffDashboard = lazy(
@@ -166,6 +167,8 @@ const AppRoutes = () => {
             <Route path="payroll/:id" element={<PayRollDetails />} />
             <Route path="settings" element={<SchoolSetting />} />
 
+
+            <Route path="profile" element={<AdminProfile />} />
 
             <Route path="*" element={<NotFound />} />
 

@@ -171,7 +171,7 @@ const onSubmit = async (formData) => {
     };
 
     return (
-        <div className="p-6">
+        <div className="md:p-6">
 
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">

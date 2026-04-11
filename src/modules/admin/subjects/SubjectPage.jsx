@@ -333,7 +333,7 @@ export default function SubjectPage() {
     }
 
     return (
-        <div className="min-h-screen bg-surface-page px-4 py-8">
+        <div className="min-h-screen bg-surface-page md:px-4 py-8">
             <div className="max-w-7xl mx-auto space-y-6">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -355,7 +355,8 @@ export default function SubjectPage() {
 
 
                 {/* Subjects Table */}
-                <DataTable
+            <div className="w-[91vw] md:w-auto">
+                    <DataTable
                     actionCell={(row) => <ActionCell row={row} />}
                     title="All Subjects"
                     columns={COLUMNS}
@@ -375,6 +376,7 @@ export default function SubjectPage() {
                     onPageSizeChange={(val) => { setLimit(val); setPage(1); }}
                     actions={<></>}
                 />
+            </div>
             </div>
 
             {/* Slide Panel for Add/Edit/View */}

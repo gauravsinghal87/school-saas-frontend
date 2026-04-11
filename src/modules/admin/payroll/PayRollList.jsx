@@ -128,7 +128,7 @@ export default function PayRollList() {
     };
 
     return (
-        <div className="p-6">
+        <div className="md:p-6">
 
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
@@ -191,7 +191,7 @@ export default function PayRollList() {
             </div>
 
             {/* 📊 TABLE */}
-            <div className="md:w-[75vw] w-[100vw]">
+            <div className="md:w-[75vw] w-[93vw]">
                 <DataTable
                     title="Staff PayRoll List"
                     data={staffData}
