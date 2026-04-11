@@ -101,6 +101,8 @@ export default function AttendanceReport() {
           <option value="student">Student</option>
           <option value="staff">Staff</option>
           <option value="admin">Admin</option>
+          <option value="teacher">Teacher</option>
+
         </select>
 
         {/* Status Filter */}

@@ -145,6 +145,8 @@ export const apiPaths = {
         RENEW_SUBSCRIPTION: '/api/subscription/renew',
         VERIFY_SUBSCRIPTION: '/api/subscription/verify-payment',
 
+        USERS_LIST:'/api/user/list-users',
+        GENERATE_STAFF_SALARY: '/api/staff/salary/generate',
 
 
     }

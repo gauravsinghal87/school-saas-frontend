@@ -207,6 +207,15 @@ export const updateRole = (data) => {
 
 
 
+export const generateStaffSalary = ({ staffId, ...data }) => {
+    return api.post(
+        `/api/staff/${staffId}/salary/generate`, // ✅ staffId in URL
+        data // ✅ only month, year in body
+    );
+}
+export const getStaffSalaryDetails = (staffId) => {
+  return api.get(`/api/staff/${staffId}/salary`);
+};
 export const addSubject = (data) => {
     return api.post(apiPaths.admin.ADD_SUBJECT, data);
 }

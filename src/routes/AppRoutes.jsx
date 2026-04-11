@@ -41,6 +41,10 @@ import ParentAssignments from "../modules/parent/assignments/ParentAssignments.j
 import { AdminSubscriptionPage } from "../modules/admin/subscription/AdminSubscriptionPage.jsx";
 import StudentMarksByStaffPage from "../modules/staff/StudentMarksByStaffPage.jsx";
 import GiveExamMarkorUpload from "../modules/staff/GiveExamMarkorUpload.jsx";
+import PayRollDetails from "../modules/admin/payroll/PayRollDetails.jsx";
+import PayRollList from "../modules/admin/payroll/PayRollList.jsx";
+import SchoolSetting from "../modules/admin/school-setting/SchoolSetting.jsx";
+
 //staff imports
 const StaffDashboard = lazy(
   () => import("../modules/staff/dashboard/StaffDashboard"),
@@ -158,6 +162,10 @@ const AppRoutes = () => {
 
             <Route path="reports/attendance" element={<AttendanceReport />} />
             <Route path="reports/attendance/:id" element={<AttendanceDetail />} />
+            <Route path="payroll" element={<PayRollList />} />
+            <Route path="payroll/:id" element={<PayRollDetails />} />
+            <Route path="settings" element={<SchoolSetting />} />
+
 
             <Route path="*" element={<NotFound />} />
 
