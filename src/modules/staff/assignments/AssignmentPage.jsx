@@ -71,7 +71,7 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
                     <label className="text-sm font-medium text-text-secondary">Class</label>
                     <select
                         disabled={isView}
-                        className="w-full h-11 px-3 rounded-xl border border-border bg-white text-sm outline-none disabled:bg-slate-50"
+                        className="w-full h-11 px-3 rounded-xl border border-border bg-surface-page text-sm outline-none disabled:bg-slate-50"
                         value={values.classId}
                         onChange={(e) => setValues({ ...values, classId: e.target.value, sectionId: "", subjectId: "" })}
                     >
@@ -84,7 +84,7 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
                         <label className="text-sm font-medium text-text-secondary">Section</label>
                         <select
                             disabled={isView || !values.classId}
-                            className="w-full h-11 px-3 rounded-xl border border-border bg-white text-sm disabled:bg-slate-50"
+                            className="w-full h-11 px-3 rounded-xl border border-border bg-surface-page text-sm disabled:bg-slate-50"
                             value={values.sectionId}
                             onChange={(e) => setValues({ ...values, sectionId: e.target.value })}
                         >
@@ -96,7 +96,7 @@ function AssignmentForm({ defaultValues, onSubmit, loading, mode, metaData }) {
                         <label className="text-sm font-medium text-text-secondary">Subject</label>
                         <select
                             disabled={isView || !values.sectionId}
-                            className="w-full h-11 px-3 rounded-xl border border-border bg-white text-sm disabled:bg-slate-50"
+                            className="w-full h-11 px-3 rounded-xl border border-border bg-surface-page text-sm disabled:bg-slate-50"
                             value={values.subjectId}
                             onChange={(e) => setValues({ ...values, subjectId: e.target.value })}
                         >

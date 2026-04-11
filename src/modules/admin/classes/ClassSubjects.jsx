@@ -177,20 +177,18 @@ function SubjectCard({ subject, index, selected, onSelect }) {
 
   return (
     <div
-      className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all duration-200 hover:-translate-y-1 ${
-        selected
-          ? `${colorStyle.border} ${colorStyle.bg} shadow-lg`
-          : 'border-border bg-surface-card hover:border-primary/40 hover:shadow-md'
-      }`}
+      className={`relative rounded-xl border-2 p-4 cursor-pointer transition-all duration-200 hover:-translate-y-1 ${selected
+        ? `${colorStyle.border} ${colorStyle.bg} shadow-lg`
+        : 'border-border bg-surface-card hover:border-primary/40 hover:shadow-md'
+        }`}
       onClick={() => onSelect(subject._id)}
     >
       {/* Selection Checkbox */}
       <div
-        className={`absolute top-3 right-3 w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-          selected
-            ? `bg-${colorVar} border-${colorVar} shadow-sm`
-            : 'border-gray-300 bg-white'
-        }`}
+        className={`absolute top-3 right-3 w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${selected
+          ? `bg-${colorVar} border-${colorVar} shadow-sm`
+          : 'border-gray-300 bg-surface-page'
+          }`}
         onClick={e => { e.stopPropagation(); onSelect(subject._id); }}
       >
         {selected && <Icons.Check />}
@@ -202,7 +200,7 @@ function SubjectCard({ subject, index, selected, onSelect }) {
       </div>
 
       {/* Emoji Icon */}
-      <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${colorStyle.gradient} flex items-center justify-center text-2xl shadow-lg mb-3`}>
+      <div className={`w-14 h-14 rounded-xl bg-surface-page ${colorStyle.gradient} flex items-center justify-center text-2xl shadow-lg mb-3`}>
         {emoji}
       </div>
 
@@ -293,7 +291,7 @@ export default function ClassSubjects() {
         id: id,
         data: { subjectIds: Array.from(selectedIds) }
       });
-      
+
       if (result?.success) {
         // toast.success(`${selectedIds.size} subject${selectedIds.size > 1 ? 's' : ''} removed successfully`);
         setSelectedIds(new Set());
@@ -333,7 +331,7 @@ export default function ClassSubjects() {
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary/5 via-info/5 to-purple-500/5 border border-primary/10 p-6 mb-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-info flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-xl bg-surface-page from-primary to-info flex items-center justify-center shadow-lg">
                 <Icons.BookOpen />
               </div>
               <div>
@@ -402,13 +400,12 @@ export default function ClassSubjects() {
               {/* Select All Button */}
               <button
                 onClick={toggleSelectAll}
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-200 ${
-                  allSelected
-                    ? 'bg-primary/10 text-primary border border-primary/30'
-                    : someSelected
+                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium transition-all duration-200 ${allSelected
+                  ? 'bg-primary/10 text-primary border border-primary/30'
+                  : someSelected
                     ? 'bg-gray-100 text-gray-700 border border-gray-200'
                     : 'bg-surface-card border border-border text-text-secondary hover:text-primary hover:border-primary/30'
-                }`}
+                  }`}
               >
                 {someSelected ? <Icons.Minus /> : <Icons.SelectAll />}
                 {allSelected ? 'Deselect All' : someSelected ? 'Clear' : 'Select All'}
@@ -418,22 +415,20 @@ export default function ClassSubjects() {
               <div className="flex gap-1 p-1 rounded-xl bg-gray-100 border border-border">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
-                    viewMode === 'grid'
-                      ? 'bg-surface-card text-primary shadow-sm'
-                      : 'text-text-secondary hover:text-primary'
-                  }`}
+                  className={`p-2 rounded-lg transition-all duration-200 ${viewMode === 'grid'
+                    ? 'bg-surface-card text-primary shadow-sm'
+                    : 'text-text-secondary hover:text-primary'
+                    }`}
                   title="Grid view"
                 >
                   <Icons.Grid />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg transition-all duration-200 ${
-                    viewMode === 'list'
-                      ? 'bg-surface-card text-primary shadow-sm'
-                      : 'text-text-secondary hover:text-primary'
-                  }`}
+                  className={`p-2 rounded-lg transition-all duration-200 ${viewMode === 'list'
+                    ? 'bg-surface-card text-primary shadow-sm'
+                    : 'text-text-secondary hover:text-primary'
+                    }`}
                   title="List view"
                 >
                   <Icons.List />
@@ -483,7 +478,7 @@ export default function ClassSubjects() {
         {/* Empty State */}
         {!loading && subjects.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-primary/10 to-info/10 flex items-center justify-center text-5xl mb-5">
+            <div className="w-24 h-24 rounded-2xl bg-surface-page from-primary/10 to-info/10 flex items-center justify-center text-5xl mb-5">
               📚
             </div>
             <h3 className="text-xl font-bold text-text-primary mb-2">No Subjects Assigned</h3>
@@ -550,23 +545,21 @@ export default function ClassSubjects() {
                   return (
                     <div
                       key={subject._id}
-                      className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:translate-x-1 ${
-                        isSelected
-                          ? `${getColorClass()} shadow-md`
-                          : 'border-border bg-surface-card hover:border-primary/30'
-                      }`}
+                      className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 hover:translate-x-1 ${isSelected
+                        ? `${getColorClass()} shadow-md`
+                        : 'border-border bg-surface-card hover:border-primary/30'
+                        }`}
                       onClick={() => toggleSelect(subject._id)}
                     >
                       <div
-                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-                          isSelected ? `bg-${colorVar} border-${colorVar}` : 'border-gray-300 bg-white'
-                        }`}
+                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-all ${isSelected ? `bg-${colorVar} border-${colorVar}` : 'border-gray-300 bg-surface-page'
+                          }`}
                         onClick={e => { e.stopPropagation(); toggleSelect(subject._id); }}
                       >
                         {isSelected && <Icons.Check />}
                       </div>
 
-                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-br from-${colorVar} to-${colorVar}/70 flex items-center justify-center text-xl flex-shrink-0 shadow-md`}>
+                      <div className={`w-10 h-10 rounded-lg bg-surface-page from-${colorVar} to-${colorVar}/70 flex items-center justify-center text-xl flex-shrink-0 shadow-md`}>
                         {emoji}
                       </div>
 

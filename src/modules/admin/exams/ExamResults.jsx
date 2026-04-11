@@ -152,7 +152,7 @@ export default function ExamResults() {
             <div className="flex items-center gap-4 mb-6">
                 <button
                     onClick={() => navigate("/school-admin/exams")}
-                    className="text-gray-600 hover:text-gray-800 dark:text-gray-400"
+                    className="text-gray-600 hover: "
                 >
                     <ArrowLeft size={24} />
                 </button>
@@ -172,19 +172,19 @@ export default function ExamResults() {
 
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <div className="bg-white  rounded-lg p-4 shadow">
+                <div className="bg-surface-page  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Total Students</p>
                     <p className="text-2xl font-bold">{summary.totalStudents}</p>
                 </div>
-                <div className="bg-white  rounded-lg p-4 shadow">
+                <div className="bg-surface-page  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Passed</p>
                     <p className="text-2xl font-bold text-green-600">{summary.passed}</p>
                 </div>
-                <div className="bg-white  rounded-lg p-4 shadow">
+                <div className="bg-surface-page  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Failed</p>
                     <p className="text-2xl font-bold text-red-600">{summary.failed}</p>
                 </div>
-                <div className="bg-white  rounded-lg p-4 shadow">
+                <div className="bg-surface-page  rounded-lg p-4 shadow">
                     <p className="text-sm text-gray-500">Average Percentage</p>
                     <p className="text-2xl font-bold text-blue-600">{summary.averagePercentage}%</p>
                 </div>

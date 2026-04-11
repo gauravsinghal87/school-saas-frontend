@@ -192,7 +192,7 @@ export default function ExamMarks() {
             <div className="flex items-center gap-4 mb-6">
                 <button
                     onClick={() => navigate("/school-admin/exams")}
-                    className="text-gray-600 hover:text-gray-800 dark:text-gray-400"
+                    className="text-gray-600 hover: "
                 >
                     <ArrowLeft size={24} />
                 </button>
@@ -207,7 +207,7 @@ export default function ExamMarks() {
             </div>
 
             {/* Student Selection */}
-            <div className="bg-white  rounded-lg p-4 mb-6 shadow">
+            <div className="bg-surface-page  rounded-lg p-4 mb-6 shadow">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium   mb-1 text-text-heading">Select Student</label>

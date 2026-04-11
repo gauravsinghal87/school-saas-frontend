@@ -352,7 +352,7 @@ const AdminDashboard = () => {
             </div>
           )}
         </div>
-        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
+        <div className={`w-12 h-12 rounded-xl bg-surface-page ${color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
           <Icon className="w-6 h-6 text-white" />
         </div>
       </div>
@@ -407,28 +407,28 @@ const AdminDashboard = () => {
 
         {/* Key Metrics Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-4 text-white">
+          <div className="bg-surface-page from-indigo-500 to-indigo-600 rounded-xl p-4 text-white">
             <div className="flex items-center justify-between">
               <Award className="w-8 h-8 opacity-80" />
               <span className="text-2xl font-bold">{dashboardStats.passPercentage}%</span>
             </div>
             <p className="text-indigo-100 text-sm mt-2">Pass Percentage</p>
           </div>
-          <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl p-4 text-white">
+          <div className="bg-surface-page from-emerald-500 to-emerald-600 rounded-xl p-4 text-white">
             <div className="flex items-center justify-between">
               <BookOpen className="w-8 h-8 opacity-80" />
               <span className="text-2xl font-bold">{dashboardStats.libraryBooks}</span>
             </div>
             <p className="text-emerald-100 text-sm mt-2">Library Books</p>
           </div>
-          <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl p-4 text-white">
+          <div className="bg-surface-page from-amber-500 to-amber-600 rounded-xl p-4 text-white">
             <div className="flex items-center justify-between">
               <Target className="w-8 h-8 opacity-80" />
               <span className="text-2xl font-bold">{dashboardStats.activeClasses}</span>
             </div>
             <p className="text-amber-100 text-sm mt-2">Active Classes</p>
           </div>
-          <div className="bg-gradient-to-br from-rose-500 to-rose-600 rounded-xl p-4 text-white">
+          <div className="bg-surface-page from-rose-500 to-rose-600 rounded-xl p-4 text-white">
             <div className="flex items-center justify-between">
               <Clock className="w-8 h-8 opacity-80" />
               <span className="text-2xl font-bold">{dashboardStats.averageMarks}%</span>
@@ -576,10 +576,10 @@ const AdminDashboard = () => {
               {topStudents.map((student) => (
                 <div key={student.id} className="p-4 hover:bg-surface-page transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${student.rank === 1 ? 'from-yellow-400 to-yellow-500' :
-                        student.rank === 2 ? 'from-gray-300 to-gray-400' :
-                          student.rank === 3 ? 'from-orange-400 to-orange-500' :
-                            'from-primary to-primary/80'
+                    <div className={`w-10 h-10 rounded-full bg-surface-page ${student.rank === 1 ? 'from-yellow-400 to-yellow-500' :
+                      student.rank === 2 ? 'from-gray-300 to-gray-400' :
+                        student.rank === 3 ? 'from-orange-400 to-orange-500' :
+                          'from-primary to-primary/80'
                       } flex items-center justify-center text-white font-bold shadow-md`}>
                       {student.avatar}
                     </div>
@@ -661,12 +661,12 @@ const AdminDashboard = () => {
                 <div key={event.id} className="p-4 hover:bg-surface-page transition-colors">
                   <div className="flex items-start gap-3">
                     <div className={`w-12 h-12 rounded-xl flex flex-col items-center justify-center flex-shrink-0 ${event.priority === 'urgent' ? 'bg-error/10 animate-pulse' :
-                        event.priority === 'high' ? 'bg-warning/10' :
-                          'bg-info/10'
+                      event.priority === 'high' ? 'bg-warning/10' :
+                        'bg-info/10'
                       }`}>
                       <Calendar className={`w-5 h-5 ${event.priority === 'urgent' ? 'text-error' :
-                          event.priority === 'high' ? 'text-warning' :
-                            'text-info'
+                        event.priority === 'high' ? 'text-warning' :
+                          'text-info'
                         }`} />
                     </div>
                     <div className="flex-1 min-w-0">

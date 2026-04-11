@@ -304,7 +304,7 @@ const SuperAdminDashboard = () => {
 
             {/* Key Metrics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className={`bg-gradient-to-br from-primary/5 to-transparent rounded-xl p-6 border border-primary/20`}>
+                <div className={`bg-surface-page from-primary/5 to-transparent rounded-xl p-6 border border-primary/20`}>
                     <div className="flex items-center gap-3 mb-4">
                         <TrendingUp className="w-8 h-8 text-primary" />
                         <h3 className="text-lg font-semibold text-text-heading">
@@ -330,7 +330,7 @@ const SuperAdminDashboard = () => {
                     </div>
                 </div>
 
-                <div className={`bg-gradient-to-br from-info/5 to-transparent rounded-xl p-6 border border-info/20`}>
+                <div className={`bg-surface-page from-info/5 to-transparent rounded-xl p-6 border border-info/20`}>
                     <div className="flex items-center gap-3 mb-4">
                         <DollarSign className="w-8 h-8 text-info" />
                         <h3 className="text-lg font-semibold text-text-heading">

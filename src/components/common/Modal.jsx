@@ -23,15 +23,15 @@ export default function Modal({ isOpen, onClose, children, size = "md", classNam
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-         
+
             <div
                 className="fixed inset-0 bg-transparent backdrop-blur-[2px] transition-opacity duration-300"
                 onClick={onClose}
             />
- 
+
             <div
                 className={`
-                    relative w-full bg-white rounded-[24px] 
+                    relative w-full bg-surface-page rounded-[24px] 
                     shadow-[0_20px_50px_rgba(0,0,0,0.1)] 
                     border border-slate-100 
                     overflow-hidden 

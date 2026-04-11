@@ -168,7 +168,9 @@ export const MENU_CONFIG = {
         // academic
         { id: "stu-subjects", name: "Subjects", path: "subjects", icon: BookOpen, section: "academic" },
         { id: "stu-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "academic", badge: 2 },
-        { id: "stu-materials", name: "Holidays", path: "holidays", icon: FolderOpen, section: "academic" },
+        { id: "stu-holidays", name: "Holidays", path: "holidays", icon: FolderOpen, section: "academic" },
+        // exam-timetable
+        { id: "stu-exams", name: "Exams & Results", path: "exam-results", icon: BarChart3, section: "academic" },
         { id: "stu-notices", name: "Notice Board", path: "notices", icon: Bell, section: "personal", badge: 1 },
         { id: "stu-profile", name: "My Profile", path: "profile", icon: UserCircle, section: "personal" },
     ],
@@ -186,6 +188,8 @@ export const MENU_CONFIG = {
         // { id: "par-assignments", name: "Assignments", path: "assignments", icon: BookMarked, section: "academic" },
         // { id: "par-timetable", name: "Timetable", path: "timetable", icon: CalendarDays, section: "academic" },
         { id: "par-marksheets", name: "Marksheets", path: "marksheets", icon: FileBadge, section: "academic" },
+        { id: "par-exam", name: "Exam and Results", path: "exam-results", icon: FileBadge, section: "academic" },
+
 
         // personal
         { id: "par-fees", name: "Fees & Payments", path: "payments", icon: Receipt, section: "personal" },

@@ -116,7 +116,7 @@ export default function Addteacher() {
         </div>
         <StepIndicator step={step} setStep={setStep} />
         <form onSubmit={handleSubmit(onSubmit)} >
-          <div className="bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/80 p-7 sm:p-10 relative ">
+          <div className="bg-surface-page rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/80 p-7 sm:p-10 relative ">
             <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-indigo-50 to-transparent rounded-bl-[80px] pointer-events-none" />
             {step === 0 && <StepBasicInfo register={register} errors={errors} control={control} watch={watch} />}
             {step === 1 && <div>Professional</div>}
@@ -126,7 +126,7 @@ export default function Addteacher() {
               <button
                 type="button"
                 onClick={goPrev}
-                className="flex items-center gap-2 px-5 py-2.5 text-sm font-600 text-slate-600 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 active:scale-95"
+                className="flex items-center gap-2 px-5 py-2.5 text-sm font-600 text-slate-600 bg-surface-page border border-slate-200 rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 active:scale-95"
               >
                 <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 Previous

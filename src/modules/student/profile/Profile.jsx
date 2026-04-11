@@ -28,15 +28,15 @@ import { format } from "date-fns";
 
 // Stat Card Component
 const StatCard = ({ title, value, icon: Icon, color, subtitle }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
+    <div className="bg-surface-page dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
         <div className="flex items-center justify-between mb-3">
             <div className={`p-2 rounded-lg ${color}`}>
                 <Icon className="w-5 h-5 text-white" />
             </div>
             {subtitle && <span className="text-xs text-gray-400">{subtitle}</span>}
         </div>
-        <p className="text-2xl font-bold text-gray-800 dark:text-white">{value}</p>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{title}</p>
+        <p className="text-2xl font-bold  ">{value}</p>
+        <p className="text-sm text-gray-500  mt-1">{title}</p>
     </div>
 );
 
@@ -47,8 +47,8 @@ const InfoRow = ({ label, value, icon: Icon }) => (
             <Icon className="w-4 h-4 text-primary" />
         </div>
         <div className="flex-1">
-            <p className="text-xs text-gray-500 dark:text-gray-400">{label}</p>
-            <p className="text-sm font-medium text-gray-800 dark:text-white mt-0.5">{value || "Not provided"}</p>
+            <p className="text-xs text-gray-500 ">{label}</p>
+            <p className="text-sm font-medium   mt-0.5">{value || "Not provided"}</p>
         </div>
     </div>
 );
@@ -69,8 +69,8 @@ const AttendanceTrend = ({ data }) => {
             {data.map((day, index) => (
                 <div key={index} className="text-center">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center ${day.status === 'present'
-                            ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400'
-                            : 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'
+                        ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400'
+                        : 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'
                         }`}>
                         {day.status === 'present' ? <CheckCircle size={20} /> : <XCircle size={20} />}
                     </div>
@@ -86,7 +86,7 @@ const ProfileSkeleton = () => (
     <div className="animate-pulse">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-1">
-                <div className="bg-white dark:bg-gray-800 rounded-2xl p-6">
+                <div className="bg-surface-page dark:bg-gray-800 rounded-2xl p-6">
                     <div className="w-32 h-32 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto mb-4"></div>
                     <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mx-auto mb-2"></div>
                     <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mx-auto mb-4"></div>
@@ -100,7 +100,7 @@ const ProfileSkeleton = () => (
             <div className="lg:col-span-2">
                 <div className="space-y-6">
                     {[1, 2, 3].map((i) => (
-                        <div key={i} className="bg-white dark:bg-gray-800 rounded-2xl p-6">
+                        <div key={i} className="bg-surface-page dark:bg-gray-800 rounded-2xl p-6">
                             <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4"></div>
                             <div className="grid grid-cols-2 gap-4">
                                 {[1, 2, 3, 4].map((j) => (
@@ -141,10 +141,10 @@ export default function StudentProfile() {
                     <div className="w-20 h-20 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                         <User className="w-10 h-10 text-red-500" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                    <h3 className="text-lg font-semibold   mb-2">
                         Unable to Load Profile
                     </h3>
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="text-gray-500 ">
                         There was an error loading your profile. Please try again later.
                     </p>
                 </div>
@@ -153,7 +153,7 @@ export default function StudentProfile() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+        <div className="min-h-screen bg-surface-page">
             <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
                 {/* Header */}
                 <div className="mb-8">
@@ -162,10 +162,10 @@ export default function StudentProfile() {
                             <User className="text-primary" size={28} />
                         </div>
                         <div>
-                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
+                            <h1 className="text-2xl sm:text-3xl font-bold  ">
                                 My Profile
                             </h1>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                            <p className="text-sm text-gray-500  mt-1">
                                 View your personal and academic information
                             </p>
                         </div>
@@ -178,18 +178,18 @@ export default function StudentProfile() {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         {/* Left Column - Personal Info */}
                         <div className="lg:col-span-1">
-                            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden sticky top-6">
+                            <div className="bg-surface-page dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden sticky top-6">
                                 {/* Profile Header */}
                                 <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-6 text-center">
-                                    <div className="w-32 h-32 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mx-auto shadow-lg">
+                                    <div className="w-32 h-32 bg-surface-page from-primary to-primary-dark rounded-full flex items-center justify-center mx-auto shadow-lg">
                                         <span className="text-4xl font-bold text-white">
                                             {student?.firstName?.[0]?.toUpperCase()}{student?.lastName?.[0]?.toUpperCase()}
                                         </span>
                                     </div>
-                                    <h2 className="text-xl font-bold text-gray-800 dark:text-white mt-4">
+                                    <h2 className="text-xl font-bold   mt-4">
                                         {student?.firstName} {student?.lastName}
                                     </h2>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                    <p className="text-sm text-gray-500  mt-1">
                                         Student • Class {student?.class?.name}-{student?.section?.name}
                                     </p>
                                     <p className="text-xs text-gray-400 mt-2">
@@ -259,8 +259,8 @@ export default function StudentProfile() {
 
                             {/* Attendance Trend */}
                             {attendanceTrend && attendanceTrend.length > 0 && (
-                                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
-                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+                                <div className="bg-surface-page dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+                                    <h3 className="text-lg font-semibold   mb-4 flex items-center gap-2">
                                         <Activity size={20} className="text-primary" />
                                         Recent Attendance
                                     </h3>
@@ -269,9 +269,9 @@ export default function StudentProfile() {
                             )}
 
                             {/* Subjects */}
-                            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+                            <div className="bg-surface-page dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
                                 <div className="flex items-center justify-between mb-4">
-                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
+                                    <h3 className="text-lg font-semibold   flex items-center gap-2">
                                         <BookOpen size={20} className="text-primary" />
                                         My Subjects
                                     </h3>
@@ -296,8 +296,8 @@ export default function StudentProfile() {
 
                             {/* Recent Results */}
                             {recentResults.length > 0 && (
-                                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
-                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
+                                <div className="bg-surface-page dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+                                    <h3 className="text-lg font-semibold   mb-4 flex items-center gap-2">
                                         <Award size={20} className="text-primary" />
                                         Recent Results
                                     </h3>
@@ -305,7 +305,7 @@ export default function StudentProfile() {
                                         {recentResults.map((result, index) => (
                                             <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                                                 <div>
-                                                    <p className="font-medium text-gray-800 dark:text-white">{result.examName}</p>
+                                                    <p className="font-medium  ">{result.examName}</p>
                                                     <p className="text-xs text-gray-500">{result.subject}</p>
                                                 </div>
                                                 <div className="text-right">
@@ -321,12 +321,12 @@ export default function StudentProfile() {
                             {/* Quick Actions / Info */}
                             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-6 border border-blue-100 dark:border-blue-800">
                                 <div className="flex items-start gap-3">
-                                    <div className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                                    <div className="p-2 bg-surface-page dark:bg-gray-800 rounded-lg shadow-sm">
                                         <School className="w-5 h-5 text-primary" />
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-gray-800 dark:text-white mb-1">Need Help?</h4>
-                                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                                        <h4 className="font-semibold   mb-1">Need Help?</h4>
+                                        <p className="text-sm text-gray-600 ">
                                             For any queries regarding your academic information, please contact your class teacher or the school administration.
                                         </p>
                                     </div>

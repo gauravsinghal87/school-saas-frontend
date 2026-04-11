@@ -208,7 +208,7 @@ export default function TimetableSchedule() {
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         {DAYS.map(day => (
                             <tr key={day} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                                <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+                                <td className="px-4 py-3 text-sm font-medium text-gray-900 ">
                                     {day}
                                 </td>
                                 {sortedPeriods.map(period => {

@@ -10,7 +10,7 @@ export default function ToggleButton({ isActive, onToggle, disabled }) {
                         ${disabled ? "opacity-50 cursor-not-allowed" : ""}
                         ${isActive ? "bg-success shadow-md shadow-success/30" : "bg-border"}`}
     >
-      <div className={`bg-white w-4 h-4 rounded-full shadow transform transition-all duration-300 ${isActive ? "translate-x-6" : "translate-x-0"}`} />
+      <div className={`bg-surface-page w-4 h-4 rounded-full shadow transform transition-all duration-300 ${isActive ? "translate-x-6" : "translate-x-0"}`} />
     </button>
   );
 }

@@ -327,14 +327,14 @@ export default function StudentAttendancePage() {
                                         type="date"
                                         value={dateRange.startDate}
                                         onChange={(e) => setDateRange(prev => ({ ...prev, startDate: e.target.value }))}
-                                        className="h-10 px-3 rounded-lg border border-border bg-white text-sm focus:border-primary outline-none"
+                                        className="h-10 px-3 rounded-lg border border-border bg-surface-page text-sm focus:border-primary outline-none"
                                     />
                                     <span className="text-text-secondary">to</span>
                                     <input
                                         type="date"
                                         value={dateRange.endDate}
                                         onChange={(e) => setDateRange(prev => ({ ...prev, endDate: e.target.value }))}
-                                        className="h-10 px-3 rounded-lg border border-border bg-white text-sm focus:border-primary outline-none"
+                                        className="h-10 px-3 rounded-lg border border-border bg-surface-page text-sm focus:border-primary outline-none"
                                     />
                                 </div>
                                 <Button
@@ -482,9 +482,9 @@ function StatCard({ label, value, color, icon: Icon }) {
 
 function StatusButton({ active, onClick, variant, icon, label }) {
     const variants = {
-        success: active ? "bg-success text-white border-success shadow-md" : "text-success bg-white border-success/20 hover:bg-success/5",
-        error: active ? "bg-error text-white border-error shadow-md" : "text-error bg-white border-error/20 hover:bg-error/5",
-        warning: active ? "bg-warning text-white border-warning shadow-md" : "text-warning bg-white border-warning/20 hover:bg-warning/5",
+        success: active ? "bg-success text-white border-success shadow-md" : "text-success bg-surface-page border-success/20 hover:bg-success/5",
+        error: active ? "bg-error text-white border-error shadow-md" : "text-error bg-surface-page border-error/20 hover:bg-error/5",
+        warning: active ? "bg-warning text-white border-warning shadow-md" : "text-warning bg-surface-page border-warning/20 hover:bg-warning/5",
     };
 
     return (

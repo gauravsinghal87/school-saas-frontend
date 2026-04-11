@@ -41,7 +41,7 @@ const AttendancePage = ({ classId, sectionId, sessionId }) => {
     if (isLoading) return <div>Loading Students...</div>;
 
     return (
-        <div className="p-6 bg-white rounded-lg shadow">
+        <div className="p-6 bg-surface-page rounded-lg shadow">
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold">Mark Attendance</h2>
                 <div className="space-x-2">

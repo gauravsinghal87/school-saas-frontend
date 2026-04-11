@@ -123,7 +123,7 @@ const TeacherAttendanceRecords = () => {
                         <select
                             value={selectedMonth}
                             onChange={(e) => setSelectedMonth(e.target.value)}
-                            className="pl-9 pr-8 py-2 text-sm border border-border rounded-xl focus:border-primary outline-none bg-white appearance-none cursor-pointer"
+                            className="pl-9 pr-8 py-2 text-sm border border-border rounded-xl focus:border-primary outline-none  appearance-none cursor-pointer"
                         >
                             <option value="all">All Months</option>
                             {months.map(month => (
@@ -140,7 +140,7 @@ const TeacherAttendanceRecords = () => {
                         <p className="text-text-secondary mt-3">No attendance records found</p>
                     </div>
                 ) : (
-                    <div className="bg-white rounded-2xl border border-border overflow-hidden">
+                    <div className=" rounded-2xl border border-border overflow-hidden">
                         <div className="overflow-x-auto">
                             <table className="w-full text-sm">
                                 <thead>
@@ -214,7 +214,7 @@ const TeacherAttendanceRecords = () => {
                             <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => {/* pagination logic */ }}
-                                    className="px-3 py-1 text-xs border border-border rounded-lg hover:bg-white transition-colors"
+                                    className="px-3 py-1 text-xs border border-border rounded-lg hover:bg-surface-page transition-colors"
                                 >
                                     Previous
                                 </button>
@@ -223,7 +223,7 @@ const TeacherAttendanceRecords = () => {
                                 </button>
                                 <button
                                     onClick={() => {/* pagination logic */ }}
-                                    className="px-3 py-1 text-xs border border-border rounded-lg hover:bg-white transition-colors"
+                                    className="px-3 py-1 text-xs border border-border rounded-lg hover:bg-surface-page transition-colors"
                                 >
                                     Next
                                 </button>

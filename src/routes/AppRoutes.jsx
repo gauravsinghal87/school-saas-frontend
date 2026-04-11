@@ -44,6 +44,8 @@ import GiveExamMarkorUpload from "../modules/staff/GiveExamMarkorUpload.jsx";
 import PayRollDetails from "../modules/admin/payroll/PayRollDetails.jsx";
 import PayRollList from "../modules/admin/payroll/PayRollList.jsx";
 import SchoolSetting from "../modules/admin/school-setting/SchoolSetting.jsx";
+import ExamAndResultsParentPage from "../modules/parent/results/ExamAndResultsParentPage.jsx";
+import StdExamAndResults from "../modules/student/exams/StdExamAndResults.jsx";
 
 //staff imports
 const StaffDashboard = lazy(
@@ -188,6 +190,7 @@ const AppRoutes = () => {
             <Route path="subjects" element={<StudentSubjects />} />
             <Route path="assignments" element={<StudentAssignments />} />
             <Route path="exam-timetable" element={<StudentExamTimetable />} />
+            <Route path="exam-results" element={<StdExamAndResults />} />
             <Route path="profile" element={<StudentProfile />} />
 
 
@@ -205,6 +208,7 @@ const AppRoutes = () => {
             <Route path="children" element={<ParentChildrenAttendance />} />
             <Route path="payments" element={<ParentPayments />} />
             <Route path="profile" element={<ParentProfile />} />
+            <Route path="exam-results" element={<ExamAndResultsParentPage />} />
             <Route path="assignments" element={<ParentAssignments />} />
             <Route path="*" element={<NotFound />} />
           </Route>
